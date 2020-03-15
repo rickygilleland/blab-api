@@ -23,6 +23,29 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = \Auth::user()->load('teams');
+        
+        $teams = $user->teams;
+        $default_team = $teams[0];
+
+        foreach ($teams as $team) {
+            if ($team->is_default) {
+                $default_team = $team;
+            }
+        }
+
+        if ($user->organization->name == null) {
+            //prompt them to set up their organization (onboarding flow) -- used for all of the urls
+            return redirect('onboarding/organization');
+        }
+
+        if ($team->name == null) {
+            //prompt them to set up their team (onboarding flow)
+            return redirect('onboarding/team');
+        }
+
+        
+        
         return view('home');
     }
 }

@@ -23,3 +23,20 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//onboarding routes
+Route::get('onboarding/organization', 'OnboardingController@organization');
+Route::post('onboarding/organization', 'OnboardingController@organization_update');
+Route::get('onboarding/team', 'OnboardingController@team');
+Route::post('onboarding/team', 'OnboardingController@team_update');
+Route::get('onboarding/room', 'OnboardingController@room');
+Route::post('onboarding/room', 'OnboardingController@room_update');
+
+//rooms routes
+Route::get('/o/{organization_slug}/{team_slug}', 'TeamController@view_rooms', function($organization_slug, $team_slug) {
+
+})->middleware('auth');
+
+Route::get('/o/{organization_slug}/{team_slug}/{room_slug}', 'RoomController@show', function($organization_slug, $team_slug, $room_slug) {
+
+})->middleware('auth');

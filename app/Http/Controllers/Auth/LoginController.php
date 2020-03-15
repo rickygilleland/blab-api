@@ -64,6 +64,8 @@ class LoginController extends Controller
                 $organization = new \App\Organization();
                 $organization->provider_id = $slack_user->organization_id;
                 $organization->email_domain = substr(strrchr($slack_user->email, "@"), 1);
+                //temporarily set the slug to the provider id
+                $organization->slug = $organization->provider_id;
                 $organization->save();
             }
 
@@ -75,6 +77,9 @@ class LoginController extends Controller
                 $team->provider_id = $slack_user->user['team']['id'];
                 $team->avatar_url = $slack_user->user['team']['image_230'];
                 $team->organization_id = $organization->id;
+                $team->is_default = true;
+                //temporarily set the slug to the provider id
+                $team->slug = $team->provider_id;
                 $team->save();
             }
 
@@ -88,6 +93,10 @@ class LoginController extends Controller
             $user->save();
             $user->teams()->attach($team);
         }
+
+        if ($user->avatar_url != $slack_user->avatar) {
+            $user->avatar_url = $slack_user->avatar;
+        }
  
         $user->provider = 'slack';
         $user->provider_id = $slack_user->id;
@@ -96,6 +105,7 @@ class LoginController extends Controller
 
         if ($user) {
             \Auth::login($user);
+
             return redirect()->intended('home');
         }
 

@@ -4,21 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Team extends Model
+class Room extends Model
 {
     //
-    public function users()
-    {
-        return $this->hasMany('App\User');
-    }
-
     public function organization()
     {
         return $this->belongsTo('App\Organization');
     }
 
-    public function rooms()
+    public function team()
     {
-        return $this->hasMany('App\Room');
+        return $this->belongsTo('App\Team');
     }
 }

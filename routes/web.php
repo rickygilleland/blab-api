@@ -32,10 +32,11 @@ Route::post('onboarding/team', 'OnboardingController@team_update');
 Route::get('onboarding/room', 'OnboardingController@room');
 Route::post('onboarding/room', 'OnboardingController@room_update');
 
-//rooms routes
-Route::get('/o/{organization_slug}/{team_slug}', 'TeamController@view_rooms', function($organization_slug, $team_slug) {
+Route::get('/o/{organization_slug}/{team_slug}', 'TeamController@show', function($organization_slug, $team_slug) {
 
 })->middleware('auth');
+
+//rooms routes
 
 Route::get('/o/{organization_slug}/{team_slug}/{room_slug}', 'RoomController@show', function($organization_slug, $team_slug, $room_slug) {
 

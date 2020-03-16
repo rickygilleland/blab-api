@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = \Auth::user()->load('teams');
+        $user = \Auth::user()->load('teams', 'organization');
         
         $teams = $user->teams;
         $default_team = $teams[0];
@@ -44,7 +44,9 @@ class HomeController extends Controller
             return redirect('onboarding/team');
         }
 
-        
+        if (count($user->teams) == 1) {
+            return redirect('o/'.$user->organization->slug.'/'.$default_team->slug);
+        } 
         
         return view('home');
     }

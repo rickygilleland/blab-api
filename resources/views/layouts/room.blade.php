@@ -22,6 +22,13 @@
         .col {
             flex-grow: 0 !important;
         }
+        .video-local {
+            height: 125px;
+            position:absolute;
+            bottom:0;
+            right:0;
+            padding:5px
+        }
     </style>
 </head>
 <body class="room" style="background-color:#4F4581">
@@ -29,7 +36,11 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container-fluid">
                 <img src="/img/water_cooler.png" class="img img-fluid" style="height:45px">
-                <p style="color:white" class="ml-3 pt-2"><a href="/o/{{ $organization->slug }}">{{$organization->slug }}</a> / <a href="/o/{{ $organization->slug }}/{{ $team->slug }}">{{ $team->slug }}</a> / {{ $room->slug }}</p>
+                @if ($user->teams->count() > 1)
+                    <p style="color:white" class="ml-3 pt-2"><a href="/o/{{ $organization->slug }}">{{$organization->slug }}</a> / <a href="/o/{{ $organization->slug }}/{{ $team->slug }}">{{ $team->slug }}</a> / {{ $room->slug }}</p>
+                @else
+                    <p style="color:white" class="ml-3 pt-2"><a href="/o/{{ $organization->slug }}/{{ $team->slug }}">{{ $team->slug }}</a> / {{ $room->slug }}</p>
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -38,7 +49,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#settings" style="color:white!important;font-size:1.3rem"><i class="fas fa-cog"></i></a>
+                            <a class="nav-link d-none" href="#settings" style="color:white!important;font-size:1.3rem"><i class="fas fa-cog"></i></a>
                         </li>
                     </ul>
 

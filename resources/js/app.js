@@ -56,16 +56,22 @@ function adjustVideoSize() {
 }
 
 // Attach the Track to the DOM.
-function attachTrack(track, container) {
+function attachTrack(track, container, local=false) {
     const trackElement = track.attach();
-    trackElement.classList.add('video');
+    if (track.kind == "video") {
+        if (!local) {
+            trackElement.classList.add('video');
+        } else {
+            trackElement.classList.add('video-local');
+        }
+    }
     container.appendChild(trackElement);
 }
 
 // Attach array of Tracks to the DOM.
-function attachTracks(tracks, container) {
+function attachTracks(tracks, container, local=false) {
     tracks.forEach(function(track) {
-        attachTrack(track, container);
+        attachTrack(track, container, local);
     });
 }
 
@@ -127,27 +133,24 @@ function roomJoined(room) {
     window.room = activeRoom = room;
 
     // Attach LocalParticipant's Tracks, if not already attached.
+    var localMediaContainer = document.getElementById('local-media');
     var remoteMediaContainer = document.getElementById('video-media');
-    if (!remoteMediaContainer.querySelector('video')) {
+    if (!localMediaContainer.querySelector('video')) {
 
         var participantdiv = document.createElement('div');
         participantdiv.id = room.localParticipant.sid;
         participantdiv.classList.add("col");
         participantdiv.classList.add("rounded");
 
-        remoteMediaContainer.appendChild(participantdiv);
+        localMediaContainer.appendChild(participantdiv);
 
-        attachTracks(getTracks(room.localParticipant), participantdiv);
-
-        adjustVideoSize();
+        attachTracks(getTracks(room.localParticipant), participantdiv, true);
 
     }
 
     // Attach the Tracks of the Room's Participants.
     room.participants.forEach(function(participant) {
 
-
-        console.log(participant);
         var participantdiv = document.createElement('div');
         participantdiv.id = participant.sid;
         participantdiv.classList.add("col");
@@ -157,11 +160,21 @@ function roomJoined(room) {
 
         participantConnected(participant, participantdiv);
 
+    });
+
+    //show the videos and adjust the size
+    setTimeout(() => { 
         adjustVideoSize();
 
-        setTimeout(() => { adjustVideoSize(); }, 500);
+        $('#loadingMsg').addClass('d-none');
 
-    });
+        if ($('.video').length == 0) {
+            $('#waitingMsg').removeClass('d-none');
+        } else {
+            $('#video-media').removeClass('d-none');
+        }
+
+    }, 1000);
 
     room.on('participantConnected', function(participant) {
 
@@ -177,6 +190,11 @@ function roomJoined(room) {
         adjustVideoSize();
 
         setTimeout(() => { adjustVideoSize(); }, 500);
+
+        if ($('#waitingMsg').hasClass('d-none') == false) {
+            $('#waitingMsg').addClass('d-none');
+            $('#video-media').removeClass('d-none');
+        }
     });
 
     // When a Participant leaves the Room, detach its Tracks.
@@ -184,6 +202,10 @@ function roomJoined(room) {
         detachParticipantTracks(participant);
         $('#'+participant.sid).remove();
         adjustVideoSize();
+
+        if ($('.video').length == 0) {
+            $('#waitingMsg').removeClass('d-none');
+        } 
     });
 
     // Once the LocalParticipant leaves the room, detach the Tracks
@@ -256,6 +278,12 @@ document.getElementById('muteBtn').onclick = function() {
     }
 }
 
+// Bind button to leave Room.
+document.getElementById('buttonLeave').onclick = function() {
+    activeRoom.disconnect();
+    window.location.href="/home";
+};
+
 $( function() {
     if (typeof is_room != 'undefined' && is_room == true) {
         
@@ -281,6 +309,6 @@ $( function() {
 /* end twilio */
 
 $(function() {
-    $( ".drag" ).draggable();
+    $( ".draggable" ).draggable();
     $( ".resizable" ).resizable();
 });

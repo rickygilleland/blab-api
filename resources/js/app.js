@@ -6,7 +6,6 @@ import 'jquery-ui/ui/widgets/resizable.js';
 /* twilio */
 
 function adjustVideoSize() {
-    console.log("ADJUST");
     var height = $(window).height();
     var width = $(window).width();
 
@@ -14,8 +13,6 @@ function adjustVideoSize() {
     width = width - 110;
 
     var totalVideoContainers = $('.video').length;
-
-    console.log(totalVideoContainers);
 
     if (totalVideoContainers == 1) {
         $('.video').height(height);
@@ -107,7 +104,6 @@ function participantConnected(participant, container) {
 
 // Detach the Participant's Tracks from the DOM.
 function detachParticipantTracks(participant) {
-    console.log(participant);
     var tracks = getTracks(participant);
     tracks.forEach(detachTrack);
 }
@@ -206,7 +202,6 @@ function roomJoined(room) {
 document.getElementById('muteBtn').onclick = function() {
     const muteBtn = $('#muteBtn');
     const mute = muteBtn.hasClass("btn-light");
-    console.log(mute);
     const localUser = room.localParticipant;
     getTracks(localUser).forEach(function(track) {
       if (track.kind === 'audio') {
@@ -220,11 +215,35 @@ document.getElementById('muteBtn').onclick = function() {
     if (mute) {
         muteBtn.removeClass('btn-light');
         muteBtn.addClass('btn-danger');
-        muteBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>';
+        muteBtn.html('<i class="fas fa-microphone-slash"></i>');
     } else {
         muteBtn.removeClass('btn-danger');
         muteBtn.addClass('btn-light');
-        muteBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+        muteBtn.html('<i class="fas fa-microphone"></i>');
+    }
+  }
+
+  document.getElementById('hideVideoBtn').onclick = function() {
+    const hideVideoBtn = $('#hideVideoBtn');
+    const hide = hideVideoBtn.hasClass("btn-light");
+    const localUser = room.localParticipant;
+    getTracks(localUser).forEach(function(track) {
+      if (track.kind === 'video') {
+        if (hide) {
+          track.disable();
+        } else {
+          track.enable();
+        }
+      }
+    });
+    if (hide) {
+        hideVideoBtn.removeClass('btn-light');
+        hideVideoBtn.addClass('btn-danger');
+        hideVideoBtn.html('<i class="fas fa-video-slash"></i>');
+    } else {
+        hideVideoBtn.removeClass('btn-danger');
+        hideVideoBtn.addClass('btn-light');
+        hideVideoBtn.html('<i class="fas fa-video"></i>');
     }
   }
 
@@ -240,7 +259,6 @@ $( function() {
         
         var connectOptions = {
             name: roomName,
-            video: { width: 1024 },
         };
     
         if (previewTracks) {

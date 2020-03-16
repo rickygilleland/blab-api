@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use TwilioRestClient;
+use TwilioJwtAccessToken;
+use TwilioJwtGrantsVideoGrant;
+
 class RoomController extends Controller
 {
     /**
@@ -11,17 +15,33 @@ class RoomController extends Controller
      *
      * @return void
      */
+    protected $sid;
+	protected $token;
+	protected $key;
+    protected $secret;
+    
     public function __construct()
     {
         $this->middleware('auth');
+
+        $this->sid = config('services.twilio.sid');
+		$this->token = config('services.twilio.token');
+		$this->key = config('services.twilio.key');
+        $this->secret = config('services.twilio.secret');
     }
 
     public function show($organization_slug, $team_slug, $room_slug)
     {
+        $user = \Auth::user();
+        
         //fetch the rooms within the organization and make sure this checks out
         $organization = \App\Organization::where('slug', $organization_slug)->with('teams.rooms')->first();
 
         if (!$organization) {
+            abort(404);
+        }
+
+        if ($user->organization->id != $organization->id) {
             abort(404);
         }
 
@@ -48,7 +68,36 @@ class RoomController extends Controller
         if (!$current_room) {
             abort(404);
         }
+
+        $full_room_slug = $user->organization->slug.'/'.$current_team->slug.'/'.$current_room->slug;
+
+        //setup the twilio video room and chat channel
+        $client = new \Twilio\Rest\Client($this->sid, $this->token);
+
+        $twilio_room_name = env('APP_ENV') . "_" . str_replace('/', '-', $full_room_slug);
+
+        //check if this room already exists
+        try {
+            $client->video->rooms($twilio_room_name)->fetch();
+        } catch (\Twilio\Exceptions\RestException $e) {
+            $client->video->rooms->create([
+                'uniqueName' => $twilio_room_name,
+                'type' => 'peer-to-peer',
+            ]);
+        }
         
-        return view('room.index', ['organization' => $organization, 'team' => $team, 'room' => $room]);
+        $identity = env('APP_ENV') . "_" . $user->id;
+
+        $token = new \Twilio\Jwt\AccessToken($this->sid, $this->key, $this->secret, 86400, $identity);
+
+        $videoGrant = new \Twilio\Jwt\Grants\VideoGrant();
+        $videoGrant->setRoom($twilio_room_name);
+
+        $token->addGrant($videoGrant);
+
+        $user->access_token = $token->toJWT();
+        $room->twilio_room_name = $twilio_room_name;        
+        
+        return view('room.index', ['organization' => $organization, 'team' => $team, 'room' => $room, 'user' => $user ]);
     }
 }

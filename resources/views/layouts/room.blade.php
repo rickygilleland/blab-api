@@ -13,15 +13,22 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://kit.fontawesome.com/584495cc88.js"></script>
+    <script src="//media.twiliocdn.com/sdk/js/video/releases/2.0.0/twilio-video.min.js"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .col {
+            flex-grow: 0 !important;
+        }
+    </style>
 </head>
 <body class="room" style="background-color:#4F4581">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
-            <div class="container">
-                <img src="/img/water_cooler.png" class="img img-fluid" style="height:50px">
+            <div class="container-fluid">
+                <img src="/img/water_cooler.png" class="img img-fluid" style="height:45px">
                 <p style="color:white" class="ml-3 pt-2"><a href="/o/{{ $organization->slug }}">{{$organization->slug }}</a> / <a href="/o/{{ $organization->slug }}/{{ $team->slug }}">{{ $team->slug }}</a> / {{ $room->slug }}</p>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -44,5 +51,21 @@
             @yield('content')
         </main>
     </div>
+
+    <script type="application/javascript">
+
+        var is_room = true;
+
+        var activeRoom;
+        var previewTracks;
+
+        var identity = "{{ $user->access_token }}";
+        var roomName = "{{ $room->twilio_room_name }}";
+
+        //video code
+
+        const Video = Twilio.Video;
+   
+    </script>
 </body>
 </html>

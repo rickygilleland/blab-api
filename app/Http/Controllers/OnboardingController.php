@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+use TwilioRestClient;
+use TwilioJwtAccessToken;
+use TwilioJwtGrantsVideoGrant;
+
 class OnboardingController extends Controller
 {
     /**
@@ -12,9 +16,19 @@ class OnboardingController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    protected $sid;
+	protected $token;
+	protected $key;
+	protected $secret;
+	
+	public function __construct()
+	{
         $this->middleware('auth');
+        
+        $this->sid = config('services.twilio.sid');
+		$this->token = config('services.twilio.token');
+		$this->key = config('services.twilio.key');
+        $this->secret = config('services.twilio.secret');
     }
 
     public function organization()
@@ -73,23 +87,20 @@ class OnboardingController extends Controller
         $room->slug = Str::slug($room->name, '-');
         $room->is_public = false;
         $room->save();
+
+        $full_room_slug = $user->organization->slug.'/'.$default_team->slug.'/'.$room->slug;
+
+        //setup the twilio video room and chat channel
+        $client = new \Twilio\Rest\Client($this->sid, $this->token);
+
+        $twilio_room_name = env('APP_ENV') . "_" . str_replace('/', '-', $full_room_slug);
+
+        $client->video->rooms->create([
+            'uniqueName' => $twilio_room_name,
+            'type' => 'peer-to-peer',
+        ]);
         
-        return redirect('/o/'.$user->organization->slug.'/'.$default_team->slug.'/'.$room->slug);
+        return redirect('/o/'.$full_room_slug);
     }
 
-    public function room()
-    {
-        $user = \Auth::user();
-        $teams = $user->team;
-        $default_team = $teams[0];
-        
-        return view('onboarding.room', ['team' => $default_team]);
-    }
-
-    public function room_create(Request $request)
-    {
-        $user = \Auth::user();
-        
-        return redirect('onboarding.room');
-    }
 }

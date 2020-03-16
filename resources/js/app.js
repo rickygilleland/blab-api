@@ -146,6 +146,8 @@ function roomJoined(room) {
     // Attach the Tracks of the Room's Participants.
     room.participants.forEach(function(participant) {
 
+
+        console.log(participant);
         var participantdiv = document.createElement('div');
         participantdiv.id = participant.sid;
         participantdiv.classList.add("col");

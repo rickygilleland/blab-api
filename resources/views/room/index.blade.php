@@ -18,7 +18,7 @@
 
     
 
-    <div class="fixed-bottom">
+    <div class="fixed-bottom" id="roomControls">
         <div class="row justify-content-center bg-dark py-2">
             <div class="bg-dark">
                 <button class="btn btn-light mx-2" id="muteBtn"><i class="fas fa-microphone"></i></button>

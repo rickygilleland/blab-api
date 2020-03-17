@@ -6,53 +6,53 @@ import 'jquery-ui/ui/widgets/resizable.js';
 /* twilio */
 
 function adjustVideoSize() {
-    var height = $(window).height();
+    var height = $(window).height() - $('#roomNav').outerHeight() -  $('#roomControls').outerHeight();
     var width = $(window).width();
 
-    height = height - 180;
     width = width - 110;
 
     var totalVideoContainers = $('.video').length;
 
-    if (totalVideoContainers == 1) {
-        $('.video').height(height);
-        $('.video').width("auto");
-    }
-
     if (totalVideoContainers == 2) {
-        width = width / 2;
-        $('.video').height("auto");
-        $('.video').width(width);
+        if (width > 768) {
+            width = width / 2;
+        } else {
+            height = height / 2;
+        }
     }
 
     if (totalVideoContainers > 2 && totalVideoContainers <= 6) {
         height = height / 2;
-        $('.video').height(height);
     }
 
     if (totalVideoContainers > 6 && totalVideoContainers <= 12) {
         height = height / 3;
-        $('.video').height(height);
     }
 
     if (totalVideoContainers > 2 && totalVideoContainers <= 4) {
-        $('.video').width("auto");
+        //2x2
+        width = width / 2;
     }
 
     if (totalVideoContainers > 4 && totalVideoContainers <= 6) {
+        //3x3
         width = width / 3;
-        $('.video').width(width);
     }
 
     if (totalVideoContainers > 6 && totalVideoContainers <= 9) {
+        //3x3
         width = width / 3;
-        $('.video').width(width);
     }
 
     if (totalVideoContainers > 9 && totalVideoContainers <= 12) {
+        //4x4
         width = width / 4;
-        $('.video').width(width);
     }
+    $('.video').height(height);
+    $('.video').width(width);
+
+    //$('#'+room.localParticipant.sid).width(width);
+
 }
 
 // Attach the Track to the DOM.
@@ -140,7 +140,7 @@ function roomJoined(room) {
         var participantdiv = document.createElement('div');
         participantdiv.id = room.localParticipant.sid;
         participantdiv.classList.add("col");
-        participantdiv.classList.add("rounded");
+        participantdiv.classList.add("video-rounded");
 
         localMediaContainer.appendChild(participantdiv);
 
@@ -148,13 +148,14 @@ function roomJoined(room) {
 
     }
 
+
     // Attach the Tracks of the Room's Participants.
     room.participants.forEach(function(participant) {
 
         var participantdiv = document.createElement('div');
         participantdiv.id = participant.sid;
         participantdiv.classList.add("col");
-        participantdiv.classList.add("rounded");
+        participantdiv.classList.add("video-rounded");
 
         remoteMediaContainer.appendChild(participantdiv);
 
@@ -181,7 +182,7 @@ function roomJoined(room) {
         var participantdiv = document.createElement('div');
         participantdiv.id = participant.sid;
         participantdiv.classList.add("col");
-        participantdiv.classList.add("rounded");
+        participantdiv.classList.add("video-rounded");
 
         remoteMediaContainer.appendChild(participantdiv);
 
@@ -235,6 +236,10 @@ $( function() {
         
         var connectOptions = {
             name: roomName,
+            video: {
+                aspectRatio: 1.7777777778
+            },
+            audio: true
         };
     
         if (previewTracks) {

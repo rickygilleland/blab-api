@@ -27,13 +27,13 @@
             position:absolute;
             bottom:0;
             right:0;
-            padding:5px
+            padding:5px;
         }
     </style>
 </head>
 <body class="room" style="background-color:#4F4581">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm" id="roomNav">
             <div class="container-fluid">
                 <img src="/img/water_cooler.png" class="img img-fluid" style="height:45px">
                 @if ($user->teams->count() > 1)
@@ -58,7 +58,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>

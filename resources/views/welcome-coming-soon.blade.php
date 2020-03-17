@@ -31,8 +31,8 @@
         </nav>
         
             <h1 class="text-center" style="font-size: 3.9rem;font-weight:600">Water Cooler Chat, Sans Water Cooler</h1>
-            <p class="text-center" style="font-weight:400;font-size:1.4rem">We give your remote team a place to feel a little less remote because some of the best ideas come from casual conversation, not meetings. Close your eyes and you just might forget you aren't in the office. </p>
-            <p class="text-center" style="font-weight:400;font-size:1.3rem">Starting at only $10/month for up to 5 team members with a 30 day free trial.</p>
+            <p class="text-center mt-3" style="font-weight:400;font-size:1.4rem">We give your remote team a place to feel a little less remote because some of the best ideas come from casual conversation, not meetings. Close your eyes and you just might forget you aren't in the office. </p>
+            <p class="text-center my-4" style="font-weight:600;font-size:1.3rem">Starting at only $10/month for up to 5 team members with a 30 day free trial.</p>
 
             <center><a class="btn btn-primary btn-lg text-light" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Let Me Know When It's Ready</a></center>
         </div>

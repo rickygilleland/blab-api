@@ -45,7 +45,7 @@ class HomeController extends Controller
         }
 
         if (count($user->teams) == 1) {
-            return redirect('o/'.$user->organization->slug.'/'.$default_team->slug);
+            return redirect('o/'.$user->organization->slug);
         } 
         
         return view('home');

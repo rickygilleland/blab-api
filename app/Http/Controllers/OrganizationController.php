@@ -16,8 +16,21 @@ class OrganizationController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function show($organization_slug)
     {
-        return view('organization.index');
+        $user = \Auth::user()->load('teams.rooms', 'organization');
+        
+        //fetch the rooms within the organization and make sure this checks out
+        $organization = \App\Organization::where('slug', $organization_slug)->with('teams')->first();
+
+        if (!$organization) {
+            abort(404);
+        }
+
+        if ($user->organization->id != $organization->id) {
+            abort(404);
+        }
+
+        return view('organization.index', ['user' => $user]);
     }
 }

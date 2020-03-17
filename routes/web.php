@@ -36,8 +36,16 @@ Route::get('/o/{organization_slug}/{team_slug}', 'TeamController@show', function
 
 })->middleware('auth');
 
+Route::post('/team', 'TeamController@create')->middleware('auth');
+
+Route::get('/o/{organization_slug}', 'OrganizationController@show', function($organization_slug) {
+
+})->middleware('auth');
+
 //rooms routes
 
 Route::get('/o/{organization_slug}/{team_slug}/{room_slug}', 'RoomController@show', function($organization_slug, $team_slug, $room_slug) {
 
 })->middleware('auth');
+
+Route::post('/room', 'RoomController@create')->middleware('auth');

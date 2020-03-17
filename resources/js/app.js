@@ -223,66 +223,12 @@ function roomJoined(room) {
     });
 }
 
-document.getElementById('muteBtn').onclick = function() {
-    const muteBtn = $('#muteBtn');
-    const mute = muteBtn.hasClass("btn-light");
-    const localUser = room.localParticipant;
-    getTracks(localUser).forEach(function(track) {
-      if (track.kind === 'audio') {
-        if (mute) {
-          track.disable();
-        } else {
-          track.enable();
-        }
-      }
-    });
-    if (mute) {
-        muteBtn.removeClass('btn-light');
-        muteBtn.addClass('btn-danger');
-        muteBtn.html('<i class="fas fa-microphone-slash"></i>');
-    } else {
-        muteBtn.removeClass('btn-danger');
-        muteBtn.addClass('btn-light');
-        muteBtn.html('<i class="fas fa-microphone"></i>');
-    }
-  }
-
-  document.getElementById('hideVideoBtn').onclick = function() {
-    const hideVideoBtn = $('#hideVideoBtn');
-    const hide = hideVideoBtn.hasClass("btn-light");
-    const localUser = room.localParticipant;
-    getTracks(localUser).forEach(function(track) {
-      if (track.kind === 'video') {
-        if (hide) {
-          track.disable();
-        } else {
-          track.enable();
-        }
-      }
-    });
-    if (hide) {
-        hideVideoBtn.removeClass('btn-light');
-        hideVideoBtn.addClass('btn-danger');
-        hideVideoBtn.html('<i class="fas fa-video-slash"></i>');
-    } else {
-        hideVideoBtn.removeClass('btn-danger');
-        hideVideoBtn.addClass('btn-light');
-        hideVideoBtn.html('<i class="fas fa-video"></i>');
-    }
-  }
-
  // Leave Room.
  function leaveRoomIfJoined() {
     if (activeRoom) {
         activeRoom.disconnect();
     }
 }
-
-// Bind button to leave Room.
-document.getElementById('buttonLeave').onclick = function() {
-    activeRoom.disconnect();
-    window.location.href="/home";
-};
 
 $( function() {
     if (typeof is_room != 'undefined' && is_room == true) {
@@ -303,6 +249,60 @@ $( function() {
         window.onresize = function(event) {
             adjustVideoSize();
         }
+
+        document.getElementById('muteBtn').onclick = function() {
+            const muteBtn = $('#muteBtn');
+            const mute = muteBtn.hasClass("btn-light");
+            const localUser = room.localParticipant;
+            getTracks(localUser).forEach(function(track) {
+              if (track.kind === 'audio') {
+                if (mute) {
+                  track.disable();
+                } else {
+                  track.enable();
+                }
+              }
+            });
+            if (mute) {
+                muteBtn.removeClass('btn-light');
+                muteBtn.addClass('btn-danger');
+                muteBtn.html('<i class="fas fa-microphone-slash"></i>');
+            } else {
+                muteBtn.removeClass('btn-danger');
+                muteBtn.addClass('btn-light');
+                muteBtn.html('<i class="fas fa-microphone"></i>');
+            }
+          }
+        
+          document.getElementById('hideVideoBtn').onclick = function() {
+            const hideVideoBtn = $('#hideVideoBtn');
+            const hide = hideVideoBtn.hasClass("btn-light");
+            const localUser = room.localParticipant;
+            getTracks(localUser).forEach(function(track) {
+              if (track.kind === 'video') {
+                if (hide) {
+                  track.disable();
+                } else {
+                  track.enable();
+                }
+              }
+            });
+            if (hide) {
+                hideVideoBtn.removeClass('btn-light');
+                hideVideoBtn.addClass('btn-danger');
+                hideVideoBtn.html('<i class="fas fa-video-slash"></i>');
+            } else {
+                hideVideoBtn.removeClass('btn-danger');
+                hideVideoBtn.addClass('btn-light');
+                hideVideoBtn.html('<i class="fas fa-video"></i>');
+            }
+          }
+        
+        // Bind button to leave Room.
+        document.getElementById('buttonLeave').onclick = function() {
+            activeRoom.disconnect();
+            window.location.href="/home";
+        };
     }
 });
 

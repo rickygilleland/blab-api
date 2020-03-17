@@ -100,4 +100,41 @@ class RoomController extends Controller
         
         return view('room.index', ['organization' => $organization, 'team' => $team, 'room' => $room, 'user' => $user ]);
     }
+
+    public function create(Request $request) 
+    {
+        $user = \Auth::user();
+
+        //validate the team id
+        $team_found = false;
+        foreach ($user->teams as $team) {
+            if ($team->id == $request->team_id) {
+                $team_found = true;
+            }
+        }
+
+        if (!$team_found) {
+            abort(404);
+        }
+
+        //check the slug for uniqueness
+        $room_slug = Str::slug($request->name, '-');
+
+        $room = \App\Room::where('organization_id', $user->organization->id)->where('team_id', $request->team_id)->where('slug', $room_slug)->first();
+
+        if ($room) {
+            $room_slug = $room_slug . "-" . uniqid();
+        }
+
+        $room = new \App\Room();
+        $room->name = $request->name;
+        $room->team_id = $request->team_id;
+        $room->organization_id = $user->organization->id;
+        $room->slug = $room_slug;
+        $room->is_public = false;
+        $room->save();
+
+        return redirect("o/".$user->organization->slug);
+
+    }
 }

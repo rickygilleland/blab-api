@@ -26,7 +26,7 @@
                             <h1 class="h3"><strong>{{ $team->name }}</strong> Rooms</h1>
                         </div>
                         <div class="col-md-4 d-flex flex-row-reverse">
-                            <button class="btn btn-primary text-light" data-toggle="modal" data-target="#newRoomModal"><i class="fas fa-plus"></i> Add Room</button>
+                            <button class="btn btn-primary text-light" data-toggle="modal" data-team="{{ $team->id }}" data-target="#newRoomModal"><i class="fas fa-plus"></i> Add Room</button>
                         </div>
                     </div>
 
@@ -122,7 +122,7 @@
             @csrf
             <label for="roomName">Room Name</label>
             <input type="text" name="name" placeholder="Room Name" class="form-control" id="roomName">
-            <input type="hidden" name="team_name" value="">
+            <input type="hidden" name="team_name" value="" id="newRoomTeamId">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -132,4 +132,23 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('js-script')
+<script>
+
+    (function() {
+
+        $('#newRoomModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) 
+            var team_id = button.data('team')
+            
+            console.log(event);
+
+            var modal = $(this)
+            $('#newRoomTeamId').val(team_id)
+        });
+    });
+
+</script>
 @endsection

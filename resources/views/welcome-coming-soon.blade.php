@@ -41,7 +41,6 @@
 
             <center><a class="btn btn-primary btn-lg text-light" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Let Me Know When It's Ready</a></center>
 
-            <center><img src="/img/home-screenshot.png" class="img img-fluid shadow my-5"></center>
         </div>
 
     </body>

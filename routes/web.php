@@ -48,7 +48,7 @@ Route::get('/o/{organization_slug}/{team_slug}/{room_slug}', 'RoomController@sho
 
 })->middleware('auth');
 
-Route::get('/demo/o/{organization_slug}/{team_slug}/{room_slug}', 'RoomController@demo_show', function($organization_slug, $team_slug, $room_slug) {
+Route::get('/demo/o/{organization_slug}/{team_slug}/{room_slug}', 'RoomController@show_demo', function($organization_slug, $team_slug, $room_slug) {
 
 });
 

@@ -237,7 +237,7 @@ $( function() {
         var connectOptions = {
             name: roomName,
             video: {
-                aspectRatio: 1.7777777778
+                aspectRatio: 1.3333333333
             },
             audio: true
         };

@@ -48,4 +48,8 @@ Route::get('/o/{organization_slug}/{team_slug}/{room_slug}', 'RoomController@sho
 
 })->middleware('auth');
 
+Route::get('/demo/o/{organization_slug}/{team_slug}/{room_slug}', 'RoomController@demo_show', function($organization_slug, $team_slug, $room_slug) {
+
+})->middleware('auth');
+
 Route::post('/room', 'RoomController@create')->middleware('auth');

@@ -18,6 +18,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
     <style>
         .col {
             flex-grow: 0 !important;
@@ -39,7 +44,7 @@
                 @if ($user->teams->count() > 1)
                     <p style="color:white" class="ml-3 pt-2"><a href="/o/{{ $organization->slug }}">{{$organization->slug }}</a> / <a href="/o/{{ $organization->slug }}/{{ $team->slug }}">{{ $team->slug }}</a> / {{ $room->slug }}</p>
                 @else
-                    <p style="color:white" class="ml-3 pt-2"><a href="/o/{{ $organization->slug }}/{{ $team->slug }}">{{ $team->slug }}</a> / {{ $room->slug }}</p>
+                    <p style="color:white" class="ml-3 pt-2">{{ $team->slug }} / {{ $room->slug }}</p>
                 @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

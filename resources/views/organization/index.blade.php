@@ -57,7 +57,7 @@
     </div>
 </div>
 
-@if (1 == 2)
+@if (env('APP_ENV') == 'local')
     <!-- New Team Modal -->
     <div class="modal fade" id="newTeamModal" tabindex="-1" role="dialog" aria-labelledby="newTeamModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -98,7 +98,7 @@
                     <p class="sub-heading">Oops! An Enterprise Plan (coming soon) is required to create multiple teams.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </form>
             </div>
@@ -107,31 +107,55 @@
 
 @endif
 
-<!-- New Room Modal -->
-<div class="modal fade" id="newRoomModal" tabindex="-1" role="dialog" aria-labelledby="newRoomModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="newRoomModalLabel">Create a New Room</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form method="post" action="/room">
-        <div class="modal-body">
-            @csrf
-            <label for="roomName">Room Name</label>
-            <input type="text" name="name" placeholder="Room Name" class="form-control" id="roomName">
-            <input type="hidden" name="team_name" value="" id="newRoomTeamId">
+@if (env('APP_ENV') != 'local')
+    <!-- New Room Modal -->
+    <div class="modal fade" id="newRoomModal" tabindex="-1" role="dialog" aria-labelledby="newRoomModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newRoomModalLabel">Create a New Room</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="/room">
+                <div class="modal-body">
+                    <p class="sub-heading">The ability to add multiple rooms is coming soon!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </form>
     </div>
-  </div>
-</div>
+@else
+    <!-- New Room Modal -->
+    <div class="modal fade" id="newRoomModal" tabindex="-1" role="dialog" aria-labelledby="newRoomModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newRoomModalLabel">Create a New Room</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="/room">
+                <div class="modal-body">
+                    @csrf
+                    <label for="roomName">Room Name</label>
+                    <input type="text" name="name" placeholder="Room Name" class="form-control" id="roomName">
+                    <input type="hidden" name="team_name" value="" id="newRoomTeamId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+@endif
 @endsection
 
 @section('js-script')

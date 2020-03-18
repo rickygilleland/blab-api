@@ -12,13 +12,18 @@
 
         <script src="https://kit.fontawesome.com/584495cc88.js"></script>
 
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+
     </head>
     <body>
 
         <div class="container">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#"><img src="img/water_cooler.png" class="img img-fluid" style="height:60px"></a>
+            <a class="navbar-brand" href="#"><img src="img/water_cooler.png" class="img img-fluid" style="height:60px"> <span style="font-weight:900;font-size:1.5rem;">Water Cooler</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

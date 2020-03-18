@@ -40,6 +40,8 @@
             <p class="text-center my-4" style="font-weight:600;font-size:1.3rem">Starting at only $10/month for up to 5 team members with a 7 day free trial (no credit card required).</p>
 
             <center><a class="btn btn-primary btn-lg text-light" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Let Me Know When It's Ready</a></center>
+
+            <center><img src="/img/home-screenshot.png" class="img img-fluid shadow my-5"></center>
         </div>
 
     </body>

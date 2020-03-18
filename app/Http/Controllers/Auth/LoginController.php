@@ -67,7 +67,7 @@ class LoginController extends Controller
                 //temporarily set the slug to the provider id
                 $organization->slug = $organization->provider_id;
                 //create a generic trial sub
-                $organization->trial_ends_at = now()->addDays(30);
+                $organization->trial_ends_at = now()->addDays(7);
                 $organization->save();
             }
 

@@ -6,37 +6,32 @@ import 'jquery-ui/ui/widgets/resizable.js';
 /* twilio */
 
 function adjustVideoSize() {
-    var height = $(window).height() - $('#roomNav').outerHeight() -  $('#roomControls').outerHeight();
-    var width = $(window).width();
-
-    width = width - 110;
+    var height = $(window).height() - $('#roomNav').outerHeight() -  $('#roomControls').outerHeight() - 5;
+    var width = $("#app").width() - 110;
 
     var totalVideoContainers = $('.video').length;
 
-    if (totalVideoContainers == 2) {
-        if (width > 768) {
-            width = width / 2;
-        } else {
-            height = height / 2;
-        }
+    if (totalVideoContainers == 1) {
+        height = height;
     }
 
-    if (totalVideoContainers > 2 && totalVideoContainers <= 6) {
-        height = height / 2;
+    if (totalVideoContainers == 2) {
+        width /= 2;
+    }
+
+
+    if (width > 620) {    
+        if (totalVideoContainers > 2 && totalVideoContainers <= 6) {
+            width /= 3;
+        }
+    } else {    
+        if (totalVideoContainers > 2 && totalVideoContainers <= 6) {
+            width /= 2;
+        }
     }
 
     if (totalVideoContainers > 6 && totalVideoContainers <= 12) {
         height = height / 3;
-    }
-
-    if (totalVideoContainers > 2 && totalVideoContainers <= 4) {
-        //2x2
-        width = width / 2;
-    }
-
-    if (totalVideoContainers > 4 && totalVideoContainers <= 6) {
-        //3x3
-        width = width / 3;
     }
 
     if (totalVideoContainers > 6 && totalVideoContainers <= 9) {
@@ -48,10 +43,9 @@ function adjustVideoSize() {
         //4x4
         width = width / 4;
     }
-    $('.video').height(height);
+    //$('.video').height(height);
     $('.video').width(width);
-
-    //$('#'+room.localParticipant.sid).width(width);
+    $('.video').height(height);
 
 }
 
@@ -222,6 +216,12 @@ function roomJoined(room) {
         room.participants.forEach(detachParticipantTracks);
         activeRoom = null;
     });
+
+    room.on('trackEnabled', function(track, participant) {
+    });
+
+    room.on('trackDisabled', function(track, participant) {
+    });
 }
 
  // Leave Room.
@@ -237,7 +237,10 @@ $( function() {
         var connectOptions = {
             name: roomName,
             video: {
-                aspectRatio: 1.7777777778
+                aspectRatio: 1.3333333333,
+                mode: 'grid',
+                dominantSpeakerPriority: 'high',
+                trackSwitchOffMode: 'detected',
             },
             audio: true
         };
@@ -249,6 +252,7 @@ $( function() {
         // Join the Room with the token from the server and the
         // LocalParticipant's Tracks.
         Video.connect(identity, connectOptions).then(roomJoined, function(error) {
+            console.log(error);
         });
 
         window.onresize = function(event) {
@@ -296,10 +300,12 @@ $( function() {
                 hideVideoBtn.removeClass('btn-light');
                 hideVideoBtn.addClass('btn-danger');
                 hideVideoBtn.html('<i class="fas fa-video-slash"></i>');
+                $('.video-local').addClass("d-none");
             } else {
                 hideVideoBtn.removeClass('btn-danger');
                 hideVideoBtn.addClass('btn-light');
                 hideVideoBtn.html('<i class="fas fa-video"></i>');
+                $('.video-local').removeClass("d-none");
             }
           }
         

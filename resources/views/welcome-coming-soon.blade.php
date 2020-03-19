@@ -39,9 +39,21 @@
             <p class="text-center mt-3" style="font-weight:400;font-size:1.4rem">We give your remote team a place to feel a little less remote because some of the best ideas come from casual conversation, not meetings. Close your eyes and you just might forget you aren't in the office. </p>
             <p class="text-center my-4" style="font-weight:600;font-size:1.3rem">Starting at only $10/month for up to 5 team members with a 7 day free trial (no credit card required).</p>
 
-            <center><a class="btn btn-primary btn-lg text-light" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Let Me Know When It's Ready</a></center>
+            <center><a class="btn btn-primary btn-lg text-light my-3" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Tell Me When It's Ready</a></center>
+            <center><img src="/img/home-screenshot-main.png" class="img img-fluid shadow my-4"></center>
 
+            <h2 class="text-center mt-5" style="font-size:3rem">Why Water Cooler?</h2>
+            <p class="text-center mt-3" style="font-weight:400;font-size:1.3rem">Traditional video conferencing software was made for one thing: meetings. But when your team is distributed, you need a way to feel connected, not another way to have meetings.</p>
+
+            <p class="text-center mt-3" style="font-weight:600;font-size:1.2rem">We aren't focused on a huge suite of fancy features or revolutionizing the way you do meetings, we're focused on bringing you a light-weight and reliable way to keep your remote team closer.</p>
+            <p class="text-center mt-3" style="font-weight:400;font-size:1.2rem">Water Cooler runs in any modern web browser, and will soon offer native Windows and MacOS apps.</p>
+            <center><a class="btn btn-primary btn-lg text-light my-3" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Tell Me When It's Ready</a></center>
+
+
+    
+            
         </div>
+
 
     </body>
 </html>

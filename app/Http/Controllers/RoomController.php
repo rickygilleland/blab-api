@@ -182,9 +182,11 @@ class RoomController extends Controller
 
         //validate the team id
         $team_found = false;
+        $found_team = null;
         foreach ($user->teams as $team) {
             if ($team->id == $request->team_id) {
                 $team_found = true;
+                $found_team = $team;
             }
         }
 
@@ -207,6 +209,7 @@ class RoomController extends Controller
         $room->organization_id = $user->organization->id;
         $room->slug = $room_slug;
         $room->is_public = false;
+        $room->channel_id = $user->organization->slug . "-" . $found_team->slug . "-" . $room_slug;
         $room->save();
 
         return redirect("o/".$user->organization->slug);

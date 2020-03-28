@@ -53,3 +53,5 @@ Route::get('/demo/o/{organization_slug}/{team_slug}/{room_slug}', 'RoomControlle
 });
 
 Route::post('/room', 'RoomController@create')->middleware('auth');
+
+Route::post('/network_token', 'RoomController@get_token')->middleware('auth');

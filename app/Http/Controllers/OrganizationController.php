@@ -33,4 +33,19 @@ class OrganizationController extends Controller
 
         return view('organization.index', ['user' => $user]);
     }
+
+
+    public function api_show()
+    {
+        $user = \Auth::user()->load('teams.rooms', 'organization');
+        
+        $organization = [
+            "id" => $user->organization->id,
+            "name" => $user->organization->name,
+            "slug" => $user->organization->slug,
+            "teams" => $user->teams
+        ];
+        
+        return $organization;
+    }
 }

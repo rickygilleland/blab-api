@@ -13,6 +13,29 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Broadcast::channel('user.{userId}', function ($user, $userId) {
+    if ($user->id === $userId) {
+      return array('name' => $user->name);
+    }
+});
+
+Broadcast::channel('chat.{roomId}', function ($user, $roomId) {
+    foreach ($user->teams as $team) {
+        foreach ($team->rooms as $room) {
+            if ($room->channel_id == $channelId) {
+                return ['id' => $user->id, 'name' => $user->name];
+            }
+        }
+    }
+});
+
+Broadcast::channel('{channelId}', function ($user, $channelId) {
+    foreach ($user->teams as $team) {
+        foreach ($team->rooms as $room) {
+            if ($room->channel_id == $channelId) {
+                return true;
+            }
+        }
+    }
+    return false;
 });

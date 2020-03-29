@@ -23,7 +23,7 @@ Broadcast::channel('chat.{channelId}', function ($user, $channelId) {
     foreach ($user->teams as $team) {
         foreach ($team->rooms as $room) {
             if ($room->channel_id == $channelId) {
-                return ['id' => $user->id, 'name' => $user->name];
+                return ['id' => $user->id, 'name' => $user->name, 'avatar' => $user->avatar_url];
             }
         }
     }

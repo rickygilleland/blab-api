@@ -29,7 +29,7 @@ Broadcast::channel('peers.{channelId}', function ($user, $channelId) {
     }
 });
 
-Broadcast::channel('{channelId}', function ($user, $channelId) {
+Broadcast::channel('peer_status.{channelId}', function ($user, $channelId) {
     foreach ($user->teams as $team) {
         foreach ($team->rooms as $room) {
             if ($room->channel_id == $channelId) {

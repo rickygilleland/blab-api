@@ -19,7 +19,7 @@ Broadcast::channel('user.{userId}', function ($user, $userId) {
     }
 });
 
-Broadcast::channel('chat.{roomId}', function ($user, $roomId) {
+Broadcast::channel('chat.{channelId}', function ($user, $channelId) {
     foreach ($user->teams as $team) {
         foreach ($team->rooms as $room) {
             if ($room->channel_id == $channelId) {

@@ -3,6 +3,8 @@
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Broadcast;
 
+use App\Broadcasting\RoomChannel;
+
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -14,13 +16,10 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('user.{userId}', function ($user, $userId) {
-    if ($user->id === $userId) {
-      return array('name' => $user->name);
-    }
-});
+Broadcast::channel('peers.{channelId', RoomChannel::class);
 
-Broadcast::channel('peers.{channelId}', function ($user, $channelId) {
+
+/*Broadcast::channel('peers.{channelId}', function ($user, $channelId) {
     foreach ($user->teams as $team) {
         foreach ($team->rooms as $room) {
             if ($room->channel_id == $channelId) {
@@ -28,8 +27,9 @@ Broadcast::channel('peers.{channelId}', function ($user, $channelId) {
             }
         }
     }
-});
+});*/
 
+/*
 Broadcast::channel('peer_status.{channelId}', function ($user, $channelId) {
     foreach ($user->teams as $team) {
         foreach ($team->rooms as $room) {
@@ -40,3 +40,4 @@ Broadcast::channel('peer_status.{channelId}', function ($user, $channelId) {
     }
     return false;
 });
+*/

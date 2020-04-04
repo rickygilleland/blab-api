@@ -37,11 +37,11 @@ class RoomChannel
             foreach ($team->rooms as $room) {
                 if ($room->channel_id == $channelId) {
                     //generate them a twilio nts token as well
-                    //$twilio = new \Twilio\Rest\Client($this->sid, $this->token);
+                    $twilio = new \Twilio\Rest\Client($this->sid, $this->token);
 
-                    //$token = $twilio->tokens->create();
+                    $token = $twilio->tokens->create();
 
-                    return ['id' => $user->id, 'name' => $user->name, 'avatar' => $user->avatar_url, 'peer_uuid' =>  Str::uuid() ];
+                    return ['id' => $user->id, 'name' => $user->name, 'avatar' => $user->avatar_url, 'peer_uuid' =>  Str::uuid(), 'ice_servers' => $token->ice_servers];
                 }
             }
         }

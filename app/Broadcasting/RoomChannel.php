@@ -3,6 +3,7 @@
 namespace App\Broadcasting;
 
 use App\User;
+use Illuminate\Support\Str;
 
 class RoomChannel
 {

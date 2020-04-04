@@ -42,7 +42,7 @@ class RoomChannel
 
                     $token = $twilio->tokens->create();
 
-                    return ['id' => $user->id, 'name' => $user->name, 'avatar' => $user->avatar_url, 'peer_uuid' =>  Str::uuid(), 'ice_servers' => $token->ice_servers];
+                    return ['id' => $user->id, 'name' => $user->name, 'avatar' => $user->avatar_url, 'peer_uuid' =>  Str::uuid(), 'ice_servers' => $token->username];
                 }
             }
         }

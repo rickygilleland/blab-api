@@ -122,7 +122,7 @@ class RoomChannel
                         ];
 
                         $room = Http::post($api_url_with_room_handler, $data);
-                        $room = $room_exists->json();
+                        $room = $room->json();
                     } else {
                         //make sure the current user's token is in there
                         $message_body = [
@@ -142,7 +142,7 @@ class RoomChannel
                         ];
 
                         $room = Http::post($api_url_with_room_handler, $data);
-                        $room = $room_exists->json();
+                        $room = $room->json();
                     }
 
 

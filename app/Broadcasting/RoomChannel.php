@@ -111,6 +111,7 @@ class RoomChannel
                         //create the room
                         $message_body = [
                             "request" => "create",
+                            "admin_key" => $this->streaming_backend_api_secret,
                             "room" => $room->channel_id,
                             "secret" => $room->secret,
                             "is_private" => true,
@@ -133,6 +134,7 @@ class RoomChannel
                         //make sure the current user's token is in there
                         $message_body = [
                             "request" => "allowed",
+                            "admin_key" => $this->streaming_backend_api_secret,
                             "secret" => $room->secret,
                             "action" => "add",
                             "allowed" => [

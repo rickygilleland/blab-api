@@ -135,6 +135,7 @@ class RoomChannel
                         $message_body = [
                             "request" => "allowed",
                             "admin_key" => $this->streaming_backend_api_secret,
+                            "room" => $room->channel_id,
                             "secret" => $room->secret,
                             "action" => "add",
                             "allowed" => [

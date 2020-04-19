@@ -163,9 +163,7 @@ class RoomChannel
                         'peer_uuid' =>  md5($user->id), 
                         'nts_user' => $token->username, 
                         'nts_password' => $token->password,
-                        'streamer_key' => $user->streamer_key,
-                        'room' => $streamer_room,
-                        'room_secret' => $room->secret
+                        'streamer_key' => $user->streamer_key
                     ];
                 }
             }

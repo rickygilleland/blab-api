@@ -140,6 +140,10 @@ class RoomController extends Controller
         $room->channel_id = $user->organization->slug . "-" . $found_team->slug . "-" . $room_slug;
         $room->save();
 
+        $room->secret = Hash::make(Str::random(256));
+        $room->secret .= "_" . $room->id;
+        $room->save();
+
         return redirect("o/".$user->organization->slug);
 
     }

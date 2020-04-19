@@ -56,6 +56,12 @@ class RoomChannel
                         $user->save();
                     }
 
+                    if ($room->secret == null) {
+                        $room->secret = Hash::make(Str::random(256));
+                        $room->secret .= "_" . $room->id;
+                        $room->save();
+                    }
+
                     //get the room details from the backend server
 
                     $data = [
@@ -106,7 +112,7 @@ class RoomChannel
                         $message_body = [
                             "request" => "create",
                             "room" => $room->channel_id,
-                            "secret" => md5($room->channel_id),
+                            "secret" => $room->secret,
                             "is_private" => true,
                             "publishers" => 99,
                             "allowed" => [
@@ -127,7 +133,7 @@ class RoomChannel
                         //make sure the current user's token is in there
                         $message_body = [
                             "request" => "allowed",
-                            "secret" => md5($room->channel_id),
+                            "secret" => $room->secret,
                             "action" => "add",
                             "allowed" => [
                                 $user->streamer_key
@@ -155,7 +161,7 @@ class RoomChannel
                         'nts_password' => $token->password,
                         'streamer_key' => $user->streamer_key,
                         'room' => $room,
-                        'room_secret' => md5($room)
+                        'room_secret' => $room->secret
                     ];
                 }
             }

@@ -14,8 +14,11 @@ class RenameRoomSecretColumnOnRoomsTable extends Migration
     public function up()
     {
         //
-        $table->dropColumn('room_secret');
-        $table->string('secret')->default(null);
+        Schema::table('rooms', function (Blueprint $table) {
+            //
+            $table->dropColumn('room_secret');
+            $table->string('secret')->default(null);
+        });
     }
 
     /**
@@ -26,5 +29,8 @@ class RenameRoomSecretColumnOnRoomsTable extends Migration
     public function down()
     {
         //
+        Schema::table('rooms', function (Blueprint $table) {
+            //
+        });
     }
 }

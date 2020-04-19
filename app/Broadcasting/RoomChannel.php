@@ -75,7 +75,7 @@ class RoomChannel
 
                     $message_body = [
                         "request" => "exists",
-                        "room": $room->channel_id
+                        "room" => $room->channel_id
                     ];  
 
                     $data = [

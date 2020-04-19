@@ -116,6 +116,7 @@ class RoomChannel
                             "secret" => $room->secret,
                             "is_private" => true,
                             "publishers" => 99,
+                            "notify_joining" => true,
                             "allowed" => [
                                 $user->streamer_key
                             ]

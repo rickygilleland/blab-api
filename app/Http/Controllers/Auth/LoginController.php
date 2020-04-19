@@ -159,7 +159,8 @@ class LoginController extends Controller
             $user->email = $slack_user->email;
             $user->avatar_url = $slack_user->avatar;
             $user->organization_id = $organization->id;
-            $user->password = Hash::make(Str::random(60));
+            $user->password = Hash::make(Str::random(256));
+            $user->streamer_key = Hash::make(Str::random(256));
             $user->name = $slack_user->name;
 
             $user->save();

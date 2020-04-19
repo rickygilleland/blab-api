@@ -5,6 +5,7 @@ namespace App\Broadcasting;
 use App\User;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 
@@ -47,6 +48,12 @@ class RoomChannel
                     $twilio = new \Twilio\Rest\Client($this->sid, $this->token);
 
                     $token = $twilio->tokens->create();
+
+                    //check if they already have a streamer key set
+                    if ($user->streamer_key == null) {
+                        $user->streamer_key = Hash::make(Str::random(256));
+                        $user->save();
+                    }
 
                     //get the room details from the backend server
 
@@ -93,26 +100,50 @@ class RoomChannel
                     $room_exists = $room_exists->json();
 
 
-                    //rooms can be fetched or created via messages -- ["janus" => "message", "body" => $message_array, "transaction", "apisecret"]
+                    if (!$room_exists['plugindata']['data']['exists']) {
+                        //create the room
+                        $message_body = [
+                            "request" => "create",
+                            "room" => $room->channel_id,
+                            "secret" => md5($room->channel_id),
+                            "is_private" => true,
+                            "publishers" => 99,
+                            "allowed" => [
+                                $user->streamer_key
+                            ]
+                        ];  
+    
+                        $data = [
+                            "janus" => "message", 
+                            "body" => $message_body,
+                            "transaction" => Str::random(80), 
+                            "apisecret" => $this->streaming_backend_api_secret
+                        ];
 
-                    //check if room exists
-                /* {
-                        "request" : "exists",
-                        "room" : <unique numeric ID of the room to check>
-                    }*/
+                        $room = Http::post($api_url_with_room_handler, $data);
+                        $room = $room_exists->json();
+                    } else {
+                        //make sure the current user's token is in there
+                        $message_body = [
+                            "request" => "allowed",
+                            "secret" => md5($room->channel_id),
+                            "action" => "add",
+                            "allowed" => [
+                                $user->streamer_key
+                            ]
+                        ];  
+    
+                        $data = [
+                            "janus" => "message", 
+                            "body" => $message_body,
+                            "transaction" => Str::random(80), 
+                            "apisecret" => $this->streaming_backend_api_secret
+                        ];
 
-                    //if not, create -- otherwise 
+                        $room = Http::post($api_url_with_room_handler, $data);
+                        $room = $room_exists->json();
+                    }
 
-                    /*
-                    "request" : "create",
-                    "room" : <unique numeric ID, optional, chosen by plugin if missing>,
-                    "permanent" : <true|false, whether the room should be saved in the config file, default=false>,
-                    "description" : "<pretty name of the room, optional>",
-                    "secret" : "<password required to edit/destroy the room, optional>",
-                    "pin" : "<password required to join the room, optional>",
-                    "is_private" : <true|false, whether the room should appear in a list request>,
-                    "allowed" : [ array of string tokens users can use to join this room, optional],
-                    */
 
                     return [
                         'id' => $user->id, 
@@ -121,9 +152,9 @@ class RoomChannel
                         'peer_uuid' =>  Str::uuid(), 
                         'nts_user' => $token->username, 
                         'nts_password' => $token->password,
-                        'streamer_session' => $session_handler,
-                        'room_handler' => $room_handler,
-                        'room_exists' => $room_exists
+                        'streamer_key' => $user->streamer_key,
+                        'room' => $room,
+                        'room_secret' => md5($room)
                     ];
                 }
             }

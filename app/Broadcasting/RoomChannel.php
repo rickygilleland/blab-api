@@ -117,6 +117,7 @@ class RoomChannel
                         'peer_uuid' =>  Str::uuid(), 
                         'nts_user' => $token->username, 
                         'nts_password' => $token->password,
+                        'streamer_session' => $session_handler,
                         'room_handler' => $room_handler,
                         'room_exists' => $room_exists
                     ];

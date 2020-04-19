@@ -52,6 +52,7 @@ class RoomChannel
                     //check if they already have a streamer key set
                     if ($user->streamer_key == null) {
                         $user->streamer_key = Hash::make(Str::random(256));
+                        $user->streamer_key .= "_" . $user->id;
                         $user->save();
                     }
 

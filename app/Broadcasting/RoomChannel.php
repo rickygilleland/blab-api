@@ -59,7 +59,7 @@ class RoomChannel
                     //create a session
                     $session_handler = Http::post($this->streaming_backend_api_url, $data);
                     $session_handler = $session_handler->json();
-                    //$session_handler = $session_handler['data']['id'];
+                    $session_handler = $session_handler['data']['id'];
 
                     $data = [
                         "janus" => "attach", 
@@ -68,8 +68,10 @@ class RoomChannel
                         "apisecret" => $this->streaming_backend_api_secret
                     ];
 
+                    $api_url_with_handler = $this->streaming_backend_api_url . "/" . $session_handler;
+
                     //attach the video room plugin
-                    $room_handler = Http::post($this->streaming_backend_api_url, $data);
+                    $room_handler = Http::post($this->api_url_with_handler, $data);
                     $room_handler = $room_handler->json();
                     //$room_handler = $room_handler['data']['id'];
 
@@ -85,7 +87,7 @@ class RoomChannel
                         "apisecret" => $this->streaming_backend_api_secret
                     ];
 
-                    $room_exists = Http::post($this->streaming_backend_api_url, $data);
+                    $room_exists = Http::post($this->api_url_with_handler, $data);
                     $room_exists = $room_exists->json();
 
 

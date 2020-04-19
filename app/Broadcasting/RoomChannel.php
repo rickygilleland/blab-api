@@ -73,7 +73,9 @@ class RoomChannel
                     //attach the video room plugin
                     $room_handler = Http::post($api_url_with_handler, $data);
                     $room_handler = $room_handler->json();
-                    //$room_handler = $room_handler['data']['id'];
+                    $room_handler = $room_handler['data']['id'];
+
+                    $api_url_with_room_handler = $api_url_with_handler . "/" . $room_handler;
 
                     $message_body = [
                         "request" => "exists",
@@ -87,7 +89,7 @@ class RoomChannel
                         "apisecret" => $this->streaming_backend_api_secret
                     ];
 
-                    $room_exists = Http::post($api_url_with_handler, $data);
+                    $room_exists = Http::post($api_url_with_room_handler, $data);
                     $room_exists = $room_exists->json();
 
 

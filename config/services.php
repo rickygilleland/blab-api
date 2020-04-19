@@ -42,4 +42,9 @@ return [
 	    'key' => env('TWILIO_API_KEY'),
         'secret' => env('TWILIO_API_SECRET'),
     ],
+
+    'streaming_backend' => [
+        'url' => env('STREAMING_BACKEND_API_URL'),
+        'secret' => env('STREAMING_BACKEND_API_SECRET')
+    ]
 ];

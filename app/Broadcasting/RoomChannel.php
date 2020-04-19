@@ -127,8 +127,8 @@ class RoomChannel
                             "apisecret" => $this->streaming_backend_api_secret
                         ];
 
-                        $room = Http::post($api_url_with_room_handler, $data);
-                        $room = $room->json();
+                        $streamer_room = Http::post($api_url_with_room_handler, $data);
+                        $streamer_room = $streamer_room->json();
                     } else {
                         //make sure the current user's token is in there
                         $message_body = [
@@ -147,8 +147,8 @@ class RoomChannel
                             "apisecret" => $this->streaming_backend_api_secret
                         ];
 
-                        $room = Http::post($api_url_with_room_handler, $data);
-                        $room = $room->json();
+                        $streamer_room = Http::post($api_url_with_room_handler, $data);
+                        $streamer_room = $streamer_room->json();
                     }
 
 
@@ -160,7 +160,7 @@ class RoomChannel
                         'nts_user' => $token->username, 
                         'nts_password' => $token->password,
                         'streamer_key' => $user->streamer_key,
-                        'room' => $room,
+                        'room' => $streamer_room,
                         'room_secret' => $room->secret
                     ];
                 }

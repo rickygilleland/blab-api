@@ -159,7 +159,7 @@ class RoomChannel
                         'id' => $user->id, 
                         'name' => $user->name, 
                         'avatar' => $user->avatar_url, 
-                        'peer_uuid' =>  Str::uuid(), 
+                        'peer_uuid' =>  md5($user->id), 
                         'nts_user' => $token->username, 
                         'nts_password' => $token->password,
                         'streamer_key' => $user->streamer_key,

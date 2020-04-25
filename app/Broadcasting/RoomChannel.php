@@ -117,7 +117,9 @@ class RoomChannel
                             "is_private" => true,
                             "publishers" => 99,
                             "notify_joining" => true,
-                            "videocodec" => "vp9,vp8,h264",
+                            "videocodec" => "vp9",
+                            "audiolevel_event" => true,
+                            "video_svc" => true,
                             "allowed" => [
                                 $user->streamer_key
                             ]

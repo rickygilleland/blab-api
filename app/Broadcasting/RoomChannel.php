@@ -107,7 +107,7 @@ class RoomChannel
                     $room_exists = $room_exists->json();
 
 
-                    if (!$room_exists['plugindata']['data']['exists']) {
+                    if (!isset($room_exists['plugindata']['data']['exists']) || !$room_exists['plugindata']['data']['exists']) {
                         //create the room
                         $message_body = [
                             "request" => "create",

@@ -31,12 +31,28 @@ class UserController extends Controller
     {
         $user = \Auth::user();
 
-        //fetch a twilio nts token and attach it to the user
-        $client = new \Twilio\Rest\Client($this->sid, $this->token);
+        if ($user->avatar_url == null) {
+            //generate a random one
+            $avi_base = env('AVI_SERVICE_URL');
 
-        $nts_token = $client->tokens->create();
+            $themes = [
+                "frogideas",
+                "sugarsweets",
+                "heatwave",
+                "daisygarden",
+                "seascape",
+                "summerwarmth",
+                "bythepool",
+                "duskfalling",
+                "berrypie"
+            ];
 
-        $user->nts_token = $nts_token;
+            $random_theme = array_rand($themes, 1);
+            $random_theme = $random_theme[0];
+
+            $user->avatar_url = $avi_base . md5($user->name) . "?theme=" . $random_theme . "&numcolors=4&size=880&fmt=svg";
+            $user->save();
+        }
         
         return $user;
     }

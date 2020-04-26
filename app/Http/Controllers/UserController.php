@@ -48,7 +48,7 @@ class UserController extends Controller
             ];
 
             $random_theme = array_rand($themes, 1);
-            $random_theme = $random_theme[0];
+            $random_theme = $themes[$random_theme];
 
             $user->avatar_url = $avi_base . md5($user->name) . "?theme=" . $random_theme . "&numcolors=4&size=880&fmt=svg";
             $user->save();

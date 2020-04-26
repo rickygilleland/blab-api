@@ -35,19 +35,9 @@
             <h1 class="text-center" style="font-size: 3.9rem;font-weight:600">Water Cooler Chat, Sans Water Cooler</h1>
             <p class="text-center mt-3" style="font-weight:400;font-size:1.4rem">We give your team an always available place designed to run in the background, encouraging natural conversation you would normally only get in the office.</p>
             <p class="text-center mt-3" style="font-weight:400;font-size:1.4rem">Some of the best ideas come from natural conversation, not meetings. Don't miss out.</p>
-            <p class="text-center my-4" style="font-weight:600;font-size:1.3rem">Starting at only $10/month for up to 5 team members with a 7 day free trial (no credit card required).</p>
 
             <center><a class="btn btn-primary btn-lg text-light my-3" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Tell Me When It's Ready</a></center>
-            <center><img src="/img/home-screenshot-main.png" class="img img-fluid shadow my-4"></center>
-
-            <h2 class="text-center mt-5" style="font-size:3rem">Why Water Cooler?</h2>
-            <p class="text-center mt-3" style="font-weight:400;font-size:1.3rem">Traditional video conferencing software was made for one thing: meetings. But when your team is distributed, you need a way to feel connected, not another way to have meetings.</p>
-
-            <p class="text-center mt-3" style="font-weight:600;font-size:1.2rem">Rather than creating another meeting room and waiting for the host to connect, members of your team can hop in and out of your always active Water Cooler to chat and hang out with the rest of the team.</p>
-            <p class="text-center mt-3" style="font-weight:400;font-size:1.2rem">Water Cooler runs in any modern web browser, and will soon offer native Windows and MacOS apps.</p>
-            <center><a class="btn btn-primary btn-lg text-light my-3" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Tell Me When It's Ready</a></center>
-
-
+           
     
             
         </div>

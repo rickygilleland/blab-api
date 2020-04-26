@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 use TwilioRestClient;
 use TwilioJwtAccessToken;
@@ -85,22 +86,17 @@ class OnboardingController extends Controller
         $room->team_id = $default_team->id;
         $room->organization_id = $user->organization->id;
         $room->slug = Str::slug($room->name, '-');
+        $room->channel_id = $user->organization->slug . "-" . $default_team->slug . "-" . $room->slug;
+        $room->secret = Hash::make(Str::random(256));
         $room->is_public = false;
         $room->save();
 
         $full_room_slug = $user->organization->slug.'/'.$default_team->slug.'/'.$room->slug;
 
-        //setup the twilio video room and chat channel
-        $client = new \Twilio\Rest\Client($this->sid, $this->token);
-
-        $twilio_room_name = env('APP_ENV') . "_" . str_replace('/', '-', $full_room_slug);
-
-        $client->video->rooms->create([
-            'uniqueName' => $twilio_room_name,
-            'type' => 'peer-to-peer',
-        ]);
-        
-        return redirect('/o/'.$full_room_slug);
+        return redirect("/onboarding/download");
     }
 
+    public function download() {
+        return view('onboarding.download');
+    }
 }

@@ -17,9 +17,10 @@ Route::get('/', function () {
     return view('welcome-coming-soon');
 });
 
-
 Route::get('login/slack/callback', 'Auth\LoginController@handleSlackCallback');
 Route::get('login-tucker', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('register-tucker', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register-tucker', 'Auth\RegisterController@register');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -31,6 +32,7 @@ Route::get('onboarding/team', 'OnboardingController@team');
 Route::post('onboarding/team', 'OnboardingController@team_update');
 Route::get('onboarding/room', 'OnboardingController@room');
 Route::post('onboarding/room', 'OnboardingController@room_update');
+Route::get('onboarding/download', 'OnboardingController@download');
 
 Route::get('/o/{organization_slug}/{team_slug}', 'TeamController@show', function($organization_slug, $team_slug) {
 

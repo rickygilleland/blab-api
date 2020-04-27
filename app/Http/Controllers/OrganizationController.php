@@ -48,4 +48,19 @@ class OrganizationController extends Controller
         
         return $organization;
     }
+
+    public function get_organization_users()
+    {
+        $user = \Auth::user()->load('organization');
+    
+        return $user->organization->users;
+    }
+
+    public function get_organization_teams()
+    {
+        $user = \Auth::user()->load('organization.teams.rooms');
+
+        return $user->organization;
+    }
+
 }

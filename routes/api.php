@@ -19,3 +19,7 @@ Route::get('/login/slack', 'Auth\LoginController@apiHandleSlackCallback');
 Route::middleware('auth:api')->get('/user', 'UserController@show');
 
 Route::middleware('auth:api')->get('/organization', 'OrganizationController@api_show');
+
+Route::middleware('auth:api')->get('/organization/users', 'OrganizationController@get_organization_users');
+
+Route::middleware('auth:api')->get('/organization/teams', 'OrganizationController@get_organization_teams');

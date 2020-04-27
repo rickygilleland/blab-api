@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
@@ -57,7 +58,18 @@ class OrganizationController extends Controller
             abort(404);
         }
     
-        return $user->organization->users;
+
+        $users = [];
+
+        foreach ($user->organzation->users as $user) {
+            $users[] = [
+                'id' => $user->id, 
+                'name' => $user->name,
+                'avatar_url' => $user->avatar_url
+            ];
+        }
+
+        return $users;
     }
 
     public function get_organization_teams($id)

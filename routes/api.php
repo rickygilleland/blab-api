@@ -20,6 +20,10 @@ Route::middleware('auth:api')->get('/user', 'UserController@show');
 
 Route::middleware('auth:api')->get('/organization', 'OrganizationController@api_show');
 
-Route::middleware('auth:api')->get('/organization/users', 'OrganizationController@get_organization_users');
+Route::middleware('auth:api')->get('/organization/{id}/users', 'OrganizationController@get_organization_users', function ($id) {
 
-Route::middleware('auth:api')->get('/organization/teams', 'OrganizationController@get_organization_teams');
+});
+
+Route::middleware('auth:api')->get('/organization/{id}/teams', 'OrganizationController@get_organization_teams', function ($id) {
+
+});

@@ -58,9 +58,8 @@ class OrganizationController extends Controller
             abort(404);
         }
 
-        $organization = \App\Organization::where('id', $id)->get();
-        $organization_users = $organization->users;
-
+        $organization_users = \App\Organization::find($id)->users;
+    
         $users = [];
 
         foreach ($organization_users as $user) {

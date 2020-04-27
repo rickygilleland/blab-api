@@ -52,16 +52,18 @@ class OrganizationController extends Controller
 
     public function get_organization_users($id)
     {
-        $user = \Auth::user()->load('organization.users');
+        $user = \Auth::user()->load('organization');
 
         if ($user->organization->id != $id) {
             abort(404);
         }
-    
+
+        $organization = \App\Organization::where('id', $id)->get();
+        $organization_users = $organization->users;
 
         $users = [];
 
-        foreach ($user->organzation->users as $user) {
+        foreach ($organization_users as $user) {
             $users[] = [
                 'id' => $user->id, 
                 'name' => $user->name,

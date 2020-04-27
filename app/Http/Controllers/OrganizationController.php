@@ -52,7 +52,7 @@ class OrganizationController extends Controller
 
     public function get_organization_users($id)
     {
-        $user = \Auth::user()->load('organization');
+        $user = \Auth::user()->load('organization.users');
 
         if ($user->organization->id != $id) {
             abort(404);

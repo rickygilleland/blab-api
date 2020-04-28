@@ -70,6 +70,9 @@ class OrganizationController extends Controller
             ];
         }
 
+        //also fetch the invited users
+        //all invited users should be created and attached to the organization with an accepted_invite -- existing users will have it true or otherwise false obviously
+
         return $users;
     }
 
@@ -82,6 +85,19 @@ class OrganizationController extends Controller
         }
 
         return $user->organization;
+    }
+
+    public function invite_users(Request $request, $id)
+    {
+        $user = \Auth::user()->load('organization.teams.rooms');
+
+        if ($user->organization->id != $id) {
+            abort(404);
+        }
+
+        print_r($request->emails);
+
+        //invite the users
     }
 
 }

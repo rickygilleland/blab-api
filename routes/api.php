@@ -27,3 +27,7 @@ Route::middleware('auth:api')->get('/organization/{id}/users', 'OrganizationCont
 Route::middleware('auth:api')->get('/organization/{id}/teams', 'OrganizationController@get_organization_teams', function ($id) {
 
 });
+
+Route::middleware('auth:api')->get('/organization/{id}/users/invite', 'OrganizationController@invite_users', function ($id) {
+
+});

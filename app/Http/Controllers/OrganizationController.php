@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+
 
 class OrganizationController extends Controller
 {
@@ -95,9 +99,20 @@ class OrganizationController extends Controller
             abort(404);
         }
 
-        print_r($request->emails);
+        $emails = trim($request->emails);
 
-        //invite the users
+        $emails = explode(',', $emails);
+
+        foreach ($emails as $email) {
+            $user = new \App\User();
+            $user->email = $email;
+            $user->password = Hash::make(Str::random(256));
+            $user->streamer_key = Hash::make(Str::random(256));
+            $user->organization_id = $id;
+            $user->save();
+        }
+
+        return true;
     }
 
 }

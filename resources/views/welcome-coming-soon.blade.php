@@ -22,8 +22,8 @@
 
         <div class="container">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#"><img src="img/water_cooler.png" class="img img-fluid" style="height:60px"> <span style="font-weight:900;font-size:1.5rem;">Water Cooler</span></a>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#"><img src="img/water_cooler.png" class="img img-fluid" style="height:60px"></a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
@@ -32,11 +32,12 @@
             </div>
         </nav>
         
-            <h1 class="text-center" style="font-size: 3.9rem;font-weight:600">Water Cooler Chat, Sans Water Cooler</h1>
+            <h1 class="text-center" style="font-size: 3.9rem;font-weight:600">Give Your Distributed Team a Virtual Office</h1>
             <p class="text-center mt-3" style="font-weight:400;font-size:1.4rem">We give your team an always available place designed to run in the background, encouraging natural conversation you would normally only get in the office.</p>
-            <p class="text-center mt-3" style="font-weight:400;font-size:1.4rem">Some of the best ideas come from natural conversation, not meetings. Don't miss out.</p>
+            <center><img src="/img/main-hero-screenshot.png" class="img img-fluid"></center>
 
-            <center><a class="btn btn-primary btn-lg text-light my-3" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Tell Me When It's Ready</a></center>
+            <p class="text-center mt-3" style="font-weight:400;font-size:1.4rem">Water Cooler is currently in an invite-only beta. Click the button below to request an invite.</p>
+            <center><a class="btn btn-primary btn-lg text-light mt-3 mb-5" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Request an Invite</a></center>
            
     
             

@@ -50,4 +50,8 @@ class TeamController extends Controller
 
         return view('team.index', ['user' => $user, 'team' => $current_team]);
     }
+
+    public function create(Request $request) {
+
+    }
 }

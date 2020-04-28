@@ -109,6 +109,27 @@ class OrganizationController extends Controller
             $user->password = Hash::make(Str::random(256));
             $user->streamer_key = Hash::make(Str::random(256));
             $user->organization_id = $id;
+
+            //generate a random avi
+            $avi_base = env('AVI_SERVICE_URL');
+
+            $themes = [
+                "frogideas",
+                "sugarsweets",
+                "heatwave",
+                "daisygarden",
+                "seascape",
+                "summerwarmth",
+                "bythepool",
+                "duskfalling",
+                "berrypie"
+            ];
+
+            $random_theme = array_rand($themes, 1);
+            $random_theme = $themes[$random_theme];
+
+            $user->avatar_url = $avi_base . md5(uniqid()) . "?theme=" . $random_theme . "&numcolors=4&size=880&fmt=svg";
+
             $user->save();
         }
 

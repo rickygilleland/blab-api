@@ -119,6 +119,7 @@ class RoomChannel
                             "notify_joining" => true,
                             "videocodec" => "vp9",
                             "audiolevel_event" => true,
+                            "audiolevel_ext" => true,
                             "video_svc" => true,
                             "allowed" => [
                                 $user->streamer_key

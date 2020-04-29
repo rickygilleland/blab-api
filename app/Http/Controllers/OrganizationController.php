@@ -136,7 +136,7 @@ class OrganizationController extends Controller
             $user->save();
     
             $invite_email = new \SendGrid\Mail\Mail();
-            $invite_email->setForm("help@watercooler.work", "Water Cooler");
+            $invite_email->setFrom("help@watercooler.work", "Water Cooler");
             $invite_email->addTo($email, [
                 "inviter_name" => $auth_user->name,
                 "invite_token" => "sdfdsfsdf",

@@ -75,7 +75,7 @@ class RoomChannel
                     ];
 
                     //create a session
-                    $session_handler = Http::post("https://".$server, $data);
+                    $session_handler = Http::post("https://".$server+"/streamer", $data);
                     $session_handler = $session_handler->json();
                     $session_handler = $session_handler['data']['id'];
 

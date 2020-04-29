@@ -56,6 +56,8 @@ class RoomChannel
                         $user->save();
                     }
 
+                    //TODO: Pull possible streaming servers from the database and attach it to the current room
+                    
                     if ($room->secret == null) {
                         $room->secret = Hash::make(Str::random(256));
                         $room->secret .= "_" . $room->id;
@@ -64,6 +66,8 @@ class RoomChannel
 
                     //get the room details from the backend server
 
+                    $server = "streamer-us-west-1.watercooler.work";
+
                     $data = [
                         "janus" => "create", 
                         "transaction" => Str::random(80), 
@@ -71,7 +75,7 @@ class RoomChannel
                     ];
 
                     //create a session
-                    $session_handler = Http::post($this->streaming_backend_api_url, $data);
+                    $session_handler = Http::post("https://".$server, $data);
                     $session_handler = $session_handler->json();
                     $session_handler = $session_handler['data']['id'];
 
@@ -82,7 +86,7 @@ class RoomChannel
                         "apisecret" => $this->streaming_backend_api_secret
                     ];
 
-                    $api_url_with_handler = $this->streaming_backend_api_url . "/" . $session_handler;
+                    $api_url_with_handler = "https://" . $server . "/" . $session_handler;
 
                     //attach the video room plugin
                     $room_handler = Http::post($api_url_with_handler, $data);
@@ -125,7 +129,7 @@ class RoomChannel
                                 $user->streamer_key
                             ]
                         ];  
-    
+
                         $data = [
                             "janus" => "message", 
                             "body" => $message_body,
@@ -167,7 +171,8 @@ class RoomChannel
                         'peer_uuid' =>  md5($user->id), 
                         'nts_user' => $token->username, 
                         'nts_password' => $token->password,
-                        'streamer_key' => $user->streamer_key
+                        'streamer_key' => $user->streamer_key,
+                        'media_server' => $server
                     ];
                 }
             }

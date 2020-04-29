@@ -93,15 +93,18 @@ class OrganizationController extends Controller
 
     public function invite_users(Request $request, $id)
     {
-        $user = \Auth::user()->load('organization.teams.rooms');
+        $auth_user = \Auth::user()->load('organization.teams.rooms');
 
-        if ($user->organization->id != $id) {
+        if ($auth_user->organization->id != $id) {
             abort(404);
         }
 
         $emails = trim($request->emails);
 
         $emails = explode(',', $emails);
+
+        $sendgrid_key = env('SENDGRID_API_KEY');
+        $sg = new \SendGrid($sendgrid_key);
 
         foreach ($emails as $email) {
             $user = new \App\User();
@@ -131,7 +134,24 @@ class OrganizationController extends Controller
             $user->avatar_url = $avi_base . md5(uniqid()) . "?theme=" . $random_theme . "&numcolors=4&size=880&fmt=svg";
 
             $user->save();
+    
+            $invite_email = new \SendGrid\Mail\Mail();
+            $invite_email->setForm("help@watercooler.work", "Water Cooler");
+            $invite_email->addTo($email, [
+                "inviter_name" => $auth_user->name,
+                "invite_token" => "sdfdsfsdf",
+            ]);
+        
+            $invite_email->setTemplateId("d-e06d25f4b0b2405591fb3e8417cb312e");
+            
+            try {
+                $response = $sg->send($invite_email);
+            } catch (Exception $e) {
+                //do something
+            }
+    
         }
+
 
         return true;
     }

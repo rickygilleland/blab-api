@@ -33,10 +33,11 @@
         </nav>
         
             <h1 class="text-center" style="font-size: 3.9rem;font-weight:600">Give Your Distributed Team a Virtual Office</h1>
-            <p class="text-center mt-3" style="font-weight:400;font-size:1.4rem">We give your team an always available place designed to run in the background, encouraging natural conversation you would normally only get in the office.</p>
+            <p class="text-center mt-3" style="font-weight:400;font-size:1.6rem">We give your team an always available place to chat that encourages natural conversation you would normally only get in a phyiscal office.</p>
+            <p class="text-center mt-3" style="font-weight:400;font-size:1.2rem">Water Cooler designed to run in the background and let you focus on communicating with your team while getting work done, instead of endlessly staring at our app. We're invite-only for now, but a public beta is coming soon.</p>
             <center><img src="/img/main-hero-screenshot.png" class="img img-fluid"></center>
 
-            <p class="text-center mt-3" style="font-weight:400;font-size:1.4rem">Water Cooler is currently in an invite-only beta. Click the button below to request an invite.</p>
+            <p class="text-center mt-3" style="font-weight:400;font-size:1.4rem">Interested in being one of the first to try Water Cooler? Click the button below to request an invite.</p>
             <center><a class="btn btn-primary btn-lg text-light mt-3 mb-5" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Request an Invite</a></center>
            
     

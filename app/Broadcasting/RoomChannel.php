@@ -86,7 +86,7 @@ class RoomChannel
                         "apisecret" => $this->streaming_backend_api_secret
                     ];
 
-                    $api_url_with_handler = "https://" . $server . "/" . $session_handler;
+                    $api_url_with_handler = "https://" . $server . "/streamer/" . $session_handler;
 
                     //attach the video room plugin
                     $room_handler = Http::post($api_url_with_handler, $data);

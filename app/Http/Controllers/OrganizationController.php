@@ -146,6 +146,9 @@ class OrganizationController extends Controller
             
             try {
                 $response = $sg->send($invite_email);
+
+                print_r($response);
+                die();
             } catch (Exception $e) {
                 //do something
             }

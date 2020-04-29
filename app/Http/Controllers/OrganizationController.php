@@ -137,18 +137,17 @@ class OrganizationController extends Controller
     
             $invite_email = new \SendGrid\Mail\Mail();
             $invite_email->setFrom("help@watercooler.work", "Water Cooler");
-            $invite_email->addTo($email, "New Water Cooler User", [
+            $invite_email->addTo($email, "New Water Cooler User");
+
+            $invite_email->addDynamicTemplateDatas([
                 "inviter_name" => $auth_user->name,
                 "invite_token" => "sdfdsfsdf",
             ]);
         
-            $invite_email->setTemplateId("d-e06d25f4b0b2405591fb3e8417cb312e");
+            $invite_email->setTemplateId("d-4ed531cf14924f9d854aeae3a3304022");
             
             try {
                 $response = $sg->send($invite_email);
-
-                print_r($response);
-                die();
             } catch (Exception $e) {
                 //do something
             }
@@ -156,7 +155,7 @@ class OrganizationController extends Controller
         }
 
 
-        return $response;
+        return true;
     }
 
 }

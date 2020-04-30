@@ -107,41 +107,20 @@ class OrganizationController extends Controller
         $sg = new \SendGrid($sendgrid_key);
 
         foreach ($emails as $email) {
-            $user = new \App\User();
-            $user->email = $email;
-            $user->password = Hash::make(Str::random(256));
-            $user->streamer_key = Hash::make(Str::random(256));
-            $user->organization_id = $id;
+            $invite = new \App\Invite();
+            $invite->email = $email;
+            $invite->invite_code = Hash::make(Str::random(256));
+            $invite->invited_by = $auth_user->id;
+            $invite->organization_id = $id;
+            $invite->save();
 
-            //generate a random avi
-            $avi_base = env('AVI_SERVICE_URL');
-
-            $themes = [
-                "frogideas",
-                "sugarsweets",
-                "heatwave",
-                "daisygarden",
-                "seascape",
-                "summerwarmth",
-                "bythepool",
-                "duskfalling",
-                "berrypie"
-            ];
-
-            $random_theme = array_rand($themes, 1);
-            $random_theme = $themes[$random_theme];
-
-            $user->avatar_url = $avi_base . md5(uniqid()) . "?theme=" . $random_theme . "&numcolors=4&size=880&fmt=svg";
-
-            $user->save();
-    
             $invite_email = new \SendGrid\Mail\Mail();
             $invite_email->setFrom("help@watercooler.work", "Water Cooler");
             $invite_email->addTo($email, "New Water Cooler User");
 
             $invite_email->addDynamicTemplateDatas([
                 "inviter_name" => $auth_user->name,
-                "invite_token" => "sdfdsfsdf",
+                "invite_token" => $invite->invite_code,
             ]);
         
             $invite_email->setTemplateId("d-4ed531cf14924f9d854aeae3a3304022");

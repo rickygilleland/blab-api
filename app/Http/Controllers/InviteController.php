@@ -13,7 +13,7 @@ class InviteController extends Controller
      */
     public function index($code)
     {
-        $invite = \App\Invite::where('invite_code', $code)->first();
+        $invite = \App\Invite::where('invite_code', base64_decode($code))->first();
 
         if (!$invite) {
             abort(404);

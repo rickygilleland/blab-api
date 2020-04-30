@@ -120,7 +120,7 @@ class OrganizationController extends Controller
 
             $invite_email->addDynamicTemplateDatas([
                 "inviter_name" => $auth_user->name,
-                "invite_token" => $invite->invite_code,
+                "invite_token" => base64_encode($invite->invite_code),
             ]);
         
             $invite_email->setTemplateId("d-4ed531cf14924f9d854aeae3a3304022");

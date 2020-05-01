@@ -23,31 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = \Auth::user()->load('teams', 'organization');
+        $user = \Auth::user();
+
+        $magic_login_link = $user->id . "|" . $user->email . "|" . time();
+
+        $magic_login_link = encrypt($magic_login_link);
         
-        $teams = $user->teams;
-        $default_team = $teams[0];
-
-        foreach ($teams as $team) {
-            if ($team->is_default) {
-                $default_team = $team;
-            }
-        }
-
-        if ($user->organization->name == null) {
-            //prompt them to set up their organization (onboarding flow) -- used for all of the urls
-            return redirect('onboarding/organization');
-        }
-
-        if ($team->name == null) {
-            //prompt them to set up their team (onboarding flow)
-            return redirect('onboarding/team');
-        }
-
-        if (count($user->teams) == 1) {
-            return redirect('o/'.$user->organization->slug);
-        } 
-        
-        return view('home');
+        return view('home', ['magic_login_link' => $magic_login_link]);
     }
 }

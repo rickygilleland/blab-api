@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/login/slack', 'Auth\LoginController@apiHandleSlackCallback');
 
+Route::post('/magic/auth', 'Auth\LoginController@apiMagicAuth');
+
 Route::middleware('auth:api')->get('/user', 'UserController@show');
 
 Route::middleware('auth:api')->get('/organization', 'OrganizationController@api_show');

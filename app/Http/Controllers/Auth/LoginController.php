@@ -182,4 +182,34 @@ class LoginController extends Controller
         return ['access_token' => $token];
 
     }
+
+    function apiMagicAuth(Request $request) {
+        if (!isset($request->token) || $request->token == null) {
+            abort(500);
+        }
+
+        $decrypted_code = decrypt($request->code);
+
+        $decrypted_code = explode("|", $decrypted_code);
+
+        if (count($decrypted_code) != 3) {
+            abort(500);
+        }
+
+        $user = \App\User::where('id', $decrypted_code[0])->first();
+
+        if (!$user) {
+            abort(500);
+        }
+
+        if ($user->email != $decrypted_code[1]) {
+            abort(500);
+        }
+
+        //everything is good, login
+        $token = $user->createToken('Token created by Magic Link')->accessToken;
+
+        return ['access_token' => $token];
+        
+    }
 }

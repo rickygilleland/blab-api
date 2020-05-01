@@ -185,7 +185,7 @@ class LoginController extends Controller
     }
 
     function apiMagicAuth(Request $request) {
-        if (!isset($request->token) || $request->token == null) {
+        if (!isset($request->code) || $request->code == null) {
             abort(500);
         }
 

@@ -21,15 +21,13 @@
 			            @endforeach
 					@endif
 
-					<form method="post" action="{{ route('login') }}">
+					<form method="post" action="/login">
 						
 						@csrf
   
 						<input type="text" placeholder="Email" name="email" class="form-control dark-input mb-4 py-4 shadow-sm">
 						
-						<input type="password" placeholder="Password" name="password" class="form-control dark-input mb-4 py-4 shadow-sm">
-						
-						<button type="submit" class="btn btn-primary btn-block p-2 shadow">Login</button>
+						<button type="submit" class="btn btn-primary btn-block p-2 shadow">Continue</button>
   						
 					</form>
 					

@@ -184,6 +184,65 @@ class LoginController extends Controller
 
     }
 
+    public function login(Request $request) {
+        //make sure we have a user
+        $user = \App\User::where('email', $request->email)->first();
+
+        if ($user && isset($request->token)) {
+            $code = \App\LoginCode::where('code', $request->token)->first();
+
+            if (!$code) {
+                return view('auth.code_sent', ['email' => $user->email, 'error' => 'The code you entered was incorrect.']);
+            }
+
+            \Auth::login($user);
+            return redirect()->intended('home');
+        }
+
+        if ($user) {
+
+            //generate a new code
+            $code = new \App\LoginCode();
+            $code->user_id = $user->id;
+
+            $login_code = '';
+
+            for ($i=0; $i<3; $i++) {
+                $login_code .= $this->generateHumanReadableString(4);
+
+                if ($i != 2) {
+                    $login_code .= "-";
+                } 
+            }
+
+            $code->code = $login_code;
+            $code->save();
+
+            $sendgrid_key = env('SENDGRID_API_KEY');
+            $sg = new \SendGrid($sendgrid_key);
+
+            $email = new \SendGrid\Mail\Mail();
+            $email->setFrom("help@watercooler.work", "Water Cooler");
+            $email->addTo($user->email);
+
+            $email->addDynamicTemplateDatas([
+                "name" => $user->name,
+                "token" => $login_code,
+                "subject" => "Your temporary Water Cooler login code is ".$login_code
+            ]);
+        
+            $email->setTemplateId("d-dd835e437d9f4aadaf1c9acb25e5f488");
+            
+            try {
+                $response = $sg->send($email);
+            } catch (Exception $e) {
+                //do something
+            }
+
+            return view('auth.code_sent', ['email' => $user->email]);
+        }
+    }
+
     function apiMagicAuth(Request $request) {
         if (!isset($request->code) || $request->code == null) {
             abort(500);
@@ -212,5 +271,25 @@ class LoginController extends Controller
 
         return ['access_token' => $token];
         
+    }
+
+    public function generateHumanReadableString($length) {
+        $string     = '';
+        $vowels     = array("a","e","i","o","u");  
+        $consonants = array(
+            'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 
+            'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'
+        );  
+
+        // Seed it
+        srand((double) microtime() * 1000000);
+
+        $max = $length/2;
+        for ($i = 1; $i <= $max; $i++) {
+            $string .= $consonants[rand(0,19)];
+            $string .= $vowels[rand(0,4)];
+        }
+
+        return $string;
     }
 }

@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome-coming-soon');
 });
 
+Route::get('login/token/{code}', 'Auth\LoginController@loginWithToken');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::get('invite/{code}', 'InviteController@index', function($code) {

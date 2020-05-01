@@ -22,7 +22,7 @@ Route::post('login', 'Auth\LoginController@login');
 Route::get('invite/{code}', 'InviteController@index', function($code) {
 
 });
-Route::post('register', 'Auth\RegisterController@register');
+Route::post('register', 'Auth\RegisterController@register')->name('register');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');

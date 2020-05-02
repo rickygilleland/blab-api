@@ -113,7 +113,7 @@ class OrganizationController extends Controller
             $invite->invite_code = Hash::make(Str::random(256));
             $invite->invited_by = $auth_user->id;
             $invite->organization_id = $id;
-            $invite->team_id = $auth_user->organiation->teams[0]->id;
+            $invite->team_id = $auth_user->organization->teams[0]->id;
             $invite->save();
 
             $invite_email = new \SendGrid\Mail\Mail();
@@ -121,7 +121,7 @@ class OrganizationController extends Controller
             $invite_email->addTo($email, "New Water Cooler User");
 
             $invite_email->addDynamicTemplateDatas([
-                "subject" => $auth_user->first_name . " has invited you to join ".$auth_user->organization->name . " on Water Cooler",
+                "subject" => $auth_user->first_name . " has invited you to join " . $auth_user->organization->name . " on Water Cooler",
                 "organization_name" => $auth_user->organization->name,
                 "inviter_name" => $auth_user->first_name,
                 "invite_token" => base64_encode($invite->invite_code),

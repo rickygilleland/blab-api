@@ -191,7 +191,7 @@ class LoginController extends Controller
         if ($user && isset($request->token)) {
             $code = \App\LoginCode::where('code', $request->token)->first();
 
-            if (!$code) {
+            if (!$code || $code->user_id != $user->id) {
                 return view('auth.code_sent', ['email' => $user->email, 'error' => 'The code you entered was incorrect.']);
             }
 
@@ -233,7 +233,7 @@ class LoginController extends Controller
             }
 
             $email->addDynamicTemplateDatas([
-                "name" => $user->name,
+                "name" => $user->first_name,
                 "token" => $login_code,
                 "subject" => "Your temporary Water Cooler login code is ".$login_code
             ]);
@@ -248,6 +248,8 @@ class LoginController extends Controller
 
             return view('auth.code_sent', ['email' => $user->email]);
         }
+
+        return view('auth.login', ['error' => 'We could not find an account under that address. Please try again.']);
     }
 
     function apiMagicAuth(Request $request) {

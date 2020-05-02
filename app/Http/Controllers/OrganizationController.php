@@ -69,7 +69,8 @@ class OrganizationController extends Controller
         foreach ($organization_users as $user) {
             $users[] = [
                 'id' => $user->id, 
-                'name' => $user->name,
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
                 'avatar_url' => $user->avatar_url
             ];
         }
@@ -119,7 +120,7 @@ class OrganizationController extends Controller
             $invite_email->addTo($email, "New Water Cooler User");
 
             $invite_email->addDynamicTemplateDatas([
-                "inviter_name" => $auth_user->name,
+                "inviter_name" => $auth_user->first_name,
                 "invite_token" => base64_encode($invite->invite_code),
             ]);
         

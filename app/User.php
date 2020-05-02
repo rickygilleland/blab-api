@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password',
     ];
 
     /**
@@ -37,6 +37,33 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+    {
+	    return $this->belongsToMany('App\Role');
+    }
+    
+    public function hasRole($role)
+    {
+	    
+	    foreach ($this->roles as $user_role) {
+		    
+		    if ($user_role->name == $role) {
+			    return true;
+		    }
+		    
+		    if ($user_role->name == "system_admin") {
+			    //let them do whatever they want
+			    return true;
+		    }
+	    }
+	    
+	    return false;
+    }
+
+    public function loginCodes() {
+        return $this->hasMany('App\LoginCode');
+    }
 
     public function teams()
     {

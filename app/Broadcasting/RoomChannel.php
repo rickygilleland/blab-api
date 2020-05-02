@@ -44,11 +44,6 @@ class RoomChannel
         foreach ($user->teams as $team) {
             foreach ($team->rooms as $room) {
                 if ($room->channel_id == $channelId) {
-                    //generate them a twilio nts token as well
-                    $twilio = new \Twilio\Rest\Client($this->sid, $this->token);
-
-                    $token = $twilio->tokens->create();
-
                     //check if they already have a streamer key set
                     if ($user->streamer_key == null) {
                         $user->streamer_key = Hash::make(Str::random(256));
@@ -166,11 +161,10 @@ class RoomChannel
 
                     return [
                         'id' => $user->id, 
-                        'name' => $user->name, 
+                        'first_name' => $user->first_name,
+                        'last_name' => $user->last_name, 
                         'avatar' => $user->avatar_url, 
                         'peer_uuid' =>  md5($user->id), 
-                        'nts_user' => $token->username, 
-                        'nts_password' => $token->password,
                         'streamer_key' => $user->streamer_key,
                         'media_server' => $server
                     ];

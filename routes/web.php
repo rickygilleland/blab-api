@@ -23,6 +23,9 @@ Route::post('login', 'Auth\LoginController@login');
 Route::get('invite/{code}', 'InviteController@index', function($code) {
 
 });
+
+Route::get('/admin/invite/create', 'InviteController@admin_create_invite_form');
+Route::post('/admin/invite/create', 'InviteController@admin_create_invite');
 Route::post('register', 'Auth\RegisterController@register')->name('register');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 

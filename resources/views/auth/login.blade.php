@@ -21,6 +21,12 @@
 			            @endforeach
 					@endif
 
+                    @if (isset($error))
+                        <div class="alert alert-danger">
+                            <p class="text-center mb-0">Oops! {{ $error }}</p>
+                        </div>
+                    @endif
+
 					<form method="post" action="/login">
 						
 						@csrf

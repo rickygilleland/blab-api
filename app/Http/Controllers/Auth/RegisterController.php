@@ -66,6 +66,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        print_r($data); die();
+        
         $organization = new \App\Organization();
         $email_domain = substr(strrchr($data['email'], "@"), 1);
 
@@ -83,7 +85,8 @@ class RegisterController extends Controller
         $team->save();
 
         $user = new \App\User();
-        $user->name = $data['name'];
+        $user->first_name = $data['first_name'];
+        $user->last_name = $data['last_name'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
         $user->organization_id = $organization->id;

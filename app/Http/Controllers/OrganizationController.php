@@ -121,11 +121,13 @@ class OrganizationController extends Controller
             $invite_email->addTo($email, "New Water Cooler User");
 
             $invite_email->addDynamicTemplateDatas([
+                "subject" => $auth_user->first_name . " has invited you to join ".$auth_user->organization->name . " on Water Cooler",
+                "organization_name" => $auth_user->organization->name,
                 "inviter_name" => $auth_user->first_name,
                 "invite_token" => base64_encode($invite->invite_code),
             ]);
         
-            $invite_email->setTemplateId("d-4ed531cf14924f9d854aeae3a3304022");
+            $invite_email->setTemplateId("d-ed053e9026d742eda4c66e5c5d6b2963");
             
             try {
                 $response = $sg->send($invite_email);

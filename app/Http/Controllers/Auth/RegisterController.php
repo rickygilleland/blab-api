@@ -51,9 +51,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
             'invite_code' => ['required', 'exists:invites,invite_code']
         ]);
     }
@@ -66,34 +66,43 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        print_r($data); die();
-        
-        $organization = new \App\Organization();
-        $email_domain = substr(strrchr($data['email'], "@"), 1);
+        $invite = \App\Invite::where('invite_code', $data['invite_code'])->first();
 
-        if ($email_domain != "gmail.com" && $email_domain != "yahoo.com" && $email_domain != "hotmail.com" && $email_domain != "live.com") {
-            $organization->email_domain = $email_domain;
+        if ($invite->organization_id == null) {
+            $organization = new \App\Organization();
+            $email_domain = substr(strrchr($data['email'], "@"), 1);
+    
+            if ($email_domain != "gmail.com" && $email_domain != "yahoo.com" && $email_domain != "hotmail.com" && $email_domain != "live.com") {
+                $organization->email_domain = $email_domain;
+            }
+    
+            $organization->slug = md5($data['email'] . uniqid()) . uniqid();
+            $organization->save();
+
+            $team = new \App\Team();
+            $team->organization_id = $organization->id;
+            $team->is_default = true;
+            $team->slug = md5($data['email'] . uniqid()) . uniqid();
+            $team->save();
         }
-
-        $organization->slug = md5($data['email'] . uniqid()) . uniqid();
-        $organization->save();
-
-        $team = new \App\Team();
-        $team->organization_id = $organization->id;
-        $team->is_default = true;
-        $team->slug = md5($data['email'] . uniqid()) . uniqid();
-        $team->save();
 
         $user = new \App\User();
         $user->first_name = $data['first_name'];
         $user->last_name = $data['last_name'];
         $user->email = $data['email'];
-        $user->password = Hash::make($data['password']);
-        $user->organization_id = $organization->id;
+        $user->password = Hash::make(Str::random(256));
+        $user->organization_id = $invite->organization_id != null ? $invite->organization_id : $organization->id;
         $user->streamer_key = Hash::make(Str::random(256));
         $user->save();
 
+        if (!isset($team)) {
+            $team = \App\Team::where('id', $invite->team_id)->first();
+        }
+
         $user->teams()->attach($team);
+
+        $invite->invite_accepted = true;
+        $invite->save();
 
         return $user;
     }

@@ -58,7 +58,9 @@ class OnboardingController extends Controller
 
         $organization->save();
         
-        return redirect('onboarding/team');
+        //skip the team setup for now until we have multi-team support
+        //return redirect('onboarding/team');
+        return redirect('/home');
     }
 
     public function team()
@@ -93,7 +95,7 @@ class OnboardingController extends Controller
 
         $full_room_slug = $user->organization->slug.'/'.$default_team->slug.'/'.$room->slug;
 
-        return redirect("/onboarding/download");
+        return redirect("/home");
     }
 
     public function download() {

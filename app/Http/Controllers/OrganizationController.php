@@ -113,6 +113,7 @@ class OrganizationController extends Controller
             $invite->invite_code = Hash::make(Str::random(256));
             $invite->invited_by = $auth_user->id;
             $invite->organization_id = $id;
+            $invite->team_id = $auth_user->organiation->teams[0]->id;
             $invite->save();
 
             $invite_email = new \SendGrid\Mail\Mail();

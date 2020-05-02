@@ -51,7 +51,29 @@ class RoomChannel
                         $user->save();
                     }
 
+                    $server = null;
+
                     //TODO: Pull possible streaming servers from the database and attach it to the current room
+                    if ($room->server_id == null) {
+                        $available_servers = \App\Server::where('is_active', true)->get();
+
+                        if (!$available_servers) {
+                            abort(503);
+                        }
+
+                        //TODO: get utilization stats from the server to make sure it isn't overloaded
+                        $rand = rand(0, (count($available_servers) - 1));
+
+                        $room->server_id = $available_servers[$rand]->id;
+                        $room->save();
+
+                        $server = $available_servers[$rand]->hostname;
+                    }
+
+                    if ($server == null) {
+                        $server = \App\Server::where('id', $room->server_id)->first();
+                        $server = $server->hostname;
+                    }
                     
                     if ($room->secret == null) {
                         $room->secret = Hash::make(Str::random(256));
@@ -60,9 +82,6 @@ class RoomChannel
                     }
 
                     //get the room details from the backend server
-
-                    $server = "streamer-us-west-1.watercooler.work";
-
                     $data = [
                         "janus" => "create", 
                         "transaction" => Str::random(80), 

@@ -223,7 +223,14 @@ class LoginController extends Controller
 
             $email = new \SendGrid\Mail\Mail();
             $email->setFrom("help@watercooler.work", "Water Cooler");
-            $email->addTo($user->email);
+
+            //make sure we don't send emails for the demo accounts
+            $domain = explode("@", $user->email);
+            if ($domain[1] == "acme.co") {
+                $email->addTo("ricky@watercooler.work");
+            } else {
+                $email->addTo($user->email);
+            }
 
             $email->addDynamicTemplateDatas([
                 "name" => $user->name,

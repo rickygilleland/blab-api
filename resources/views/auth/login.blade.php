@@ -5,7 +5,7 @@
 		
 		<div class="col-md-6 mx-auto">
 			
-			<div class="card shadow">
+			<div class="card shadow-sm">
 				
 				<div class="card-body p-5">
 			
@@ -30,8 +30,8 @@
 					<form method="post" action="/login">
 						
 						@csrf
-  
-						<input type="text" placeholder="Email" name="email" class="form-control dark-input mb-4 py-4 shadow-sm">
+                        <label>Email Address</label>
+						<input type="text" placeholder="eleanor@yourworkemail.com" name="email" class="form-control dark-input mb-4 py-4 shadow-sm">
 						
 						<button type="submit" class="btn btn-primary btn-block p-2 shadow">Continue</button>
   						

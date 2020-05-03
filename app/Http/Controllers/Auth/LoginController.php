@@ -191,9 +191,13 @@ class LoginController extends Controller
         if ($user && isset($request->token)) {
             $code = \App\LoginCode::where('code', Hash::make($request->token))->first();
 
-            if (!$code || $code->user_id != $user->id) {
+            if (!$code || $code->user_id != $user->id || $code->used 
+                || (strtotime($code->created_at) + 3600) < time()) {
                 return view('auth.code_sent', ['email' => $user->email, 'error' => 'The code you entered was incorrect.']);
             }
+
+            $code->used = true;
+            $code->save();
 
             \Auth::login($user);
             return redirect()->intended('home');

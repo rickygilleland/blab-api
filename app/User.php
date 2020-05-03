@@ -43,11 +43,15 @@ class User extends Authenticatable
     {
         $hashed_password = Hash::make($password);
         $code = \App\LoginCode::where('code', $hashed_password)->first();
-
-        if (!$code || $code->user_id != $this->id) {
+        
+        if (!$code || $code->user_id != $this->id || $code->used 
+            || (strtotime($code->created_at) + 3600) < time()) {
             return false;
         }
         
+        $code->used = true;
+        $code->save();
+
         return true;
     }
 

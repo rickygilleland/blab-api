@@ -137,7 +137,8 @@ class RoomController extends Controller
         $room->team_id = $request->team_id;
         $room->organization_id = $user->organization->id;
         $room->slug = $room_slug;
-        $room->is_public = false;
+        $room->is_private = $request->is_private;
+        $room->video_enabled = $request->video_enabled;
         $room->channel_id = $user->organization->slug . "-" . $found_team->slug . "-" . $room_slug;
         $room->save();
 
@@ -145,8 +146,7 @@ class RoomController extends Controller
         $room->secret .= "_" . $room->id;
         $room->save();
 
-        return redirect("o/".$user->organization->slug);
-
+        return $room;
     }
 
     public function getToken(Request $request)

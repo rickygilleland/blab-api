@@ -131,7 +131,7 @@ class OnboardingController extends Controller
         $room->slug = Str::slug($room->name, '-');
         $room->channel_id = $user->organization->slug . "-" . $default_team->slug . "-" . $room->slug;
         $room->secret = Hash::make(Str::random(256));
-        $room->is_public = false;
+        $room->is_private = false;
         $room->save();
 
         $full_room_slug = $user->organization->slug.'/'.$default_team->slug.'/'.$room->slug;

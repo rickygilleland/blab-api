@@ -141,6 +141,17 @@ class RoomController extends Controller
         $room->video_enabled = $request->video_enabled;
         $room->channel_id = $user->organization->slug . "-" . $found_team->slug . "-" . $room_slug;
         $room->secret = Hash::make(Str::random(256));
+
+        $available_servers = \App\Server::where('is_active', true)->get();
+
+        if (!$available_servers) {
+            abort(503);
+        }
+
+        //TODO: get utilization stats from the server to make sure it isn't overloaded
+        $rand = rand(0, (count($available_servers) - 1));
+
+        $room->server_id = $available_servers[$rand]->id;
         $room->save();
 
         $room->secret .= "_" . $room->id;

@@ -10,6 +10,7 @@
 				<div class="card-body p-5">
 			
 					<h2 class="pb-2 text-center">Join {{$organization->name}} on Water Cooler</h2>
+                    <p class="sub-heading text-center">Let's get your account created.</p>
 					
 					<hr>
 					

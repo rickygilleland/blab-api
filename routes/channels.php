@@ -3,6 +3,7 @@
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Broadcast;
 
+use App\Broadcasting\OrganizationChannel;
 use App\Broadcasting\RoomChannel;
 
 /*
@@ -18,7 +19,6 @@ use App\Broadcasting\RoomChannel;
 
 Broadcast::channel('organization.{channelId}', OrganizationChannel::class);
 Broadcast::channel('room.{channelId}', RoomChannel::class);
-
 
 /*Broadcast::channel('peers.{channelId}', function ($user, $channelId) {
     foreach ($user->teams as $team) {

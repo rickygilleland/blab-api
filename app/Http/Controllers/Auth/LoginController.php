@@ -259,6 +259,10 @@ class LoginController extends Controller
     public function apiRequestLoginCode(Request $request)
     {
         $user = \App\User::where('email', $request->email)->first(); 
+
+        if (!$user) {
+            abort(404);
+        }
         
         //generate a new code
         $code = new \App\LoginCode();

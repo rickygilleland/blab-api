@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 
-class RoomChannel
+class OrganizationChannel
 {
     /**
      * Create a new channel instance.

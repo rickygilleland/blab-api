@@ -10,6 +10,7 @@
 				<div class="card-body p-5">
 			
 					<h2 class="pb-2 text-center">Create Your Water Cooler Account</h2>
+                    <p class="sub-heading text-center">We can't wait for you and your team to get started using Water Cooler!<br>Let's get your account created.</p>
 					
 					<hr>
 					
@@ -27,7 +28,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <label>First Name</label>
-						        <input type="text" placeholder="Enter your first name" class="form-control dark-input mb-4 py-4 shadow-sm @error('last_name') is-invalid @enderror" name="first_name" value="{{ old('last_name') }}" required>
+						        <input type="text" placeholder="Eleanor" class="form-control dark-input mb-4 py-4 shadow-sm @error('last_name') is-invalid @enderror" name="first_name" value="{{ old('last_name') }}" required>
                                 @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -36,7 +37,7 @@
                             </div>
                             <div class="col-6">
                                 <label>Last Name</label>
-						        <input type="text" placeholder="Enter your last name" class="form-control dark-input mb-4 py-4 shadow-sm @error('first_name') is-invalid @enderror" name="last_name" value="{{ old('first_name') }}" required>
+						        <input type="text" placeholder="Rigby" class="form-control dark-input mb-4 py-4 shadow-sm @error('first_name') is-invalid @enderror" name="last_name" value="{{ old('first_name') }}" required>
                                 @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -45,8 +46,8 @@
                             </div>
                         </div>
 
-                        <label>Email Address</label>
-						<input type="text" placeholder="Enter your email address" class="form-control dark-input mb-4 py-4 shadow-sm @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
+                        <label>Your Work Email Address</label>
+						<input type="text" placeholder="eleanor@yourworkemail.com" class="form-control dark-input mb-4 py-4 shadow-sm @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

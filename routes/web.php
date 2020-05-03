@@ -36,6 +36,8 @@ Route::get('onboarding/organization', 'OnboardingController@organization');
 Route::post('onboarding/organization', 'OnboardingController@organization_update');
 Route::get('onboarding/team', 'OnboardingController@team');
 Route::post('onboarding/team', 'OnboardingController@team_update');
+Route::get('onboarding/invite', 'OnboardingController@invite');
+Route::post('onboarding/invite', 'OnboardingController@send_invite');
 Route::get('onboarding/room', 'OnboardingController@room');
 Route::post('onboarding/room', 'OnboardingController@room_update');
 Route::get('onboarding/download', 'OnboardingController@download');

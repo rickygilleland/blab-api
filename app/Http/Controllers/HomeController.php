@@ -39,10 +39,10 @@ class HomeController extends Controller
             return redirect('onboarding/organization');
         }
 
-        if ($team->name == null) {
+        /*if ($team->name == null) {
             //prompt them to set up their team (onboarding flow)
             return redirect('onboarding/team');
-        }
+        }*/
 
         $magic_login_link = $user->id . "|" . $user->email . "|" . time();
 

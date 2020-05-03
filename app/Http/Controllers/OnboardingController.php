@@ -6,10 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
-use TwilioRestClient;
-use TwilioJwtAccessToken;
-use TwilioJwtGrantsVideoGrant;
-
 class OnboardingController extends Controller
 {
     /**
@@ -17,19 +13,10 @@ class OnboardingController extends Controller
      *
      * @return void
      */
-    protected $sid;
-	protected $token;
-	protected $key;
-	protected $secret;
 	
 	public function __construct()
 	{
         $this->middleware('auth');
-        
-        $this->sid = config('services.twilio.sid');
-		$this->token = config('services.twilio.token');
-		$this->key = config('services.twilio.key');
-        $this->secret = config('services.twilio.secret');
     }
 
     public function organization()
@@ -37,7 +24,7 @@ class OnboardingController extends Controller
         $user = \Auth::user();
 
         if ($user->organization->name != null) {
-            return redirect('onboarding/team');
+            return redirect('onboarding/invite');
         }
         
         return view('onboarding.organization', ['organization' => $user->organization]);
@@ -60,7 +47,7 @@ class OnboardingController extends Controller
         
         //skip the team setup for now until we have multi-team support
         //return redirect('onboarding/team');
-        return redirect('/home');
+        return redirect('onboarding/invite');
     }
 
     public function team()
@@ -70,6 +57,60 @@ class OnboardingController extends Controller
         $default_team = $teams[0];
         
         return view('onboarding.team', ['team' => $default_team, 'organization' => $user->organization]);
+    }
+
+    public function invite() 
+    {
+        $user = \Auth::user();
+
+        return view('onboarding.invite', ['organization' => $user->organization]);
+    }
+
+    public function send_invite(Request $request)
+    {
+        $auth_user = \Auth::user();
+        $emails = rtrim($request->emails);
+        $emails = str_replace(array("\r", "\n"), '', $emails);
+
+        $emails = explode(',', $emails);
+
+        $sendgrid_key = env('SENDGRID_API_KEY');
+        $sg = new \SendGrid($sendgrid_key);
+
+        foreach ($emails as $email) {
+            if (strlen($email) == 0) {
+                continue;
+            }
+
+            $invite = new \App\Invite();
+            $invite->email = $email;
+            $invite->invite_code = Hash::make(Str::random(256));
+            $invite->invited_by = $auth_user->id;
+            $invite->organization_id = $auth_user->organization->id;
+            $invite->team_id = $auth_user->organization->teams[0]->id;
+            $invite->save();
+
+            $invite_email = new \SendGrid\Mail\Mail();
+            $invite_email->setFrom("help@watercooler.work", "Water Cooler");
+            $invite_email->addTo($email, "New Water Cooler User");
+
+            $invite_email->addDynamicTemplateDatas([
+                "subject" => $auth_user->first_name . " has invited you to join " . $auth_user->organization->name . " on Water Cooler",
+                "organization_name" => $auth_user->organization->name,
+                "inviter_name" => $auth_user->first_name,
+                "invite_token" => base64_encode($invite->invite_code),
+            ]);
+        
+            $invite_email->setTemplateId("d-ed053e9026d742eda4c66e5c5d6b2963");
+            
+            try {
+                $response = $sg->send($invite_email);
+            } catch (Exception $e) {
+                //do something
+            }
+        }
+
+        return redirect("/home");
     }
 
     public function team_update(Request $request)

@@ -108,6 +108,11 @@ class OrganizationController extends Controller
         $sg = new \SendGrid($sendgrid_key);
 
         foreach ($emails as $email) {
+            $domain = explode("@", $email);
+            if ($domain[1] == "acme.co") {
+                continue;
+            }
+
             $invite = new \App\Invite();
             $invite->email = $email;
             $invite->invite_code = Hash::make(Str::random(256));

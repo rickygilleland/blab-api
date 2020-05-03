@@ -16,7 +16,7 @@ use App\Broadcasting\RoomChannel;
 |
 */
 
-Broadcast::channel('orgaization.{organizationId}', OrganizationChannel::class);
+Broadcast::channel('organization.{channelId}', OrganizationChannel::class);
 Broadcast::channel('room.{channelId}', RoomChannel::class)
 
 

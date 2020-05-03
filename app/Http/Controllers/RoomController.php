@@ -140,9 +140,9 @@ class RoomController extends Controller
         $room->is_private = $request->is_private;
         $room->video_enabled = $request->video_enabled;
         $room->channel_id = $user->organization->slug . "-" . $found_team->slug . "-" . $room_slug;
+        $room->secret = Hash::make(Str::random(256));
         $room->save();
 
-        $room->secret = Hash::make(Str::random(256));
         $room->secret .= "_" . $room->id;
         $room->save();
 

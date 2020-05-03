@@ -189,7 +189,7 @@ class LoginController extends Controller
         $user = \App\User::where('email', $request->email)->first();
 
         if ($user && isset($request->token)) {
-            $code = \App\LoginCode::where('code', $request->token)->first();
+            $code = \App\LoginCode::where('code', Hash::make($request->token))->first();
 
             if (!$code || $code->user_id != $user->id) {
                 return view('auth.code_sent', ['email' => $user->email, 'error' => 'The code you entered was incorrect.']);
@@ -215,7 +215,7 @@ class LoginController extends Controller
                 } 
             }
 
-            $code->code = $login_code;
+            $code->code = Hash::make($login_code);
             $code->save();
 
             $sendgrid_key = env('SENDGRID_API_KEY');

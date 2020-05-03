@@ -231,9 +231,9 @@ class LoginController extends Controller
             //make sure we don't send emails for the demo accounts
             $domain = explode("@", $user->email);
             if ($domain[1] == "acme.co") {
-                $email->addTo("ricky@watercooler.work");
+                $email->addTo("ricky@watercooler.work", $user->first_name . " " . $user->last_name);
             } else {
-                $email->addTo($user->email);
+                $email->addTo($user->email, $user->first_name . " " . $user->last_name);
             }
 
             $email->addDynamicTemplateDatas([
@@ -256,7 +256,61 @@ class LoginController extends Controller
         return view('auth.login', ['error' => 'We could not find an account under that address. Please try again.']);
     }
 
-    function apiMagicAuth(Request $request) {
+    public function apiRequestLoginCode(Request $request)
+    {
+        $user = \App\User::where('email', $request->email)->first(); 
+        
+        //generate a new code
+        $code = new \App\LoginCode();
+        $code->user_id = $user->id;
+
+        $login_code = '';
+
+        for ($i=0; $i<3; $i++) {
+            $login_code .= $this->generateHumanReadableString(4);
+
+            if ($i != 2) {
+                $login_code .= "-";
+            } 
+        }
+
+        $code->code = Hash::make($login_code);
+        $code->save();
+
+        $sendgrid_key = env('SENDGRID_API_KEY');
+        $sg = new \SendGrid($sendgrid_key);
+
+        $email = new \SendGrid\Mail\Mail();
+        $email->setFrom("help@watercooler.work", "Water Cooler");
+
+        //make sure we don't send emails for the demo accounts
+        $domain = explode("@", $user->email);
+        if ($domain[1] == "acme.co") {
+            $email->addTo("ricky@watercooler.work", $user->first_name . " " . $user->last_name);
+        } else {
+            $email->addTo($user->email, $user->first_name . " " . $user->last_name);
+        }
+
+        $email->addDynamicTemplateDatas([
+            "name" => $user->first_name,
+            "token" => $login_code,
+            "subject" => "Your temporary Water Cooler login code is ".$login_code
+        ]);
+    
+        $email->setTemplateId("d-dd835e437d9f4aadaf1c9acb25e5f488");
+        
+        try {
+            $response = $sg->send($email);
+            return true;
+        } catch (Exception $e) {
+            //do something
+            abort(500);
+        }
+        
+    }
+
+    public function apiMagicAuth(Request $request) 
+    {
         if (!isset($request->code) || $request->code == null) {
             abort(500);
         }

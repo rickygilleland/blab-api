@@ -32,7 +32,7 @@ class InviteController extends Controller
 
         $organization = \App\Organization::where('id', $invite->organization_id)->first();
 
-        return view('invite.existing', ['organization' => $organization]);
+        return view('invite.existing', ['organization' => $organization, 'invite_code' => base64_decode($code)]);
     }
 
     public function admin_create_invite_form() {

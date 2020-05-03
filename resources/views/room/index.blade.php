@@ -16,8 +16,6 @@
     <div class="row justify-content-center align-items-center d-none" id="video-media">
     </div>
 
-    
-
     <div class="fixed-bottom" id="roomControls">
         <div class="row justify-content-center bg-dark py-2">
             <div class="bg-dark">

@@ -32,5 +32,11 @@
             @yield('content')
         </main>
     </div>
+
+    <script type="application/javascript">
+        document.getElementById('continue-btn').addEventListener('click', async (e) => {
+            document.getElementById('continue-btn').innerHTML = '<i class="fas fa-circle-notch fa-spin text-light mr-2" style="font-size:.9rem"></i>Signing You Up...';
+        });
+    </script>
 </body>
 </html>

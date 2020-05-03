@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -54,7 +55,8 @@ class RegisterController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'invite_code' => ['required', 'exists:invites,invite_code']
+            'invite_code' => ['required', 'exists:invites,invite_code'],
+            'avatar' => ['nullable', 'image']
         ]);
     }
 
@@ -67,6 +69,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $invite = \App\Invite::where('invite_code', $data['invite_code'])->first();
+
+        $request = request();
 
         if ($invite->organization_id == null) {
             $organization = new \App\Organization();
@@ -93,6 +97,38 @@ class RegisterController extends Controller
         $user->password = Hash::make(Str::random(256));
         $user->organization_id = $invite->organization_id != null ? $invite->organization_id : $organization->id;
         $user->streamer_key = Hash::make(Str::random(256));
+        $user->save();
+
+        if ($request->hasFile('avatar')) {
+            try {
+                $avatar_url = Storage::disk('spaces')->putFile('avatars', $request->file('avatar'), 'public');
+                $avatar_url = "https://watercooler-uploads.sfo2.cdn.digitaloceanspaces.com/" . $avatar_url;
+            } catch (\Exception $e) {
+                //do something
+            }
+        } else {
+            //generate a random one
+            $avi_base = env('AVI_SERVICE_URL');
+
+            $themes = [
+                "frogideas",
+                "sugarsweets",
+                "heatwave",
+                "daisygarden",
+                "seascape",
+                "summerwarmth",
+                "bythepool",
+                "duskfalling",
+                "berrypie"
+            ];
+
+            $random_theme = array_rand($themes, 1);
+            $random_theme = $themes[$random_theme];
+
+            $avatar_url = $avi_base . md5($user->name) . "?theme=" . $random_theme . "&numcolors=4&size=880&fmt=svg";
+        }
+
+        $user->avatar_url = $avatar_url;
         $user->save();
 
         if (!isset($team)) {

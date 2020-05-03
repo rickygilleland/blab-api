@@ -13,6 +13,12 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://kit.fontawesome.com/584495cc88.js"></script>
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.28/moment-timezone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.28/moment-timezone-with-data.min.js"></script>
+    -->
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

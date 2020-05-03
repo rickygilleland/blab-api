@@ -41,18 +41,21 @@ class User extends Authenticatable
 
     public function validateForPassportPasswordGrant($password)
     {
-        $hashed_password = Hash::make($password);
-        $code = \App\LoginCode::where('code', $hashed_password)->first();
-        
-        if (!$code || $code->user_id != $this->id || $code->used 
-            || (strtotime($code->created_at) + 3600) < time()) {
-            return false;
+        foreach ($this->loginCodes as $code) {
+            if (Hash::check($password, $code->code)) {
+                if ($code->user_id != $this->id || $code->used 
+                    || (strtotime($code->created_at) + 3600) < time()) {
+                    return false;
+                }
+                
+                $code->used = true;
+                $code->save();
+
+                return true;
+            }
         }
         
-        $code->used = true;
-        $code->save();
-
-        return true;
+        return false;
     }
 
     public function roles()

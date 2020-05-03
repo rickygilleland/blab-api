@@ -21,6 +21,10 @@ class InviteController extends Controller
             abort(404);
         }
 
+        if ($invite->invite_accepted) {
+            return view('invite.accepted');
+        } 
+
         if ($invite->organization_id == null) {
             //this was an internal, new account invite, show them the new account sign up page
             return view('invite.new_account', ['invite_code' => base64_decode($code)]);

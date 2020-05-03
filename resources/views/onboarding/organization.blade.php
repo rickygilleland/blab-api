@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
 
-        <div class="card shadow w-75">
+        <div class="card shadow-sm w-75">
             <div class="card-body p-4">
                 <h1 class="h2 pb-2 text-center">Thank you for registering!</h1>
                 <hr>

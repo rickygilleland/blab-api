@@ -2,12 +2,15 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        
-        <div class="card shadow-sm w-75 border-0">
+    <div class="row justify-content-center">        
+        <div class="card shadow-sm w-75">
             <div class="card-body p-4 text-center">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <h1>Download Water Cooler</h1>
-
                 <div id="downloadInstructions">
                     <p class="my-4 lead">You're all set! Click the link below to download the latest version of Water Cooler.<br><span class="text-muted">We'll automatically detect if you're using Windows or MacOS</span></p>
 

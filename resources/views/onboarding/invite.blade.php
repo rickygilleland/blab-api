@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
 
-        <div class="card shadow w-75">
+        <div class="card shadow-sm w-75">
             <div class="card-body p-4">
                 <h1 class="h2 pb-2 text-center">Who else works with you at {{ $organization->name }}?</h1>
                 <hr>
@@ -17,6 +17,8 @@
                     <small class="form-text text-muted">To invite multiple people, separate each email with a comma. We'll send everyone an email with a unique invitation to join {{ $organization->name }} on Water Cooler.</small>
                     <button type="submit" class="btn btn-primary mt-3 btn-block py-2">Continue</button>
                 </form>
+                <hr>
+                <center><a href="/home" class="btn btn-secondary text-light">Skip for Now</a></center>
             </div>
         </div>
 

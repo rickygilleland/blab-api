@@ -110,7 +110,7 @@ class OnboardingController extends Controller
             }
         }
 
-        return redirect("/home");
+        return redirect("/home")->width('status', 'Your teammates have been invited! Let them know to check their email.');
     }
 
     public function team_update(Request $request)

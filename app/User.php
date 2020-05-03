@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -37,6 +38,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function validateForPassportPasswordGrant($password)
+    {
+        $hashed_password = Hash::make($password);
+        $code = \App\LoginCode::where('code', $hashed_password)->first();
+
+        if (!$code || $code->user_id != $this->id) {
+            return false;
+        }
+        
+        return true;
+    }
 
     public function roles()
     {

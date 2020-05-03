@@ -17,7 +17,7 @@ use App\Broadcasting\RoomChannel;
 */
 
 Broadcast::channel('organization.{channelId}', OrganizationChannel::class);
-Broadcast::channel('room.{channelId}', RoomChannel::class)
+Broadcast::channel('room.{channelId}', RoomChannel::class);
 
 
 /*Broadcast::channel('peers.{channelId}', function ($user, $channelId) {

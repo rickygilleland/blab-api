@@ -38,4 +38,9 @@ class NewRoomCreated implements ShouldBroadcastNow
     {
         return new PresenceChannel('organization.'.$this->room->organization_id);
     }
+
+    public function broadcastAs()
+    {
+        return 'room.created';
+    }
 }

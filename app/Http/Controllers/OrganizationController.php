@@ -44,28 +44,33 @@ class OrganizationController extends Controller
     {
         $user = \Auth::user()->load('teams.rooms', 'organization', 'rooms');
 
-        foreach ($user->teams as $team_key => $team) {
+        $teams = [];
+
+        foreach ($teams as $team_key => $team) {
+            $rooms = [];
+            
             foreach ($team->rooms as $room_key => $room) {
                 if ($room->is_private) {
-                    $user_found = false;
                     foreach ($room->users as $room_user) {
                         if ($room_user->id == $user->id) {
-                            $user_found = true;
+                            $rooms[] = $room;
                             break;
                         }
                     }
-                    if (!$user_found) {
-                        unset($user->teams[$team_key]->rooms[$room_key]);
-                    }
+                } else {
+                    $rooms[] = $room;
                 }
             }
+
+            $team->rooms = $rooms;
+            $teams[] = $team;
         }
         
         $organization = [
             "id" => $user->organization->id,
             "name" => $user->organization->name,
             "slug" => $user->organization->slug,
-            "teams" => $user->teams
+            "teams" => $teams
         ];
         
         return $organization;

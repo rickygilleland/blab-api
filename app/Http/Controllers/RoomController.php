@@ -10,6 +10,8 @@ use TwilioRestClient;
 use TwilioJwtAccessToken;
 use TwilioJwtGrantsVideoGrant;
 
+use App\Events\NewNotification;
+
 class RoomController extends Controller
 {
     /**
@@ -158,7 +160,8 @@ class RoomController extends Controller
         $room->save();
 
         //notify everyone else that a new room has been created
-        event(new \App\Events\NewNotification($user->organization));
+        //event(new NewNotification($user->organization))->toOthers();
+        event(new NewNotification($user->organization));
 
         return $room;
     }

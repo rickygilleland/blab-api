@@ -11,6 +11,7 @@ use TwilioJwtAccessToken;
 use TwilioJwtGrantsVideoGrant;
 
 use App\Events\NewRoomCreated;
+use App\Events\UserAddedToRoom;
 
 class RoomController extends Controller
 {
@@ -119,6 +120,57 @@ class RoomController extends Controller
         }
 
         return $room->users;
+
+    }
+
+    public function invite_user(Request $request, $id)
+    {
+        $user = \Auth::user()->load('teams');
+
+        $room = \App\Room::where('id', $id)->with('users')->first();
+        
+        $team_found = false;
+        foreach ($user->teams as $team) {
+            if ($team->id == $room->team_id) {
+                $team_found = true;
+            }
+        }
+
+        if (!$team_found) {
+            abort(404);
+        }
+
+        if ($room->is_private) {
+            $user_found = false;
+            foreach ($room->users as $room_user) {
+                if ($room_user->id == $user->id) {
+                    $user_found = true;
+                    break;
+                }
+            }
+
+            if (!$user_found) {
+                abort(404);
+            }
+        }
+
+        $user_to_add = \App\User::where('id', $request->user_id)->first();
+
+        if (!$user_to_add) {
+            abort(404);
+        }
+
+        $room->users()->$attach($user_to_add);
+
+        $notification = new \stdClass;
+        $notification->created_by = $user->id;
+        $notification->room = $room;
+        $notification->user = $user_to_add;
+
+        //notify everyone else that a new user has been added to the room
+        broadcast(new UserAddedToRoom($notification))->toOthers();
+
+        return true;
 
     }
 

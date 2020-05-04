@@ -40,3 +40,4 @@ Route::middleware('auth:api')->post('/team', 'TeamController@create');
 
 Route::middleware('auth:api')->post('/room', 'RoomController@create');
 Route::middleware('auth:api')->get('/room/{id}/users', 'RoomController@get_users', function($id) { });
+Route::middleware('auth:api')->post('/room/{id}/users', 'RoomController@invite_user', function($id) { });

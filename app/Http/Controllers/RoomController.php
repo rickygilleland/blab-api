@@ -160,8 +160,7 @@ class RoomController extends Controller
         $room->save();
 
         //notify everyone else that a new room has been created
-        //event(new NewNotification($user->organization))->toOthers();
-        event(new NewRoomCreated($user->organization));
+        event(new NewNotification($user->organization))->toOthers();
 
         return $room;
     }

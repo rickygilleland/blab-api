@@ -57,13 +57,22 @@ class OrganizationController extends Controller
                             break;
                         }
                     }
-                } else {
-                    $rooms[] = $room;
-                }
+
+                    continue;
+                } 
+                
+                $rooms[] = $room;
             }
 
-            $team->rooms = $rooms;
-            $teams[] = $team;
+            $newTeam = new \stdClass;
+            $newTeam->id = $team->id;
+            $newTeam->name = $team->name;
+            $newTeam->is_default = $team->is_default;
+            $newTeam->avatar_url = $team->avatar_url;
+            $newTeam->organization_id = $team->organization_id;
+            $newTeam->rooms = $rooms;
+
+            $teams[] = $newTeam;
         }
         
         $organization = [

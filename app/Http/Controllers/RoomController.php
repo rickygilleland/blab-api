@@ -85,20 +85,33 @@ class RoomController extends Controller
     public function get_users($id)
     {
 
-        $user = \Auth::user();
+        $user = \Auth::user()->load('teams');
 
         $room = \App\Room::where('id', $id)->with('users')->first();
         
-        $user_found = false;
-        foreach ($room->users as $room_user) {
-            if ($room_user->id == $user->id) {
-                $user_found = true;
-                break;
+        $team_found = false;
+        foreach ($user->teams as $team) {
+            if ($team->id == $room->team_id) {
+                $team_found = true;
             }
         }
 
-        if (!$user_found) {
+        if (!$team_found) {
             abort(404);
+        }
+
+        if ($room->is_private) {
+            $user_found = false;
+            foreach ($room->users as $room_user) {
+                if ($room_user->id == $user->id) {
+                    $user_found = true;
+                    break;
+                }
+            }
+
+            if (!$user_found) {
+                abort(404);
+            }
         }
 
         return $room->users;

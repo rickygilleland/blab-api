@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <label>First Name</label>
-						        <input type="text" placeholder="Eleanor" class="form-control dark-input mb-4 py-4 shadow-sm @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required>
+						        <input type="text" placeholder="Eleanor" class="form-control dark-input mb-4 py-4 shadow-sm @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required>
                                 @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-6">
                                 <label>Last Name</label>
-						        <input type="text" placeholder="Rigby" class="form-control dark-input mb-4 py-4 shadow-sm @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required>
+						        <input type="text" placeholder="Rigby" class="form-control dark-input mb-4 py-4 shadow-sm @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required>
                                 @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -56,7 +56,7 @@ class OnboardingController extends Controller
         $room->slug = "water-cooler";
         $room->is_private = false;
         $room->video_enabled = true;
-        $room->channel_id = $user->organization->slug . "-" . $default_team->slug . "-" . $room_slug;
+        $room->channel_id = $user->organization->slug . "-" . $default_team->slug . "-" . $room->slug;
         $room->secret = Hash::make(Str::random(256));
 
         $available_servers = \App\Server::where('is_active', true)->get();

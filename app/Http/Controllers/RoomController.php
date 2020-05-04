@@ -76,8 +76,12 @@ class RoomController extends Controller
             $user->rooms()->attach($room);
         }
 
+        $notification = new \stdClass;
+        $notification->created_by = $user->id;
+        $notification->room = $room;
+
         //notify everyone else that a new room has been created
-        broadcast(new NewRoomCreated($user->organization))->toOthers();
+        broadcast(new NewRoomCreated($notification))->toOthers();
 
         return $room;
     }

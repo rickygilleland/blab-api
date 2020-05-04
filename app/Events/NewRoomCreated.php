@@ -23,9 +23,9 @@ class NewRoomCreated implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct(Organization $organization)
+    public function __construct($notification)
     {
-        $this->organization = $organization;
+        $this->notification = $notification;
     }
 
     /**
@@ -35,6 +35,6 @@ class NewRoomCreated implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('organization.'.$this->organization->id);
+        return new PresenceChannel('organization.'.$this->notification->room->organization_id);
     }
 }

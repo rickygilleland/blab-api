@@ -95,4 +95,9 @@ class User extends Authenticatable
         return $this->belongsTo('App\Organization');
     }
 
+    public function rooms()
+    {
+        return $this->hasMany('App\Room');
+    }
+
 }

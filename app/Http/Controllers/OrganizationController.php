@@ -42,7 +42,24 @@ class OrganizationController extends Controller
 
     public function api_show()
     {
-        $user = \Auth::user()->load('teams.rooms', 'organization');
+        $user = \Auth::user()->load('teams.rooms', 'organization', 'rooms');
+
+        foreach ($user->teams as $team_key => $team) {
+            foreach ($team->rooms as $room_key => $room) {
+                if ($room->is_private) {
+                    $user_found = false;
+                    foreach ($room->users as $room_user) {
+                        if ($room_user->id == $user->id) {
+                            $user_found = true;
+                            break;
+                        }
+                    }
+                    if (!$user_found) {
+                        unset($user->teams[$team_key]->rooms[$room_key]);
+                    }
+                }
+            }
+        }
         
         $organization = [
             "id" => $user->organization->id,

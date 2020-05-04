@@ -72,10 +72,23 @@ class RoomController extends Controller
         $room->secret .= "_" . $room->id;
         $room->save();
 
+        if ($room->is_private) {
+            $user->rooms()->attach($room);
+        }
+
         //notify everyone else that a new room has been created
         broadcast(new NewRoomCreated($user->organization))->toOthers();
 
         return $room;
+    }
+
+    public function get_users($id)
+    {
+
+        $user = \Auth::user();
+        
+
+
     }
 
 }

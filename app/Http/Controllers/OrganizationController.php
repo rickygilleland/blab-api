@@ -46,9 +46,9 @@ class OrganizationController extends Controller
 
         $teams = [];
 
-        foreach ($teams as $team_key => $team) {
+        foreach ($user->teams as $team_key => $team) {
             $rooms = [];
-            
+
             foreach ($team->rooms as $room_key => $room) {
                 if ($room->is_private) {
                     foreach ($room->users as $room_user) {

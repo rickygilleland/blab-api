@@ -87,7 +87,7 @@ class RoomController extends Controller
 
         $user = \Auth::user();
 
-        $room = \App\Room::where('id', $id)->load('users')->first();
+        $room = \App\Room::where('id', $id)->with('users')->first();
         
         $user_found = false;
         foreach ($room->users as $room_user) {

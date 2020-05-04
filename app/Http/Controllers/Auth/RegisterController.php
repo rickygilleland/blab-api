@@ -86,6 +86,7 @@ class RegisterController extends Controller
             $team = new \App\Team();
             $team->organization_id = $organization->id;
             $team->is_default = true;
+            $team->name = "default";
             $team->slug = md5($data['email'] . uniqid()) . uniqid();
             $team->save();
         }

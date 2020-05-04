@@ -44,6 +44,35 @@ class OnboardingController extends Controller
         }
 
         $organization->save();
+
+        //create their first room
+        $teams = $user->teams;
+        $default_team = $teams[0];
+
+        $room = new \App\Room();
+        $room->name = "Water Cooler";
+        $room->team_id = $default_team->id;
+        $room->organization_id = $user->organization->id;
+        $room->slug = "water-cooler";
+        $room->is_private = false;
+        $room->video_enabled = true;
+        $room->channel_id = $user->organization->slug . "-" . $default_team->slug . "-" . $room_slug;
+        $room->secret = Hash::make(Str::random(256));
+
+        $available_servers = \App\Server::where('is_active', true)->get();
+
+        if (!$available_servers) {
+            abort(503);
+        }
+
+        //TODO: get utilization stats from the server to make sure it isn't overloaded
+        $rand = rand(0, (count($available_servers) - 1));
+
+        $room->server_id = $available_servers[$rand]->id;
+        $room->save();
+
+        $room->secret .= "_" . $room->id;
+        $room->save();
         
         //skip the team setup for now until we have multi-team support
         //return redirect('onboarding/team');

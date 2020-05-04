@@ -157,6 +157,9 @@ class RoomController extends Controller
         $room->secret .= "_" . $room->id;
         $room->save();
 
+        //notify everyone else that a new room has been created
+        event(new \App\Events\NewNotification($user->organization));
+
         return $room;
     }
 

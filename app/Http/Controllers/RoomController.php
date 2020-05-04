@@ -86,8 +86,22 @@ class RoomController extends Controller
     {
 
         $user = \Auth::user();
-        
 
+        $room = \App\Room::where('id', $id)->load('users')->first();
+        
+        $user_found = false;
+        foreach ($room->users as $room_user) {
+            if ($room_user->id == $user->id) {
+                $user_found = true;
+                break;
+            }
+        }
+
+        if (!$user_found) {
+            abort(404);
+        }
+
+        return $room->users;
 
     }
 

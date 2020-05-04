@@ -10,13 +10,13 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
-use App\Organization;
 
 class NewRoomCreated implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $organization;
+    public $room;
+    public $created_by;
 
     /**
      * Create a new event instance.
@@ -25,7 +25,8 @@ class NewRoomCreated implements ShouldBroadcastNow
      */
     public function __construct($notification)
     {
-        $this->notification = $notification;
+        $this->room = $notification->room;
+        $this->created_by = $notification->created_by;
     }
 
     /**

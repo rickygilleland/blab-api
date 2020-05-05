@@ -78,14 +78,10 @@ class RoomChannel
                             $count = \App\Room::where('server_id', $avail_server->id)->count();
 
                             if ($count < $least_loaded_count || $least_loaded_key == null) {
-                                $least_loaded_key = $avail_server->id;
+                                $least_loaded_key = $key;
                                 $least_loaded_count = $count;
                             }
                         }
-
-                        print_r($available_servers);
-                        print_r($least_loaded_key);
-                        die();
 
                         $room->server_id = $available_servers[$least_loaded_key]->id;
                         $room->save();

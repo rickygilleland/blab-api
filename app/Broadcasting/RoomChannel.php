@@ -39,7 +39,7 @@ class RoomChannel
      * @param  \App\User  $user
      * @return array|bool
      */
-    public function join(User $user, $channelId)
+    public function join(User $user, $channelId, $changeServer = false)
     {
         foreach ($user->teams as $team) {
             foreach ($team->rooms as $room) {
@@ -54,7 +54,8 @@ class RoomChannel
                     $server = null;
 
                     //TODO: Pull possible streaming servers from the database and attach it to the current room
-                    if ($room->server_id == null) {
+                    if ($room->server_id == null || $changeServer == true) {
+
                         $available_servers = \App\Server::where('is_active', true)->get();
 
                         if (!$available_servers) {
@@ -89,81 +90,32 @@ class RoomChannel
                     ];
 
                     //create a session
-                    $session_handler = Http::post("https://".$server."/streamer", $data);
-                    $session_handler = $session_handler->json();
-                    $session_handler = $session_handler['data']['id'];
+                    try {
 
-                    $data = [
-                        "janus" => "attach", 
-                        "plugin" => "janus.plugin.videoroom", 
-                        "transaction" => Str::random(80), 
-                        "apisecret" => $this->streaming_backend_api_secret
-                    ];
-
-                    $api_url_with_handler = "https://" . $server . "/streamer/" . $session_handler;
-
-                    //attach the video room plugin
-                    $room_handler = Http::post($api_url_with_handler, $data);
-                    $room_handler = $room_handler->json();
-                    $room_handler = $room_handler['data']['id'];
-
-                    $api_url_with_room_handler = $api_url_with_handler . "/" . $room_handler;
-
-                    $message_body = [
-                        "request" => "exists",
-                        "room" => $room->channel_id
-                    ];  
-
-                    $data = [
-                        "janus" => "message", 
-                        "body" => $message_body,
-                        "transaction" => Str::random(80), 
-                        "apisecret" => $this->streaming_backend_api_secret
-                    ];
-
-                    $room_exists = Http::post($api_url_with_room_handler, $data);
-                    $room_exists = $room_exists->json();
-
-
-                    if (!isset($room_exists['plugindata']['data']['exists']) || !$room_exists['plugindata']['data']['exists']) {
-                        //create the room
-                        $message_body = [
-                            "request" => "create",
-                            "admin_key" => $this->streaming_backend_api_secret,
-                            "room" => $room->channel_id,
-                            "secret" => $room->secret,
-                            "is_private" => true,
-                            "publishers" => 99,
-                            "notify_joining" => true,
-                            "videocodec" => "vp9",
-                            "audiolevel_event" => true,
-                            "audiolevel_ext" => true,
-                            "video_svc" => true,
-                            "allowed" => [
-                                $user->streamer_key
-                            ]
-                        ];  
+                        $session_handler = Http::post("https://".$server."/streamer", $data);
+                        $session_handler = $session_handler->json();
+                        $session_handler = $session_handler['data']['id'];
 
                         $data = [
-                            "janus" => "message", 
-                            "body" => $message_body,
+                            "janus" => "attach", 
+                            "plugin" => "janus.plugin.videoroom", 
                             "transaction" => Str::random(80), 
                             "apisecret" => $this->streaming_backend_api_secret
                         ];
-
-                        $streamer_room = Http::post($api_url_with_room_handler, $data);
-                        $streamer_room = $streamer_room->json();
-                    } else {
-                        //make sure the current user's token is in there
+    
+                        $api_url_with_handler = "https://" . $server . "/streamer/" . $session_handler;
+                        
+    
+                        //attach the video room plugin
+                        $room_handler = Http::post($api_url_with_handler, $data);
+                        $room_handler = $room_handler->json();
+                        $room_handler = $room_handler['data']['id'];
+    
+                        $api_url_with_room_handler = $api_url_with_handler . "/" . $room_handler;
+    
                         $message_body = [
-                            "request" => "allowed",
-                            "admin_key" => $this->streaming_backend_api_secret,
-                            "room" => $room->channel_id,
-                            "secret" => $room->secret,
-                            "action" => "add",
-                            "allowed" => [
-                                $user->streamer_key
-                            ]
+                            "request" => "exists",
+                            "room" => $room->channel_id
                         ];  
     
                         $data = [
@@ -172,21 +124,106 @@ class RoomChannel
                             "transaction" => Str::random(80), 
                             "apisecret" => $this->streaming_backend_api_secret
                         ];
+    
+                        $room_exists = Http::post($api_url_with_room_handler, $data);
+                        $room_exists = $room_exists->json();
+    
+    
+                        if (!isset($room_exists['plugindata']['data']['exists']) || !$room_exists['plugindata']['data']['exists']) {
+                            //create the room
+                            $message_body = [
+                                "request" => "create",
+                                "admin_key" => $this->streaming_backend_api_secret,
+                                "room" => $room->channel_id,
+                                "secret" => $room->secret,
+                                "is_private" => true,
+                                "publishers" => 99,
+                                "notify_joining" => true,
+                                "videocodec" => "vp9",
+                                "audiolevel_event" => true,
+                                "audiolevel_ext" => true,
+                                "video_svc" => true,
+                                "allowed" => [
+                                    $user->streamer_key
+                                ]
+                            ];  
+    
+                            $data = [
+                                "janus" => "message", 
+                                "body" => $message_body,
+                                "transaction" => Str::random(80), 
+                                "apisecret" => $this->streaming_backend_api_secret
+                            ];
+    
+                            $streamer_room = Http::post($api_url_with_room_handler, $data);
+                            $streamer_room = $streamer_room->json();
+                        } else {
+                            //make sure the current user's token is in there
+                            $message_body = [
+                                "request" => "allowed",
+                                "admin_key" => $this->streaming_backend_api_secret,
+                                "room" => $room->channel_id,
+                                "secret" => $room->secret,
+                                "action" => "add",
+                                "allowed" => [
+                                    $user->streamer_key
+                                ]
+                            ];  
+        
+                            $data = [
+                                "janus" => "message", 
+                                "body" => $message_body,
+                                "transaction" => Str::random(80), 
+                                "apisecret" => $this->streaming_backend_api_secret
+                            ];
+    
+                            $streamer_room = Http::post($api_url_with_room_handler, $data);
+                            $streamer_room = $streamer_room->json();
+                        }
+    
+    
+                        return [
+                            'id' => $user->id, 
+                            'first_name' => $user->first_name,
+                            'last_name' => $user->last_name, 
+                            'avatar' => $user->avatar_url, 
+                            'peer_uuid' =>  md5($user->id), 
+                            'streamer_key' => $user->streamer_key,
+                            'media_server' => $server
+                        ];
 
-                        $streamer_room = Http::post($api_url_with_room_handler, $data);
-                        $streamer_room = $streamer_room->json();
+                    } catch(\Exception $e) {
+
+                        //take this server out of service for now and try again
+                        $server = \App\Server::where('hostname', $server)->first();
+                        $server->is_active = false;
+                        $server->save();
+
+                        //send an email alert
+                        $sendgrid_key = env('SENDGRID_API_KEY');
+                        $sg = new \SendGrid($sendgrid_key);
+
+                        $email = new \SendGrid\Mail\Mail();
+                        $email->setFrom("noreply@watercooler.work", "Water Cooler System");
+
+                        $email->addTo("ricky@watercooler.work", "Ricky Gilleland");
+                        $email->setSubject("A Media Server was Unreachable");
+                        $email->addContent(
+                            "text/html", $server->hostname . " was unavailable and has been placed out of service. 
+                            Here's the error we received:<br>" . 
+                            $e->getMessage()
+                        );
+                        
+                        try {
+                            $response = $sg->send($email);
+                        } catch (Exception $e) {
+                            //do something
+                        }
+
+                        return $this->join($user, $channelId, true);
                     }
 
-
-                    return [
-                        'id' => $user->id, 
-                        'first_name' => $user->first_name,
-                        'last_name' => $user->last_name, 
-                        'avatar' => $user->avatar_url, 
-                        'peer_uuid' =>  md5($user->id), 
-                        'streamer_key' => $user->streamer_key,
-                        'media_server' => $server
-                    ];
+                    
                 }
             }
         }

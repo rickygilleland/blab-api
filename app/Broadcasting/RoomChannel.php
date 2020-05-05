@@ -58,31 +58,36 @@ class RoomChannel
 
                         if ($user->timezone != null) {
                             if ($user->timezone == "America/New_York") {
-                                $available_servers = \App\Server::where('is_active', true)->where('location', 'us-east')->get();
+                                $available_servers = \App\Server::where('is_active', 1)->where('location', 'us-east')->get();
                             } else {
-                                $available_servers = \App\Server::where('is_active', true)->where('location', 'us-west')->get();
+                                $available_servers = \App\Server::where('is_active', 1)->where('location', 'us-west')->get();
                             }
                         }
 
                         if (!isset($available_servers) || !$available_servers) {
-                            $available_servers = \App\Server::where('is_active', true)->get();
+                            $available_servers = \App\Server::where('is_active', 1)->get();
                         }
 
                         if (!$available_servers) {
                             abort(503);
                         }
+
+                        print_r($available_servers);
             
                         $least_loaded_key = 0;
                         $least_loaded_count = 0;
                         foreach ($available_servers as $key => $avail_server) {
                             $count = \App\Room::where('server_id', $avail_server->id)->count();
 
-                            if ($count < $least_loaded_coun) {
+                            if ($count < $least_loaded_count) {
                                 $least_loaded_key = $key;
                                 $least_loaded_count = $count;
                             }
                         }
 
+                        print_r($least_loaded_key);
+
+                        die();
                         $room->server_id = $available_servers[$least_loaded_key]->id;
                         $room->save();
 

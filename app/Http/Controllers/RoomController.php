@@ -150,17 +150,17 @@ class RoomController extends Controller
             }
 
             if (!$user_found) {
-                abort(500);
+                abort(404);
             }
         }
 
         $user_to_add = \App\User::where('id', $request->user_id)->first();
 
         if (!$user_to_add) {
-            abort(503);
+            abort(404);
         }
 
-        $room->users()->$attach($user_to_add);
+        $room->users()->attach($user_to_add);
 
         $notification = new \stdClass;
         $notification->created_by = $user->id;

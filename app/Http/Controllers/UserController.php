@@ -20,11 +20,6 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-
-        $this->sid = config('services.twilio.sid');
-		$this->token = config('services.twilio.token');
-		$this->key = config('services.twilio.key');
-        $this->secret = config('services.twilio.secret');
     }
 
     public function show()
@@ -55,5 +50,17 @@ class UserController extends Controller
         }
         
         return $user;
+    }
+
+    public function update(Request $request, $id) 
+    {
+        $user = \Auth::user();
+
+        if ($user->id != $id) {
+            abort(404);
+        }
+
+        $user->timezone = $request->timezone;
+        $user->save();
     }
 }

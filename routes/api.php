@@ -21,6 +21,7 @@ Route::post('/login_code', 'Auth\LoginController@apiRequestLoginCode');
 Route::post('/magic/auth', 'Auth\LoginController@apiMagicAuth');
 
 Route::middleware('auth:api')->get('/user', 'UserController@show');
+Route::middleware('auth:api')->patch('/user/{id}', 'UserController@update', function($id) {});
 
 Route::middleware('auth:api')->get('/organization', 'OrganizationController@api_show');
 

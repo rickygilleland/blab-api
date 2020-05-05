@@ -64,6 +64,8 @@ class RoomChannel
                             }
                         }
 
+                        print_r($available_servers); die();
+
                         if (!isset($available_servers) || count($available_servers) == 0) {
                             $available_servers = \App\Server::where('is_active', 1)->get();
                         }

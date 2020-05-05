@@ -54,6 +54,13 @@ class RoomChannel
 
                     $server = null;
 
+                    //make sure the selected server is still available
+                    $server = \App\Server::where('id', $room->server_id)->first();
+
+                    if (!$server->is_active) {
+                        $changeServer = true;
+                    }
+
                     if ($room->server_id == null || $changeServer == true) {
 
                         if ($user->timezone != null) {
@@ -63,8 +70,6 @@ class RoomChannel
                                 $available_servers = \App\Server::where('is_active', 1)->where('location', 'us-west')->get();
                             }
                         }
-
-                        print_r($available_servers); die();
 
                         if (!isset($available_servers) || count($available_servers) == 0) {
                             $available_servers = \App\Server::where('is_active', 1)->get();

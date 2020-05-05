@@ -3,6 +3,7 @@
 namespace App\Broadcasting;
 
 use App\User;
+use App\Events\NotifyServerOutOfService;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
@@ -198,6 +199,13 @@ class RoomChannel
                         $server = \App\Server::where('hostname', $server)->first();
                         $server->is_active = false;
                         $server->save();
+
+
+                        $notification = new \stdClass;
+                        $notification->triggered_by = $user->id;
+                        $notification->room = $room;
+
+                        broadcast(new NotifyServerOutOfService($notification))->toOthers();
 
                         //send an email alert
                         $sendgrid_key = env('SENDGRID_API_KEY');

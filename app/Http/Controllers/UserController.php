@@ -62,5 +62,7 @@ class UserController extends Controller
 
         $user->timezone = $request->timezone;
         $user->save();
+
+        return $user;
     }
 }

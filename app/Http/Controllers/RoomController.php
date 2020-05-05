@@ -163,7 +163,7 @@ class RoomController extends Controller
         $room->users()->attach($user_to_add);
 
         $notification = new \stdClass;
-        $notification->created_by = $user->id;
+        $notification->added_by = $user->id;
         $notification->room = $room;
         $notification->user = $user_to_add;
 

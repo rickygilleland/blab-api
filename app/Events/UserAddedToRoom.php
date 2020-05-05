@@ -38,7 +38,10 @@ class UserAddedToRoom implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('room.'.$this->room->channel_id);
+        return [
+            new PresenceChannel('room.'.$this->room->channel_id),
+            new PresenceChannel('organization.'.$this->room->organization_id)
+        ];
     }
 
     public function broadcastAs()

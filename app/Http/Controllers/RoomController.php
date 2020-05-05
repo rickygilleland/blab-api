@@ -150,14 +150,14 @@ class RoomController extends Controller
             }
 
             if (!$user_found) {
-                abort(404);
+                abort(500);
             }
         }
 
         $user_to_add = \App\User::where('id', $request->user_id)->first();
 
         if (!$user_to_add) {
-            abort(404);
+            abort(503);
         }
 
         $room->users()->$attach($user_to_add);

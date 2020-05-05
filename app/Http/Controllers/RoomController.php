@@ -137,7 +137,7 @@ class RoomController extends Controller
             abort(404);
         }
 
-        $team = \App\Team::where('id', $room->team)->first();
+        $team = \App\Team::where('id', $room->team_id)->first();
 
         if (!$team->users->contains($request->user_id)) {
             abort(403);

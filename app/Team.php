@@ -9,7 +9,7 @@ class Team extends Model
     //
     public function users()
     {
-        return $this->hasMany('App\User');
+        return $this->belongsToMany('App\User');
     }
 
     public function organization()

@@ -151,7 +151,7 @@ class RoomController extends Controller
         $notification = new \stdClass;
         $notification->added_by = $user->id;
         $notification->room = $room;
-        $notification->user = $user_to_add;
+        $notification->user = $request->user_id;
 
         //notify everyone else that a new user has been added to the room
         broadcast(new UserAddedToRoom($notification))->toOthers();

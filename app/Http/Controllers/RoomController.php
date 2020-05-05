@@ -128,39 +128,25 @@ class RoomController extends Controller
         $user = \Auth::user()->load('teams');
 
         $room = \App\Room::where('id', $id)->with('users')->first();
-        
-        $team_found = false;
-        foreach ($user->teams as $team) {
-            if ($team->id == $room->team_id) {
-                $team_found = true;
-            }
-        }
 
-        if (!$team_found) {
+        if (!$user->teams->contains($room->team_id)) {
             abort(404);
         }
 
-        if ($room->is_private) {
-            $user_found = false;
-            foreach ($room->users as $room_user) {
-                if ($room_user->id == $user->id) {
-                    $user_found = true;
-                    break;
-                }
-            }
-
-            if (!$user_found) {
-                abort(404);
-            }
-        }
-
-        $user_to_add = \App\User::where('id', $request->user_id)->first();
-
-        if (!$user_to_add) {
+        if (!$room->users->contains($user)) {
             abort(404);
         }
 
-        $room->users()->attach($user_to_add);
+        $team = \App\Team::where('id', $room->team)->first();
+
+        if (!$team->users->contains($request->user_id)) {
+            abort(403);
+        }
+
+        //make sure we don't attach more than once
+        if (!$room->users->contains($request->user_id)) {
+            $room->users()->attach($request->user_id);
+        }
 
         $notification = new \stdClass;
         $notification->added_by = $user->id;

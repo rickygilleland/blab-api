@@ -64,16 +64,14 @@ class RoomChannel
                             }
                         }
 
-                        if (!isset($available_servers) || !$available_servers) {
+                        if (!isset($available_servers) || count($available_servers) == 0) {
                             $available_servers = \App\Server::where('is_active', 1)->get();
                         }
 
-                        if (!$available_servers) {
+                        if (count($available_servers) == 0) {
                             abort(503);
                         }
 
-                        print_r($available_servers);
-            
                         $least_loaded_key = 0;
                         $least_loaded_count = 0;
                         foreach ($available_servers as $key => $avail_server) {
@@ -85,9 +83,6 @@ class RoomChannel
                             }
                         }
 
-                        print_r($least_loaded_key);
-
-                        die();
                         $room->server_id = $available_servers[$least_loaded_key]->id;
                         $room->save();
 

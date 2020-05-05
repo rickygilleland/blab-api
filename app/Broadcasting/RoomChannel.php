@@ -48,13 +48,12 @@ class RoomChannel
                     //check if they already have a streamer key set
                     if ($user->streamer_key == null) {
                         $user->streamer_key = Hash::make(Str::random(256));
-                        $user->streamer_key .= "_" . $user->id;
+                        $user->streamer_key .= "_" . $user->id; 
                         $user->save();
                     }
 
                     $server = null;
 
-                    //TODO: Pull possible streaming servers from the database and attach it to the current room
                     if ($room->server_id == null || $changeServer == true) {
 
                         if ($user->timezone != null) {
@@ -72,11 +71,19 @@ class RoomChannel
                         if (!$available_servers) {
                             abort(503);
                         }
+            
+                        $least_loaded_key = null;
+                        $least_loaded_count = 0;
+                        foreach ($available_servers as $key => $avail_server) {
+                            $count = \App\Room::where('server_id', $avail_server->id)->count();
 
-                        //TODO: get utilization stats from the server to make sure it isn't overloaded
-                        $rand = rand(0, (count($available_servers) - 1));
+                            if ($count < $least_loaded_count || $least_loaded_key == null) {
+                                $least_loaded_key = $avail_server->id;
+                                $least_loaded_count = $count;
+                            }
+                        }
 
-                        $room->server_id = $available_servers[$rand]->id;
+                        $room->server_id = $available_servers[$least_loaded_key]->id;
                         $room->save();
 
                         $server = $available_servers[$rand]->hostname;

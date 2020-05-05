@@ -57,7 +57,17 @@ class RoomChannel
                     //TODO: Pull possible streaming servers from the database and attach it to the current room
                     if ($room->server_id == null || $changeServer == true) {
 
-                        $available_servers = \App\Server::where('is_active', true)->get();
+                        if ($user->timezone != null) {
+                            if ($user->timezone == "America/New_York") {
+                                $available_servers = \App\Server::where('is_active', true)->where('location', 'us-east')->get();
+                            } else {
+                                $available_servers = \App\Server::where('is_active', true)->where('location', 'us-west')->get();
+                            }
+                        }
+
+                        if (!isset($available_servers) || !$available_servers) {
+                            $available_servers = \App\Server::where('is_active', true)->get();
+                        }
 
                         if (!$available_servers) {
                             abort(503);

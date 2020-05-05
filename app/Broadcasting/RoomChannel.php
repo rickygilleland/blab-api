@@ -221,6 +221,11 @@ class RoomChannel
 
                         //take this server out of service for now and try again
                         $server = \App\Server::where('hostname', $server)->first();
+                        
+                        if (!$server) {
+                            return $this->join($user, $channelId, true);
+                        }
+
                         $server->is_active = false;
                         $server->save();
 

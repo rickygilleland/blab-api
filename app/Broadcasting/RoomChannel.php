@@ -86,7 +86,7 @@ class RoomChannel
                         $room->server_id = $available_servers[$least_loaded_key]->id;
                         $room->save();
 
-                        $server = $available_servers[$rand]->hostname;
+                        $server = $available_servers[$least_loaded_key]->hostname;
                     }
 
                     if ($server == null) {

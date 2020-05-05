@@ -102,7 +102,8 @@ class OrganizationController extends Controller
                 'id' => $user->id, 
                 'first_name' => $user->first_name,
                 'last_name' => $user->last_name,
-                'avatar_url' => $user->avatar_url
+                'avatar_url' => $user->avatar_url,
+                'timezone' => $user->timezone
             ];
         }
 

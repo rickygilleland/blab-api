@@ -83,6 +83,10 @@ class RoomChannel
                             }
                         }
 
+                        print_r($available_servers);
+                        print_r($least_loaded_key);
+                        die();
+
                         $room->server_id = $available_servers[$least_loaded_key]->id;
                         $room->save();
 

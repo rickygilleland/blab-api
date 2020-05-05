@@ -72,12 +72,12 @@ class RoomChannel
                             abort(503);
                         }
             
-                        $least_loaded_key = null;
+                        $least_loaded_key = 0;
                         $least_loaded_count = 0;
                         foreach ($available_servers as $key => $avail_server) {
                             $count = \App\Room::where('server_id', $avail_server->id)->count();
 
-                            if ($count < $least_loaded_count || $least_loaded_key == null) {
+                            if ($count < $least_loaded_coun) {
                                 $least_loaded_key = $key;
                                 $least_loaded_count = $count;
                             }

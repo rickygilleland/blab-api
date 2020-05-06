@@ -112,7 +112,7 @@ class RoomChannel
                     //create a session
                     try {
 
-                        $session_handler = Http::post("https://".$server."/streamer", $data);
+                        $session_handler = Http::post("https://".$hostname."/streamer", $data);
                         $session_handler = $session_handler->json();
                         $session_handler = $session_handler['data']['id'];
 
@@ -123,7 +123,7 @@ class RoomChannel
                             "apisecret" => $this->streaming_backend_api_secret
                         ];
     
-                        $api_url_with_handler = "https://" . $server . "/streamer/" . $session_handler;
+                        $api_url_with_handler = "https://" . $hostname . "/streamer/" . $session_handler;
                         
     
                         //attach the video room plugin
@@ -210,13 +210,13 @@ class RoomChannel
                             'peer_uuid' =>  md5($user->id), 
                             'streamer_key' => $user->streamer_key,
                             'timezone' => $user->timezone,
-                            'media_server' => $server
+                            'media_server' => $hostname
                         ];
 
                     } catch(\Exception $e) {
 
                         //take this server out of service for now and try again
-                        $server = \App\Server::where('hostname', $server)->first();
+                        $server = \App\Server::where('hostname', $hostname)->first();
                         
                         if (!$server) {
                             return $this->join($user, $channelId, true);

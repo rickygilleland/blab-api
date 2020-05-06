@@ -57,7 +57,7 @@ class RoomChannel
                     //make sure the selected server is still available
                     $server = \App\Server::where('id', $room->server_id)->first();
 
-                    if (!$server->is_active) {
+                    if ($server->is_active == false) {
                         $changeServer = true;
                     }
 

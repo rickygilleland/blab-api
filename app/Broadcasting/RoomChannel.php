@@ -52,16 +52,12 @@ class RoomChannel
                         $user->save();
                     }
 
-                    $server = null;
-
                     //make sure the selected server is still available
                     $server = \App\Server::where('id', $room->server_id)->first();
 
                     if ($server->is_active == false) {
                         $changeServer = true;
                     }
-
-                    var_dump($changeServer); die();
 
                     if ($room->server_id == null || $changeServer == true) {
 
@@ -95,13 +91,10 @@ class RoomChannel
                         $room->server_id = $available_servers[$least_loaded_key]->id;
                         $room->save();
 
-                        $server = $available_servers[$least_loaded_key]->hostname;
+                        $server = $available_servers[$least_loaded_key];
                     }
 
-                    if ($server == null) {
-                        $server = \App\Server::where('id', $room->server_id)->first();
-                        $server = $server->hostname;
-                    }
+                    $hostname = $server->hostname;
                     
                     if ($room->secret == null) {
                         $room->secret = Hash::make(Str::random(256));

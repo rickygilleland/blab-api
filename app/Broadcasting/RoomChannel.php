@@ -214,6 +214,7 @@ class RoomChannel
                             'avatar' => $user->avatar_url, 
                             'peer_uuid' =>  md5($user->id), 
                             'streamer_key' => $user->streamer_key,
+                            'timezone' => $user->timezone,
                             'media_server' => $server
                         ];
 

@@ -63,12 +63,6 @@
 
             <hr class="my-5">
 
-            <h3 class="h1 text-center mt-5">Running on Distributed Infrastructure for Distributed Teams</h3>
-            <p class="lead text-center">We use WebRTC for low-latency audio and video chat, powered by servers in New York City, San Francisco, Germany, and Singapore.</p>
-            <p class="text-center" style="font-size:6.5rem"><i class="fas fa-globe-americas"></i> <i class="fas fa-globe-europe mx-5"></i> <i class="fas fa-globe-asia"></i></p>
-
-            <hr class="my-5">
-
             <p class="text-center" style="font-weight:400;font-size:1.4rem;">Interested in being one of the first to try Water Cooler for free?<br> Click the button below to request an invite.</p>
             <center><a class="btn btn-primary btn-lg text-light mt-3 mb-5" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Request an Invite</a></center>
            

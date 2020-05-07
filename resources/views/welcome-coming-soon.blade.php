@@ -51,10 +51,7 @@
                 </div>
             </div>
 
-            <h3 class="h1 text-center" style="margin-top:6rem">Keep Track of Who's Available Across Multiple Timezones</h3>
-            <p class="lead text-center">We make it simple to see who's online and who might be available soon by showing everyone's local time. And when you're in a room, you'll see each members local time if it doesn't match your own. Don't worry about accidentally saying "good morning" when it's 3:30PM somewhere else.</p>
-
-            <img src="/img/team-screenshot.png" class="img img-fluid rounded" />
+            <hr class="my-5">
 
             <h3 class="h1 text-center mt-5">Water Cooler is Cross Platform</h3>
             <p class="lead text-center">Work without limitations.</p>

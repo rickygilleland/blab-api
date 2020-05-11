@@ -4,6 +4,32 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@font-face {
+    font-family: 'Airbnb Cereal App';
+    src: url("fonts/AirbnbCereal-Bold.ttf");
+    font-weight: 700;
+}
+@font-face {
+    font-family: 'Airbnb Cereal App';
+    src: url("fonts/AirbnbCereal-ExtraBold.ttf");
+    font-weight: 900;
+}
+@font-face {
+    font-family: 'Airbnb Cereal App';
+    src: url("fonts/AirbnbCereal-Light.ttf");
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'Airbnb Cereal App';
+    src: url("fonts/AirbnbCereal-Medium.ttf");
+    font-weight: 600;
+}
+@font-face {
+	font-family: 'Airbnb Cereal App';
+    src: url("fonts/AirbnbCereal-Book.ttf");
+    font-weight: 400;
+}
+
 body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

@@ -21,6 +21,18 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+
+    <style>
+        h1, .h1 {
+            font-weight:900
+        }
+        h2, .h2 {
+            font-weight:800
+        }
+        .btn {
+            font-weight:600
+        }
+    </style>
 </head>
 <body>
     <div id="app">

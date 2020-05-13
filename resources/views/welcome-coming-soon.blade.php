@@ -21,6 +21,21 @@
             <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/7015051.js"></script>
         <!-- End of HubSpot Embed Code -->
 
+        <style>
+            h4 {
+                font-weight:800
+            }
+            td {
+                font-size:1rem;
+                font-weight:600
+            }
+            td .lead {
+                font-size:1.05rem;
+                margin-top:.5rem!important;
+                margin-bottom:.5rem!important;
+            }
+        </style>
+
     </head>
     <body>
 
@@ -72,7 +87,8 @@
                     <div class="col-md-6">
                         <h3 class="h2" style="font-weight:800;margin-top:5rem">Always Available, No Codes Required</h3>
                         <p class="lead" style="font-weight:500">Create rooms that are available to the entire team, or restricted to a few select team members. Great for general office chit-chat, recurring meetings, or 1:1 conversations with your co-workers.</p>
-                        <p class="lead font-weight-bold">Rooms are always available and never require a special code to join or for a specific host to be present.</p>           
+                        <p class="lead font-weight-bold">Rooms are always available and never require a special code to join or for a specific host to be present.</p>         
+                        <p class="lead" style="font-weight:500">Whenever a member of your team is in a different timezone than yours, we automatically overlay their local time whenever they're in a room.</p>  
                     </div>
                     <div class="col-md-6">
                         <img src="/img/rooms-screenshot.png" style="max-height:400px" class="img img-fluid rounded shadow float-right" />
@@ -102,28 +118,127 @@
             <div style="max-width:1400px" class="mx-auto py-5">
                 <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-shield-alt"></i> Secure and Optimized for Low-Latency</h3>
                 <p class="lead text-center mb-3" style="font-weight:500;font-size:1.3rem">Our video and audio chat is powered by WebRTC and all traffic between our desktop app and our servers is encrypted and secure, with <strong>full end-to-end encryption coming later this year.</strong></p>
-                <p class="lead text-center mb-3" style="font-weight:500;font-size:1.2rem">We designed our server infrastructure with reliability and scalability in mind. Water Cooler has servers on both coasts of the United States (with international expansion coming soon) and will automatically attempt to route your team to the nearest server for high-quality low-latency connections.</p>
+                <p class="lead text-center mb-5" style="font-weight:500;font-size:1.2rem">We designed our server infrastructure with reliability and scalability in mind. Water Cooler has servers on both coasts of the United States (with international expansion coming soon) and will automatically attempt to route your team to the nearest server for high-quality low-latency connections.</p>
             </div>
         </div>
 
-        <div class="container-fluid" style="background-color:#3777ff;color:white" id="pricing">
+        <div class="container-fluid" style="background-color:#3777ff;color:white">
+            <div style="max-width:1400px" class="mx-auto py-5">
+                <h3 class="h1 text-center mt-5" style="font-weight:800">Water Cooler is Cross Platform</h3>
+                <p class="lead text-center" style="font-weight:500">Available on Windows, MacOS. Linux support coming soon.</p>
+                <p class="text-center" style="font-size:6.5rem"><i class="fab fa-apple"></i> <i class="fab fa-windows mx-5"></i></p>
+            </div>
+        </div>
+
+        <div class="container-fluid" style="background-color:#fff;color:black" id="pricing">
             <div style="max-width:1400px" class="mx-auto py-5">
                 <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-tags"></i> Water Cooler Pricing</h3>
-                <p class="lead text-center mb-1" style="font-weight:500;font-size:1.45rem">Water Cooler is currently in a private beta and available completely free of charge.</p>
-                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Once Water Cooler is publicly released, there will be a free tier along with two to be announced paid tiers, charged on a per user basis.</p>
+                <p class="lead text-center mb-1" style="font-weight:500;font-size:1.45rem">Water Cooler is currently in a private beta and only the free tier is available.</p>
+                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Once Water Cooler is publicly released, the Standard plan will be available for larger teams.</p>
+                <div class="table-responsive">
+                    <table class="table w-75 mx-auto shadow-sm" style="border-top: 5px solid #3777ff">
+                        <tr>
+                            <th class="border-top-0" style="width:33.33%">&nbsp;</th>
+                            <th class="border-left border-top-0 border-bottom-0 pt-4 pb-0" style="width:33.33%">
+                                <h3 style="font-weight:800">Free</h3>
+                            </th>
+                            <th class="border-left border-top-0 pt-4 pb-0" style="width:33.33%">
+                                <h3 style="font-weight:800">Standard</h3>
+                                <p class="lead"><span style="font-weight:700">$5/user</span><small> per month</small></p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="border-top-0">
+                                <h4 class="pt-0">Usage</h4>
+                            </td>
+                            <td class="border-top-0 border-left">&nbsp;</td>
+                            <td class="border-top-0 border-left">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="lead">Users</p>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                5
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                Unlimited
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td>
+                                <p class="lead">Rooms</p>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                Unlimited
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                Unlimited
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border-top-0">
+                                <h4 class="pt-4">Features</h4>
+                            </td>
+                            <td class="border-top-0 border-left">&nbsp;</td>
+                            <td class="border-top-0 border-left">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="lead">Video Chat</p>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                Audio Only
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                <i class="fas fa-check pr-1" style="color:green"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="lead">Max Room Participants</p>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                5
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                25
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td>
+                                <p class="lead">Screensharing</p>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                <i class="fas fa-ban pr-1" style="color:red"></i>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                <i class="fas fa-check pr-1" style="color:green"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border-top-0">
+                                <h4 class="pt-4">Support</h4>
+                            </td>
+                            <td class="border-top-0 border-left">&nbsp;</td>
+                            <td class="border-top-0 border-left">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="lead">Priority Support</p>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                <i class="fas fa-ban pr-1" style="color:red"></i>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                <i class="fas fa-check pr-1" style="color:green"></i>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
                 
-        <div class="container-fluid" style="background-color:#fff;color:black">
-            <div style="max-width:1400px" class="mx-auto py-5">
-                <h3 class="h1 text-center mt-5" style="font-weight:800">Water Cooler is Cross Platform</h3>
-                <p class="lead text-center" style="font-weight:500">Available on Windows, MacOS and will soon support Linux.</p>
-                <p class="text-center" style="font-size:6.5rem"><i class="fab fa-apple"></i> <i class="fab fa-windows mx-5"></i> <i class="fab fa-linux"></i></p>
-                <p class="small text-muted text-center">Linux Support Coming Soon</p>
-
-            </div>
-        </div>
-
         <div class="container-fluid" style="background-color:#3777ff;color:white">
             <div style="max-width:1400px" class="mx-auto py-5">
                 <p class="text-center" style="font-weight:600;font-size:1.4rem;">Interested in being one of the first to try Water Cooler for free?<br> Click the button below to request an invite.</p>

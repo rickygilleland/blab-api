@@ -125,7 +125,7 @@
         <div class="container-fluid" style="background-color:#3777ff;color:white">
             <div style="max-width:1400px" class="mx-auto py-5">
                 <h3 class="h1 text-center mt-5" style="font-weight:800">Water Cooler is Cross Platform</h3>
-                <p class="lead text-center" style="font-weight:500">Available on Windows, MacOS. Linux support coming soon.</p>
+                <p class="lead text-center" style="font-weight:500">Available on Windows and MacOS. Linux support coming soon.</p>
                 <p class="text-center" style="font-size:6.5rem"><i class="fab fa-apple"></i> <i class="fab fa-windows mx-5"></i></p>
             </div>
         </div>

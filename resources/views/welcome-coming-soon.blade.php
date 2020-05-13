@@ -20,6 +20,15 @@
         <!-- Start of HubSpot Embed Code -->
             <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/7015051.js"></script>
         <!-- End of HubSpot Embed Code -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3RVXY9EZ49"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-3RVXY9EZ49');
+        </script>
 
         <style>
             h4 {
@@ -69,7 +78,7 @@
                     <div class="col-md-5 order-sm-12">
                         <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Bring your team together with Water Cooler</h1>
                         <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Stop the endless meetings and let your team work like they would physically, virtually.</h2>
-                        <h3 class="text-center mt-3" style="font-weight:500;font-size:1.4rem">Rooms are always available, no codes and no host requirements. Now in a free beta.</h3>
+                        <h3 class="text-center mt-3" style="font-weight:500;font-size:1.4rem">Rooms are always available, no codes and no host requirements. Available by invitation.</h3>
                         <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" target="_blank" href="https://share.hsforms.com/1Fg-icSYPTuOAmDM7GDqPug46cuj">Request an Invite</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">
@@ -133,8 +142,8 @@
         <div class="container-fluid" style="background-color:#fff;color:black" id="pricing">
             <div style="max-width:1400px" class="mx-auto py-5">
                 <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-tags"></i> Water Cooler Pricing</h3>
-                <p class="lead text-center mb-1" style="font-weight:500;font-size:1.45rem">Water Cooler is currently in a private beta and only the free tier is available.</p>
-                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Once Water Cooler is publicly released, the Standard plan will be available for larger teams.</p>
+                <p class="lead text-center mb-1" style="font-weight:500;font-size:1.45rem">Flexible pricing with no commitments.</p>
+                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it.</p>
                 <div class="table-responsive">
                     <table class="table w-75 mx-auto shadow-sm" style="border-top: 5px solid #3777ff">
                         <tr>
@@ -214,6 +223,28 @@
                             </td>
                             <td class="pricing-table-feature border-left">
                                 <i class="fas fa-check pr-1" style="color:green"></i>
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td>
+                                <p class="lead">Slack Integration</p>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                <i class="fas fa-ban pr-1" style="color:red"></i>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                (Coming Soon)
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td>
+                                <p class="lead">Calendar Integration</p>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                <i class="fas fa-ban pr-1" style="color:red"></i>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                (Coming Soon)
                             </td>
                         </tr>
                         <tr>

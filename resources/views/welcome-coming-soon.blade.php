@@ -207,7 +207,7 @@
                         </tr>
                         <tr class="border-bottom">
                             <td>
-                                <p class="lead">Screensharing</p>
+                                <p class="lead">Screen Sharing</p>
                             </td>
                             <td class="pricing-table-feature border-left">
                                 <i class="fas fa-ban pr-1" style="color:red"></i>

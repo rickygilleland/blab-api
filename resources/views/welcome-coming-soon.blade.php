@@ -168,7 +168,7 @@
                                 <p class="lead">Users</p>
                             </td>
                             <td class="pricing-table-feature border-left">
-                                5
+                                Unlimited
                             </td>
                             <td class="pricing-table-feature border-left">
                                 Unlimited
@@ -222,7 +222,7 @@
                                 <i class="fas fa-ban pr-1" style="color:red"></i>
                             </td>
                             <td class="pricing-table-feature border-left">
-                                <i class="fas fa-check pr-1" style="color:green"></i>
+                                Coming Soon
                             </td>
                         </tr>
                         <tr class="border-bottom">
@@ -233,7 +233,7 @@
                                 <i class="fas fa-ban pr-1" style="color:red"></i>
                             </td>
                             <td class="pricing-table-feature border-left">
-                                (Coming Soon)
+                                Coming Soon
                             </td>
                         </tr>
                         <tr class="border-bottom">
@@ -244,7 +244,7 @@
                                 <i class="fas fa-ban pr-1" style="color:red"></i>
                             </td>
                             <td class="pricing-table-feature border-left">
-                                (Coming Soon)
+                                Coming Soon
                             </td>
                         </tr>
                         <tr>

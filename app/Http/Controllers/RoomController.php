@@ -55,7 +55,7 @@ class RoomController extends Controller
         $room->slug = $room_slug;
         $room->is_private = $request->is_private;
         $room->video_enabled = $request->video_enabled;
-        $room->channel_id = Str::uuid() . uniqid();
+        $room->channel_id = Str::uuid();
         $room->secret = Hash::make(Str::random(256));
         $room->pin = Hash::make(Str::random(256));
 

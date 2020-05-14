@@ -20,7 +20,8 @@
                     <form method="POST" action="/admin/invite/create">
                         @csrf
 
-                        <input type="text" name="email" placeholder="Email" class="form-control dark-input mb-4 py-4 shadow-sm" />
+                        <input type="text" name="name" placeholder="First Name" class="form-control dark-input mb-4 py-4 shadow-sm" required/>
+                        <input type="text" name="email" placeholder="Email" class="form-control dark-input mb-4 py-4 shadow-sm" required/>
                         <button type="submit" class="btn btn-primary btn-block">Create Invite</button>
                        
                     </form>

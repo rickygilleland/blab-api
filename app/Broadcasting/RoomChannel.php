@@ -2,6 +2,7 @@
 
 namespace App\Broadcasting;
 
+use Log;
 use App\User;
 use App\Events\NotifyServerOutOfService;
 
@@ -154,6 +155,7 @@ class RoomChannel
                     $room_exists = Http::post($api_url_with_room_handler, $data);
                     $room_exists = $room_exists->json();
 
+                    Log::info($room_exists);
 
                     if (!isset($room_exists['plugindata']['data']['exists']) || !$room_exists['plugindata']['data']['exists']) {
                         //create the room
@@ -185,6 +187,8 @@ class RoomChannel
 
                         $streamer_room = Http::post($api_url_with_room_handler, $data);
                         $streamer_room = $streamer_room->json();
+
+                        Log::info($streamer_room);
                     } else {
                         //make sure the current user's token is in there
                         $message_body = [

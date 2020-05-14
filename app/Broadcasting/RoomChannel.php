@@ -44,7 +44,6 @@ class RoomChannel
     {
         foreach ($user->teams as $team) {
             foreach ($team->rooms as $room) {
-                if ($room->channel_id == $channelId) {
                     //check if they already have a streamer key set
                     if ($user->streamer_key == null) {
                         $user->streamer_key = Hash::make(Str::random(256));
@@ -208,34 +207,34 @@ class RoomChannel
     
                             $streamer_room = Http::post($api_url_with_room_handler, $data);
                             $streamer_room = $streamer_room->json();
+                        }
 
-                            //make sure we aren't at quota
-                            $message_body = [
-                                "request" => "listparticipants",
-                                "room" => $room->channel_id
-                            ];
+                        //make sure we aren't at quota
+                        $message_body = [
+                            "request" => "listparticipants",
+                            "room" => $room->channel_id
+                        ];
 
-                            $data = [
-                                "janus" => "message", 
-                                "body" => $message_body,
-                                "transaction" => Str::random(80), 
-                                "apisecret" => $this->streaming_backend_api_secret
-                            ];
+                        $data = [
+                            "janus" => "message", 
+                            "body" => $message_body,
+                            "transaction" => Str::random(80), 
+                            "apisecret" => $this->streaming_backend_api_secret
+                        ];
 
-                            $quota_check = Http::post($api_url_with_room_handler, $data);
-                            $quota_check = $quota_check->json();
+                        $quota_check = Http::post($api_url_with_room_handler, $data);
+                        $quota_check = $quota_check->json();
 
-                            $publisher_count = 0;
+                        $publisher_count = 0;
 
-                            foreach ($quota_check['plugindata']['data']['participants'] as $participant) {
-                                if ($participant['publisher']) {
-                                    $publisher_count++;
-                                }
+                        foreach ($quota_check['plugindata']['data']['participants'] as $participant) {
+                            if ($participant['publisher']) {
+                                $publisher_count++;
                             }
+                        }
 
-                            if ($publisher_count >= 5) {
-                                $room_at_capacity = true;
-                            }
+                        if ($publisher_count >= 5) {
+                            $room_at_capacity = true;
                         }
     
                         return [

@@ -218,7 +218,8 @@ class RoomChannel
                             'room_pin' => $room->pin,
                             'streamer_key' => $user->streamer_key,
                             'timezone' => $user->timezone,
-                            'media_server' => $hostname
+                            'media_server' => $hostname,
+                            'plan' => "free"
                         ];
 
                     } catch(\Exception $e) {

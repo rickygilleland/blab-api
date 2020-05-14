@@ -114,6 +114,8 @@ class RoomChannel
                         "apisecret" => $this->streaming_backend_api_secret
                     ];
 
+                    $room_at_capacity = false;
+
                     //create a session
                     try {
 
@@ -206,6 +208,34 @@ class RoomChannel
     
                             $streamer_room = Http::post($api_url_with_room_handler, $data);
                             $streamer_room = $streamer_room->json();
+
+                            //make sure we aren't at quota
+                            $message_body = [
+                                "request": "listparticipants",
+                                "room": $room->channel_id
+                            ];
+
+                            $data = [
+                                "janus" => "message", 
+                                "body" => $message_body,
+                                "transaction" => Str::random(80), 
+                                "apisecret" => $this->streaming_backend_api_secret
+                            ];
+
+                            $quota_check = Http::post($api_url_with_room_handler, $data);
+                            $quota_check = $quota_check->json();
+
+                            $publisher_count = 1;
+
+                            foreach ($quota_check['plugindata']['data']['participants'] as $participant) {
+                                if ($participant['publisher']) {
+                                    $publisher_count++;
+                                }
+                            }
+
+                            if ($publisher_count > 5) {
+                                $room_at_capacity = true;
+                            }
                         }
     
     
@@ -219,7 +249,8 @@ class RoomChannel
                             'streamer_key' => $user->streamer_key,
                             'timezone' => $user->timezone,
                             'media_server' => $hostname,
-                            'plan_limit' => 5
+                            'room_at_capacity' => $room_at_capacity,
+                            'number_of_publishers' => $publisher_count
                         ];
 
                     } catch(\Exception $e) {

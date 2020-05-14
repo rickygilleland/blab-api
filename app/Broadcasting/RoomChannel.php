@@ -219,7 +219,7 @@ class RoomChannel
                             'streamer_key' => $user->streamer_key,
                             'timezone' => $user->timezone,
                             'media_server' => $hostname,
-                            'plan' => "free"
+                            'plan_limit' => 5
                         ];
 
                     } catch(\Exception $e) {

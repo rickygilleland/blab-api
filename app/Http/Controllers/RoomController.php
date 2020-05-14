@@ -59,16 +59,33 @@ class RoomController extends Controller
         $room->secret = Hash::make(Str::random(256));
         $room->pin = Hash::make(Str::random(256));
 
-        $available_servers = \App\Server::where('is_active', true)->get();
-
-        if (!$available_servers) {
-            abort(503);
+        if ($user->timezone != null) {
+            if ($user->timezone == "America/New_York") {
+                $available_servers = \App\Server::where('is_active', 1)->where('location', 'us-east')->get();
+            } else {
+                $available_servers = \App\Server::where('is_active', 1)->where('location', 'us-west')->get();
+            }
         }
 
-        //TODO: get utilization stats from the server to make sure it isn't overloaded
-        $rand = rand(0, (count($available_servers) - 1));
+        if (count($available_servers) == 0) {
+            $room->server_id = 1;
+        }
 
-        $room->server_id = $available_servers[$rand]->id;
+        if (!isset($room->server_id)) {
+            $least_loaded_key = 0;
+            $least_loaded_count = 0;
+            foreach ($available_servers as $key => $avail_server) {
+                $count = \App\Room::where('server_id', $avail_server->id)->count();
+
+                if ($count < $least_loaded_count) {
+                    $least_loaded_key = $key;
+                    $least_loaded_count = $count;
+                }
+            }
+
+            $room->server_id = $available_servers[$least_loaded_key]->id;
+        }
+
         $room->save();
 
         $room->secret .= "_" . $room->id;

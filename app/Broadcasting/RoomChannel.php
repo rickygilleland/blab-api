@@ -211,8 +211,8 @@ class RoomChannel
 
                             //make sure we aren't at quota
                             $message_body = [
-                                "request": "listparticipants",
-                                "room": $room->channel_id
+                                "request" => "listparticipants",
+                                "room" => $room->channel_id
                             ];
 
                             $data = [
@@ -237,7 +237,6 @@ class RoomChannel
                                 $room_at_capacity = true;
                             }
                         }
-    
     
                         return [
                             'id' => $user->id, 

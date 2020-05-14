@@ -102,6 +102,11 @@ class RoomChannel
                         $room->save();
                     }
 
+                    if ($room->pin == null) {
+                        $room->pin = Hash::make(Str::random(256));
+                        $room->save();
+                    }
+
                     //get the room details from the backend server
                     $data = [
                         "janus" => "create", 
@@ -156,7 +161,9 @@ class RoomChannel
                                 "admin_key" => $this->streaming_backend_api_secret,
                                 "room" => $room->channel_id,
                                 "secret" => $room->secret,
+                                "pin" => $room->pin,
                                 "is_private" => true,
+                                "require_pvtid" => true,
                                 "publishers" => 99,
                                 "notify_joining" => true,
                                 "videocodec" => "vp9",
@@ -208,6 +215,7 @@ class RoomChannel
                             'last_name' => $user->last_name, 
                             'avatar' => $user->avatar_url, 
                             'peer_uuid' =>  md5($user->id), 
+                            'room_pin' => $room->pin,
                             'streamer_key' => $user->streamer_key,
                             'timezone' => $user->timezone,
                             'media_server' => $hostname

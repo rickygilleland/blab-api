@@ -140,6 +140,7 @@ class OrganizationController extends Controller
         $sg = new \SendGrid($sendgrid_key);
 
         foreach ($emails as $email) {
+            $email = trim($email);
             $domain = explode("@", $email);
             if ($domain[1] == "acme.co") {
                 continue;

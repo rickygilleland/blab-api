@@ -106,6 +106,7 @@ class OnboardingController extends Controller
         $sg = new \SendGrid($sendgrid_key);
 
         foreach ($emails as $email) {
+            $email = trim($email);
             if (strlen($email) == 0) {
                 continue;
             }
@@ -118,18 +119,22 @@ class OnboardingController extends Controller
             $invite->team_id = $auth_user->organization->teams[0]->id;
             $invite->save();
 
-            $invite_email = new \SendGrid\Mail\Mail();
-            $invite_email->setFrom("help@watercooler.work", "Water Cooler");
-            $invite_email->addTo($email, "New Water Cooler User");
+            try {
+                $invite_email = new \SendGrid\Mail\Mail();
+                $invite_email->setFrom("help@watercooler.work", "Water Cooler");
+                $invite_email->addTo($email, "New Water Cooler User");
 
-            $invite_email->addDynamicTemplateDatas([
-                "subject" => $auth_user->first_name . " has invited you to join " . $auth_user->organization->name . " on Water Cooler",
-                "organization_name" => $auth_user->organization->name,
-                "inviter_name" => $auth_user->first_name,
-                "invite_token" => base64_encode($invite->invite_code),
-            ]);
-        
-            $invite_email->setTemplateId("d-ed053e9026d742eda4c66e5c5d6b2963");
+                $invite_email->addDynamicTemplateDatas([
+                    "subject" => $auth_user->first_name . " has invited you to join " . $auth_user->organization->name . " on Water Cooler",
+                    "organization_name" => $auth_user->organization->name,
+                    "inviter_name" => $auth_user->first_name,
+                    "invite_token" => base64_encode($invite->invite_code),
+                ]);
+            
+                $invite_email->setTemplateId("d-ed053e9026d742eda4c66e5c5d6b2963");
+            } catch (Exception $e) {
+                //do something
+            }
             
             try {
                 $response = $sg->send($invite_email);

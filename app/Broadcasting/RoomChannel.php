@@ -225,7 +225,7 @@ class RoomChannel
                             $quota_check = Http::post($api_url_with_room_handler, $data);
                             $quota_check = $quota_check->json();
 
-                            $publisher_count = 1;
+                            $publisher_count = 0;
 
                             foreach ($quota_check['plugindata']['data']['participants'] as $participant) {
                                 if ($participant['publisher']) {
@@ -233,7 +233,7 @@ class RoomChannel
                                 }
                             }
 
-                            if ($publisher_count > 5) {
+                            if ($publisher_count >= 5) {
                                 $room_at_capacity = true;
                             }
                         }

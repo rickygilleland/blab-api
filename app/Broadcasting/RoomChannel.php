@@ -183,6 +183,7 @@ class RoomChannel
                     "videocodec" => "vp9",
                     "audiolevel_event" => true,
                     "audiolevel_ext" => true,
+                    "audio_level_average" => 10,
                     "video_svc" => true,
                     "allowed" => [
                         $user->streamer_key

@@ -67,7 +67,7 @@ class RoomController extends Controller
             }
         }
 
-        if (count($available_servers) == 0) {
+        if (!isset($available_servers) || count($available_servers) == 0) {
             $room->server_id = 1;
         }
 

@@ -176,7 +176,6 @@ class RoomChannel
                     "admin_key" => $this->streaming_backend_api_secret,
                     "room" => $room->channel_id,
                     "secret" => $room->secret,
-                    "pin" => $room->pin,
                     "is_private" => true,
                     "require_pvtid" => true,
                     "publishers" => 99,

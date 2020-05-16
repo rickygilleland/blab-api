@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+use App\Jobs\ProcessEmails;
 
 class OrganizationController extends Controller
 {

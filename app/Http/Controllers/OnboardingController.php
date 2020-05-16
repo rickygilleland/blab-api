@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
+use App\Jobs\ProcessEmails;
+
 class OnboardingController extends Controller
 {
     /**

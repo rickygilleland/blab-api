@@ -38,10 +38,14 @@ class Kernel extends ConsoleKernel
                 ->where('used', true)
                 ->orWhere('created_at', '<', Carbon::now()->subMinutes(60))
                 ->delete();
-        })->hourly();
+        })
+        ->hourly()
+        ->name('purge_expired_login_codes')
+        ->onOneServer();
 
         $schedule->call(function () {
-            $invites = \App\Invite::where([
+            $invites = DB::table('invites')
+                ->where([
                     ['organization_id', null],
                     ['invite_sent', false]
                 ])
@@ -64,8 +68,7 @@ class Kernel extends ConsoleKernel
 
                 ProcessEmails::dispatch($email);
 
-                $invite->invite_sent = true;
-                $invite->save();
+                $update = DB::table('invites')->where('id', $invite->id)->update(['invite_sent' => true]);
 
                 $invited_count++;
         
@@ -82,7 +85,10 @@ class Kernel extends ConsoleKernel
                 ProcessEmails::dispatch($email);
             }
 
-        })->hourly();
+        })
+        ->hourly()
+        ->name('send_invites')
+        ->onOneServer();
     }
 
     /**

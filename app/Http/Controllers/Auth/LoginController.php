@@ -299,7 +299,9 @@ class LoginController extends Controller
         ];
         $email->template_id = "d-dd835e437d9f4aadaf1c9acb25e5f488";
 
-        return ProcessEmails::dispatch($email);
+        ProcessEmails::dispatch($email);
+
+        return true;
         
     }
 

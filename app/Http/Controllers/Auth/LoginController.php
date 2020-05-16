@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use App\Jobs\ProcessEmails;
+
 use Socialite;
 
 class LoginController extends Controller
@@ -228,33 +230,25 @@ class LoginController extends Controller
             $code->code = Hash::make($login_code);
             $code->save();
 
-            $sendgrid_key = env('SENDGRID_API_KEY');
-            $sg = new \SendGrid($sendgrid_key);
-
-            $email = new \SendGrid\Mail\Mail();
-            $email->setFrom("help@watercooler.work", "Water Cooler");
+            $email = new \stdClass;
 
             //make sure we don't send emails for the demo accounts
             $domain = explode("@", $user->email);
             if ($domain[1] == "acme.co") {
-                $email->addTo("ricky@watercooler.work", $user->first_name . " " . $user->last_name);
+                $email->email = "ricky@watercooler.work";
             } else {
-                $email->addTo($user->email, $user->first_name . " " . $user->last_name);
+                $email->email = $user->email;
             }
 
-            $email->addDynamicTemplateDatas([
+            $email->name = $user->first_name;
+            $email->data = [
                 "name" => $user->first_name,
                 "token" => $login_code,
                 "subject" => "Your temporary Water Cooler login code is ".$login_code
-            ]);
-        
-            $email->setTemplateId("d-dd835e437d9f4aadaf1c9acb25e5f488");
-            
-            try {
-                $response = $sg->send($email);
-            } catch (Exception $e) {
-                //do something
-            }
+            ];
+            $email->template_id = "d-dd835e437d9f4aadaf1c9acb25e5f488";
+
+            ProcessEmails::dispatch($email);
 
             return view('auth.code_sent', ['email' => $user->email]);
         }
@@ -287,35 +281,25 @@ class LoginController extends Controller
         $code->code = Hash::make($login_code);
         $code->save();
 
-        $sendgrid_key = env('SENDGRID_API_KEY');
-        $sg = new \SendGrid($sendgrid_key);
-
-        $email = new \SendGrid\Mail\Mail();
-        $email->setFrom("help@watercooler.work", "Water Cooler");
+        $email = new \stdClass;
 
         //make sure we don't send emails for the demo accounts
         $domain = explode("@", $user->email);
         if ($domain[1] == "acme.co") {
-            $email->addTo("ricky@watercooler.work", $user->first_name . " " . $user->last_name);
+            $email->email = "ricky@watercooler.work";
         } else {
-            $email->addTo($user->email, $user->first_name . " " . $user->last_name);
+            $email->email = $user->email;
         }
 
-        $email->addDynamicTemplateDatas([
+        $email->name = $user->first_name;
+        $email->data = [
             "name" => $user->first_name,
             "token" => $login_code,
             "subject" => "Your temporary Water Cooler login code is ".$login_code
-        ]);
-    
-        $email->setTemplateId("d-dd835e437d9f4aadaf1c9acb25e5f488");
-        
-        try {
-            $response = $sg->send($email);
-            return true;
-        } catch (Exception $e) {
-            //do something
-            abort(500);
-        }
+        ];
+        $email->template_id = "d-dd835e437d9f4aadaf1c9acb25e5f488";
+
+        return ProcessEmails::dispatch($email);
         
     }
 

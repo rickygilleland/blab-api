@@ -61,6 +61,34 @@ class InviteController extends Controller
         return view('invite.admin_create');
     }
 
+    public function request_invite() {
+        return view('invite.request');
+    }
+
+    public function submit_invite_request(Request $request) {
+
+        //check if we already have an invite for them
+        $invite = \App\Invite::where([
+            ['email', $request->email],
+            ['organization_id', null]
+        ])
+        ->first();
+
+        if ($invite) {
+            return view('invite.request', ['success' => true ]);
+        }
+
+        $invite = new \App\Invite();
+        $invite->email = $request->email;
+        $invite->name = $request->name;
+        $invite->invited_by = 0;
+        $invite->invite_code = Hash::make(Str::random(256));
+        $invite->invite_sent = false;
+        $invite->save();
+
+        return view('invite.request', ['success' => true ]);
+    }
+
     public function admin_create_invite(Request $request) {
 
         if (!\Auth::check()) {

@@ -119,28 +119,26 @@ class OnboardingController extends Controller
             $invite->team_id = $auth_user->organization->teams[0]->id;
             $invite->save();
 
-            try {
-                $invite_email = new \SendGrid\Mail\Mail();
-                $invite_email->setFrom("help@watercooler.work", "Water Cooler");
-                $invite_email->addTo($email, "New Water Cooler User");
+            $invite_email = new \stdClass;
 
-                $invite_email->addDynamicTemplateDatas([
-                    "subject" => $auth_user->first_name . " has invited you to join " . $auth_user->organization->name . " on Water Cooler",
-                    "organization_name" => $auth_user->organization->name,
-                    "inviter_name" => $auth_user->first_name,
-                    "invite_token" => base64_encode($invite->invite_code),
-                ]);
-            
-                $invite_email->setTemplateId("d-ed053e9026d742eda4c66e5c5d6b2963");
-            } catch (Exception $e) {
-                //do something
+            //make sure we don't send emails for the demo accounts
+            $domain = explode("@", $email);
+            if ($domain[1] == "acme.co") {
+                $invite_email->email = "ricky@watercooler.work";
+            } else {
+                $invite_email->email = $email;
             }
-            
-            try {
-                $response = $sg->send($invite_email);
-            } catch (Exception $e) {
-                //do something
-            }
+
+            $invite_email->name = "New Water Cooler User";
+            $invite_email->data = [
+                "subject" => $auth_user->first_name . " has invited you to join " . $auth_user->organization->name . " on Water Cooler",
+                "organization_name" => $auth_user->organization->name,
+                "inviter_name" => $auth_user->first_name,
+                "invite_token" => base64_encode($invite->invite_code),
+            ];
+            $invite_email->template_id = "d-ed053e9026d742eda4c66e5c5d6b2963";
+
+            ProcessEmails::dispatch($invite_email);
         }
 
         return redirect("/home")->with('status', 'Your teammates have been invited! Let them know to check their email.');

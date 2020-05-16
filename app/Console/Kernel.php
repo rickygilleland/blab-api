@@ -48,6 +48,8 @@ class Kernel extends ConsoleKernel
                 ->limit(5)
                 ->get();
 
+            $invited_count = 0;
+
             foreach ($invites as $invite) {
 
                 $email = new \stdClass;
@@ -64,8 +66,22 @@ class Kernel extends ConsoleKernel
 
                 $invite->invite_sent = true;
                 $invite->save();
+
+                $invited_count++;
         
             }
+
+            if ($invited_count > 0) {
+                $email = new \stdClass;
+                $email->type = "text_only";
+                $email->email = "ricky@watercooler.work";
+                $email->name = "Ricky Gilleland";
+                $email->subject = "Invites Were Sent Out";
+                $email->content = $invited_count . " invites were sent.";
+
+                ProcessEmails::dispatch($email);
+            }
+
         })->hourly();
     }
 

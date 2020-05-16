@@ -37,9 +37,17 @@ class ProcessEmails implements ShouldQueue
         $invite_email = new \SendGrid\Mail\Mail();
         $invite_email->setFrom("help@watercooler.work", "Water Cooler");
         $invite_email->addTo($this->email->email, $this->email->name);
-        $invite_email->addDynamicTemplateDatas($this->email->data);
-        $invite_email->setTemplateId($this->email->template_id);
-        
+
+        if (isset($email->type) && $email->type == "text_only") {
+            $email->setSubject($email->subject);
+            $email->addContent(
+                "text/html", $email->content
+            );
+        } else {
+            $invite_email->addDynamicTemplateDatas($this->email->data);
+            $invite_email->setTemplateId($this->email->template_id);
+        }
+
         try {
             
             $response = $sg->send($invite_email);

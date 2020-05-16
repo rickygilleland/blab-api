@@ -41,8 +41,7 @@ class Kernel extends ConsoleKernel
         })->hourly();
 
         $schedule->call(function () {
-            $invites = DB::table('invites')
-                ->where([
+            $invites = \App\Invite::where([
                     ['organization_id', null],
                     ['invite_sent', false]
                 ])

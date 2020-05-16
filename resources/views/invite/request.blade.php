@@ -16,6 +16,8 @@
                             <p class="text-center font-weight-bold">Thank you! We'll send you an email as soon as you reach the front of the line.</p>
                             <p class="text-center">We're sending out invitations on a rolling basis every day depending on demand, so keep an eye out for your invite!.</p>
                         </div>
+
+                        <a href="https://watercooler.work" class="btn btn-primary btn-block text-light">Return to Water Cooler Home Page</a>
                     @else
 
                         <form method="POST" action="/invite">

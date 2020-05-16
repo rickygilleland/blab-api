@@ -38,10 +38,10 @@ class ProcessEmails implements ShouldQueue
         $invite_email->setFrom("help@watercooler.work", "Water Cooler");
         $invite_email->addTo($this->email->email, $this->email->name);
 
-        if (isset($email->type) && $email->type == "text_only") {
-            $email->setSubject($email->subject);
-            $email->addContent(
-                "text/html", $email->content
+        if (isset($this->email->type) && $this->email->type == "text_only") {
+            $invite_email->setSubject($this->email->subject);
+            $invite_email->addContent(
+                "text/html", $this->email->content
             );
         } else {
             $invite_email->addDynamicTemplateDatas($this->email->data);

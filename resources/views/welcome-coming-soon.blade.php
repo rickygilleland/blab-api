@@ -110,9 +110,10 @@
             <div style="max-width:1400px" class="mx-auto py-5">
                 <div class="row mb-5 clearfix">
                     <div class="col-md-6">
-                        <h3 class="h2" style="font-weight:800;margin-top:5rem">Secure HD Video and Audio</h3>
+                        <h3 class="h2" style="font-weight:800;margin-top:1.75rem">Secure HD Video and Audio</h3>
                         <p class="lead" style="font-weight:500">Connect with your team members with <a href="#security" style="color:#fff!important;font-weight:600">secure</a> HD video and audio chat available in every room (additional security details below).</p>
                         <p class="lead" style="font-weight:500">All rooms are audio only by default, putting the conversation at center stage and reducing distractions and embarrassing moments.</p> 
+                        <p class="lead" style="font-weight:600">Coming Soon: Record your screen or a video message and send it to any teammate to watch any time.</p> 
                         <p class="small">*Video quality and resolution may be reduced at times depending on network conditions.</p>             
                     </div>
                     <div class="col-md-6">
@@ -227,7 +228,7 @@
                         </tr>
                         <tr class="border-bottom">
                             <td>
-                                <p class="lead">Slack Integration</p>
+                                <p class="lead">Send Video Messages to Teammates</p>
                             </td>
                             <td class="pricing-table-feature border-left">
                                 <i class="fas fa-ban pr-1" style="color:red"></i>
@@ -238,7 +239,7 @@
                         </tr>
                         <tr class="border-bottom">
                             <td>
-                                <p class="lead">Calendar Integration</p>
+                                <p class="lead">Slack Integration</p>
                             </td>
                             <td class="pricing-table-feature border-left">
                                 <i class="fas fa-ban pr-1" style="color:red"></i>

@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 use App\Jobs\ProcessEmails;
+use App\Invite;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -49,18 +50,32 @@ class Kernel extends ConsoleKernel
                     ['organization_id', null],
                     ['invite_sent', false]
                 ])
-                ->limit(5)
+                ->orWhere([
+                    ['organization_id', null],
+                    ['invite_sent', true],
+                    ['invite_accepted', false],
+                    ['updated_at', '<', Carbon::now()->subDays(3)]
+                ])
+                ->limit(30)
                 ->get();
 
             $invited_count = 0;
+            $reminder_count = 0;
 
             foreach ($invites as $invite) {
+
+                $subject = $invite->name . ": You are Invited to Try Water Cooler";
+
+                if ($invite->invite_sent == true) {
+                    $subject = "Reminder: " . $invite->name . ": You are Invited to Try Water Cooler";
+                    $reminder_count++;
+                }
 
                 $email = new \stdClass;
                 $email->email = $invite->email;
                 $email->name = $invite->name;
                 $email->data = [
-                    "subject" => $invite->name . ": You are Invited to Try Water Cooler",
+                    "subject" => $subject,
                     "first_name" => $invite->name,
                     "invite_token" => base64_encode($invite->invite_code),
                 ];
@@ -68,7 +83,14 @@ class Kernel extends ConsoleKernel
 
                 ProcessEmails::dispatch($email);
 
-                $update = DB::table('invites')->where('id', $invite->id)->update(['invite_sent' => true]);
+                $updated_invite = Invite::where('id', $invite->id)->first();
+
+                if ($updated_invite->invite_sent == false) {
+                    $updated_invite->invite_sent = true;
+                    $updated_invite->save();
+                } 
+
+                $updated_invite->touch();
 
                 $invited_count++;
         
@@ -80,13 +102,13 @@ class Kernel extends ConsoleKernel
                 $email->email = "ricky@watercooler.work";
                 $email->name = "Ricky Gilleland";
                 $email->subject = "Invites Were Sent Out";
-                $email->content = $invited_count . " invites were sent.";
+                $email->content = $invited_count . " invites were sent.\n " . $reminder_count++ . " were reminders.";
 
                 ProcessEmails::dispatch($email);
             }
 
         })
-        ->hourly()
+        ->everyMinute()
         ->name('send_invites')
         ->onOneServer();
     }

@@ -67,7 +67,7 @@
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
                             </li>   
                             <li class="nav-item">
-                                <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/invite">Request an Invite</a>
+                                <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/invite">Get Started for Free</a>
                             </li>
                         </ul>
                     </div>
@@ -79,7 +79,7 @@
                         <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Bring your team together with Water Cooler</h1>
                         <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Stop the endless meetings and let your team work like they would physically, virtually.</h2>
                         <h3 class="text-center mt-3" style="font-weight:500;font-size:1.4rem">Rooms are always available, no codes and no host requirements. Available by invitation.</h3>
-                        <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/invite">Request an Invite</a></center>
+                        <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/invite">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">
                         <img src="/img/main-hero-screenshot.png" class="img img-fluid rounded">
@@ -274,7 +274,7 @@
         <div class="container-fluid" style="background-color:#3777ff;color:white">
             <div style="max-width:1400px" class="mx-auto py-5">
                 <p class="text-center" style="font-weight:600;font-size:1.4rem;">Interested in being one of the first to try Water Cooler for free?<br> Click the button below to request an invite.</p>
-                <center><a class="btn btn-success shadow text-dark btn-lg mt-3 font-weight-bold" href="/invite">Request an Invite</a></center>
+                <center><a class="btn btn-success shadow text-dark btn-lg mt-3 font-weight-bold" href="/invite">Get Started for Free</a></center>
             </div>
         </div>
 

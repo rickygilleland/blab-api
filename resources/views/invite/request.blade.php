@@ -8,7 +8,8 @@
                 <div class="card-body p-5">
 
                     <h2 class="pb-2 text-center">Request an Invitation to Water Cooler</h2>	
-                    <p class="text-center lead">Enter your name and email address and we'll send you an invitation to try Water Cooler soon.</p>
+                    <p class="text-center lead mb-1" style="font-size:1.3rem;font-weight:600">To handle demand, we're accepting new users on a rolling basis.</p>
+                    <p class="text-center lead pt-0 mt-0">Enter your name and email address and we'll send you an invitation to try Water Cooler soon.</p>
                     <hr>
 
                     @if (isset($success))

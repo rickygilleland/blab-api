@@ -109,7 +109,7 @@ class Kernel extends ConsoleKernel
             }
 
         })
-        ->everyMinute()
+        ->hourly()
         ->name('send_invites')
         ->onOneServer();
 
@@ -169,7 +169,7 @@ class Kernel extends ConsoleKernel
             }
     
         })
-        ->everyMinute()
+        ->hourly()
         ->name('send_organization_invite_reminders')
         ->onOneServer();
 

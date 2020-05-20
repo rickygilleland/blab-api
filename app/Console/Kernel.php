@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Jobs\ProcessEmails;
 use App\Invite;
+use App\User;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -111,7 +112,69 @@ class Kernel extends ConsoleKernel
         ->everyMinute()
         ->name('send_invites')
         ->onOneServer();
+
+        $schedule->call(function () {
+            $invites = DB::table('invites')
+                ->where([
+                    ['organization_id', '!=', null],
+                    ['invite_accepted', false],
+                    ['updated_at', '<', Carbon::now()->subDays(3)]
+                ])
+                ->limit(30)
+                ->get();
+    
+            $invited_count = 0;
+            $reminder_count = 0;
+    
+            foreach ($invites as $invite) {
+    
+                //make sure we don't send emails for the demo accounts
+                $email = $invite->email;
+                $domain = explode("@", $invite->email);
+                if ($domain[1] == "acme.co") {
+                    $email = "ricky@watercooler.work";
+                } 
+
+                $invite_user = User::where('id', $invite->invited_by)->first();
+    
+                $invite_email = new \stdClass;
+                $invite_email->name = "New Water Cooler User";
+                $invite_email->email = $email;
+                $invite_email->data = [
+                    "subject" => "Reminder: " . $invite_user->first_name . " has invited you to join " . $invite_user->organization->name . " on Water Cooler",
+                    "organization_name" => $invite_user->organization->name,
+                    "inviter_name" => $invite_user->first_name,
+                    "invite_token" => base64_encode($invite->invite_code),
+                ];
+                $invite_email->template_id = "d-ed053e9026d742eda4c66e5c5d6b2963";
+    
+                ProcessEmails::dispatch($invite_email);
+    
+                $updated_invite = Invite::where('id', $invite->id)->first();
+                $updated_invite->touch();
+    
+                $invited_count++;
+        
+            }
+    
+            if ($invited_count > 0) {
+                $email = new \stdClass;
+                $email->type = "text_only";
+                $email->email = "ricky@watercooler.work";
+                $email->name = "Ricky Gilleland";
+                $email->subject = "Organization Invite Reminders Were Sent Out";
+                $email->content = $invited_count . " reminders were sent.";
+    
+                ProcessEmails::dispatch($email);
+            }
+    
+        })
+        ->everyMinute()
+        ->name('send_organization_invite_reminders')
+        ->onOneServer();
+
     }
+
 
     /**
      * Register the commands for the application.

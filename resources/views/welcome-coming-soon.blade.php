@@ -17,9 +17,9 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
 
-        <meta property="og:title" content="Socialize and Work With Your Team or Community" />
+        <meta property="og:title" content="Water Cooler" />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content="Always available rooms and audio only by default for office banter, meetings, or quick questions." />
+        <meta property="og:description" content="We deliver always available rooms for office banter, meetings, or quick questions." />
         <meta property="og:url" content="https://watercooler.work" />
         <meta property="og:image" content="https://watercooler.work/img/og-hero.png" />
 

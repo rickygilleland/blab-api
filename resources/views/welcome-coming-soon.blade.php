@@ -17,6 +17,11 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
 
+        <meta property="og:title" content="Water Cooler" />
+        <meta property="og:description" content="Water Cooler delivers always available rooms for office banter, meetings, or quick questions. Rooms are audio only by default so the focus is on your team, not your screen." />
+        <meta property="og:url" content="https://watercooler.work" />
+        <meta property="og:image" content="https://watercooler.work/img/og-hero.png" />
+
         <!-- Start of HubSpot Embed Code -->
             <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/7015051.js"></script>
         <!-- End of HubSpot Embed Code -->
@@ -76,9 +81,9 @@
 
                 <div class="row my-md-5">
                     <div class="col-md-5 order-sm-12">
-                        <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Bring your team together with Water Cooler</h1>
-                        <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Stop the endless meetings and let your team work like they would physically, virtually.</h2>
-                        <h3 class="text-center mt-3" style="font-weight:500;font-size:1.4rem">Rooms are always available, no codes and no host requirements. Available by invitation.</h3>
+                        <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">The Best Way to Socialize and Work With Your Team</h1>
+                        <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Water Cooler delivers always available rooms for office banter, meetings, or quick questions.</h2>
+                        <h3 class="text-center mt-3" style="font-weight:500;font-size:1.4rem">Rooms are audio only by default so the focus is on your team, not your screen. Available by invitation.</h3>
                         <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/invite">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">

@@ -17,7 +17,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
 
-        <meta property="og:title" content="Water Cooler" />
+        <meta property="og:title" content="Water Cooler: Socialize and Work With Your Team or Community" />
         <meta property="og:description" content="Water Cooler delivers always available rooms for office banter, meetings, or quick questions. Rooms are audio only by default so the focus is on your team, not your screen." />
         <meta property="og:url" content="https://watercooler.work" />
         <meta property="og:image" content="https://watercooler.work/img/og-hero.png" />
@@ -66,7 +66,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#security"><i class="fas fa-shield-alt"></i> Security</a>
+                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#features"><i class="fas fa-flag"></i> Features</a>
+                            </li>  
+                            <li class="nav-item">
+                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#community"><i class="fas fa-users"></i> Communities</a>
                             </li>  
                             <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
@@ -94,7 +97,7 @@
             </div>
         </div>
 
-        <div class="container-fluid" style="background-color:#fff;color:black">
+        <div class="container-fluid" style="background-color:#fff;color:black" id="features">
             <div style="max-width:1400px" class="mx-auto py-5">
             
                 <div class="row mb-5 clearfix">
@@ -116,7 +119,7 @@
                 <div class="row mb-5 clearfix">
                     <div class="col-md-6">
                         <h3 class="h2" style="font-weight:800;margin-top:1.75rem">Secure HD Video and Audio</h3>
-                        <p class="lead" style="font-weight:500">Connect with your team members with <a href="#security" style="color:#fff!important;font-weight:600">secure</a> HD video and audio chat available in every room (additional security details below).</p>
+                        <p class="lead" style="font-weight:500">Our video and audio chat is powered by WebRTC for low-latency connections and all streams are encrypted while in transit.</p>
                         <p class="lead" style="font-weight:500">All rooms are audio only by default, putting the conversation at center stage and reducing distractions and embarrassing moments.</p> 
                         <p class="lead" style="font-weight:600">Coming Soon: Record your screen or a video message and send it to any teammate to watch any time.</p> 
                         <p class="small">*Video quality and resolution may be reduced at times depending on network conditions.</p>             
@@ -129,11 +132,11 @@
             </div>
         </div>
 
-        <div class="container-fluid" style="background-color:#fff;color:black" id="security">
+        <div class="container-fluid" style="background-color:#fff;color:black" id="community">
             <div style="max-width:1400px" class="mx-auto py-5">
-                <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-shield-alt"></i> Secure and Optimized for Low-Latency</h3>
-                <p class="lead text-center mb-3" style="font-weight:500;font-size:1.3rem">Our video and audio chat is powered by WebRTC and all traffic between our desktop app and our servers is encrypted and secure, with <strong>full end-to-end encryption coming later this year.</strong></p>
-                <p class="lead text-center mb-5" style="font-weight:500;font-size:1.2rem">We designed our server infrastructure with reliability and scalability in mind. Water Cooler has servers on both coasts of the United States (with international expansion coming soon) and will automatically attempt to route your team to the nearest server for high-quality low-latency connections.</p>
+                <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-flag"></i> Water Cooler for Communities</h3>
+                <p class="lead text-center mb-3" style="font-weight:500;font-size:1.3rem">Coming soon, we're offering a version of Water Cooler that will let anyone create their own community of high quality audio-only rooms.</strong></p>
+                <p class="lead text-center mb-5" style="font-weight:500;font-size:1.2rem">Forget 300 people in a Zoom call or keeping up with a Slack thread, give your community an interactive way and scalable way to engage with each other with the same spontaneity you would normally only get in person.</p>
             </div>
         </div>
 

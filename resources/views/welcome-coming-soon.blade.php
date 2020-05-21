@@ -18,6 +18,7 @@
         <link rel="manifest" href="/site.webmanifest">
 
         <meta property="og:title" content="Water Cooler: Socialize and Work With Your Team or Community" />
+        <meta property="og:type" content="website" />
         <meta property="og:description" content="Water Cooler delivers always available rooms for office banter, meetings, or quick questions. Rooms are audio only by default so the focus is on your team, not your screen." />
         <meta property="og:url" content="https://watercooler.work" />
         <meta property="og:image" content="https://watercooler.work/img/og-hero.png" />

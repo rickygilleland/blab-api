@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel
                 ->orWhere('created_at', '<', Carbon::now()->subMinutes(60))
                 ->delete();
         })
-        ->hourly()
+        ->everyMinute()
         ->name('purge_expired_login_codes')
         ->onOneServer();
 
@@ -109,7 +109,7 @@ class Kernel extends ConsoleKernel
             }
 
         })
-        ->hourly()
+        ->everyMinute()
         ->name('send_invites')
         ->onOneServer();
 
@@ -169,7 +169,7 @@ class Kernel extends ConsoleKernel
             }
     
         })
-        ->hourly()
+        ->everyMinute()
         ->name('send_organization_invite_reminders')
         ->onOneServer();
 

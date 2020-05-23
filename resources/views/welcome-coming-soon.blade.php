@@ -237,6 +237,17 @@
                         </tr>
                         <tr class="border-bottom">
                             <td>
+                                <p class="lead">Live Broadcast to Team</p>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                <i class="fas fa-ban pr-1" style="color:red"></i>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                Coming Soon
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td>
                                 <p class="lead">Send Video Messages to Teammates</p>
                             </td>
                             <td class="pricing-table-feature border-left">

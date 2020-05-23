@@ -218,10 +218,10 @@
                                 <p class="lead">Max Room Participants</p>
                             </td>
                             <td class="pricing-table-feature border-left">
-                                5
+                                15
                             </td>
                             <td class="pricing-table-feature border-left">
-                                25
+                                100 <br><small>(Video participants limited to 20, all others audio only)</small>
                             </td>
                         </tr>
                         <tr class="border-bottom">

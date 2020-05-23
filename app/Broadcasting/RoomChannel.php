@@ -249,7 +249,7 @@ class RoomChannel
                 }
             }
 
-            if ($publisher_count >= 5) {
+            if ($publisher_count >= 15) {
                 $room_at_capacity = true;
             }
 

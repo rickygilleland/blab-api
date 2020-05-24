@@ -204,6 +204,17 @@
                         </tr>
                         <tr>
                             <td>
+                                <p class="lead">Private Rooms</p>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                <i class="fas fa-check pr-1" style="color:green"></i>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                <i class="fas fa-check pr-1" style="color:green"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <p class="lead">Video Chat</p>
                             </td>
                             <td class="pricing-table-feature border-left">

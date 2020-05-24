@@ -87,7 +87,7 @@
                     <div class="col-md-5 order-sm-12">
                         <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">The Best Way to Socialize and Work With Your Team</h1>
                         <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Water Cooler delivers always available rooms for office banter, meetings, or quick questions.</h2>
-                        <h3 class="text-center mt-3" style="font-weight:500;font-size:1.4rem">Rooms are audio only by default so the focus is on your team, not your screen. Available by invitation.</h3>
+                        <h3 class="text-center mt-3" style="font-weight:500;font-size:1.4rem">Rooms are voice only by default so the focus is on your team, not your screen. Available by invitation.</h3>
                         <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">
@@ -120,8 +120,8 @@
                 <div class="row mb-5 clearfix">
                     <div class="col-md-6">
                         <h3 class="h2" style="font-weight:800;margin-top:1.75rem">Secure HD Video and Audio</h3>
-                        <p class="lead" style="font-weight:500">Our video and audio chat is powered by WebRTC for low-latency connections and all streams are encrypted while in transit.</p>
-                        <p class="lead" style="font-weight:500">All rooms are audio only by default, putting the conversation at center stage and reducing distractions and embarrassing moments.</p> 
+                        <p class="lead" style="font-weight:500">Our video and voice chat is powered by WebRTC for low-latency connections and all streams are encrypted while in transit.</p>
+                        <p class="lead" style="font-weight:500">All rooms are voice only by default, putting the conversation at center stage and reducing distractions and embarrassing moments.</p> 
                         <p class="lead" style="font-weight:600">Coming Soon: Record your screen or a video message and send it to any teammate to watch any time.</p> 
                         <p class="small">*Video quality and resolution may be reduced at times depending on network conditions.</p>             
                     </div>
@@ -136,7 +136,7 @@
         <div class="container-fluid" style="background-color:#fff;color:black" id="community">
             <div style="max-width:1400px" class="mx-auto py-5">
                 <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-flag"></i> Water Cooler for Communities</h3>
-                <p class="lead text-center mb-3" style="font-weight:500;font-size:1.3rem">Coming soon, we're offering a version of Water Cooler that will let anyone create their own community of high quality audio-only rooms.</strong></p>
+                <p class="lead text-center mb-3" style="font-weight:500;font-size:1.3rem">Coming soon, we're offering a version of Water Cooler that will let anyone create their own community of high quality voice-only rooms.</strong></p>
                 <p class="lead text-center mb-5" style="font-weight:500;font-size:1.2rem">Forget 300 people in a Zoom call or keeping up with a Slack thread, give your community an interactive way and scalable way to engage with each other with the same spontaneity you would normally only get in person.</p>
             </div>
         </div>
@@ -153,7 +153,7 @@
             <div style="max-width:1400px" class="mx-auto py-5">
                 <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-tags"></i> Water Cooler Pricing</h3>
                 <p class="lead text-center mb-1" style="font-weight:500;font-size:1.45rem">Flexible pricing with no commitments.</p>
-                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it.</p>
+                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it. 7 day free trial available for our Standard Plan.</p>
                 <div class="table-responsive">
                     <table class="table w-75 mx-auto shadow-sm" style="border-top: 5px solid #3777ff">
                         <tr>
@@ -163,7 +163,7 @@
                             </th>
                             <th class="border-left border-top-0 pt-4 pb-0" style="width:33.33%">
                                 <h3 style="font-weight:800">Standard</h3>
-                                <p class="lead"><span style="font-weight:700">$10/active user</span><small> per month</small></p>
+                                <p class="lead mb-1"><span style="font-weight:700">$10/active user</span><small> per month</small></p>
                             </th>
                         </tr>
                         <tr>
@@ -218,7 +218,7 @@
                                 <p class="lead">Video Chat</p>
                             </td>
                             <td class="pricing-table-feature border-left">
-                                Audio Only
+                                Voice Only
                             </td>
                             <td class="pricing-table-feature border-left">
                                 <i class="fas fa-check pr-1" style="color:green"></i>
@@ -232,7 +232,7 @@
                                 15
                             </td>
                             <td class="pricing-table-feature border-left">
-                                100 <br><small>(Video participants limited to 20, all others audio only)</small>
+                                100 <br><small>(Video participants limited to 20, all others voice only)</small>
                             </td>
                         </tr>
                         <tr class="border-bottom">

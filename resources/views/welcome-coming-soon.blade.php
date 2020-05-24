@@ -76,7 +76,7 @@
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
                             </li>   
                             <li class="nav-item">
-                                <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/invite">Get Started for Free</a>
+                                <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a>
                             </li>
                         </ul>
                     </div>
@@ -88,7 +88,7 @@
                         <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">The Best Way to Socialize and Work With Your Team</h1>
                         <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Water Cooler delivers always available rooms for office banter, meetings, or quick questions.</h2>
                         <h3 class="text-center mt-3" style="font-weight:500;font-size:1.4rem">Rooms are audio only by default so the focus is on your team, not your screen. Available by invitation.</h3>
-                        <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/invite">Get Started for Free</a></center>
+                        <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">
                         <img src="/img/main-hero-screenshot.png" class="img img-fluid rounded">
@@ -294,7 +294,7 @@
         <div class="container-fluid" style="background-color:#3777ff;color:white">
             <div style="max-width:1400px" class="mx-auto py-5">
                 <p class="text-center" style="font-weight:600;font-size:1.4rem;">Interested in being one of the first to try Water Cooler for free?<br> Click the button below to request an invite.</p>
-                <center><a class="btn btn-success shadow text-dark btn-lg mt-3 font-weight-bold" href="/invite">Get Started for Free</a></center>
+                <center><a class="btn btn-success shadow text-dark btn-lg mt-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
 
                 <p class="text-center mt-5 font-weight-bold" style="font-size:1.1rem">Questions? Drop us a line at hello (at) watercooler.work</p>
             </div>

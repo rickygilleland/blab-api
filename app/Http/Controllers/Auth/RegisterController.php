@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+
+use App\User;
+use App\Jobs\ProcessEmails;
 
 class RegisterController extends Controller
 {
@@ -68,6 +70,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         $invite = \App\Invite::where('invite_code', $data['invite_code'])->first();
 
         $request = request();
@@ -140,6 +143,15 @@ class RegisterController extends Controller
 
         $invite->invite_accepted = true;
         $invite->save();
+
+        $email = new \stdClass;
+        $email->type = "text_only";
+        $email->email = "ricky@watercooler.work";
+        $email->name = "Ricky Gilleland";
+        $email->subject = "New User Registered";
+        $email->content = "A new user signed up for Water Cooler. ID: ".$user->id;
+
+        ProcessEmails::dispatch($email);
 
         return $user;
     }

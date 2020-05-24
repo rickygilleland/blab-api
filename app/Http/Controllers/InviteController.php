@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use App\User;
 use App\Jobs\ProcessEmails;
 
 class InviteController extends Controller
@@ -64,7 +66,23 @@ class InviteController extends Controller
     }
 
     public function request_invite() {
-        return view('invite.request');
+
+        //check how many users we've accepted today, if less than 10 let them sign up immediately
+        $users = User::where('created_at', '>', Carbon::now()->subHours(24))->count();
+
+        if ($users > 10) {
+            return view('invite.request');
+        }
+
+        $invite = new \App\Invite();
+        $invite->email = "hello@watercooler.work";
+        $invite->name = "Created By System";
+        $invite->invited_by = 0;
+        $invite->invite_code = Hash::make(Str::random(256));
+        $invite->invite_sent = true;
+        $invite->save();
+
+        return redirect('/invite/'.base64_encode($invite->invite_code));
     }
 
     public function submit_invite_request(Request $request) {

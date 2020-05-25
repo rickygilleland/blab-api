@@ -308,6 +308,7 @@
                 <center><a class="btn btn-success shadow text-dark btn-lg mt-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
 
                 <p class="text-center mt-5 font-weight-bold" style="font-size:1.1rem">Questions? Drop us a line at hello (at) watercooler.work</p>
+                <center><a href="https://twitter.com/get_watercooler?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @get_watercooler</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
             </div>
         </div>
 

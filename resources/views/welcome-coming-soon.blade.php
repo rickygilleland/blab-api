@@ -90,7 +90,7 @@
                     <div class="col-md-5 order-sm-12">
                         <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">The Best Way to Socialize and Work With Your Team</h1>
                         <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Water Cooler delivers always available rooms for office banter, meetings, or quick questions.</h2>
-                        <h3 class="text-center mt-3" style="font-weight:500;font-size:1.4rem">Rooms are voice only by default so the focus is on your team, not your screen. Available by invitation.</h3>
+                        <h3 class="text-center mt-3" style="font-weight:500;font-size:1.4rem">Rooms are voice only by default so the focus is on your team, not your screen.</h3>
                         <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">

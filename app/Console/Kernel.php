@@ -55,7 +55,8 @@ class Kernel extends ConsoleKernel
                     ['organization_id', null],
                     ['invite_sent', true],
                     ['invite_accepted', false],
-                    ['updated_at', '<', Carbon::now()->subDays(3)]
+                    ['updated_at', '<', Carbon::now()->subDays(3)],
+                    ['updated_at', '>', Carbon::now()->subDays(9)]
                 ])
                 ->limit(30)
                 ->get();
@@ -70,6 +71,10 @@ class Kernel extends ConsoleKernel
                 if ($invite->invite_sent == true) {
                     $subject = "Reminder: " . $invite->name . ": You are Invited to Try Water Cooler";
                     $reminder_count++;
+
+                    if ($invite->updated_at >= Carbon::now()->subDays(6)) {
+                        $subject = "Final " . $subject;
+                    }
                 }
 
                 $email = new \stdClass;
@@ -118,7 +123,8 @@ class Kernel extends ConsoleKernel
                 ->where([
                     ['organization_id', '!=', null],
                     ['invite_accepted', false],
-                    ['updated_at', '<', Carbon::now()->subDays(3)]
+                    ['updated_at', '<', Carbon::now()->subDays(3)],
+                    ['updated_at', '>', Carbon::now()->subDays(9)]
                 ])
                 ->limit(30)
                 ->get();
@@ -136,12 +142,18 @@ class Kernel extends ConsoleKernel
                 } 
 
                 $invite_user = User::where('id', $invite->invited_by)->first();
+
+                $subject = "Reminder: " . $invite_user->first_name . " has invited you to join " . $invite_user->organization->name . " on Water Cooler";
+
+                if ($invite->updated_at >= Carbon::now()->subDays(6)) {
+                    $subject = "Final " . $subject;
+                }
     
                 $invite_email = new \stdClass;
                 $invite_email->name = "New Water Cooler User";
                 $invite_email->email = $email;
                 $invite_email->data = [
-                    "subject" => "Reminder: " . $invite_user->first_name . " has invited you to join " . $invite_user->organization->name . " on Water Cooler",
+                    "subject" => $subject,
                     "organization_name" => $invite_user->organization->name,
                     "inviter_name" => $invite_user->first_name,
                     "invite_token" => base64_encode($invite->invite_code),

@@ -45,10 +45,10 @@ class OrganizationController extends Controller
     {
         $user = \Auth::user()->load('teams.rooms', 'organization', 'rooms');
 
-        if ($user->organization->trial_ends_at = null) {
-            $organization = \App\Organization::where('id', $user->organization->id)->first();
-            $organization->trial_ends_at = now()->addDays(7);
-            $organization->save();
+
+        if ($user->organization->trial_ends_at == null) {
+            $user->organization->trial_ends_at = now()->addDays(7);
+            $user->organization->save();
         }
 
         $billing = new \stdClass;

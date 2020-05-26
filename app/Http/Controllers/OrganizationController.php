@@ -45,7 +45,7 @@ class OrganizationController extends Controller
     {
         $user = \Auth::user()->load('teams.rooms', 'organization', 'rooms');
 
-        if ($user->organization->trial_ends_at = null) {
+        if ($user->organization->trial_ends_at == null) {
             $user->organization->trial_ends_at = now()->addDays(7);
             $user->organization->save();
         }

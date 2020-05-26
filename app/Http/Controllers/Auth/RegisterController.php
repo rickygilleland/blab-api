@@ -84,6 +84,7 @@ class RegisterController extends Controller
             }
     
             $organization->slug = md5($data['email'] . uniqid()) . uniqid();
+            $organization->trial_ends_at = now()->addDays(7);
             $organization->save();
 
             $team = new \App\Team();
@@ -102,6 +103,9 @@ class RegisterController extends Controller
         $user->organization_id = $invite->organization_id != null ? $invite->organization_id : $organization->id;
         $user->streamer_key = Hash::make(Str::random(256));
         $user->save();
+
+        $role = \App\Role::where('name', 'organization_admin')->first();
+        $user->roles()->attach($role, ['organization_id' => $organization->id]);
 
         if ($request->hasFile('avatar')) {
             try {

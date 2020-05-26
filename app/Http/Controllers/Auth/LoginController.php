@@ -202,6 +202,13 @@ class LoginController extends Controller
                     
                     $code->used = true;
                     $code->save();
+
+                    $organization = \App\Organization::where('id', $user->organization_id)->first();
+
+                    if ($organization->trial_ends_at = null) {
+                        $organization->trial_ends_at = now()->addDays(7);
+                        $organization->save();
+                    }
     
                     \Auth::login($user);
                     return redirect()->intended('home');

@@ -76,6 +76,9 @@
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
                             </li>   
                             <li class="nav-item">
+                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="/login">Log In</a>
+                            </li>   
+                            <li class="nav-item">
                                 <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a>
                             </li>
                         </ul>

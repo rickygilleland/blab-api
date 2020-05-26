@@ -9,6 +9,13 @@ use Laravel\Cashier\Billable;
 class Organization extends Model
 {
     use Billable;
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'trial_ends_at'
+    ];
     
     public function teams()
     {

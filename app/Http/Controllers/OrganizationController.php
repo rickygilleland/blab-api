@@ -45,11 +45,9 @@ class OrganizationController extends Controller
     {
         $user = \Auth::user()->load('teams.rooms', 'organization', 'rooms');
 
-        $organization = \App\Organization::where('id', $user->organization->id)->first();
-
-        if ($organization->trial_ends_at == null) {
-            $organization->trial_ends_at = now()->addDays(7);
-            $organization->save();
+        if ($user->organization->trial_ends_at = null) {
+            $user->organization->trial_ends_at = now()->addDays(7);
+            $user->organization->save();
         }
 
         $billing = new \stdClass;
@@ -58,7 +56,7 @@ class OrganizationController extends Controller
         $billing->video_enabled = false;
         $billing->screen_sharing_enabled = false;
 
-        if ($organization->onGenericTrial()) {
+        if ($user->organization->onGenericTrial()) {
             $billing->plan = "Standard";
             $billing->is_trial = true;
             $billing->video_enabled = false;

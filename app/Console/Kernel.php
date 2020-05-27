@@ -50,7 +50,8 @@ class Kernel extends ConsoleKernel
                 ->where([
                     ['organization_id', null],
                     ['invite_sent', false],
-                    ['name', '!=', 'Created By System']
+                    ['name', '!=', 'Created By System'],
+                    ['invite_type', null]
                 ])
                 ->orWhere([
                     ['organization_id', null],
@@ -58,7 +59,8 @@ class Kernel extends ConsoleKernel
                     ['invite_accepted', false],
                     ['updated_at', '<', Carbon::now()->subDays(3)],
                     ['updated_at', '>', Carbon::now()->subDays(9)],
-                    ['name', '!=', 'Created By System']
+                    ['name', '!=', 'Created By System'],
+                    ['invite_type', null]
                 ])
                 ->limit(30)
                 ->get();

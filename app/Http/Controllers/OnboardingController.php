@@ -93,7 +93,25 @@ class OnboardingController extends Controller
     {
         $user = \Auth::user();
 
-        return view('onboarding.invite', ['organization' => $user->organization]);
+        $organization_invite = \App\Invite::where([
+                ['organization_id', $user->organization->id],
+                ['invite_type', 'organization_root']
+            ])
+            ->first();
+
+        if (!$organization_invite) {
+            $organization_invite = new \App\Invite();
+            $organization_invite->email = "hello@watercooler.work";
+            $organization_invite->name = "Created By System";
+            $organization_invite->invited_by = 0;
+            $organization_invite->invite_code = Hash::make(Str::random(256));
+            $organization_invite->invite_sent = true;
+            $organization_invite->invite_type = "organization_root";
+            $organization_invite->organization_id = $user->organization->id;
+            $organization_invite->save();
+        }
+
+        return view('onboarding.invite', ['organization' => $user->organization, 'organization_invite_code' => base64_encode($organization_invite->invite_code)]);
     }
 
     public function send_invite(Request $request)

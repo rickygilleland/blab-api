@@ -8,7 +8,16 @@
             <div class="card-body p-4">
                 <h1 class="h2 pb-2 text-center">Who else works with you at {{ $organization->name }}?</h1>
                 <hr>
-                <p class="sub-heading">Enter the email address for any teammates you want to invite to use Water Cooler with you. You can enter multiple email addresses, separated by commas.</p>
+
+                <p class="sub-heading">Let's get your teammates on Water Cooler. Send anyone the link below to join {{ $organization->name }}.</p>
+                <div class="card card-body">
+                    <section>https://watercooler.work/invite/{{ $organization_invite_code }}</section>
+                </div>
+                <p class="small pt-2 font-weight-bold">Just be careful who you send this link to because it will allow anyone to join you on Water Cooler.</p>
+
+                <p class="font-weight-bold text-center my-4">OR</p>
+
+                <p class="sub-heading">Enter the email address for any teammates you want to invite to use Water Cooler with you and we'll send them a one-time use invitation. You can enter multiple email addresses, separated by commas.</p>
       
                 <form method="post" action="/onboarding/invite">
                     @csrf

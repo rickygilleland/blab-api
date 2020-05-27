@@ -240,6 +240,17 @@
                         </tr>
                         <tr class="border-bottom">
                             <td>
+                                <p class="lead">1:1 and Group Calls</p>
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                Coming Soon
+                            </td>
+                            <td class="pricing-table-feature border-left">
+                                Coming Soon
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td>
                                 <p class="lead">Screen Sharing</p>
                             </td>
                             <td class="pricing-table-feature border-left">

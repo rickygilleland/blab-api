@@ -49,14 +49,16 @@ class Kernel extends ConsoleKernel
             $invites = DB::table('invites')
                 ->where([
                     ['organization_id', null],
-                    ['invite_sent', false]
+                    ['invite_sent', false],
+                    ['name', '!=', 'Created By System']
                 ])
                 ->orWhere([
                     ['organization_id', null],
                     ['invite_sent', true],
                     ['invite_accepted', false],
                     ['updated_at', '<', Carbon::now()->subDays(3)],
-                    ['updated_at', '>', Carbon::now()->subDays(9)]
+                    ['updated_at', '>', Carbon::now()->subDays(9)],
+                    ['name', '!=', 'Created By System']
                 ])
                 ->limit(30)
                 ->get();

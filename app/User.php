@@ -64,13 +64,6 @@ class User extends Authenticatable
         return false;
     }
 
-    protected function authenticated(Request $request, $user)
-    {
-        $user->update([
-            'last_login_at' => Carbon::now(),
-        ]);
-    }
-
     public function roles()
     {
 	    return $this->belongsToMany('App\Role');

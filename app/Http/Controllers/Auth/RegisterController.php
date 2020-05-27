@@ -102,6 +102,7 @@ class RegisterController extends Controller
         $user->password = Hash::make(Str::random(256));
         $user->organization_id = $invite->organization_id != null ? $invite->organization_id : $organization->id;
         $user->streamer_key = Hash::make(Str::random(256));
+        $user->last_login_at = Carbon::now();
         $user->save();
 
         $role = \App\Role::where('name', 'organization_admin')->first();

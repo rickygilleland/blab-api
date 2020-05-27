@@ -39,6 +39,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'last_login_at'
+    ];
+
     public function validateForPassportPasswordGrant($password)
     {
         foreach ($this->loginCodes as $code) {
@@ -56,6 +62,14 @@ class User extends Authenticatable
         }
         
         return false;
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        $user->last_login_at = Carbon::now();
+        $user->save();
+
+        return response($user);
     }
 
     public function roles()

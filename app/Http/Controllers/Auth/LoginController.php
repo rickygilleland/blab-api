@@ -343,12 +343,6 @@ class LoginController extends Controller
         
     }
 
-    protected function authenticated(Request $request, $user)
-    {
-        $user->last_login_at = Carbon::now();
-        $user->save();
-    }
-
     public function generateHumanReadableString($length) {
         $string     = '';
         $vowels     = array("a","e","i","o","u");  

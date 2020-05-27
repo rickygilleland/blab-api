@@ -13,7 +13,7 @@
                 <div class="card card-body">
                     <section>https://watercooler.work/invite/{{ $organization_invite_code }}</section>
                 </div>
-                <p class="small pt-2 font-weight-bold">Just be careful who you send this link to because it will allow anyone to join you on Water Cooler.</p>
+                <p class="small pt-2 font-weight-bold">Warning: Anyone with this link will be able to join you on Water Cooler. Make sure you only send it to trusted teammates.</p>
 
                 <p class="font-weight-bold text-center my-4">OR</p>
 

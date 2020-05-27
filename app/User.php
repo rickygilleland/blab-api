@@ -66,10 +66,9 @@ class User extends Authenticatable
 
     protected function authenticated(Request $request, $user)
     {
-        $user->last_login_at = Carbon::now();
-        $user->save();
-
-        return response($user);
+        $user->update([
+            'last_login_at' => Carbon::now(),
+        ]);
     }
 
     public function roles()

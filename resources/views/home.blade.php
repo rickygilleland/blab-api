@@ -15,6 +15,11 @@
                     <p class="my-4 lead">You're all set! Click the link below to download the latest version of Water Cooler.<br><span class="text-muted">We'll automatically detect if you're using Windows or MacOS</span></p>
 
                     <a href="https://updater.watercooler.work" class="btn btn-primary btn-lg text-light btn-block" onclick="toggleMagicLinkDisplay()">Download Water Cooler</a>
+
+                    <hr class="my-5">
+                    <p class="h4">Already have Water Cooler installed and need to log in?</p>
+                    <p class="lead">Click the button below to automatically sign into Water Cooler.</p>
+                    <a href="watercooler::/magic/login/{{ $magic_login_link }}" class="btn btn-success btn-lg text-light">Magic Login Link</a>
                 </div>
                 <div id="magicLink" class="d-none">
                     <p class="my-4 lead">Water Cooler is downloading! Use the downloaded file to install Water Cooler.<br><span class="text-muted">Once the installation is complete, you can click the magic link below to automatically log in to Water Cooler.</p>

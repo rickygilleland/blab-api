@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
+use Carbon\Carbon;
+
 use App\User;
 use App\Jobs\ProcessEmails;
 

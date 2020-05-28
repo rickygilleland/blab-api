@@ -10,8 +10,8 @@
                 <hr>
 
                 <p class="sub-heading">Let's get your teammates on Water Cooler. Send anyone the link below to join {{ $organization->name }}.</p>
-                <div class="card card-body">
-                    <section style="user-select: all">https://watercooler.work/invite/{{ $organization_invite_code }}</section>
+                <div class="card card-body" style="user-select: all">
+                    <section>https://watercooler.work/invite/{{ $organization_invite_code }}</section>
                 </div>
                 <p class="small pt-2 font-weight-bold">Warning: Anyone with this link will be able to join you on Water Cooler. Make sure you only send it to trusted teammates.</p>
 

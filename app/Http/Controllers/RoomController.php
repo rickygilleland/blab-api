@@ -11,6 +11,7 @@ use TwilioJwtAccessToken;
 use TwilioJwtGrantsVideoGrant;
 
 use App\Events\NewRoomCreated;
+use App\Events\NewCallCreated;
 use App\Events\UserAddedToRoom;
 
 class RoomController extends Controller
@@ -58,6 +59,12 @@ class RoomController extends Controller
         $room->channel_id = Str::uuid();
         $room->secret = Hash::make(Str::random(256));
         $room->pin = Hash::make(Str::random(256));
+        $room->is_active = true;
+
+        if (isset($request->type) && $request->type == "call") {
+            $room->type = "call";
+            $room->is_private = true;
+        }
 
         if ($user->timezone != null) {
             if ($user->timezone == "America/New_York") {
@@ -95,12 +102,27 @@ class RoomController extends Controller
             $user->rooms()->attach($room);
         }
 
+        if ($room->type == "call") {
+            $callee = \App\User::where('id', $request->callee)->first();
+
+            if ($callee) {
+                $user->rooms()->attach($callee);
+            }   
+        }
+
         $notification = new \stdClass;
         $notification->created_by = $user->id;
         $notification->room = $room;
+        $notification->caller_name = $user->first_name;
 
-        //notify everyone else that a new room has been created
-        broadcast(new NewRoomCreated($notification))->toOthers();
+        if ($room->type == "room" && $room->is_private == false) {
+            //notify everyone else that a new room has been created
+            broadcast(new NewRoomCreated($notification))->toOthers();
+        } 
+
+        if ($room->type == "call") {
+            broadcast(new NewCallCreated($notification));
+        }
 
         return $room;
     }

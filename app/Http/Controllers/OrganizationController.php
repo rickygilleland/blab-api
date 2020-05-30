@@ -66,13 +66,13 @@ class OrganizationController extends Controller
         $teams = [];
 
         foreach ($user->teams as $team_key => $team) {
-            $rooms = [];
+            $all_rooms = [];
 
             foreach ($team->rooms as $room_key => $room) {
                 if ($room->is_private) {
                     foreach ($room->users as $room_user) {
                         if ($room_user->id == $user->id) {
-                            $rooms[] = $room;
+                            $all_rooms[] = $room;
                             break;
                         }
                     }
@@ -80,7 +80,18 @@ class OrganizationController extends Controller
                     continue;
                 } 
                 
-                $rooms[] = $room;
+                $all_rooms[] = $room;
+            }
+
+            $rooms = [];
+            $calls = [];
+            foreach ($all_rooms as $room) {
+                if ($room->type == "room") {
+                    $rooms[] = $room;
+                    continue;
+                }
+
+                $calls[] = $room;
             }
 
             $newTeam = new \stdClass;
@@ -90,6 +101,7 @@ class OrganizationController extends Controller
             $newTeam->avatar_url = $team->avatar_url;
             $newTeam->organization_id = $team->organization_id;
             $newTeam->rooms = $rooms;
+            $newTeam->calls = $calls;
 
             $teams[] = $newTeam;
         }

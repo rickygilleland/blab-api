@@ -10,13 +10,12 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserAddedToRoom implements ShouldBroadcast
+class NewCallCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $room;
-    public $user;
-    public $added_by;
+    public $created_by;
 
     /**
      * Create a new event instance.
@@ -26,8 +25,8 @@ class UserAddedToRoom implements ShouldBroadcast
     public function __construct($notification)
     {
         $this->room = $notification->room;
-        $this->user = $notification->user;
-        $this->added_by = $notification->added_by;
+        $this->caller_name = $notification->caller_name;
+        $this->created_by = $notification->created_by;
     }
 
     /**
@@ -37,23 +36,11 @@ class UserAddedToRoom implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        $broadcast_channels = [];
-        $broadcast_channels[] = new PresenceChannel('room.'.$this->room->channel_id);
-
-        //keep broadcasting on organization channel for now until clients are updated -- removed in 1.2.0
-        $broadcast_channels[] = new PresenceChannel('organization.'.$this->room->organization_id);
-
-        if ($room->is_private == true) {
-            $broadcast_channels[] = new PrivateChannel('user.'.$this->user->id);
-
-            return $broadcast_channels;
-        }
-        
-        return $broadcast_channels;
+        return new PrivateChannel('user.'.$this->room->callee_id);
     }
 
     public function broadcastAs()
     {
-        return 'room.user.invited';
+        return 'call.created';
     }
 }

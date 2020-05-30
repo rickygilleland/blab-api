@@ -4,6 +4,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Broadcast;
 
 use App\Broadcasting\OrganizationChannel;
+use App\Broadcasting\UserChannel;
 use App\Broadcasting\RoomChannel;
 
 /*
@@ -18,6 +19,7 @@ use App\Broadcasting\RoomChannel;
 */
 
 Broadcast::channel('organization.{channelId}', OrganizationChannel::class);
+Broadcast::channel('user.{channelId}', UserChannel::class);
 Broadcast::channel('room.{channelId}', RoomChannel::class);
 
 /*Broadcast::channel('peers.{channelId}', function ($user, $channelId) {

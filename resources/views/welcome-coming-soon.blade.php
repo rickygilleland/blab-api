@@ -68,10 +68,7 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#features"><i class="fas fa-flag"></i> Features</a>
-                            </li>  
-                            <li class="nav-item">
-                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#community"><i class="fas fa-users"></i> Communities</a>
-                            </li>  
+                            </li>   
                             <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
                             </li>   
@@ -138,9 +135,17 @@
 
         <div class="container-fluid" style="background-color:#fff;color:black" id="community">
             <div style="max-width:1400px" class="mx-auto py-5">
-                <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-flag"></i> Water Cooler for Communities</h3>
-                <p class="lead text-center mb-3" style="font-weight:500;font-size:1.3rem">Coming soon, we're offering a version of Water Cooler that will let anyone create their own community of high quality voice-only rooms.</strong></p>
-                <p class="lead text-center mb-5" style="font-weight:500;font-size:1.2rem">Forget 300 people in a Zoom call or keeping up with a Slack thread, give your community an interactive way and scalable way to engage with each other with the same spontaneity you would normally only get in person.</p>
+                <div class="row mb-5 clearfix">
+                    <div class="col-md-6">
+                        <h3 class="h2" style="font-weight:800;margin-top:5.25rem">Simple and Fast Screen Sharing</h3>
+                        <p class="lead" style="font-weight:500">Share your entire screen, or just a single window. With compact and simple controls, we stay out of your way and so you can work.</p>
+                        <p class="lead" style="font-weight:500">Your screen is shared in full HD through the same secure infrastructure powering our HD video and voice chat.</p> 
+                        <p class="small">*Video quality and resolution may be reduced at times depending on network conditions.</p>             
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/img/screen-sharing-demo.gif" style="max-height:400px" class="img img-fluid rounded shadow float-right" />
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -280,35 +285,6 @@
                             </td>
                             <td class="pricing-table-feature border-left">
                                 Coming Soon
-                            </td>
-                        </tr>
-                        <tr class="border-bottom">
-                            <td>
-                                <p class="lead">Slack Integration</p>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                <i class="fas fa-ban pr-1" style="color:red"></i>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                Coming Soon
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border-top-0">
-                                <h4 class="pt-4">Support</h4>
-                            </td>
-                            <td class="border-top-0 border-left">&nbsp;</td>
-                            <td class="border-top-0 border-left">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="lead">Priority Support</p>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                <i class="fas fa-ban pr-1" style="color:red"></i>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                <i class="fas fa-check pr-1" style="color:green"></i>
                             </td>
                         </tr>
                     </table>

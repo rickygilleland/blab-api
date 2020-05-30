@@ -42,3 +42,7 @@ Route::middleware('auth:api')->post('/team', 'TeamController@create');
 Route::middleware('auth:api')->post('/room', 'RoomController@create');
 Route::middleware('auth:api')->get('/room/{id}/users', 'RoomController@get_users', function($id) { });
 Route::middleware('auth:api')->post('/room/{id}/users', 'RoomController@invite_user', function($id) { });
+
+Route::middleware('auth:api')->post('/call', 'RoomController@create');
+Route::middleware('auth:api')->get('/call/{id}/users', 'RoomController@get_users', function($id) { });
+Route::middleware('auth:api')->post('/call/{id}/users', 'RoomController@invite_user', function($id) { });

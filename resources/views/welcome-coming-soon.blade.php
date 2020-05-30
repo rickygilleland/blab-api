@@ -87,7 +87,6 @@
                     <div class="col-md-5 order-sm-12">
                         <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">The Best Way to Socialize and Work With Your Team</h1>
                         <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Water Cooler delivers always available rooms for office banter, meetings, or quick questions.</h2>
-                        <h3 class="text-center mt-3" style="font-weight:500;font-size:1.4rem">Rooms are voice only by default so the focus is on your team, not your screen.</h3>
                         <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">
@@ -119,10 +118,9 @@
             <div style="max-width:1400px" class="mx-auto py-5">
                 <div class="row mb-5 clearfix">
                     <div class="col-md-6">
-                        <h3 class="h2" style="font-weight:800;margin-top:1.75rem">Secure HD Video and Audio</h3>
+                        <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Secure HD Video and Audio</h3>
                         <p class="lead" style="font-weight:500">Our video and voice chat is powered by WebRTC for low-latency connections and all streams are encrypted while in transit.</p>
                         <p class="lead" style="font-weight:500">All rooms are voice only by default, putting the conversation at center stage and reducing distractions and embarrassing moments.</p> 
-                        <p class="lead" style="font-weight:600">Coming Soon: Record your screen or a video message and send it to any teammate to watch any time.</p> 
                         <p class="small">*Video quality and resolution may be reduced at times depending on network conditions.</p>             
                     </div>
                     <div class="col-md-6">

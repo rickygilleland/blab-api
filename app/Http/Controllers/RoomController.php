@@ -71,6 +71,11 @@ class RoomController extends Controller
 
                 if ($participants == $call_room_participants) {
                     $room = $call_room;
+                    $room->is_active = true;
+                    //rotate their room secret from when we last called
+                    $room->secret = Hash::make(Str::random(256));
+                    $room->pin = Hash::make(Str::random(256));
+                    $room->save();
                     break;
                 }
             }
@@ -126,9 +131,6 @@ class RoomController extends Controller
             }
 
 
-            $room->save();
-
-            $room->secret .= "_" . $room->id;
             $room->save();
 
             if ($room->is_private) {

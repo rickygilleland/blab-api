@@ -40,74 +40,108 @@ class RoomController extends Controller
             abort(404);
         }
 
-        //check the slug for uniqueness
-        $room_slug = Str::slug($request->name, '-');
+        $room_slug = Str::uuid();
 
-        $room = \App\Room::where('organization_id', $user->organization->id)->where('team_id', $request->team_id)->where('slug', $room_slug)->first();
+        if (!isset($request->type) || $request->type != "call") {
+            $room_slug = Str::slug($request->name, '-');
 
-        if ($room) {
-            $room_slug = $room_slug . "-" . uniqid();
-        }
+            $room = \App\Room::where('organization_id', $user->organization->id)->where('team_id', $request->team_id)->where('slug', $room_slug)->first();
 
-        $room = new \App\Room();
-        $room->name = $request->name;
-        $room->team_id = $request->team_id;
-        $room->organization_id = $user->organization->id;
-        $room->slug = $room_slug;
-        $room->is_private = $request->is_private;
-        $room->video_enabled = $request->video_enabled;
-        $room->channel_id = Str::uuid();
-        $room->secret = Hash::make(Str::random(256));
-        $room->pin = Hash::make(Str::random(256));
-        $room->is_active = true;
-
-        if (isset($request->type) && $request->type == "call") {
-            $room->type = "call";
-            $room->is_private = true;
-        }
-
-        if ($user->timezone != null) {
-            if ($user->timezone == "America/New_York") {
-                $available_servers = \App\Server::where('is_active', 1)->where('location', 'us-east')->get();
-            } else {
-                $available_servers = \App\Server::where('is_active', 1)->where('location', 'us-west')->get();
+            if ($room) {
+                $room_slug = $room_slug . "-" . uniqid();
             }
         }
 
-        if (!isset($available_servers) || count($available_servers) == 0) {
-            $room->server_id = 1;
-        }
+        if (isset($request->type) && $request->type == "call") {
+            $call_rooms = \App\Room::where([
+                ['type', 'call'],
+                ['team_id', $request->team_id]
+            ])
+            ->load('users')
+            ->get();
 
-        if (!isset($room->server_id)) {
-            $least_loaded_key = 0;
-            $least_loaded_count = 0;
-            foreach ($available_servers as $key => $avail_server) {
-                $count = \App\Room::where('server_id', $avail_server->id)->count();
+            $participants = $request->participants;
 
-                if ($count < $least_loaded_count) {
-                    $least_loaded_key = $key;
-                    $least_loaded_count = $count;
+            foreach ($call_rooms as $call_room) {
+                $call_room_participants = [];
+
+                foreach ($call_room->users as $call_room_user) {
+                    $call_room_participants[] = $call_room_user->id;
+                }
+
+                if ($participants == $call_room_participants) {
+                    $room = $call_room;
+                    break;
                 }
             }
 
-            $room->server_id = $available_servers[$least_loaded_key]->id;
         }
 
-        $room->save();
+        if (!isset($room)) {
+            $room = new \App\Room();
+            $room->team_id = $request->team_id;
+            $room->organization_id = $user->organization->id;
+            $room->slug = $room_slug;
 
-        $room->secret .= "_" . $room->id;
-        $room->save();
+            if (isset($request->type) && $request->type == "call") {
+                $room->type = "call";
+                $room->is_private = true;
+                $room->video_enabled = true;
+            } else {
+                $room->name = $request->name;
+                $room->is_private = $request->is_private;
+                $room->video_enabled = $request->video_enabled;
+            }
 
-        if ($room->is_private) {
-            $user->rooms()->attach($room);
-        }
+            $room->channel_id = Str::uuid();
+            $room->secret = Hash::make(Str::random(256));
+            $room->pin = Hash::make(Str::random(256));
+            $room->is_active = true;
 
-        if ($room->type == "call") {
-            $callee = \App\User::where('id', $request->callee)->first();
+            if ($user->timezone != null) {
+                if ($user->timezone == "America/New_York") {
+                    $available_servers = \App\Server::where('is_active', 1)->where('location', 'us-east')->get();
+                } else {
+                    $available_servers = \App\Server::where('is_active', 1)->where('location', 'us-west')->get();
+                }
+            }
+    
+            if (!isset($available_servers) || count($available_servers) == 0) {
+                $room->server_id = 1;
+            }
 
-            if ($callee) {
-                $user->rooms()->attach($callee);
-            }   
+            if (!isset($room->server_id)) {
+                $least_loaded_key = 0;
+                $least_loaded_count = 0;
+                foreach ($available_servers as $key => $avail_server) {
+                    $count = \App\Room::where('server_id', $avail_server->id)->count();
+    
+                    if ($count < $least_loaded_count) {
+                        $least_loaded_key = $key;
+                        $least_loaded_count = $count;
+                    }
+                }
+    
+                $room->server_id = $available_servers[$least_loaded_key]->id;
+            }
+
+
+            $room->save();
+
+            $room->secret .= "_" . $room->id;
+            $room->save();
+
+            if ($room->is_private) {
+                $user->rooms()->attach($room);
+            }
+    
+            if ($room->type == "call") {
+                foreach ($request->participants as $participant) {
+                    $participant_user = \App\User::where('id', $participant)->first();
+                    $participant_user->rooms()->attach($room);
+                }
+            }
+            
         }
 
         $notification = new \stdClass;

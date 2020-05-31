@@ -56,16 +56,16 @@ class RoomController extends Controller
                         continue;
                     }
 
-                    $call_room_participants = [];
+                    $team_room_participants = [];
 
                     foreach ($team_room->users as $team_room_user) {
-                        $call_room_participants[] = $team_room_user->id;
+                        $team_room_participants[] = $team_room_user->id;
                     }
 
-                    sort($call_room_participants);
+                    sort($team_room_participants);
 
-                    if ($participants == $call_room_participants) {
-                        $room = $call_room;
+                    if ($participants == $team_room_participants) {
+                        $room = $team_room;
                         $room->is_active = true;
                         //rotate their room secret from when we last called
                         $room->secret = Hash::make(Str::random(256));

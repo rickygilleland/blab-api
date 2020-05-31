@@ -60,6 +60,7 @@ class RoomController extends Controller
             $participants[] = $user->id;
 
             Log::info('participants', (array)$participants);
+            sort($participants);
 
             foreach ($call_rooms as $call_room) {
                 $call_room_participants = [];
@@ -69,6 +70,7 @@ class RoomController extends Controller
                 }
 
                 Log::info('call_room_participants', (array)$call_room_participants);
+                sort($call_room_participants);
 
                 if ($participants == $call_room_participants) {
                     $room = $call_room;

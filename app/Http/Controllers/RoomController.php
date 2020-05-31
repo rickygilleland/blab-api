@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-use TwilioRestClient;
-use TwilioJwtAccessToken;
-use TwilioJwtGrantsVideoGrant;
+use Log;
 
 use App\Events\NewRoomCreated;
 use App\Events\NewCallCreated;
@@ -60,7 +58,11 @@ class RoomController extends Controller
             ->with('users')
             ->get();
 
+            Log::info('Call_rooms', $call_rooms);
+
             $participants = $request->participants;
+
+            Log::info('participants from post', $participants);
 
             foreach ($call_rooms as $call_room) {
                 $call_room_participants = [];
@@ -68,6 +70,9 @@ class RoomController extends Controller
                 foreach ($call_room->users as $call_room_user) {
                     $call_room_participants[] = $call_room_user->id;
                 }
+
+                Log::info('call_room', $call_room);
+                Log::info('call_room_participants', $call_room_participants);
 
                 if ($participants == $call_room_participants) {
                     $room = $call_room;

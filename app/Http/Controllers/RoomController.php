@@ -11,6 +11,7 @@ use Log;
 use App\Events\NewRoomCreated;
 use App\Events\NewCallCreated;
 use App\Events\UserAddedToRoom;
+use App\Events\CallDeclined;
 
 class RoomController extends Controller
 {
@@ -234,6 +235,34 @@ class RoomController extends Controller
 
         return true;
 
+    }
+
+    public function answer_call(Request $request, $id) 
+    {
+        $user = \Auth::user()->load('teams.rooms');
+
+        $room = \App\Room::where('id', $id)->with('users')->first();
+
+        if (!$user->teams->contains($room->team_id)) {
+            abort(404);
+        }
+
+        if (!$room->users->contains($user)) {
+            abort(404);
+        }
+
+        $notification = new \stdClass;
+        $notification->room = $room;
+
+        foreach ($room->users as $room_user) {
+            if ($room_user->id == $user->id) {
+                continue;
+            }
+            $notification->recipient_id = $room_user->id;
+            broadcast(new CallDeclined($notification));
+        }
+
+        return true;
     }
 
 }

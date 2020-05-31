@@ -22,19 +22,9 @@ class RoomController extends Controller
 
     public function create(Request $request) 
     {
-        $user = \Auth::user();
+        $user = \Auth::user()->load('teams.rooms.users');
 
-        //validate the team id
-        $team_found = false;
-        $found_team = null;
-        foreach ($user->teams as $team) {
-            if ($team->id == $request->team_id) {
-                $team_found = true;
-                $found_team = $team;
-            }
-        }
-
-        if (!$team_found) {
+        if (!$user->teams->contains($request->team_id)) {
             abort(404);
         }
 
@@ -51,35 +41,38 @@ class RoomController extends Controller
         }
 
         if (isset($request->type) && $request->type == "call") {
-            $call_rooms = \App\Room::where('type', 'call')
-                ->where('team_id', $request->team_id)
-                ->with('users')
-                ->get();
-
             $participants = (array)$request->participants;
             $participants[] = $user->id;
 
-            Log::info('participants', (array)$participants);
             sort($participants);
 
-            foreach ($call_rooms as $call_room) {
-                $call_room_participants = [];
-
-                foreach ($call_room->users as $call_room_user) {
-                    $call_room_participants[] = $call_room_user->id;
+            foreach ($user->teams as $team) {
+                if ($team->id != $request->team_id) {
+                    continue;
                 }
+                
+                foreach ($team->rooms as $team_room) {
+                    if ($team_room->type != "call") {
+                        continue;
+                    }
 
-                Log::info('call_room_participants', (array)$call_room_participants);
-                sort($call_room_participants);
+                    $call_room_participants = [];
 
-                if ($participants == $call_room_participants) {
-                    $room = $call_room;
-                    $room->is_active = true;
-                    //rotate their room secret from when we last called
-                    $room->secret = Hash::make(Str::random(256));
-                    $room->pin = Hash::make(Str::random(256));
-                    $room->save();
-                    break;
+                    foreach ($team_room->users as $team_room_user) {
+                        $call_room_participants[] = $team_room_user->id;
+                    }
+
+                    sort($call_room_participants);
+
+                    if ($participants == $call_room_participants) {
+                        $room = $call_room;
+                        $room->is_active = true;
+                        //rotate their room secret from when we last called
+                        $room->secret = Hash::make(Str::random(256));
+                        $room->pin = Hash::make(Str::random(256));
+                        $room->save();
+                        break 2;
+                    }
                 }
             }
 

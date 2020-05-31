@@ -16,6 +16,8 @@ class NewCallCreated implements ShouldBroadcast
 
     public $room;
     public $created_by;
+    public $caller_name;
+    public $callee_id;
 
     /**
      * Create a new event instance.

@@ -57,7 +57,7 @@ class RoomController extends Controller
                 ['type', 'call'],
                 ['team_id', $request->team_id]
             ])
-            ->load('users')
+            ->with('users')
             ->get();
 
             $participants = $request->participants;

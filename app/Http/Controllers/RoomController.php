@@ -156,6 +156,7 @@ class RoomController extends Controller
         if ($room->type == "call") {
             foreach ($request->participants as $participant) {
                 $notification->callee_id = $participant;
+                Log::info("NOTIFICATION", (array)$notification);
                 broadcast(new NewCallCreated($notification));
             }
         }

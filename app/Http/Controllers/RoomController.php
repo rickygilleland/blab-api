@@ -58,9 +58,8 @@ class RoomController extends Controller
 
             Log::info('Call_rooms', (array)$call_rooms);
 
-            $participants = $request->participants;
-
-            Log::info('participants from post', (array)$participants);
+            $participants = (array)$request->participants;
+            $participants[] = $user->id;
 
             foreach ($call_rooms as $call_room) {
                 $call_room_participants = [];
@@ -68,9 +67,6 @@ class RoomController extends Controller
                 foreach ($call_room->users as $call_room_user) {
                     $call_room_participants[] = $call_room_user->id;
                 }
-
-                Log::info('call_room', (array)$call_room);
-                Log::info('call_room_participants', $call_room_participants);
 
                 if ($participants == $call_room_participants) {
                     $room = $call_room;

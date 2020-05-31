@@ -66,6 +66,7 @@ class RoomController extends Controller
 
                     if ($participants == $team_room_participants) {
                         $room = $team_room;
+                        unset($room->users);
                         $room->is_active = true;
                         //rotate their room secret from when we last called
                         $room->secret = Hash::make(Str::random(256));
@@ -153,7 +154,10 @@ class RoomController extends Controller
         } 
 
         if ($room->type == "call") {
-            broadcast(new NewCallCreated($notification));
+            foreach ($request->participants as $participant) {
+                $notification->callee_id = $participant;
+                broadcast(new NewCallCreated($notification));
+            }
         }
 
         return $room;

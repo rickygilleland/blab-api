@@ -26,6 +26,7 @@ class NewCallCreated implements ShouldBroadcast
     {
         $this->room = $notification->room;
         $this->caller_name = $notification->caller_name;
+        $this->callee_id = $notification->callee_id;
         $this->created_by = $notification->created_by;
     }
 
@@ -36,7 +37,7 @@ class NewCallCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('user.'.$this->room->callee_id);
+        return new PrivateChannel('user.'.$this->callee_id);
     }
 
     public function broadcastAs()

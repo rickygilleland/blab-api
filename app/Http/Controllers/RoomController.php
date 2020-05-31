@@ -51,12 +51,10 @@ class RoomController extends Controller
         }
 
         if (isset($request->type) && $request->type == "call") {
-            $call_rooms = \App\Room::where([
-                ['type', 'call'],
-                ['team_id', $request->team_id]
-            ])
-            ->with('users')
-            ->get();
+            $call_rooms = \App\Room::where('type', 'call')
+                ->where('team_id', $request->team_id)
+                ->with('users')
+                ->get();
 
             Log::info('Call_rooms', $call_rooms);
 

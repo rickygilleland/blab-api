@@ -108,7 +108,7 @@ class RegisterController extends Controller
         $user->save();
 
         $role = \App\Role::where('name', 'organization_admin')->first();
-        $user->roles()->attach($role, ['organization_id' => $invite->organization_id]);
+        $user->roles()->attach($role, ['organization_id' => $invite->organization_id != null ? $invite->organization_id : $organization->id]);
 
         if ($request->hasFile('avatar')) {
             try {

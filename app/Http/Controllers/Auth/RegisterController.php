@@ -154,6 +154,24 @@ class RegisterController extends Controller
         $invite->save();
 
         $email = new \stdClass;
+        $email->email = $user->email;
+
+        //make sure we don't send emails for the demo accounts
+        $domain = explode("@", $user->email);
+        if ($domain[1] == "acme.co") {
+            $email->email = "ricky@watercooler.work";
+        } 
+
+        $email->name = $user->first_name . " " . $user->last_name;
+        $email->data = [
+            "subject" => $user->first_name . ", Welcome to Water Cooler",
+            "first_name" => $user->first_name
+        ];
+        $email->template_id = "d-ce8fa69059b948b3806fe5a4f1520bef";
+
+        ProcessEmails::dispatch($email);
+
+        $email = new \stdClass;
         $email->type = "text_only";
         $email->email = "ricky@watercooler.work";
         $email->name = "Ricky Gilleland";

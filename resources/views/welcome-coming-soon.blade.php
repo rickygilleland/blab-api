@@ -86,7 +86,7 @@
                 <div class="row my-md-5">
                     <div class="col-md-5 order-sm-12">
                         <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Always Available Communication for your Team</h1>
-                        <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Water Cooler delivers always available rooms for office banter, meetings, or quick questions.</h2>
+                        <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Voice-only by default and perfect for office banter, meetings, or quick questions.</h2>
                         <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">

@@ -70,7 +70,7 @@ class InviteController extends Controller
         //check how many users we've accepted today, if less than 10 let them sign up immediately
         $users = User::where('created_at', '>', Carbon::now()->subHours(24))->count();
 
-        if ($users > 10) {
+        if ($users > 100) {
             return view('invite.request');
         }
 

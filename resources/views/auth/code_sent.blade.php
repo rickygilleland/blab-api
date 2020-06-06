@@ -19,7 +19,7 @@
 						</div>
                     @else
                         <div class="alert alert-success text-center" role="alert">
-                            We sent a tempoary login code to {{ $email }}. Enter the temporary code below to sign in.
+                            We sent a temporary login code to {{ $email }}. Enter the temporary code below to sign in.
                         </div>
                     @endif
 

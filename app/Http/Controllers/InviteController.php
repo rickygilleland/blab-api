@@ -19,6 +19,10 @@ class InviteController extends Controller
      */
     public function index($code)
     {
+        if (Auth::check()) {
+            return redirect('home');
+        }
+        
         $invite = \App\Invite::where('invite_code', base64_decode($code))->first();
 
         if (!$invite) {

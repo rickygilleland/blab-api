@@ -47,3 +47,8 @@ Route::get('onboarding/room', 'OnboardingController@room');
 Route::post('onboarding/room', 'OnboardingController@room_update');
 Route::get('onboarding/download', 'OnboardingController@download');
 
+//billing routes
+Route::get('/billing', 'BillingController@index');
+Route::get('/billing/upgrade', 'BillingController@upgrade_form');
+Route::post('/billing/upgrade', 'BillingController@upgrade');
+

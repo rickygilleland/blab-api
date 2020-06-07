@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+use App\Jobs\ProcessUsageEvent;
 
 class RoomChannel
 {
@@ -252,6 +253,14 @@ class RoomChannel
             if ($publisher_count >= 15) {
                 $room_at_capacity = true;
             }
+
+            $event = new \stdClass;
+            $event->type = "joined_room_presence_channel";
+            $event->user_id = $user->id;
+            $event->organization_id = $user->organization->id;
+            $event->room_id = $room->id;
+
+            ProcessUsageEvent::dispatch($event);
 
             return [
                 'id' => $user->id, 

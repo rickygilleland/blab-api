@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = \Auth::user()->load('teams', 'organization');
+        $user = \Auth::user()->load('roles', 'teams', 'organization');
 
         if (!$user->is_active) {
             return redirect('onboarding/confirm');
@@ -51,7 +51,26 @@ class HomeController extends Controller
         $magic_login_link = $user->id . "|" . $user->email . "|" . time();
 
         $magic_login_link = encrypt($magic_login_link);
+
+        $role = \App\Role::where('name', 'organization_admin')->first();
         
-        return view('home', ['magic_login_link' => $magic_login_link]);
+        $is_billing_admin = false;
+        if ($user->roles()->exists($role)) {
+            $is_billing_admin = true;
+        }
+
+        $billing = new \stdClass;
+        $billing->plan = "Free";
+        $billing->is_trial = false;
+
+        if ($user->organization->onGenericTrial()) {
+            $billing->plan = "Standard";
+            $billing->is_trial = true;
+            $billing->trial_ends_at = $user->organization->trial_ends_at->toFormattedDateString();
+        }
+        
+        $is_billing_admin = false;
+        
+        return view('home', ['magic_login_link' => $magic_login_link, 'is_billing_admin' => $is_billing_admin, 'billing' => $billing, 'organization' => $user->organization]);
     }
 }

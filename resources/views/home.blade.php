@@ -2,7 +2,27 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">        
+    <div class="row justify-content-center">      
+        @if ($is_billing_admin)
+            <div class="card shadow-sm w-75 mb-5">
+                <div class="card-body p-4 text-center">
+                    <h1>Billing Information</h1>
+                    @if ($billing->is_trial)
+                        <p class="lead">{{ $organization->name }} is on a free trial of the {{ $billing->plan }} tier.<br>Your free trial ends on {{ $billing->trial_ends_at }}.</p>
+                    @else
+                        <p class="lead">{{ $organization->name }} is on the {{ $billing->plan }} tier.</p>
+                    @endif
+                    <a href="/billing" class="btn btn-primary text-light">
+                        @if ($billing->plan == "Free")
+                            Upgrade Account
+                        @else  
+                            Manage Billing
+                        @endif
+                    </a>
+                </div>
+            </div>  
+        @endif
+
         <div class="card shadow-sm w-75">
             <div class="card-body p-4 text-center">
                 @if (session('status'))

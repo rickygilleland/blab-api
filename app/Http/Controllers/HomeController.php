@@ -24,6 +24,10 @@ class HomeController extends Controller
     public function index()
     {
         $user = \Auth::user()->load('teams', 'organization');
+
+        if (!$user->is_active) {
+            return redirect('onboarding/confirm');
+        }
         
         $teams = $user->teams;
         $default_team = $teams[0];

@@ -35,6 +35,8 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //onboarding routes
+Route::get('/onboarding/confirm', 'OnboardingController@confirm')->name('register_confirm');
+Route::post('/onboarding/confirm', 'OnboardingController@register_confirm_code');
 Route::get('onboarding/organization', 'OnboardingController@organization');
 Route::post('onboarding/organization', 'OnboardingController@organization_update');
 Route::get('onboarding/team', 'OnboardingController@team');

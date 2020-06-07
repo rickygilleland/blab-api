@@ -211,6 +211,11 @@ class LoginController extends Controller
                         $organization->trial_ends_at = now()->addDays(7);
                         $organization->save();
                     }
+
+                    if (!$user->is_active) {
+                        $user->is_active = true;
+                        $user->save();
+                    }
     
                     \Auth::login($user);
                     return redirect()->intended('home');

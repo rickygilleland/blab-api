@@ -265,7 +265,7 @@
                                 <i class="fas fa-ban pr-1" style="color:red"></i>
                             </td>
                             <td class="pricing-table-feature border-left">
-                                Coming Soon
+                                <i class="fas fa-check pr-1" style="color:green"></i>
                             </td>
                         </tr>
                         <tr class="border-bottom">

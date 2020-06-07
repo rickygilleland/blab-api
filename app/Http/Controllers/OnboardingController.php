@@ -17,15 +17,120 @@ class OnboardingController extends Controller
      *
      * @return void
      */
-	
-	public function __construct()
-	{
-        $this->middleware('auth');
+
+    public function confirm()
+    {
+        $user = \Auth::user();
+
+        $invite = \App\Invite::where('email', $user->email)->first();
+        if ($invite) {
+            $user->is_active = true;
+            return redirect('/home');
+        }
+
+        //generate a new code
+        $code = new \App\LoginCode();
+        $code->user_id = $user->id;
+
+        $login_code = '';
+
+        for ($i=0; $i<3; $i++) {
+            $login_code .= $this->generateHumanReadableString(4);
+
+            if ($i != 2) {
+                $login_code .= "-";
+            } 
+        }
+
+        $code->code = Hash::make($login_code);
+        $code->save();
+
+        $email = new \stdClass;
+
+        //make sure we don't send emails for the demo accounts
+        $domain = explode("@", $user->email);
+        if ($domain[1] == "acme.co") {
+            $email->email = "ricky@watercooler.work";
+        } else {
+            $email->email = $user->email;
+        }
+
+        $email->name = $user->first_name;
+        $email->data = [
+            "name" => $user->first_name,
+            "token" => $login_code,
+            "subject" => "Your Water Cooler confirmation code is ".$login_code
+        ];
+        $email->template_id = "d-dd835e437d9f4aadaf1c9acb25e5f488";
+
+        ProcessEmails::dispatch($email);
+
+        return view('onboarding.confirm', ['email' => $user->email]);
+    }
+
+    public function register_confirm_code(Request $request)
+    {
+        $user = \Auth::user();
+
+        $code_valid = false;
+        foreach ($user->loginCodes as $code) {
+            if (Hash::check($request->token, $code->code)) {
+                $code_valid = $code;
+
+                if ((strtotime($code->created_at) + 3600) < time()) {
+                    return view('onboarding.confirm', ['error' => 'The code you entered is expired.']);
+                }
+            }
+        }
+
+        if ($code_valid === false) {
+            return view('onboarding.confirm', ['email' => $request->email, 'error' => 'The code you entered was incorrect.']);
+        }
+
+        $code_valid->used = true;
+        $code_valid->save();
+
+        $organization = \App\Organization::where('id', $user->organization_id)->first();
+
+        if ($organization->trial_ends_at = null) {
+            $organization->trial_ends_at = now()->addDays(7);
+            $organization->save();
+        }
+
+        $user->is_active = true;
+        $user->save();
+
+        return redirect('home');
+
+    }
+
+    public function generateHumanReadableString($length) {
+        $string     = '';
+        $vowels     = array("a","e","i","o","u");  
+        $consonants = array(
+            'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 
+            'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'
+        );  
+
+        // Seed it
+        srand((double) microtime() * 1000000);
+
+        $max = $length/2;
+        for ($i = 1; $i <= $max; $i++) {
+            $string .= $consonants[rand(0,19)];
+            $string .= $vowels[rand(0,4)];
+        }
+
+        return $string;
     }
 
     public function organization()
     {
         $user = \Auth::user();
+
+        if (!$user->is_active) {
+            return redirect('onboarding/confirm');
+        }
 
         if ($user->organization->name != null) {
             return redirect('onboarding/invite');

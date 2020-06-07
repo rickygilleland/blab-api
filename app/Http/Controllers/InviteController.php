@@ -19,7 +19,7 @@ class InviteController extends Controller
      */
     public function index($code)
     {
-        if (Auth::check()) {
+        if (\Auth::check()) {
             return redirect('home');
         }
         

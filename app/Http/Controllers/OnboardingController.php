@@ -25,6 +25,7 @@ class OnboardingController extends Controller
         $invite = \App\Invite::where('email', $user->email)->first();
         if ($invite) {
             $user->is_active = true;
+            $user->save();
             return redirect('/home');
         }
 

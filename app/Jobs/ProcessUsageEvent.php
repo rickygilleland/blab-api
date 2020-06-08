@@ -8,7 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-use App\Usage;
+use App\Event;
 
 class ProcessUsageEvent implements ShouldQueue
 {
@@ -33,15 +33,15 @@ class ProcessUsageEvent implements ShouldQueue
      */
     public function handle()
     {
-        $usage = new Usage();
-        $usage->type = $this->event->type;
-        $usage->user_id = $this->event->user_id;
-        $usage->organization_id = $this->event->organization_id;
+        $event = new Event();
+        $event->type = $this->event->type;
+        $event->user_id = $this->event->user_id;
+        $event->organization_id = $this->event->organization_id;
 
         if (isset($this->event->room_id)) {
-            $usage->room_id = $this->event->room_id;
+            $event->room_id = $this->event->room_id;
         }
 
-        $usage->save();
+        $event->save();
     }
 }

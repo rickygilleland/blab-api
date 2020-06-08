@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Usage extends Model
+class Event extends Model
 {
 
     protected $dates = [

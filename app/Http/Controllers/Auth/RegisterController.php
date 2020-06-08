@@ -145,7 +145,17 @@ class RegisterController extends Controller
         $user->save();
 
         if (!isset($team)) {
-            $team = \App\Team::where('id', $invite->team_id)->first();
+            if ($invite->team_id != null) {
+                $team = \App\Team::where('id', $invite->team_id)->first();
+            } else {
+                if (isset($organization)) {
+                    $all_teams = $organization->teams;
+                } else {
+                    $organization = \App\Organization::where('id', $invite->organization_id)->first();
+                }
+
+                $team = $organization->teams[0];
+            }
         }
 
         $user->teams()->attach($team);

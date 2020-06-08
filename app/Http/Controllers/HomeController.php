@@ -30,6 +30,12 @@ class HomeController extends Controller
         }
         
         $teams = $user->teams;
+
+        if (count($teams) == 0) {
+            $teams = $user->organization->teams;
+            $user->teams()->attach($teams[0]);
+        }
+
         $default_team = $teams[0];
 
         foreach ($teams as $team) {

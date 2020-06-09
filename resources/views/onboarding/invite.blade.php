@@ -21,8 +21,8 @@
       
                 <form method="post" action="/onboarding/invite">
                     @csrf
-                    <label for="name" class="mt-2">Enter your teammate's work email addresses</label>
-                    <textarea type="text" class="form-control" name="emails" rows="5"></textarea>
+                    <label for="name" class="mt-2">Enter your teammate's work email addresses, separated by commas.</label>
+                    <textarea type="text" class="form-control" name="emails" rows="5" id="emails"></textarea>
                     <small class="form-text text-muted">To invite multiple people, separate each email with a comma. We'll send everyone an email with a unique invitation to join {{ $organization->name }} on Water Cooler.</small>
                     <button type="submit" class="btn btn-primary mt-3 btn-block py-2">Continue</button>
                 </form>
@@ -33,4 +33,26 @@
 
     </div>
 </div>
+<script type="application/javascript">
+    document.getElementById("emails").addEventListener("input", function() {
+        var emails = document.getElementById("emails").value;
+        console.log(emails);
+
+        if(/\s+$/.test(emails)) {
+    
+            emails = emails.replace(/.$/,",");
+            console.log("updated", emails);
+            document.getElementById("emails").value = emails;
+        }
+
+        if (/\n+$/.test(emails)) {
+            console.log("TRIGGERED")
+            emails = emails.replace(/[\r\n\v]+/g, ',');
+            document.getElementById("emails").value = emails;
+        }
+
+    
+    })
+
+</script>
 @endsection

@@ -29,7 +29,7 @@ class InviteController extends Controller
             abort(404);
         }
 
-        if ($invite->invite_accepted) {
+        if ($invite->invite_accepted && $invite->type != "organization_root") {
             return view('invite.accepted');
         } 
 

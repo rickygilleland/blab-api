@@ -57,8 +57,8 @@ class Kernel extends ConsoleKernel
                     ['organization_id', null],
                     ['invite_sent', true],
                     ['invite_accepted', false],
+                    ['created_at', '>', Carbon::now()->subDays(7)],
                     ['updated_at', '<', Carbon::now()->subDays(3)],
-                    ['updated_at', '>', Carbon::now()->subDays(9)],
                     ['name', '!=', 'Created By System'],
                     ['invite_type', null]
                 ])
@@ -76,7 +76,7 @@ class Kernel extends ConsoleKernel
                     $subject = "Reminder: " . $invite->name . ": You are Invited to Try Water Cooler";
                     $reminder_count++;
 
-                    if ($invite->updated_at >= Carbon::now()->subDays(6)) {
+                    if ($invite->created_at <= Carbon::now()->subDays(6)) {
                         $subject = "Final " . $subject;
                     }
                 }
@@ -127,8 +127,8 @@ class Kernel extends ConsoleKernel
                 ->where([
                     ['organization_id', '!=', null],
                     ['invite_accepted', false],
+                    ['created_at', '>', Carbon::now()->subDays(7)],
                     ['updated_at', '<', Carbon::now()->subDays(3)],
-                    ['updated_at', '>', Carbon::now()->subDays(9)]
                 ])
                 ->limit(30)
                 ->get();
@@ -145,11 +145,15 @@ class Kernel extends ConsoleKernel
                     $email = "ricky@watercooler.work";
                 } 
 
+                $subject = "Reminder: You are invited to join " . $invite_user->organization->name . " on Water Cooler";
+
                 $invite_user = User::where('id', $invite->invited_by)->first();
 
-                $subject = "Reminder: " . $invite_user->first_name . " has invited you to join " . $invite_user->organization->name . " on Water Cooler";
+                if ($invite_user) {
+                    $subject = "Reminder: " . $invite_user->first_name . " has invited you to join " . $invite_user->organization->name . " on Water Cooler";
+                }
 
-                if ($invite->updated_at >= Carbon::now()->subDays(6)) {
+                if ($invite->created_at <= Carbon::now()->subDays(6)) {
                     $subject = "Final " . $subject;
                 }
     

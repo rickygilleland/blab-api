@@ -36,17 +36,14 @@
 <script type="application/javascript">
     document.getElementById("emails").addEventListener("input", function() {
         var emails = document.getElementById("emails").value;
-        console.log(emails);
 
         if(/\s+$/.test(emails)) {
     
             emails = emails.replace(/.$/,",");
-            console.log("updated", emails);
             document.getElementById("emails").value = emails;
         }
 
         if (/\n+$/.test(emails)) {
-            console.log("TRIGGERED")
             emails = emails.replace(/[\r\n\v]+/g, ',');
             document.getElementById("emails").value = emails;
         }

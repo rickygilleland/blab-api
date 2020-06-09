@@ -127,6 +127,12 @@ class Kernel extends ConsoleKernel
                 ->where([
                     ['organization_id', '!=', null],
                     ['invite_accepted', false],
+                    ['invite_sent', false],
+                    ['created_at', '>', Carbon::now()->subDays(7)]
+                ])
+                ->orWhere([
+                    ['organization_id', '!=', null],
+                    ['invite_accepted', false],
                     ['created_at', '>', Carbon::now()->subDays(7)],
                     ['updated_at', '<', Carbon::now()->subDays(3)],
                 ])
@@ -145,13 +151,15 @@ class Kernel extends ConsoleKernel
                     $email = "ricky@watercooler.work";
                 } 
 
-                $subject = "Reminder: You are invited to join " . $invite_user->organization->name . " on Water Cooler";
-
                 $invite_user = User::where('id', $invite->invited_by)->first();
 
-                if ($invite_user) {
-                    $subject = "Reminder: " . $invite_user->first_name . " has invited you to join " . $invite_user->organization->name . " on Water Cooler";
+                if (!$invite_user) {
+                    $updated_invite = Invite::where('id', $invite->id)->first();
+                    $updated_invite->touch();
+                    continue;
                 }
+
+                $subject = "Reminder: " . $invite_user->first_name . " has invited you to join " . $invite_user->organization->name . " on Water Cooler";
 
                 if ($invite->created_at <= Carbon::now()->subDays(6)) {
                     $subject = "Final " . $subject;
@@ -172,6 +180,11 @@ class Kernel extends ConsoleKernel
     
                 $updated_invite = Invite::where('id', $invite->id)->first();
                 $updated_invite->touch();
+
+                if ($updated_invite->invite_sent == false) {
+                    $updated_invite->invite_sent = true;
+                    $updated_invite->save();
+                }
     
                 $invited_count++;
         

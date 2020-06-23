@@ -57,13 +57,12 @@
         </style>
 
     </head>
-    <body>
+    <body class="px-5">
 
-        <div class="container-fluid" style="background-color:#3777ff;color:white">
-            <div style="max-width:1400px" class="mx-auto pb-3">
-
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="#" style="font-weight:900;font-size:1.75rem;color:#fff!important"><img src="img/water_cooler.png" class="img img-fluid" style="height:60px">Water Cooler</a>
+        <div class="container-fluid">
+            <div class="max-width:1400px">
+                <nav class="navbar navbar-expand-lg navbar-light text-dark">
+                    <a class="navbar-brand" href="#" style="font-weight:900;font-size:1.75rem;"><img src="img/water_cooler.png" class="img img-fluid" style="height:60px">Water Cooler</a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -72,13 +71,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#features"><i class="fas fa-flag"></i> Features</a>
+                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="#features"><i class="fas fa-flag"></i> Features</a>
                             </li>   
                             <li class="nav-item">
-                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
+                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
                             </li>   
                             <li class="nav-item">
-                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem" href="/login">Log In</a>
+                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="/login">Log In</a>
                             </li>   
                             <li class="nav-item">
                                 <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a>
@@ -86,16 +85,20 @@
                         </ul>
                     </div>
                 </nav>
+            </div>
+        </div>      
 
+        <div class="container-fluid" style="background-color:#0076ff;color:white;border-radius:50px">
+            <div style="max-width:1400px" class="mx-auto py-3">
 
                 <div class="row my-md-5">
                     <div class="col-md-5 order-sm-12">
-                        <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Always Available Communication for your Team</h1>
-                        <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Voice-only by default and perfect for office banter, meetings, or quick questions.</h2>
+                        <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Let the Office Water Cooler Work Remotely Too</h1>
+                        <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Stay connected with always available meeting rooms. Simple, secure, and enhanced with machine learning.</h2>
                         <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">
-                        <img src="/img/main-hero-screenshot.png" class="img img-fluid rounded">
+                        <img src="/img/main-hero-demo.gif" class="img img-fluid rounded">
                     </div>
                 </div>
                 
@@ -104,22 +107,22 @@
 
         <div class="container-fluid" style="background-color:#fff;color:black" id="features">
             <div style="max-width:1400px" class="mx-auto py-5">
-            
+
                 <div class="row mb-5 clearfix">
                     <div class="col-md-6">
-                        <h3 class="h2" style="font-weight:800;margin-top:5rem">Always Available, No Codes Required</h3>
-                        <p class="lead" style="font-weight:500">Create rooms that are available to the entire team, or restricted to a few select team members. Great for general office chit-chat, recurring meetings, or 1:1 conversations with your co-workers.</p>
-                        <p class="lead font-weight-bold">Rooms are always available and never require a special code to join or for a specific host to be present.</p>         
+                        <h3 class="h2" style="font-weight:800;margin-top:2.5rem">Always Available, Voice-Only by Default</h3>
+                        <p class="lead" style="font-weight:500">Create rooms that are available to the entire team, or restricted to a few select team members.</p>
+                        <p class="lead" style="font-weight:500">Great for general office chit-chat, recurring meetings, or 1:1 conversations with your co-workers.</p>      
                         <p class="lead" style="font-weight:500">Whenever a member of your team is in a different timezone than yours, we automatically overlay their local time whenever they're in a room.</p>  
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/rooms-screenshot.png" style="max-height:400px" class="img img-fluid rounded shadow float-right" />
+                        <img src="/img/overview-screenshot.png" style="max-height:650px" class="img img-fluid rounded float-right" />
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="container-fluid" style="background-color:#3777ff;color:white">
+        <div class="container-fluid" style="background-color:#0076ff;color:white;border-radius:50px">
             <div style="max-width:1400px" class="mx-auto py-5">
                 <div class="row mb-5 clearfix">
                     <div class="col-md-6">
@@ -152,11 +155,20 @@
             </div>
         </div>
 
-        <div class="container-fluid" style="background-color:#3777ff;color:white">
+        <div class="container-fluid" style="background-color:#0076ff;color:white;border-radius:50px">
             <div style="max-width:1400px" class="mx-auto py-5">
-                <h3 class="h1 text-center mt-5" style="font-weight:800">Water Cooler is Cross Platform</h3>
-                <p class="lead text-center" style="font-weight:500">Available on Windows and MacOS. Linux support coming soon.</p>
-                <p class="text-center" style="font-size:6.5rem"><i class="fab fa-apple"></i> <i class="fab fa-windows mx-5"></i></p>
+                <div class="row mb-5 clearfix">
+                    <div class="col-md-6">
+                        <h3 class="h2" style="font-weight:800;margin-top:2.5rem">Face Tracking and Background Noise Detection <small>(Coming Soon)</small></h3>
+                        <p class="lead" style="font-weight:500">You can't always control what's happening in the background, so let us worry about it. Our face tracking uses machine learning to automatically keep the focus on you.</p>
+                        <p class="lead" style="font-weight:500">Our background noise detection runs your voice through a neural network trained with thousands of sounds and noises, isolating your voice and reducing background clutter.</p>      
+                        <p class="lead" style="font-weight:500">Face Tracking is available as an experimental feature, and background noise detection is coming soon.</p>  
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/img/face-tracking-demo.gif" style="max-height:650px" class="img img-fluid rounded float-right" />
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -166,7 +178,7 @@
                 <p class="lead text-center mb-1" style="font-weight:500;font-size:1.45rem">Flexible pricing with no commitments.</p>
                 <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it. 7 day free trial available for our Standard Plan.</p>
                 <div class="table-responsive">
-                    <table class="table w-75 mx-auto shadow-sm" style="border-top: 5px solid #3777ff">
+                    <table class="table w-75 mx-auto shadow-sm" style="border-top: 5px solid #0076ff">
                         <tr>
                             <th class="border-top-0" style="width:33.33%">&nbsp;</th>
                             <th class="border-left border-top-0 border-bottom-0 pt-4 pb-0" style="width:33.33%">
@@ -175,7 +187,7 @@
                             <th class="border-left border-top-0 pt-4 pb-0" style="width:33.33%">
                                 <h3 style="font-weight:800">Standard</h3>
                                 <p class="lead mb-1"><s><span style="font-weight:700">$8/active user</span><small> per month</small></s></p>
-                                <p>Free until June 24th, 2020</p>
+                                <p>Free until June 25th, 2020</p>
                             </th>
                         </tr>
                         <tr>
@@ -293,12 +305,26 @@
                         </tr>
                     </table>
                 </div>
+
+                <div class="row" style="margin-top:7rem;margin-bottom:5rem">
+                    <div class="col-md-2 offset-md-1">
+                        <center><img src="img/watercooler-app-icon.png" class="img img-fluid" style="height:150px" /></center>
+                    </div>
+                    <div class="col-md-5">
+                        <h3 class="h1 mt-1" style="font-weight:800">Cross Platform and Ready to Work Where You Do</h3>
+                        <p class="lead" style="font-weight:500">Available on Windows and MacOS. Linux support coming soon.</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p style="font-size:6.5rem"><i class="fab fa-apple"></i> <i class="fab fa-windows mx-5"></i></p>
+                    </div>
+                </div>
+
             </div>
         </div>
                 
-        <div class="container-fluid" style="background-color:#3777ff;color:white">
+        <div class="container-fluid mb-5" style="background-color:#0076ff;color:white;border-radius:50px">
             <div style="max-width:1400px" class="mx-auto py-5">
-                <p class="text-center" style="font-weight:600;font-size:1.4rem;">Interested in being one of the first to try Water Cooler for free?<br> Click the button below to get started.</p>
+                <p class="text-center" style="font-weight:800;font-size:2rem;">Ready to try Water Cooler?</p>
                 <center><a class="btn btn-success shadow text-dark btn-lg mt-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
 
                 <p class="text-center mt-5 font-weight-bold" style="font-size:1.1rem">Questions? Drop us a line at hello (at) watercooler.work</p>

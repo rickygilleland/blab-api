@@ -358,9 +358,6 @@ class LoginController extends Controller
             'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'
         );  
 
-        // Seed it
-        srand((double) microtime() * 1000000);
-
         $max = $length/2;
         for ($i = 1; $i <= $max; $i++) {
             $string .= $consonants[rand(0,19)];

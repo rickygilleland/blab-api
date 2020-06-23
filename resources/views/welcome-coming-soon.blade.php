@@ -57,7 +57,7 @@
         </style>
 
     </head>
-    <body class="px-5">
+    <body class="px-md-5 px-2">
 
         <div class="container-fluid">
             <div class="max-width:1400px">

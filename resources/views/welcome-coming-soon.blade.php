@@ -306,30 +306,22 @@
                     </table>
                 </div>
 
-                <div class="row" style="margin-top:7rem;margin-bottom:5rem">
-                    <div class="col-md-2 offset-md-1">
+                <div class="d-flex justify-content-center" style="margin-top:7rem;">
+                    <div>
                         <center><img src="img/watercooler-app-icon.png" class="img img-fluid" style="height:150px" /></center>
                     </div>
-                    <div class="col-md-5">
-                        <h3 class="h1 mt-1" style="font-weight:800">Cross Platform and Ready to Work Where You Do</h3>
+                    <div class="w-50 px-4">
+                        <h3 class="h1" style="font-weight:800;margin-top:1rem">Cross Platform and Ready to Work Where You Do</h3>
                         <p class="lead" style="font-weight:500">Available on Windows and MacOS. Linux support coming soon.</p>
                     </div>
-                    <div class="col-md-3">
-                        <p style="font-size:6.5rem"><i class="fab fa-apple"></i> <i class="fab fa-windows mx-5"></i></p>
-                    </div>
                 </div>
-
-            </div>
-        </div>
                 
-        <div class="container-fluid mb-5" style="background-color:#0076ff;color:white;border-radius:50px">
-            <div style="max-width:1400px" class="mx-auto py-5">
-                <p class="text-center" style="font-weight:800;font-size:2rem;">Ready to try Water Cooler?</p>
-                <center><a class="btn btn-success shadow text-dark btn-lg mt-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
+                <center><a class="btn btn-success shadow text-dark btn-lg mt-4 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
+                <p class="text-center font-weight-bold" style="font-size:1.1rem;margin-top:7rem;margin-bottom:5rem">Questions? Drop us a line at hello (at) watercooler.work</p>
 
-                <p class="text-center mt-5 font-weight-bold" style="font-size:1.1rem">Questions? Drop us a line at hello (at) watercooler.work</p>
             </div>
         </div>
+            
 
         <!-- Twitter universal website tag code -->
         <script>

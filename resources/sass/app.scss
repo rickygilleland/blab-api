@@ -50,8 +50,12 @@ a {
 }
 
 .btn-primary {
-    background-color: $purple !important;
-    border-color: $purple !important;
+    background-color: $blue !important;
+    border-color: $blue !important;
+}
+
+.btn {
+    font-size: 1rem;
 }
 
 .sub-heading {

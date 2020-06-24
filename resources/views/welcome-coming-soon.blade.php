@@ -89,7 +89,7 @@
         </div>      
 
         <div class="container-fluid" style="background-color:#0076ff;color:white;border-radius:50px">
-            <div style="max-width:1400px" class="mx-auto py-3">
+            <div style="max-width:1400px" class="mx-auto py-3 py-4">
 
                 <div class="row my-md-5">
                     <div class="col-md-5 order-sm-12">

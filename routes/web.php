@@ -27,6 +27,10 @@ Route::get('invite/{code}', 'InviteController@index', function($code) {
 Route::get('invite', 'InviteController@request_invite');
 Route::post('invite', 'InviteController@submit_invite_request');
 
+Route::get('get_started', function() {
+    return view('invite.get_started');
+});
+
 Route::get('/admin/invite/create', 'InviteController@admin_create_invite_form');
 Route::post('/admin/invite/create', 'InviteController@admin_create_invite');
 Route::post('register', 'Auth\RegisterController@register')->name('register');

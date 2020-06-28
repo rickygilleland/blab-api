@@ -80,7 +80,7 @@
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="/login">Log In</a>
                             </li>   
                             <li class="nav-item">
-                                <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a>
+                                <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a>
                             </li>
                         </ul>
                     </div>
@@ -95,7 +95,7 @@
                     <div class="col-md-5 order-sm-12">
                         <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Let the Office Water Cooler Work Remotely Too</h1>
                         <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Stay connected with always available meeting rooms. Simple, secure, and enhanced with machine learning.</h2>
-                        <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
+                        <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">
                         <img src="/img/main-hero-demo.gif" class="img img-fluid rounded">
@@ -316,7 +316,7 @@
                     </div>
                 </div>
                 
-                <center><a class="btn btn-success shadow text-dark btn-lg mt-4 font-weight-bold" href="/invite" rel="nofollow">Get Started for Free</a></center>
+                <center><a class="btn btn-success shadow text-dark btn-lg mt-4 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
                 <p class="text-center font-weight-bold" style="font-size:1.1rem;margin-top:7rem;margin-bottom:5rem">Questions? Drop us a line at hello (at) watercooler.work</p>
 
             </div>

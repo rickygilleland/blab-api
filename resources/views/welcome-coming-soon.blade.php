@@ -187,7 +187,7 @@
                             <th class="border-left border-top-0 pt-4 pb-0" style="width:33.33%">
                                 <h3 style="font-weight:800">Standard</h3>
                                 <p class="lead mb-1"><s><span style="font-weight:700">$8/active user</span><small> per month</small></s></p>
-                                <p>Free until July 1st, 2020</p>
+                                <p>Free until July 6th, 2020</p>
                             </th>
                         </tr>
                         <tr>

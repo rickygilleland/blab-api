@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::get('slack/oauth', 'SlackController@start');
 Route::get('slack/callback', 'SlackController@callback');
+Route::post('slack/hook', 'SlackController@handle_hook');
 
 Route::get('login/token/{code}', 'Auth\LoginController@loginWithToken');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

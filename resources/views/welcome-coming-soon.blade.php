@@ -159,10 +159,9 @@
             <div style="max-width:1400px" class="mx-auto py-5">
                 <div class="row mb-5 clearfix">
                     <div class="col-md-6">
-                        <h3 class="h2" style="font-weight:800;margin-top:2.5rem">Face Tracking and Background Noise Detection <small>(Coming Soon)</small></h3>
-                        <p class="lead" style="font-weight:500">You can't always control what's happening in the background, so let us worry about it. Our face tracking uses machine learning to automatically keep the focus on you.</p>
-                        <p class="lead" style="font-weight:500">Our background noise detection runs your voice through a neural network trained with thousands of sounds and noises, isolating your voice and reducing background clutter.</p>      
-                        <p class="lead" style="font-weight:500">Face Tracking is available as an experimental feature, and background noise detection is coming soon.</p>  
+                        <h3 class="h2" style="font-weight:800;margin-top:2.5rem">Face Tracking <small>(Coming Soon)</small></h3>
+                        <p class="lead" style="font-weight:500">You can't always control what's happening in the background, so let us worry about it. Our face tracking uses machine learning to automatically keep the focus on you.</p>    
+                        <p class="lead" style="font-weight:500">Face Tracking is available as an experimental feature and will be available to everyone soon.</p>  
                     </div>
                     <div class="col-md-6">
                         <img src="/img/face-tracking-demo.gif" style="max-height:650px" class="img img-fluid rounded float-right" />
@@ -187,7 +186,7 @@
                             <th class="border-left border-top-0 pt-4 pb-0" style="width:33.33%">
                                 <h3 style="font-weight:800">Standard</h3>
                                 <p class="lead mb-1"><s><span style="font-weight:700">$8/active user</span><small> per month</small></s></p>
-                                <p>Free until July 6th, 2020</p>
+                                <p>Free until July 15th, 2020</p>
                             </th>
                         </tr>
                         <tr>

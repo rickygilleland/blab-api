@@ -181,11 +181,9 @@ class RoomChannel
                     "require_pvtid" => true,
                     "publishers" => 99,
                     "notify_joining" => true,
-                    "videocodec" => "vp9",
                     "audiolevel_event" => true,
                     "audiolevel_ext" => true,
                     "audio_level_average" => 10,
-                    "video_svc" => true,
                     "allowed" => [
                         $user->streamer_key
                     ]

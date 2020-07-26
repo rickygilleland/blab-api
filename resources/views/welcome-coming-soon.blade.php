@@ -73,9 +73,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="#features"><i class="fas fa-flag"></i> Features</a>
                             </li>   
-                            <li class="nav-item">
+      <!--                       <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
-                            </li>   
+                            </li>    -->
                             <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="/login">Log In</a>
                             </li>   
@@ -95,7 +95,8 @@
                     <div class="col-md-5 order-sm-12">
                         <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Let the Office Water Cooler Work Remotely Too</h1>
                         <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Stay connected with always available meeting rooms. Simple, secure, and enhanced with machine learning.</h2>
-                        <center><a class="btn btn-success shadow btn-lg text-dark my-3 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
+                        <p class="lead text-center mt-3" style="font-weight:600">Free until at least August 1st, 2020.</p>
+                        <center><a class="btn btn-success shadow btn-lg text-dark my-2 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">
                         <img src="/img/main-hero-demo.gif" class="img img-fluid rounded">
@@ -173,7 +174,7 @@
 
         <div class="container-fluid" style="background-color:#fff;color:black" id="pricing">
             <div style="max-width:1400px" class="mx-auto py-5">
-                <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-tags"></i> Water Cooler Pricing</h3>
+               <!--  <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-tags"></i> Water Cooler Pricing</h3>
                 <p class="lead text-center mb-1" style="font-weight:500;font-size:1.45rem">Flexible pricing with no commitments.</p>
                 <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it. 7 day free trial available for our Standard Plan.</p>
                 <div class="table-responsive">
@@ -303,7 +304,7 @@
                             </td>
                         </tr>
                     </table>
-                </div>
+                </div> -->
 
                 <div class="d-flex justify-content-center" style="margin-top:7rem;">
                     <div>
@@ -311,11 +312,12 @@
                     </div>
                     <div class="w-50 px-4">
                         <h3 class="h1" style="font-weight:800;margin-top:1rem">Cross Platform and Ready to Work Where You Do</h3>
-                        <p class="lead" style="font-weight:500">Available on Windows and MacOS. Linux support coming soon.</p>
+                        <p class="lead" style="font-weight:500">Available on every major browser, and through our MacOS and Windows apps.</p>
                     </div>
                 </div>
                 
-                <center><a class="btn btn-success shadow text-dark btn-lg mt-4 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
+                <p class="lead font-weight-bold text-center mt-5">Free until at least August 1st, 2020.</p>
+                <center><a class="btn btn-success shadow text-dark btn-lg mt-2 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
                 <p class="text-center font-weight-bold" style="font-size:1.1rem;margin-top:7rem;margin-bottom:5rem">Questions? Drop us a line at hello (at) watercooler.work</p>
 
             </div>

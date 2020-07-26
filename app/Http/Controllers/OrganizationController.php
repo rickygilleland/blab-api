@@ -45,10 +45,10 @@ class OrganizationController extends Controller
     {
         $user = \Auth::user()->load('teams.rooms', 'organization', 'rooms');
 
-        if ($user->organization->trial_ends_at != '2021-06-10 23:59:59') {
+        /*if ($user->organization->trial_ends_at != '2021-06-10 23:59:59') {
             $user->organization->trial_ends_at = '2021-06-10 23:59:59';
             $user->organization->save();
-        }
+        }*/
 
         $billing = new \stdClass;
         $billing->plan = "Free";

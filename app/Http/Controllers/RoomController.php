@@ -12,6 +12,7 @@ use App\Events\NewRoomCreated;
 use App\Events\NewCallCreated;
 use App\Events\UserAddedToRoom;
 use App\Events\CallDeclined;
+use App\Events\NewMessageSentInRoom;
 
 class RoomController extends Controller
 {
@@ -263,6 +264,92 @@ class RoomController extends Controller
         }
 
         return true;
+    }
+
+    public function get_messages($id)
+    {
+
+        $user = \Auth::user()->load('teams');
+
+        $room = \App\Room::where('id', $id)->with(['users', 'messages'])->first();
+        
+        $team_found = false;
+        foreach ($user->teams as $team) {
+            if ($team->id == $room->team_id) {
+                $team_found = true;
+            }
+        }
+
+        if (!$team_found) {
+            abort(404);
+        }
+
+        if ($room->is_private) {
+            $user_found = false;
+            foreach ($room->users as $room_user) {
+                if ($room_user->id == $user->id) {
+                    $user_found = true;
+                    break;
+                }
+            }
+
+            if (!$user_found) {
+                abort(404);
+            }
+        }
+
+        return $room->messages;
+
+    }
+
+    public function create_message(Request $request, $id)
+    {
+
+        $user = \Auth::user()->load('teams');
+
+        $room = \App\Room::where('id', $id)->with('users')->first();
+        
+        $team_found = false;
+        foreach ($user->teams as $team) {
+            if ($team->id == $room->team_id) {
+                $team_found = true;
+            }
+        }
+
+        if (!$team_found) {
+            abort(404);
+        }
+
+        if ($room->is_private) {
+            $user_found = false;
+            foreach ($room->users as $room_user) {
+                if ($room_user->id == $user->id) {
+                    $user_found = true;
+                    break;
+                }
+            }
+
+            if (!$user_found) {
+                abort(404);
+            }
+        }
+
+        $message = new \App\Message();
+        $message->user_id = $user->id;
+        $message->organization_id = $room->organization_id;
+        $message->room_id = $room->id;
+        $message->text = $request->text;
+        $message->save();
+
+        $notification = new \stdClass;
+        $notification->triggered_by = $user->id;
+        $notification->room = $room;
+        $notification->message = $message->text;
+        
+        broadcast(new NewMessageSentInRoom($notification))->toOthers();
+
+        return true;
+
     }
 
 }

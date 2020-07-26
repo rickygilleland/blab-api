@@ -204,7 +204,7 @@ class LoginController extends Controller
         }
 
         //codes expire after 1 hour
-        if ((time() - 3600 < $decrypted_code[2])) {
+        if ((time() - 3600 > $decrypted_code[2])) {
             abort(500);
         }
 

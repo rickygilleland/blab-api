@@ -203,6 +203,11 @@ class LoginController extends Controller
             abort(500);
         }
 
+        //codes expire after 1 hour
+        if ((time() - 3600 < $decrypted_code[2])) {
+            abort(500);
+        }
+
         //everything is good, login
         $token = $user->createToken('Token created by Magic Link')->accessToken;
 

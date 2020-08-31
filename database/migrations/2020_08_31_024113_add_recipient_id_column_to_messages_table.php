@@ -14,7 +14,7 @@ class AddRecipientIdColumnToMessagesTable extends Migration
     public function up()
     {
         Schema::table('messages', function (Blueprint $table) {
-            //
+            $table->bigInteger('recipient_id')->unsigned()->index()->nullable()->default(null); 
         });
     }
 

@@ -26,7 +26,8 @@ class MessageController extends Controller
         $message = new \App\Message();
         $message->user_id = $user->id;
         $message->organization_id = $request->organization_id;
-        $message->is_public = $request->is_public;
+        //not sure why this is needed? diff with form data versus regular post?
+        $message->is_public = $request->is_public === 'true' ? true : false;
         $message->recipient_id = $request->recipient_id;
 
         if ($request->hasFile('attachment')) {

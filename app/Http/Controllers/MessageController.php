@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Events\NewMessageSentInRoom;
+use Illuminate\Support\Facades\Storage;
 
 class MessageController extends Controller
 {

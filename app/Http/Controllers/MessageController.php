@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Events\NewMessageSentInRoom;
+use App\Events\NewDirectMessageSent;
 use Illuminate\Support\Facades\Storage;
 
 class MessageController extends Controller
@@ -48,7 +48,7 @@ class MessageController extends Controller
         $notification->recipient_id = $message->recipient_id;
         $notification->message = $message;
 
-        broadcast(new NewMessageSentInRoom($notification));
+        broadcast(new NewDirectMessageSent($notification));
         
     }
 

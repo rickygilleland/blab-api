@@ -49,6 +49,8 @@ class MessageController extends Controller
         $notification->message = $message;
 
         broadcast(new NewDirectMessageSent($notification));
+
+        return $message;
         
     }
 

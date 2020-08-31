@@ -28,7 +28,10 @@ class MessageController extends Controller
         $message->organization_id = $request->organization_id;
         //not sure why this is needed? diff with form data versus regular post?
         $message->is_public = $request->is_public === 'true' ? true : false;
-        $message->recipient_id = $request->recipient_id;
+
+        if ($request->recipient_id != 'null') {
+            $message->recipient_id = $request->recipient_id;
+        }
 
         if ($request->hasFile('attachment')) {
             try {

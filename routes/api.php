@@ -50,3 +50,8 @@ Route::middleware('auth:api')->post('/call', 'RoomController@create');
 Route::middleware('auth:api')->get('/call/{id}/users', 'RoomController@get_users', function($id) { });
 Route::middleware('auth:api')->post('/call/{id}/users', 'RoomController@invite_user', function($id) { });
 Route::middleware('auth:api')->post('/call/{id}/answer', 'RoomController@answer_call', function($id) { });
+
+Route::middleware('auth:api')->get('/messages', 'MessageController@get_user_messages', function() { });
+Route::middleware('auth:api')->get('/messages/{id}', 'MessageController@get_message', function($id) { });
+Route::middleware('auth:api')->post('/messages', 'MessageController@create_message', function() { });
+Route::middleware('auth:api')->patch('/messages/{id}', 'MessageController@edit_message', function($id) { });

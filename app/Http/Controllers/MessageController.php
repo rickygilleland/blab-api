@@ -20,7 +20,8 @@ class MessageController extends Controller
 
     public function create_message(Request $request)
     {
-
+        $user = \Auth::user();
+        
         $message = new \App\Message();
         $message->user_id = $user->id;
         $message->organization_id = $request->organization_id;

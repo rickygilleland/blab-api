@@ -27,11 +27,7 @@ class MessageController extends Controller
         $message->user_id = $user->id;
         $message->organization_id = $request->organization_id;
         $message->is_public = $request->is_public;
-        $message->recipient_id = null;
-
-        if ($request->is_public == false) {
-            $message->recipient_id = $request->recipient_id;
-        }
+        $message->recipient_id = $request->recipient_id;
 
         if ($request->hasFile('attachment')) {
             try {

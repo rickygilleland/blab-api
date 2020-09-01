@@ -18,12 +18,11 @@ class MessageController extends Controller
 
     public function create_message(Request $request)
     {
-        $user = \Auth::user();
+        $user = \Auth::user()->load('threads');
         
         $message = new \App\Message();
         $message->user_id = $user->id;
         $message->organization_id = $request->organization_id;
-        //not sure why this is needed? diff with form data versus regular post?
         $message->is_public = $request->is_public === 'true' ? true : false;
 
         if (count($request->recipient_ids) > 0) {
@@ -40,6 +39,7 @@ class MessageController extends Controller
 
             if ($active_thread == null) {
                 $active_thread = new \App\Thread();
+                $active_thread->type = "private";
                 $active_thread->save();
 
                 $user->threads()->attach($active_thread);
@@ -52,10 +52,28 @@ class MessageController extends Controller
             $message->thread_id = $active_thread->id;
         }
 
+        if ($message->is_public) {
+            foreach ($user->threads as $thread) {
+                if ($thread->type == "public") {
+                    $message->thread_d = $thread;
+                }
+            }
+
+            if (!isset($message->thread_id)) {
+                $thread = new \App\Thread();
+                $thread->type = "public";
+                $thread->save();
+
+                $user->threads()->attach($thread);
+
+                $message->thread_id = $thread->id;
+            }
+        }
+
         if ($request->hasFile('attachment')) {
             try {
                 $attachment_url = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
-                $message->attachment_url = "https://blab.sfo2.cdn.digitaloceanspaces.com/" . $attachment_url;
+                $message->attachment_url = $attachment_url;
             } catch (\Exception $e) {
                 //do something
             }

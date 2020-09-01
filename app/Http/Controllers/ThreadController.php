@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ThreadController extends Controller
 {
@@ -10,7 +11,10 @@ class ThreadController extends Controller
     {
         $user = \Auth::user();
 
-        $threads = [];
+        $private_threads = [];
+        $public_threads = [];
+        $shared_threads = [];
+
         foreach ($user->threads as $thread) {
 
             $thread_users = [];
@@ -26,6 +30,11 @@ class ThreadController extends Controller
 
             $thread->unsetRelation('users');
             $thread->users = $thread_users;
+
+            if ($thread->type == "public") {
+                $public_threads[] = $thread;
+                continue;
+            }
 
             if ($thread->name == null) {
                 $name = '';
@@ -44,10 +53,25 @@ class ThreadController extends Controller
                 $thread->name = $name;
             }
 
-            $threads[] = $thread;
+            $private_threads[] = $thread;
         }
 
-        return $threads;
+        if (count($public_threads) == 0) {
+            $thread = new \App\Thread();
+            $thread->type = "public";
+            $thread->save();
+
+            $user->threads()->attach($thread);
+
+            $public_threads[] = $thread;
+        }
+
+        $response = new \stdClass(); 
+        $response->private_threads = $private_threads;
+        $response->public_threads = $public_threads;
+        $response->shared_threads = $shared_threads;
+ 
+        return $response;
     }
 
     public function get_thread(Request $request, $id) 
@@ -96,6 +120,13 @@ class ThreadController extends Controller
     public function get_messages(Request $request, $id) 
     {
         $thread = \App\Thread::where('id', $id)->with('messages')->first();
+
+        foreach ($thread->messages as $message) {
+            $message->attachment_url = Storage::temporaryUrl(
+                $message->attachment_url, now()->addDays(2)
+            );
+        }
+
         return $thread;
     }
 

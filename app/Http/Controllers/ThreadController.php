@@ -33,8 +33,8 @@ class ThreadController extends Controller
 
             foreach ($thread->users as $thread_user) {
                 if ($thread_user->id != $user->id) {
-                    $thread_user->client->makeHidden('streamer_key');
-                    $thread_user->client->makeHidden('email');
+                    $thread_user->makeHidden('streamer_key');
+                    $thread_user->makeHidden('email');
 
                     $thread_users[] = $thread_user;
                 }
@@ -79,8 +79,8 @@ class ThreadController extends Controller
 
         foreach ($thread->users as $thread_user) {
             if ($thread_user->id != $user->id) {
-                $thread_user->client->makeHidden('streamer_key');
-                $thread_user->client->makeHidden('email');
+                $thread_user->makeHidden('streamer_key');
+                $thread_user->makeHidden('email');
 
                 $thread_users[] = $thread_user;
             }

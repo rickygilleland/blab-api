@@ -9,14 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class MessageController extends Controller
 {
-    public function get_user_messages(Request $request)
-    {
-
-    }
-
     public function get_message(Request $request, $id)
     {
-        
+        $message = \App\Message::where('id', $id)->first();
+
+        return $message;
     }
 
     public function create_message(Request $request)
@@ -29,8 +26,30 @@ class MessageController extends Controller
         //not sure why this is needed? diff with form data versus regular post?
         $message->is_public = $request->is_public === 'true' ? true : false;
 
-        if ($request->recipient_id != 'null') {
-            $message->recipient_id = $request->recipient_id;
+        if (count($request->recipient_ids) > 0) {
+            $active_thread = null;
+
+            if (count($request->recipient_ids) == 1) {
+                foreach($user->threads as $thread) {
+                    if ($thread->users->contains($request->recipient_ids[0])) {
+                        $active_thread = $thread;
+                        break;
+                    }
+                }
+            }
+
+            if ($active_thread == null) {
+                $active_thread = new \App\Thread();
+                $active_thread->save();
+
+                $user->threads->attach($active_thread);
+
+                foreach ($request->recipient_ids as $recipient_id) {
+                    $active_thread->users->attach($recipient_id);
+                }
+            }
+
+            $message->thread_id = $active_thread->id;
         }
 
         if ($request->hasFile('attachment')) {
@@ -51,7 +70,7 @@ class MessageController extends Controller
         $notification->recipient_id = $message->recipient_id;
         $notification->message = $message;
 
-        broadcast(new NewDirectMessageSent($notification));
+        broadcast(new NewDirectMessageSent($notification))->toOthers();
 
         return $message;
         

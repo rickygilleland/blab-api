@@ -106,4 +106,9 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Room');
     }
 
+    public function threads()
+    {
+        return $this->belongsToMany('App/Thread');
+    }
+
 }

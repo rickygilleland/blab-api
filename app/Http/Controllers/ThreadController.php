@@ -28,8 +28,11 @@ class ThreadController extends Controller
 
                 $thread->name = $name;
             }
+
+            $threads[] = $thread;
         }
-        return $user->threads;
+
+        return $threads;
     }
 
     public function get_thread(Request $request, $id) 

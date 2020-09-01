@@ -42,10 +42,10 @@ class MessageController extends Controller
                 $active_thread = new \App\Thread();
                 $active_thread->save();
 
-                $user->threads->attach($active_thread);
+                $user->threads()->attach($active_thread);
 
                 foreach ($request->recipient_ids as $recipient_id) {
-                    $active_thread->users->attach($recipient_id);
+                    $active_thread->users()->attach($recipient_id);
                 }
             }
 

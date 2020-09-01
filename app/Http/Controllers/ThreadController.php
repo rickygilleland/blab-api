@@ -70,8 +70,8 @@ class ThreadController extends Controller
         $response->private_threads = $private_threads;
         $response->public_threads = $public_threads;
         $response->shared_threads = $shared_threads;
- 
-        return $response;
+
+        return response()->json($response);
     }
 
     public function get_thread(Request $request, $id) 
@@ -120,6 +120,10 @@ class ThreadController extends Controller
     public function get_messages(Request $request, $id) 
     {
         $thread = \App\Thread::where('id', $id)->with('messages')->first();
+
+        if (!$thread) {
+            abort(404);
+        }
 
         foreach ($thread->messages as $message) {
             $message->attachment_url = Storage::temporaryUrl(

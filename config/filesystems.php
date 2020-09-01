@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 's3'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 'spaces'),
+    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
 
     /*
     |--------------------------------------------------------------------------
@@ -62,16 +62,12 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
+            'cache' => [
+                'store' => 'redis',
+                'expire' => 600,
+                'prefix' => 's3-storage-cache',
+            ],
         ],
-
-        'spaces' => [
-		    'driver' => 's3',
-		    'key' => env('DO_SPACES_KEY'),
-		    'secret' => env('DO_SPACES_SECRET'),
-		    'endpoint' => env('DO_SPACES_ENDPOINT'),
-		    'region' => env('DO_SPACES_REGION'),
-		    'bucket' => env('DO_SPACES_BUCKET'),
-		],
 
     ],
 

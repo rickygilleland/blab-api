@@ -12,6 +12,21 @@ class ThreadController extends Controller
 
         $threads = [];
         foreach ($user->threads as $thread) {
+
+            $thread_users = [];
+
+            foreach ($thread->users as $thread_user) {
+                if ($thread_user->id != $user->id) {
+                    $thread_user->makeHidden('streamer_key');
+                    $thread_user->makeHidden('email');
+
+                    $thread_users[] = $thread_user;
+                }
+            }
+
+            $thread->unsetRelation('users');
+            $thread->users = $thread_users;
+
             if ($thread->name == null) {
                 $name = '';
 
@@ -29,20 +44,6 @@ class ThreadController extends Controller
                 $thread->name = $name;
             }
 
-            $thread_users = [];
-
-            foreach ($thread->users as $thread_user) {
-                if ($thread_user->id != $user->id) {
-                    $thread_user->makeHidden('streamer_key');
-                    $thread_user->makeHidden('email');
-
-                    $thread_users[] = $thread_user;
-                }
-            }
-
-            $thread->unsetRelation('users');
-            $thread->users = $thread_users;
-
             $threads[] = $thread;
         }
 
@@ -57,6 +58,20 @@ class ThreadController extends Controller
         if (!$thread->users->contains($user)) {
             abort(404);
         }
+
+        $thread_users = [];
+
+        foreach ($thread->users as $thread_user) {
+            if ($thread_user->id != $user->id) {
+                $thread_user->makeHidden('streamer_key');
+                $thread_user->makeHidden('email');
+
+                $thread_users[] = $thread_user;
+            }
+        }
+
+        $thread->unsetRelation('users');
+        $thread->users = $thread_users;
 
         if ($thread->name == null) {
             $name = '';
@@ -74,20 +89,6 @@ class ThreadController extends Controller
 
             $thread->name = $name;
         }
-
-        $thread_users = [];
-
-        foreach ($thread->users as $thread_user) {
-            if ($thread_user->id != $user->id) {
-                $thread_user->makeHidden('streamer_key');
-                $thread_user->makeHidden('email');
-
-                $thread_users[] = $thread_user;
-            }
-        }
-
-        $thread->unsetRelation('users');
-        $thread->users = $thread_users;
 
         return $thread;
     }

@@ -16,8 +16,8 @@ class ThreadController extends Controller
                 $name = '';
 
                 $i = 0;
-                foreach ($thread->users as $user) {
-                    $name .= $user->first_name;
+                foreach ($thread->users as $thread_user) {
+                    $name .= $thread_user->first_name;
 
                     if ($i != count($thread->users) - 1) {
                         $name .= ", ";
@@ -29,6 +29,20 @@ class ThreadController extends Controller
                 $thread->name = $name;
             }
 
+            $thread_users = [];
+
+            foreach ($thread->users as $thread_user) {
+                if ($thread_user->id != $user->id) {
+                    $thread_user->client->makeHidden('streamer_key');
+                    $thread_user->client->makeHidden('email');
+
+                    $thread_users[] = $thread_user;
+                }
+            }
+
+            $thread->unsetRelation('users');
+            $thread->users = $thread_users;
+
             $threads[] = $thread;
         }
 
@@ -37,7 +51,12 @@ class ThreadController extends Controller
 
     public function get_thread(Request $request, $id) 
     {
-        $thread = \App\Thread::where('id', $id)->first();
+        $user = \Auth::user();
+        $thread = \App\Thread::where('id', $id)->with('users')->first();
+
+        if (!$thread->users->contains($user)) {
+            abort(404);
+        }
 
         if ($thread->name == null) {
             $name = '';
@@ -55,6 +74,20 @@ class ThreadController extends Controller
 
             $thread->name = $name;
         }
+
+        $thread_users = [];
+
+        foreach ($thread->users as $thread_user) {
+            if ($thread_user->id != $user->id) {
+                $thread_user->client->makeHidden('streamer_key');
+                $thread_user->client->makeHidden('email');
+
+                $thread_users[] = $thread_user;
+            }
+        }
+
+        $thread->unsetRelation('users');
+        $thread->users = $thread_users;
 
         return $thread;
     }

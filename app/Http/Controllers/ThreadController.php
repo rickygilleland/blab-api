@@ -121,7 +121,7 @@ class ThreadController extends Controller
 
     public function get_messages(Request $request, $id) 
     {
-        $thread = \App\Thread::where('id', $id)->with('messages')->first();
+        $thread = \App\Thread::where('id', $id)->with('messages.user')->first();
 
         if (!$thread) {
             abort(404);

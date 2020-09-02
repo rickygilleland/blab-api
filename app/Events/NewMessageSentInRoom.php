@@ -42,6 +42,6 @@ class NewMessageSentInRoom implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'room.messages.updated';
+        return 'room.messages.created';
     }
 }

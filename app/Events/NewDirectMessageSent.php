@@ -45,6 +45,6 @@ class NewDirectMessageSent implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'user.messages.updated';
+        return 'user.messages.created';
     }
 }

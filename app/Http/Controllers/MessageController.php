@@ -39,6 +39,7 @@ class MessageController extends Controller
 
             if ($active_thread == null) {
                 $active_thread = new \App\Thread();
+                $active_thread->slug = Str::random(12);
                 $active_thread->type = "private";
                 $active_thread->save();
 
@@ -61,6 +62,7 @@ class MessageController extends Controller
 
             if (!isset($message->thread_id)) {
                 $thread = new \App\Thread();
+                $thread->slug = Str::random(12);
                 $thread->type = "public";
                 $thread->save();
 

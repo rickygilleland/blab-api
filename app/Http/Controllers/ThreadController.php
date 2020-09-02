@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,6 +59,7 @@ class ThreadController extends Controller
 
         if (count($public_threads) == 0) {
             $thread = new \App\Thread();
+            $thread->slug = Str::random(12);
             $thread->type = "public";
             $thread->save();
 

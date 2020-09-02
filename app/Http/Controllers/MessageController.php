@@ -25,8 +25,9 @@ class MessageController extends Controller
         $message->organization_id = $request->organization_id;
         $message->is_public = $request->is_public === 'true' ? true : false;
 
+        $active_thread = null;
+
         if (count($request->recipient_ids) > 0) {
-            $active_thread = null;
 
             if (count($request->recipient_ids) == 1) {
                 foreach($user->threads as $thread) {
@@ -56,19 +57,20 @@ class MessageController extends Controller
         if ($message->is_public) {
             foreach ($user->threads as $thread) {
                 if ($thread->type == "public") {
-                    $message->thread_d = $thread;
+                    $message->thread_id = $thread->id;
+                    $active_thread = $thread;
                 }
             }
 
             if (!isset($message->thread_id)) {
-                $thread = new \App\Thread();
-                $thread->slug = Str::random(12);
-                $thread->type = "public";
-                $thread->save();
+                $active_thread = new \App\Thread();
+                $active_thread->slug = Str::random(12);
+                $active_thread->type = "public";
+                $active_thread->save();
 
-                $user->threads()->attach($thread);
+                $user->threads()->attach($active_thread);
 
-                $message->thread_id = $thread->id;
+                $message->thread_id = $active_thread->id;
             }
         }
 
@@ -84,6 +86,8 @@ class MessageController extends Controller
         $message->slug = Str::random(12);
 
         $message->save();
+
+        $message->thread = $active_thread;
 
         $notification = new \stdClass;
         $notification->triggered_by = $user->id;

@@ -18,7 +18,26 @@ class MessageController extends Controller
 
     public function create_message(Request $request)
     {
-        $user = \Auth::user()->load('threads');
+        $user = \Auth::user()->load('threads', 'organization.users');
+
+        if ($user->organization->id != $request->organization_id) {
+            abort(500);
+        }
+
+        //make sure all of the recipients are part of the org
+        foreach ($request->recipient_ids as $recipient) {
+            $found = false;  
+
+            foreach($user->organization->users as $organization_user) {
+                if ($organization_user->id == $recipient) {
+                    $found = true;
+                }
+            }   
+
+            if (!$found) {
+                abort(500);
+            }
+        }
         
         $message = new \App\Message();
         $message->user_id = $user->id;
@@ -71,6 +90,7 @@ class MessageController extends Controller
                 $user->threads()->attach($active_thread);
 
                 $message->thread_id = $active_thread->id;
+                $message->save();
             }
         }
 
@@ -91,10 +111,13 @@ class MessageController extends Controller
 
         $notification = new \stdClass;
         $notification->triggered_by = $user->id;
-        $notification->recipient_id = $message->recipient_id;
         $notification->message = $message;
+        $notification->thread = $active_thread;
 
-        broadcast(new NewDirectMessageSent($notification))->toOthers();
+        foreach($active_thread->users as $thread_user) {
+            $notification->recipient_id = $thread_user->id;
+            broadcast(new NewDirectMessageSent($notification));
+        }
 
         return $message;
         

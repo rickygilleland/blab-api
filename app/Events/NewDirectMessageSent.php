@@ -15,6 +15,7 @@ class NewDirectMessageSent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
+    public $thread;
     public $triggered_by;
     public $recipient_id;
 
@@ -26,6 +27,7 @@ class NewDirectMessageSent implements ShouldBroadcast
     public function __construct($notification)
     {
         $this->message = $notification->message;
+        $this->thread = $notification->thread;
         $this->triggered_by = $notification->triggered_by;
         $this->recipient_id = $notification->recipient_id;
     }
@@ -37,7 +39,6 @@ class NewDirectMessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('user.'.$this->triggered_by);
         if ($this->message->is_public == false && $this->recipient_id) {
             return new PrivateChannel('user.'.$this->recipient_id);
         }

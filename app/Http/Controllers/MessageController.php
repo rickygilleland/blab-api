@@ -108,6 +108,7 @@ class MessageController extends Controller
         $message->save();
 
         $message->thread = $active_thread;
+        $message->load('user');
 
         $notification = new \stdClass;
         $notification->triggered_by = $user->id;
@@ -115,6 +116,10 @@ class MessageController extends Controller
         $notification->thread = $active_thread;
 
         foreach($active_thread->users as $thread_user) {
+            /*if ($thread_user->id == $user->id) {
+                continue;
+            }*/
+
             $notification->recipient_id = $thread_user->id;
             broadcast(new NewDirectMessageSent($notification));
         }

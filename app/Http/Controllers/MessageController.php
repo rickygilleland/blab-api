@@ -111,11 +111,23 @@ class MessageController extends Controller
 
         $message->save();
 
-        $newMessage = \App\Message::where('id', $message->id)->with('user')->first()->toArray();
+        $newMessage = new \stdClass;
+        $newMessage->id = $message->id;
+        $newMessage->is_public = $message->is_public;
+        $newMessage->organization_id = $message->organization_id;
+        $newMessage->read = $message->read;
+        $newMessage->room_id = $message->room_id;
+        $newMessage->slug = $message->slug;
+        $newMessage->text = $message->text;
+        $newMessage->thread_id = $message->thread_id;
+        $newMessage->created_at = $message->thread_id;
+        $newMessage->updated_at = $message->thread_id;
 
-        $newMessage["attachment_url"] = Storage::temporaryUrl(
-            $newMessage["attachment_path"], now()->addDays(2)
+        $newMessage->attachment_url = Storage::temporaryUrl(
+            $message->attachment_path, now()->addDays(2)
         );
+
+        $newMessage->user = $message->user;
 
         $notification = new \stdClass;
         $notification->triggered_by = $user->id;

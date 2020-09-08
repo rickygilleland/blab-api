@@ -110,7 +110,6 @@ class MessageController extends Controller
         $message->slug = Str::random(12);
 
         $message->save();
-        $message = $message->fresh();
 
         $message->thread = $active_thread;
         $message->load('user');

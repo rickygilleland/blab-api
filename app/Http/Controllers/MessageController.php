@@ -111,16 +111,18 @@ class MessageController extends Controller
 
         $message->save();
 
-        $message->attachment_url = Storage::temporaryUrl(
-            $message->attachment_path, now()->addDays(2)
+        $newMessage = $message->refresh();
+
+        $newMessage->attachment_url = Storage::temporaryUrl(
+            $newMessage->attachment_path, now()->addDays(2)
         );
 
-        $message->thread = $active_thread;
-        $message->load('user');
+        $newMessage->thread = $active_thread;
+        $newMessage->load('user');
 
         $notification = new \stdClass;
         $notification->triggered_by = $user->id;
-        $notification->message = $message;
+        $notification->message = $newMessage;
         $notification->thread = $active_thread;
 
         foreach($active_thread->users as $thread_user) {

@@ -29,17 +29,19 @@ class MessageController extends Controller
         }
 
         //make sure all of the recipients are part of the org
-        foreach ($request->recipient_ids as $recipient) {
-            $found = false;  
-
-            foreach($user->organization->users as $organization_user) {
-                if ($organization_user->id == $recipient) {
-                    $found = true;
+        if (isset($request->recipient_ids) && count($request->recipient_ids) > 0) {
+            foreach ($request->recipient_ids as $recipient) {
+                $found = false;  
+    
+                foreach($user->organization->users as $organization_user) {
+                    if ($organization_user->id == $recipient) {
+                        $found = true;
+                    }
+                }   
+    
+                if (!$found) {
+                    abort(500);
                 }
-            }   
-
-            if (!$found) {
-                abort(500);
             }
         }
         
@@ -50,7 +52,7 @@ class MessageController extends Controller
 
         $active_thread = null;
 
-        if (count($request->recipient_ids) > 0) {
+        if (isset($request->recipient_ids) && count($request->recipient_ids) > 0) {
 
             if (count($request->recipient_ids) == 1) {
                 foreach($user->threads as $thread) {

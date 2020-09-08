@@ -14,7 +14,7 @@ class MessageController extends Controller
         $message = \App\Message::where('id', $id)->first();
 
         $message->attachment_url = Storage::temporaryUrl(
-            $message->attachment_url, now()->addDays(2)
+            $message->attachment_path, now()->addDays(2)
         );
 
         return $message;
@@ -100,8 +100,8 @@ class MessageController extends Controller
 
         if ($request->hasFile('attachment')) {
             try {
-                $attachment_url = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
-                $message->attachment_url = $attachment_url;
+                $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
+                $message->attachment_path = $attachment_path;
             } catch (\Exception $e) {
                 //do something
             }
@@ -116,7 +116,7 @@ class MessageController extends Controller
         $message->load('user');
 
         $message->attachment_url = Storage::temporaryUrl(
-            $message->attachment_url, now()->addDays(2)
+            $message->attachment_path, now()->addDays(2)
         );
 
         $notification = new \stdClass;

@@ -129,7 +129,7 @@ class ThreadController extends Controller
 
         foreach ($thread->messages as $message) {
             $message->attachment_url = Storage::temporaryUrl(
-                $message->attachment_url, now()->addDays(2)
+                $message->attachment_path, now()->addDays(2)
             );
         }
 

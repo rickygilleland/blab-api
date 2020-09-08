@@ -111,13 +111,11 @@ class MessageController extends Controller
 
         $message->save();
 
-        $newMessage = \App\Message::where('id', $message->id)->first();
+        $newMessage = \App\Message::where('id', $message->id)->with('user')->first()->toArray();
 
-        $newMessage->attachment_url = Storage::temporaryUrl(
-            $newMessage->attachment_path, now()->addDays(2)
+        $newMessage["attachment_url"] = Storage::temporaryUrl(
+            $newMessage["attachment_path"], now()->addDays(2)
         );
-
-        $newMessage->load('user');
 
         $notification = new \stdClass;
         $notification->triggered_by = $user->id;
@@ -133,7 +131,7 @@ class MessageController extends Controller
             broadcast(new NewDirectMessageSent($notification));
         }
 
-        return $message;
+        return $newMessage;
         
     }
 

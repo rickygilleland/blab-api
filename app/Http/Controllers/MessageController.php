@@ -50,7 +50,7 @@ class MessageController extends Controller
         }
 
         $request->validate([
-            'attachment' => 'nullable|mimes:audio/x-wav,video'
+            'attachment' => 'nullable|mimes:wav'
         ]);
         
         $message = new \App\Message();

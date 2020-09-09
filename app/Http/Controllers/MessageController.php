@@ -11,11 +11,15 @@ class MessageController extends Controller
 {
     public function get_message(Request $request, $id)
     {
-        $message = \App\Message::where('id', $id)->first();
+        $message = \App\Message::where('id', $id)->load('organization', 'user')->first();
 
         $message->attachment_url = Storage::temporaryUrl(
             $message->attachment_path, now()->addDays(2)
         );
+
+        if ($message->is_public) {
+            $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $message->slug;
+        }
 
         return $message;
     }
@@ -44,6 +48,10 @@ class MessageController extends Controller
                 }
             }
         }
+
+        $request->validate([
+            'attachment' => 'nullable|mimes:audio,video'
+        ]);
         
         $message = new \App\Message();
         $message->user_id = $user->id;
@@ -104,6 +112,7 @@ class MessageController extends Controller
             try {
                 $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
                 $message->attachment_path = $attachment_path;
+                $message->attachment_mime_type = $request->file('attachment')->getMimeType();
             } catch (\Exception $e) {
                 //do something
             }
@@ -113,11 +122,15 @@ class MessageController extends Controller
 
         $message->save();
 
-        $newMessage = \App\Message::where('id', $message->id)->with('user')->first()->toArray();
+        $newMessage = \App\Message::where('id', $message->id)->with('user', 'thread')->first()->toArray();
 
         $newMessage["attachment_url"] = Storage::temporaryUrl(
             $newMessage["attachment_path"], now()->addDays(2)
         );
+
+        if ($message->is_public) {
+            $newMessage["public_url"] = "https://blab.to/b/" . $message->organization->slug . "/" . $message->slug;
+        }
 
         $notification = new \stdClass;
         $notification->triggered_by = $user->id;
@@ -142,4 +155,27 @@ class MessageController extends Controller
         
     }
 
+    public function show(Request $request, $organization_slug, $blab_slug) 
+    {
+
+        if ($organization_slug == null || $blab_slug == null) {
+            abort(404);
+        }
+
+        $organization = \App\Organization::where('slug', $organization_slug)->first();
+
+        if (!$organization) {
+            abort(404);
+        }
+
+        $message = \App\Message::where('slug', $blab_slug)->with('user')->first();
+
+        if (!$message || $message->organization_id != $organization->id || !$message->is_public) {
+            abort(404);
+        }
+
+        return view('message.index', ['message' => $message]);
+
+    }
+    
 }

@@ -131,6 +131,10 @@ class ThreadController extends Controller
             $message->attachment_url = Storage::temporaryUrl(
                 $message->attachment_path, now()->addDays(2)
             );
+
+            if ($message->is_public) {
+                $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $message->slug;
+            }
         }
 
         return $thread;

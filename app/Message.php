@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
+    public function organization()
+    {
+        return $this->belongsTo('App\Organization');
+    }
+    
     public function user()
     {
         return $this->belongsTo('App\User');

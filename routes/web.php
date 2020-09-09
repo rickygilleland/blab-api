@@ -60,3 +60,8 @@ Route::get('/billing', 'BillingController@index');
 Route::get('/billing/upgrade', 'BillingController@upgrade_form');
 Route::post('/billing/upgrade', 'BillingController@upgrade');
 
+//public blab viewing links
+Route::get('/b/{organization_slug}/{blab_slug}', 'MessageController@show', function($organization_slug, $blab_slug) {
+
+});
+

@@ -50,7 +50,7 @@ class MessageController extends Controller
         }
 
         $request->validate([
-            'attachment' => 'nullable|mimes:audio,video'
+            'attachment' => 'nullable|mimes:audio/x-wav,video'
         ]);
         
         $message = new \App\Message();
@@ -173,6 +173,10 @@ class MessageController extends Controller
         if (!$message || $message->organization_id != $organization->id || !$message->is_public) {
             abort(404);
         }
+
+        $message->attachment_url = Storage::temporaryUrl(
+            $message->attachment_path, now()->addDays(2)
+        );
 
         return view('message.index', ['message' => $message]);
 

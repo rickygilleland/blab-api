@@ -49,9 +49,9 @@ class MessageController extends Controller
             }
         }
 
-        $request->validate([
+        /*$request->validate([
             'attachment' => 'nullable|mimes:wav,webm,mp4'
-        ]);
+        ]);*/
         
         $message = new \App\Message();
         $message->user_id = $user->id;

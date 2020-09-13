@@ -1,4 +1,4 @@
-@extends('layouts.onboarding')
+@extends('layouts.message')
 
 @section('content')
 	<div class="row">
@@ -12,14 +12,16 @@
                     <div class="row">
 
                         <div class="col-12 p-5">
-                            <h2>View {{ $message->user->first_name }}'s Blab</h2>
-                            @if (strpos($message->attachment_mime_type, "audio") === false)
-                                <video controls src="{{ $message->attachment_url }}" />
-                            @else
-                                <audio controls src="{{ $message->attachment_url }}" />
-                            @endif
+                            <center>
+                                <h2 class="mb-3">View {{ $message->user->first_name }}'s Blab</h2>
+                                @if (strpos($message->attachment_mime_type, "audio") === false)
+                                    <video controls src="{{ $message->attachment_url }}" />
+                                @else
+                                    <audio controls src="{{ $message->attachment_url }}" />
+                                @endif
+                            </center>
                         </div>
-                        
+
 				</div>
 				
 			</div>

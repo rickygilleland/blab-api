@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- OG tags -->
-    <meta property="og:title" content="The Rock" />
+    <meta property="og:title" content="Blab" />
     @if (strpos($message->attachment_mime_type, "audio") === false)
         <meta property="og:audio" content="{{ $message->attachment_url }}" />
         <meta property="og:description" content="{{ $message->user->first_name }} sent you an audio message on Blab." />

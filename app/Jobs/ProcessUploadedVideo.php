@@ -67,10 +67,6 @@ class ProcessUploadedVideo implements ShouldQueue
         $notification->thread = $thread;
 
         foreach($thread->users as $thread_user) {
-            if ($thread_user->id == $user->id) {
-                continue;
-            }
-
             $notification->recipient_id = $thread_user->id;
             broadcast(new DirectMessageUpdated($notification));
         }

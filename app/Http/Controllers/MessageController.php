@@ -19,6 +19,12 @@ class MessageController extends Controller
             $message->attachment_path, now()->addDays(2)
         );
 
+        if ($message->attachment_thumbnail_path != null) {
+            $message->attachment_thumbnail_url = Storage::temporaryUrl(
+                $message->attachment_thumbnail_path, now()->addDays(7)
+            );
+        }
+
         if ($message->is_public) {
             $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $message->slug;
         }
@@ -185,6 +191,12 @@ class MessageController extends Controller
         $message->attachment_url = Storage::temporaryUrl(
             $message->attachment_path, now()->addDays(7)
         );
+
+        if ($message->attachment_thumbnail_path != null) {
+            $message->attachment_thumbnail_url = Storage::temporaryUrl(
+                $message->attachment_thumbnail_path, now()->addDays(7)
+            );
+        }
 
         return view('message.index', ['message' => $message, 'organization_slug' =>  $organization_slug, 'blab_slug' => $blab_slug]);
 

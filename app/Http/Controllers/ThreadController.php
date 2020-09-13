@@ -129,8 +129,14 @@ class ThreadController extends Controller
 
         foreach ($thread->messages as $message) {
             $message->attachment_url = Storage::temporaryUrl(
-                $message->attachment_path, now()->addDays(2)
+                $message->attachment_path, now()->addDays(7)
             );
+
+            if ($message->attachment_thumbnail_path != null) {
+                $message->attachment_thumbnail_url = Storage::temporaryUrl(
+                    $message->attachment_thumbnail_path, now()->addDays(7)
+                );
+            }
 
             if ($message->is_public) {
                 $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $message->slug;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class ThreadController extends Controller
 {
@@ -128,14 +129,39 @@ class ThreadController extends Controller
         }
 
         foreach ($thread->messages as $message) {
-            $message->attachment_url = Storage::temporaryUrl(
-                $message->attachment_path, now()->addDays(7)
-            );
 
-            if ($message->attachment_thumbnail_path != null) {
-                $message->attachment_thumbnail_url = Storage::temporaryUrl(
-                    $message->attachment_thumbnail_path, now()->addDays(7)
-                );
+            if ($message->attachment_path != null) {
+
+                $message->attachment_url = $message->attachment_temporary_url;
+                $message->attachment_thumbnail_url = $message->attachment_thumbnail_temporary_url;
+    
+                $last_updated = Carbon::parse($message->attachment_temporary_url_last_updated);
+    
+                $update_attachment_temp_url = $message->attachment_temporary_url == null;
+    
+                if (!$update_attachment_temp_url && $message->attachment_thumbnail_path != null) {
+                    $last_updated = Carbon::parse($message->attachment_temporary_url_last_updated);
+    
+                    $update_attachment_temp_url = $last_updated->diffInDays() > 5;
+                }
+    
+                if ($update_attachment_temp_url) {
+    
+                    $message->attachment_url = Storage::temporaryUrl(
+                        $message->attachment_path, now()->addDays(7)
+                    );
+    
+                    if ($message->attachment_thumbnail_path != null) {
+                        $message->attachment_thumbnail_url = Storage::temporaryUrl(
+                            $message->attachment_thumbnail_path, now()->addDays(7)
+                        ); 
+                    }
+    
+                    $message->attachment_temporary_url = $message->attachment_url;
+                    $message->attachment_temporary_url_last_updated = Carbon::now();
+                    $message->attachment_thumbnail_temporary_url = $message->attachment_thumbnail_url;
+                    $message->attachment_thumbnail_temporary_url_last_updated = Carbon::now();
+                }
             }
 
             if ($message->is_public) {

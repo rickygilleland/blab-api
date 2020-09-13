@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Events\NewDirectMessageSent;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 use App\Jobs\ProcessUploadedVideo;
 
@@ -15,14 +16,38 @@ class MessageController extends Controller
     {
         $message = \App\Message::where('id', $id)->load('organization', 'user')->first();
 
-        $message->attachment_url = Storage::temporaryUrl(
-            $message->attachment_path, now()->addDays(2)
-        );
+        if ($message->attachment_path != null) {
 
-        if ($message->attachment_thumbnail_path != null) {
-            $message->attachment_thumbnail_url = Storage::temporaryUrl(
-                $message->attachment_thumbnail_path, now()->addDays(7)
-            );
+            $message->attachment_url = $message->attachment_temporary_url;
+            $message->attachment_thumbnail_url = $message->attachment_thumbnail_temporary_url;
+
+            $last_updated = Carbon::parse($message->attachment_temporary_url_last_updated);
+
+            $update_attachment_temp_url = $message->attachment_temporary_url == null;
+
+            if (!$update_attachment_temp_url && $message->attachment_thumbnail_path != null) {
+                $last_updated = Carbon::parse($message->attachment_temporary_url_last_updated);
+
+                $update_attachment_temp_url = $last_updated->diffInDays() > 5;
+            }
+
+            if ($update_attachment_temp_url) {
+
+                $message->attachment_url = Storage::temporaryUrl(
+                    $message->attachment_path, now()->addDays(7)
+                );
+
+                if ($message->attachment_thumbnail_path != null) {
+                    $message->attachment_thumbnail_url = Storage::temporaryUrl(
+                        $message->attachment_thumbnail_path, now()->addDays(7)
+                    ); 
+                }
+
+                $message->attachment_temporary_url = $message->attachment_url;
+                $message->attachment_temporary_url_last_updated = Carbon::now();
+                $message->attachment_thumbnail_temporary_url = $message->attachment_thumbnail_url;
+                $message->attachment_thumbnail_temporary_url_last_updated = Carbon::now();
+            }
         }
 
         if ($message->is_public) {
@@ -188,14 +213,38 @@ class MessageController extends Controller
             abort(404);
         }
 
-        $message->attachment_url = Storage::temporaryUrl(
-            $message->attachment_path, now()->addDays(7)
-        );
+        if ($message->attachment_path != null) {
 
-        if ($message->attachment_thumbnail_path != null) {
-            $message->attachment_thumbnail_url = Storage::temporaryUrl(
-                $message->attachment_thumbnail_path, now()->addDays(7)
-            );
+            $message->attachment_url = $message->attachment_temporary_url;
+            $message->attachment_thumbnail_url = $message->attachment_thumbnail_temporary_url;
+
+            $last_updated = Carbon::parse($message->attachment_temporary_url_last_updated);
+
+            $update_attachment_temp_url = $message->attachment_temporary_url == null;
+
+            if (!$update_attachment_temp_url && $message->attachment_thumbnail_path != null) {
+                $last_updated = Carbon::parse($message->attachment_temporary_url_last_updated);
+
+                $update_attachment_temp_url = $last_updated->diffInDays() > 5;
+            }
+
+            if ($update_attachment_temp_url) {
+
+                $message->attachment_url = Storage::temporaryUrl(
+                    $message->attachment_path, now()->addDays(7)
+                );
+
+                if ($message->attachment_thumbnail_path != null) {
+                    $message->attachment_thumbnail_url = Storage::temporaryUrl(
+                        $message->attachment_thumbnail_path, now()->addDays(7)
+                    ); 
+                }
+
+                $message->attachment_temporary_url = $message->attachment_url;
+                $message->attachment_temporary_url_last_updated = Carbon::now();
+                $message->attachment_thumbnail_temporary_url = $message->attachment_thumbnail_url;
+                $message->attachment_thumbnail_temporary_url_last_updated = Carbon::now();
+            }
         }
 
         return view('message.index', ['message' => $message, 'organization_slug' =>  $organization_slug, 'blab_slug' => $blab_slug]);

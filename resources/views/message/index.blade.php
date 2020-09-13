@@ -14,6 +14,8 @@
         <meta property="og:description" content="{{ $message->user->first_name }} sent you an audio message on Blab." />
     @else
         <meta property="og:video" content="{{ $message->attachment_url }}" />
+        <meta property="og:video:type" content="video/mp4" />
+        <meta property="og:video:secure_url" content="{{ $message->attachment_url }}" />
         <meta property="og:description" content="{{ $message->user->first_name }} sent you an video message on Blab." />
     @endif
     <meta property="og:url" content="https://blab.to/b/{{ $organization_slug }}/{{ $blab_slug }}" />

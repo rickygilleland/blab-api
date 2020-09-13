@@ -116,10 +116,16 @@ class MessageController extends Controller
 
                 $converted_video = $ffmpeg->open($request->file('attachment')->path());
 
-                $converted_video->save(new \FFMpeg\Format\Video\X264(), $request->file('attachment')->path());
+                $converted_path = '/tmp/' . uniqid() . '-' . uniqid() . ".mp4";
+                $converted_video->save(new \FFMpeg\Format\Video\X264(), $converted_path);
                 
-                $message->attachment_path = str_replace('.webm', '.mp4', $attachment_path);
-                $message->attachment_mime_type = "video/mp4";
+                try {
+                    $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $converted_path, 'private');
+                    $message->attachment_path = $attachment_path;
+                    $message->attachment_mime_type = "video/mp4";
+                } catch (\Exception $e) {
+                    //do something
+                }
             } else {
                 try {
                     $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');

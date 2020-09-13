@@ -175,10 +175,10 @@ class MessageController extends Controller
         }
 
         $message->attachment_url = Storage::temporaryUrl(
-            $message->attachment_path, now()->addDays(2)
+            $message->attachment_path, now()->addDays(7)
         );
 
-        return view('message.index', ['message' => $message]);
+        return view('message.index', ['message' => $message, 'organization_slug' =>  $organization_slug, 'blab_slug' => $blab_slug]);
 
     }
     

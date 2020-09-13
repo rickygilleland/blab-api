@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Water Cooler') }}</title>
+    <title>{{ config('app.name', 'Blab') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -54,6 +54,13 @@
         }
         .btn {
             font-weight:600
+        }
+        video, audio {
+            outline: none;
+        }
+        video {
+            border-radius: 25px;
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
         }
     </style>
 </head>

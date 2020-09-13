@@ -41,9 +41,10 @@ class ProcessUploadedVideo implements ShouldQueue
         $converted_video->export()
             ->toDisk('spaces')
             ->inFormat(new \FFMpeg\Format\Video\X264('aac'))
-            ->addFilter('[0:v]', 'hflip', '[v0hflip]')
-            ->addFilter('[1:v]', 'atadenoise', '[v1atadenoise]')
+            ->addFilter('hflip')
+            ->addFilter('atadenoise')
             ->withVisibility('private')
+            ->addFormatOutputMapping(new X264, Media::make('local', 'stacked_video.mp4'), ['0:a', '[v]'])
             ->save(str_replace('.webm', '.mp4', $this->message->attachment_path));
 
         $this->message->attachment_path = str_replace('.webm', '.mp4', $this->message->attachment_path);

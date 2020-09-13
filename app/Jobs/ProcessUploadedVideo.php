@@ -40,7 +40,7 @@ class ProcessUploadedVideo implements ShouldQueue
 
         $converted_video->export()
             ->toDisk('spaces')
-            ->inFormat(\FFMpeg\Format\Video\X264('aac'))
+            ->inFormat(new \FFMpeg\Format\Video\X264('aac'))
             ->withVisibility('private')
             ->save(str_replace('.webm', '.mp4', $this->message->attachment_path));
 

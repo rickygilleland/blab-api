@@ -10,12 +10,12 @@
     <!-- OG tags -->
     <meta property="og:title" content="Blab" />
     @if (strpos($message->attachment_mime_type, "audio") === false)
-        <meta property="og:audio" content="{{ $message->attachment_url }}" />
+        <meta property="og:audio" content="{{ $message->attachment_temporary_url }}" />
         <meta property="og:description" content="{{ $message->user->first_name }} sent you an audio message on Blab." />
     @else
-        <meta property="og:video" content="{{ $message->attachment_url }}" />
+        <meta property="og:video" content="{{ $message->attachment_temporary_url }}" />
         <meta property="og:video:type" content="video/mp4" />
-        <meta property="og:video:secure_url" content="{{ $message->attachment_url }}" />
+        <meta property="og:video:secure_url" content="{{ $message->attachment_temporary_url }}" />
         <meta property="og:description" content="{{ $message->user->first_name }} sent you an video message on Blab." />
     @endif
     <meta property="og:url" content="https://blab.to/b/{{ $organization_slug }}/{{ $blab_slug }}" />
@@ -96,9 +96,9 @@
                                     <center>
                                         <h2 class="mb-3">View {{ $message->user->first_name }}'s Blab</h2>
                                         @if (strpos($message->attachment_mime_type, "audio") === false)
-                                            <video controls src="{{ $message->attachment_url }}" />
+                                            <video controls src="{{ $message->attachment_temporary_url }}" />
                                         @else
-                                            <audio controls src="{{ $message->attachment_url }}" controlsList="nodownload" />
+                                            <audio controls src="{{ $message->attachment_temporary_url }}" controlsList="nodownload" />
                                         @endif
                                     </center>
                                 </div>

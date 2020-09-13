@@ -163,9 +163,6 @@ class ThreadController extends Controller
                     $message->attachment_thumbnail_temporary_url_last_updated = Carbon::now();
     
                     $message->save();
-    
-                    $message->attachment_url = $attachment_url;
-                    $message->attachment_thumbnail_url = $attachment_thumbnail_url;
                 }
             }
 

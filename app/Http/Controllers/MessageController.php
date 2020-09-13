@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Events\NewDirectMessageSent;
 use Illuminate\Support\Facades\Storage;
-use FFMpeg;
 
 class MessageController extends Controller
 {
@@ -110,24 +109,25 @@ class MessageController extends Controller
         }
 
         if ($request->hasFile('attachment')) {
-            try {
-                $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
-                $message->attachment_path = $attachment_path;
-                $message->attachment_mime_type = $request->file('attachment')->getMimeType();
-            } catch (\Exception $e) {
-                //do something
-            }
+            $mime_type = $request->file('attachment')->getMimeType();
+            if ($mime_type != "audio/wav") {
 
-            if ($message->attachment_mime_type != "audio/wav") {
-                FFMpeg::fromDisk('spaces')
-                    ->open($attachment_path)
-                    ->export()
-                    ->toDisk('spaces')
-                    ->inFormat(new \FFMpeg\Format\Video\X264)
-                    ->save(str_replace('.webm', '.mp4', $attachment_path));
+                $ffmpeg = \FFMpeg\FFMpeg::create();
 
-                    $message->attachment_path = str_replace('.webm', '.mp4', $attachment_path);
-                    $message->attachment_mime_type = "video/mp4";
+                $converted_video = $ffmpeg->open($request->file('attachment')->path());
+
+                $converted_video->save(new \FFMpeg\Format\Video\X264(), $request->file('attachment')->path());
+                
+                $message->attachment_path = str_replace('.webm', '.mp4', $attachment_path);
+                $message->attachment_mime_type = "video/mp4";
+            } else {
+                try {
+                    $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
+                    $message->attachment_path = $attachment_path;
+                    $message->attachment_mime_type = $request->file('attachment')->getMimeType();
+                } catch (\Exception $e) {
+                    //do something
+                }
             }
         }
 

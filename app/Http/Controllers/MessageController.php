@@ -117,7 +117,7 @@ class MessageController extends Controller
                 $converted_video = $ffmpeg->open($request->file('attachment')->path());
 
                 $converted_path = '/tmp/' . uniqid() . '-' . uniqid() . ".mp4";
-                $converted_video->save(new \FFMpeg\Format\Video\X264(), $converted_path);
+                $converted_video->save(new \FFMpeg\Format\Video\X264('aac'), $converted_path);
                 
                 try {
                     $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $converted_path, 'private');

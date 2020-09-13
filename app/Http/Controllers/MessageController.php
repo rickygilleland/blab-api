@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Events\NewDirectMessageSent;
 use Illuminate\Support\Facades\Storage;
 
+use App\Jobs\ProcessUploadedVideo;
+
 class MessageController extends Controller
 {
     public function get_message(Request $request, $id)
@@ -109,35 +111,18 @@ class MessageController extends Controller
         }
 
         if ($request->hasFile('attachment')) {
-            $mime_type = $request->file('attachment')->getMimeType();
-            if ($mime_type != "audio/wav") {
-
-                $ffmpeg = \FFMpeg\FFMpeg::create();
-
-                $converted_video = $ffmpeg->open($request->file('attachment')->path());
-
-                $converted_path = '/tmp/' . uniqid() . '-' . uniqid() . ".mp4";
-                $converted_video->save(new \FFMpeg\Format\Video\X264('aac'), $converted_path);
-                
-                try {
-                    $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $converted_path, 'private');
-                    $message->attachment_path = $attachment_path;
-                    $message->attachment_mime_type = "video/mp4";
-                } catch (\Exception $e) {
-                    //do something
-                }
-            } else {
-                try {
-                    $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
-                    $message->attachment_path = $attachment_path;
-                    $message->attachment_mime_type = $request->file('attachment')->getMimeType();
-                } catch (\Exception $e) {
-                    //do something
-                }
+            try {
+                $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
+                $message->attachment_path = $attachment_path;
+                $message->attachment_mime_type = $request->file('attachment')->getMimeType();
+            } catch (\Exception $e) {
+                //do something
             }
         }
 
         $message->slug = Str::random(12);
+
+        $message->attachment_processed = $message->attachment_mime_type == "audio/wav";
 
         $message->save();
 
@@ -149,6 +134,10 @@ class MessageController extends Controller
 
         if ($message->is_public) {
             $newMessage["public_url"] = "https://blab.to/b/" . $message->organization->slug . "/" . $message->slug;
+        }
+
+        if ($message->attachment_mime_type != "audio/wav") {
+            ProcessUploadedVideo::dispatch($message);
         }
 
         $notification = new \stdClass;

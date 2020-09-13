@@ -47,6 +47,7 @@ class ProcessUploadedVideo implements ShouldQueue
         $this->message->attachment_path = str_replace('.webm', '.mp4', $this->message->attachment_path);
         $this->message->attachment_mime_type = "video/mp4";
         $this->message->attachment_processed = true;
+        $this->message->attachment_temporary_url_last_updated = null;
         $this->message->save();
 
         $thumbnail_path = 'message_thumbnails/' . $this->message->id . "_" . uniqid() . '.jpg';
@@ -57,6 +58,7 @@ class ProcessUploadedVideo implements ShouldQueue
             ->save($thumbnail_path);
 
         $this->message->attachment_thumbnail_path = $thumbnail_path;
+        $this->message->attachment_thumbnail_temporary_url_last_updated = null;
         $this->message->save();
 
         $thread = \App\Thread::where('id', $this->message->thread_id)->first();

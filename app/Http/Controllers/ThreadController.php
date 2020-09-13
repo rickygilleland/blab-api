@@ -130,7 +130,7 @@ class ThreadController extends Controller
 
         foreach ($thread->messages as $message) {
 
-            if ($message->attachment_path != null) {
+            if ($message->attachment_path != null && $message->processed) {
 
                 $attachment_url = $message->attachment_temporary_url;
                 $attachment_thumbnail_url = $message->attachment_thumbnail_temporary_url;

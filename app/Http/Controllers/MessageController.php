@@ -16,7 +16,7 @@ class MessageController extends Controller
     {
         $message = \App\Message::where('id', $id)->load('organization', 'user')->first();
 
-        if ($message->attachment_path != null) {
+        if ($message->attachment_path != null && $message->processed) {
 
             $attachment_url = $message->attachment_temporary_url;
             $attachment_thumbnail_url = $message->attachment_thumbnail_temporary_url;
@@ -215,7 +215,7 @@ class MessageController extends Controller
             abort(404);
         }
 
-        if ($message->attachment_path != null) {
+        if ($message->attachment_path != null && $message->processed) {
 
             $attachment_url = $message->attachment_temporary_url;
             $attachment_thumbnail_url = $message->attachment_thumbnail_temporary_url;

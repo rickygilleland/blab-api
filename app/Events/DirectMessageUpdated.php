@@ -39,9 +39,7 @@ class DirectMessageUpdated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        if ($this->message->is_public == false && $this->recipient_id) {
-            return new PrivateChannel('user.'.$this->recipient_id);
-        }
+        return new PrivateChannel('user.'.$this->recipient_id);
     }
 
     public function broadcastAs()

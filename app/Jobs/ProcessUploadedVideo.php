@@ -44,7 +44,6 @@ class ProcessUploadedVideo implements ShouldQueue
             ->addFilter('hflip')
             ->addFilter('atadenoise')
             ->withVisibility('private')
-            ->addFormatOutputMapping(new X264, Media::make('local', 'stacked_video.mp4'), ['0:a', '[v]'])
             ->save(str_replace('.webm', '.mp4', $this->message->attachment_path));
 
         $this->message->attachment_path = str_replace('.webm', '.mp4', $this->message->attachment_path);

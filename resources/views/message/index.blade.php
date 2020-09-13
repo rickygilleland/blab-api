@@ -9,9 +9,10 @@
 
     <!-- OG tags -->
     <meta property="og:title" content="Blab" />
-    @if (strpos($message->attachment_mime_type, "audio") === false)
+    @if (strpos($message->attachment_mime_type, "audio") !== false)
         <meta property="og:audio" content="{{ $message->attachment_temporary_url }}" />
         <meta property="og:description" content="{{ $message->user->first_name }} sent you an audio message on Blab." />
+        <meta property="og:audio:type" content="audio/wav" />
     @else
         <meta property="og:video" content="{{ $message->attachment_temporary_url }}" />
         <meta property="og:video:type" content="video/mp4" />

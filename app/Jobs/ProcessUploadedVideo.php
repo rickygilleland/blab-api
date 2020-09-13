@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Events\DirectMessageUpdated;
 
 use FFMpeg;
-use FFMpeg\Coordinate\Dimension;
-use FFMpeg\Format\Video\X264;
 
 class ProcessUploadedVideo implements ShouldQueue
 {
@@ -42,7 +40,7 @@ class ProcessUploadedVideo implements ShouldQueue
 
         $converted_video->export()
             ->toDisk('spaces')
-            ->inFormat(X264('aac'))
+            ->inFormat(\FFMpeg\Format\Video\X264('aac'))
             ->withVisibility('private')
             ->save(str_replace('.webm', '.mp4', $this->message->attachment_path));
 

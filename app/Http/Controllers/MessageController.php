@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Events\NewDirectMessageSent;
 use Illuminate\Support\Facades\Storage;
+use FFMpeg;
 
 class MessageController extends Controller
 {
@@ -49,9 +50,9 @@ class MessageController extends Controller
             }
         }
 
-        /*$request->validate([
+        $request->validate([
             'attachment' => 'nullable|mimes:wav,webm,mp4'
-        ]);*/
+        ]);
         
         $message = new \App\Message();
         $message->user_id = $user->id;
@@ -113,6 +114,18 @@ class MessageController extends Controller
                 $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
                 $message->attachment_path = $attachment_path;
                 $message->attachment_mime_type = $request->file('attachment')->getMimeType();
+
+                if ($message->attachment_mime_type != "audio/wav") {
+                    FFMpeg::fromDisk('spaces')
+                        ->open($attachment_path)
+                        ->export()
+                        ->toDisk('spaces')
+                        ->inFormat(new \FFMpeg\Format\Video\X264)
+                        ->save(str_replace('.webm', '.mp4', $attachment_path));
+
+                        $message->attachment_path = str_replace('.webm', '.mp4', $attachment_path);
+                        $message->attachment_mime_type = "video/mp4";
+                }
             } catch (\Exception $e) {
                 //do something
             }

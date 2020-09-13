@@ -130,14 +130,12 @@ class ThreadController extends Controller
 
         foreach ($thread->messages as $message) {
 
-            if ($message->attachment_path != null && $message->processed) {
+            if ($message->attachment_path != null && $message->attachment_processed) {
 
                 $attachment_url = $message->attachment_temporary_url;
                 $attachment_thumbnail_url = $message->attachment_thumbnail_temporary_url;
     
-                $last_updated = Carbon::parse($message->attachment_temporary_url_last_updated);
-    
-                $update_attachment_temp_url = $message->attachment_temporary_url == null;
+                $update_attachment_temp_url = $message->attachment_temporary_url == null || $message->attachment_temporary_url_last_updated == null;
     
                 if (!$update_attachment_temp_url && $message->attachment_thumbnail_path != null) {
                     $last_updated = Carbon::parse($message->attachment_temporary_url_last_updated);

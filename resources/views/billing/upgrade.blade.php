@@ -33,7 +33,7 @@
 </div>
 
 <script>
-    const stripe = Stripe('stripe-public-key');
+    const stripe = Stripe("{{ env('STRIPE_KEY') }}");
 
     const elements = stripe.elements();
     const cardElement = elements.create('card');
@@ -45,6 +45,9 @@
     const clientSecret = cardButton.dataset.secret;
 
     cardButton.addEventListener('click', async (e) => {
+
+        document.getElementById("card-button").disabled = true;
+
         const { setupIntent, error } = await stripe.confirmCardSetup(
             clientSecret, {
                 payment_method: {
@@ -57,6 +60,8 @@
         if (error) {
             document.getElementById("card-button").disabled = false;
         } else {
+            document.getElementById('card-button').innerHTML = '<i class="fas fa-circle-notch fa-spin text-light mr-2" style="font-size:1.4rem"></i>Loading';
+
             var coupon = document.getElementById("coupon-code").value;
 
             $.ajax({
@@ -66,12 +71,15 @@
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
                 },
                 data: {
-                    'plan': {{ $plan_id }},
+                    'plan': "{{ $plan_id }}",
                     'payment_method': setupIntent.payment_method,
                     'coupon': coupon
                 },
                 success: function() {
                     window.location.href = "/billing";
+                },
+                error: function(error) {
+                    document.getElementById('card-button').innerHTML = 'Payment Failed';
                 }
             });
         }

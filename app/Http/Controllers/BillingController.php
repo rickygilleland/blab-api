@@ -60,13 +60,23 @@ class BillingController extends Controller
 
         $plan_quantity = count($user->organization->users);
 
+        $environment = getenv('APP_ENV');
+
         if ($plan == "standard") {
-            $plan_id = "price_1HRFHwFAJZnmFdvTvZczMHFq";
+            if ($environment == "production") {
+                $plan_id = "price_1HRFHwFAJZnmFdvTvZczMHFq";
+            } else {
+                $plan_id = "price_1HRGkVFAJZnmFdvTy9dmTdsV";
+            }
             $plan_name = "Standard";
             $plan_price = 5;
             $total = $plan_price * $plan_quantity;
         } else {
-            $plan_id = "price_1HRFICFAJZnmFdvTMoSn8Qhl";
+            if ($environment == "production") {
+                $plan_id = "price_1HRFICFAJZnmFdvTMoSn8Qhl";
+            } else {
+                $plan_id = "price_1HRGkgFAJZnmFdvTjvsbv53Y";
+            }
             $plan_name = "Plus";
             $plan_price = 10;
             $total = $plan_price * $plan_quantity;
@@ -95,15 +105,37 @@ class BillingController extends Controller
         }
 
         $plan_quantity = count($user->organization->users);
+        $environment = getenv('APP_ENV');
+
+        if ($request->plan == "price_1HRFHwFAJZnmFdvTvZczMHFq" || $request->plan == "price_1HRGkVFAJZnmFdvTy9dmTdsV") {
+            $plan_name = "Blab Standard";
+        }    
+        
+        if ($request->plan == "price_1HRFICFAJZnmFdvTMoSn8Qhl" || $request->plan == "price_1HRGkgFAJZnmFdvTjvsbv53Y") {
+            $plan_name = "Blab Plus";
+        }   
 
         if ($request->coupon != null && ($request->coupon == "HUNTHALFOFF" || $request->coupon == "ROO100")) {
-            $user->organization->newSubscription('Blab', $request->plan_id)->quantity($plan_quantity)->withCoupon($request->coupon)->create($request->payment_method, [
+
+            if ($request->coupon == "ROO100") {
+                if ($environment == "production") {
+                    $coupon = "I1RMqlTG";
+                } else {
+                    $coupon = "4XfKbe1k";
+                }
+            }
+
+            if ($request->coupon == "HUNTHALFOFF") {
+                $coupon = "2DXdr950";
+            }
+
+            $user->organization->newSubscription($plan_name, $request->plan)->quantity($plan_quantity)->withCoupon($coupon)->create($request->payment_method, [
                 'email' => $user->email
             ], [
                 'metadata' => ['organization_name' => $user->organization->name ]
             ]);
         } else {
-            $user->organization->newSubscription('Blab', $request->plan_id)->quantity($plan_quantity)->create($request->payment_method, [
+            $user->organization->newSubscription($plan_name, $request->plan)->quantity($plan_quantity)->create($request->payment_method, [
                 'email' => $user->email
             ], [
                 'metadata' => ['organization_name' => $user->organization->name ]

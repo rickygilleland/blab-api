@@ -160,7 +160,7 @@ class MessageController extends Controller
 
         $message->slug = Str::random(12);
 
-        $message->attachment_processed = $message->attachment_mime_type == "audio/wav";
+        $message->attachment_processed = $message->attachment_mime_type == "audio/x-wav";
 
         $message->save();
 
@@ -174,7 +174,7 @@ class MessageController extends Controller
             $newMessage["public_url"] = "https://blab.to/b/" . $message->organization->slug . "/" . $message->slug;
         }
 
-        if ($message->attachment_mime_type != "audio/wav") {
+        if ($message->attachment_mime_type != "audio/x-wav") {
             ProcessUploadedVideo::dispatch($message);
         }
 

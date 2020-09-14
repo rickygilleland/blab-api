@@ -26,4 +26,9 @@ class Room extends Model
     {
         return $this->hasMany('App\Message');
     }
+
+    public function room()
+    {
+        return $this->belongsTo('App\Thread');
+    }
 }

@@ -16,6 +16,7 @@ class ThreadController extends Controller
         $private_threads = [];
         $public_threads = [];
         $shared_threads = [];
+        $room_threads = [];
 
         foreach ($user->threads as $thread) {
 
@@ -55,6 +56,11 @@ class ThreadController extends Controller
                 $thread->name = $name;
             }
 
+            if ($thread->type == "room") {
+                $room_threads[] = $thread;
+                continue;
+            }
+
             $private_threads[] = $thread;
         }
 
@@ -73,6 +79,7 @@ class ThreadController extends Controller
         $response->private_threads = $private_threads;
         $response->public_threads = $public_threads;
         $response->shared_threads = $shared_threads;
+        $response->room_threads = $room_threads;
 
         return response()->json($response);
     }

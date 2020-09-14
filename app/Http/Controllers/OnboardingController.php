@@ -186,6 +186,14 @@ class OnboardingController extends Controller
         }
 
         $room->save();
+
+        $thread = new \App\Thread();
+        $thread->slug = Str::random(12);
+        $thread->type = "room";
+        $thread->save();
+
+        $user->threads()->attach($thread);
+        $room->thread()->attach($thread);
         
         //skip the team setup for now until we have multi-team support
         //return redirect('onboarding/team');
@@ -296,6 +304,14 @@ class OnboardingController extends Controller
         $room->secret = Hash::make(Str::random(256));
         $room->is_private = false;
         $room->save();
+
+        $thread = new \App\Thread();
+        $thread->slug = Str::random(12);
+        $thread->type = "room";
+        $thread->save();
+
+        $user->threads()->attach($thread);
+        $room->thread()->attach($thread);
 
         $full_room_slug = $user->organization->slug.'/'.$default_team->slug.'/'.$room->slug;
 

@@ -135,6 +135,14 @@ class RoomController extends Controller
             if ($room->is_private) {
                 $user->rooms()->attach($room);
             }
+
+            $thread = new \App\Thread();
+            $thread->slug = Str::random(12);
+            $thread->type = "room";
+            $thread->save();
+
+            $user->threads()->attach($thread);
+            $room->thread()->attach($thread);
     
             if ($room->type == "call") {
                 foreach ($request->participants as $participant) {

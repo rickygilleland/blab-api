@@ -162,13 +162,16 @@ class MessageController extends Controller
 
         $message->attachment_processed = $message->attachment_mime_type == "audio/x-wav";
 
+        if ($message->attachment_mime_type == "audio/x-wav") {
+            $message->attachment_temporary_url = Storage::temporaryUrl(
+                $message->attachment_path, now()->addDays(7)
+            );
+            $message->attachment_temporary_url_last_updated = Carbon::now();
+        }
+
         $message->save();
 
         $newMessage = \App\Message::where('id', $message->id)->with('user', 'thread')->first()->toArray();
-
-        $newMessage["attachment_url"] = Storage::temporaryUrl(
-            $newMessage["attachment_path"], now()->addDays(2)
-        );
 
         if ($message->is_public) {
             $newMessage["public_url"] = "https://blab.to/b/" . $message->organization->slug . "/" . $message->slug;

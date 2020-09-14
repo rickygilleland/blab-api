@@ -90,7 +90,7 @@ class MessageController extends Controller
 
         $active_thread = null;
 
-        if (isset($request->recipient_ids) && count($request->recipient_ids) > 0) {
+        if (isset($request->recipient_ids) && count($request->recipient_ids) > 0 && !isset($request->thread_id)) {
 
             if (count($request->recipient_ids) == 1) {
                 foreach($user->threads as $thread) {
@@ -136,6 +136,14 @@ class MessageController extends Controller
                 $message->thread_id = $active_thread->id;
                 $message->save();
             }
+        }
+
+        if (isset($request->thread_id)) {
+            if (!$user->threads->contains($request->thread_id)) {
+                abort(404);
+            }
+
+            $message->thread_id = $request->thread_id;
         }
 
         if ($request->hasFile('attachment')) {

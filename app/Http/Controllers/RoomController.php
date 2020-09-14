@@ -213,7 +213,7 @@ class RoomController extends Controller
     {
         $user = \Auth::user()->load('teams');
 
-        $room = \App\Room::where('id', $id)->with('users')->first();
+        $room = \App\Room::where('id', $id)->with('users, thread.users')->first();
 
         if (!$user->teams->contains($room->team_id)) {
             abort(404);
@@ -232,6 +232,10 @@ class RoomController extends Controller
         //make sure we don't attach more than once
         if (!$room->users->contains($request->user_id)) {
             $room->users()->attach($request->user_id);
+        }
+
+        if (!$room->thread->users(contains($request->user_id))) {
+            $room->thread->users()->attach($request->user_id);
         }
 
         $notification = new \stdClass;

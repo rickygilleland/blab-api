@@ -70,10 +70,10 @@ class Kernel extends ConsoleKernel
 
             foreach ($invites as $invite) {
 
-                $subject = $invite->name . ": You are Invited to Try Water Cooler";
+                $subject = $invite->name . ": You are Invited to Try Blab";
 
                 if ($invite->invite_sent == true) {
-                    $subject = "Reminder: " . $invite->name . ": You are Invited to Try Water Cooler";
+                    $subject = "Reminder: " . $invite->name . ": You are Invited to Try Blab";
                     $reminder_count++;
 
                     if ($invite->created_at <= Carbon::now()->subDays(6)) {
@@ -109,7 +109,7 @@ class Kernel extends ConsoleKernel
             if ($invited_count > 0) {
                 $email = new \stdClass;
                 $email->type = "text_only";
-                $email->email = "ricky@watercooler.work";
+                $email->email = "ricky@blab.to";
                 $email->name = "Ricky Gilleland";
                 $email->subject = "Invites Were Sent Out";
                 $email->content = $invited_count . " invites were sent.\n " . $reminder_count++ . " were reminders.";
@@ -148,7 +148,7 @@ class Kernel extends ConsoleKernel
                 $email = $invite->email;
                 $domain = explode("@", $invite->email);
                 if ($domain[1] == "acme.co") {
-                    $email = "ricky@watercooler.work";
+                    $email = "ricky@blab.to";
                 } 
 
                 $invite_user = User::where('id', $invite->invited_by)->first();
@@ -159,14 +159,14 @@ class Kernel extends ConsoleKernel
                     continue;
                 }
 
-                $subject = "Reminder: " . $invite_user->first_name . " has invited you to join " . $invite_user->organization->name . " on Water Cooler";
+                $subject = "Reminder: " . $invite_user->first_name . " has invited you to join " . $invite_user->organization->name . " on Blab";
 
                 if ($invite->created_at <= Carbon::now()->subDays(6)) {
                     $subject = "Final " . $subject;
                 }
     
                 $invite_email = new \stdClass;
-                $invite_email->name = "New Water Cooler User";
+                $invite_email->name = "New Blab User";
                 $invite_email->email = $email;
                 $invite_email->data = [
                     "subject" => $subject,
@@ -193,7 +193,7 @@ class Kernel extends ConsoleKernel
             if ($invited_count > 0) {
                 $email = new \stdClass;
                 $email->type = "text_only";
-                $email->email = "ricky@watercooler.work";
+                $email->email = "ricky@blab.to";
                 $email->name = "Ricky Gilleland";
                 $email->subject = "Organization Invite Reminders Were Sent Out";
                 $email->content = $invited_count . " reminders were sent.";

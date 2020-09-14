@@ -168,12 +168,12 @@ class RegisterController extends Controller
         //make sure we don't send emails for the demo accounts
         $domain = explode("@", $user->email);
         if ($domain[1] == "acme.co") {
-            $email->email = "ricky@watercooler.work";
+            $email->email = "ricky@blab.to";
         } 
 
         $email->name = $user->first_name . " " . $user->last_name;
         $email->data = [
-            "subject" => $user->first_name . ", Welcome to Water Cooler",
+            "subject" => $user->first_name . ", Welcome to Blab",
             "first_name" => $user->first_name
         ];
         $email->template_id = "d-ce8fa69059b948b3806fe5a4f1520bef";
@@ -182,10 +182,10 @@ class RegisterController extends Controller
 
         $email = new \stdClass;
         $email->type = "text_only";
-        $email->email = "ricky@watercooler.work";
+        $email->email = "ricky@blab.to";
         $email->name = "Ricky Gilleland";
         $email->subject = "New User Registered";
-        $email->content = "A new user signed up for Water Cooler. ID: ".$user->id;
+        $email->content = "A new user signed up for Blab. ID: ".$user->id;
 
         ProcessEmails::dispatch($email);
 

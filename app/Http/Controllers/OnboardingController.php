@@ -55,7 +55,7 @@ class OnboardingController extends Controller
         //make sure we don't send emails for the demo accounts
         $domain = explode("@", $user->email);
         if ($domain[1] == "acme.co") {
-            $email->email = "ricky@watercooler.work";
+            $email->email = "ricky@blab.to";
         } else {
             $email->email = $user->email;
         }
@@ -64,7 +64,7 @@ class OnboardingController extends Controller
         $email->data = [
             "name" => $user->first_name,
             "token" => $login_code,
-            "subject" => "Your Water Cooler confirmation code is ".$login_code
+            "subject" => "Your Blab confirmation code is ".$login_code
         ];
         $email->template_id = "d-dd835e437d9f4aadaf1c9acb25e5f488";
 
@@ -159,7 +159,7 @@ class OnboardingController extends Controller
         $default_team = $teams[0];
 
         $room = new \App\Room();
-        $room->name = "Water Cooler";
+        $room->name = "Blab";
         $room->team_id = $default_team->id;
         $room->organization_id = $user->organization->id;
         $room->slug = "water-cooler";
@@ -216,7 +216,7 @@ class OnboardingController extends Controller
 
         if (!$organization_invite) {
             $organization_invite = new \App\Invite();
-            $organization_invite->email = "hello@watercooler.work";
+            $organization_invite->email = "hello@blab.to";
             $organization_invite->name = "Created By System";
             $organization_invite->invited_by = 0;
             $organization_invite->invite_code = Hash::make(Str::random(256));
@@ -259,14 +259,14 @@ class OnboardingController extends Controller
             //make sure we don't send emails for the demo accounts
             $domain = explode("@", $email);
             if ($domain[1] == "acme.co") {
-                $invite_email->email = "ricky@watercooler.work";
+                $invite_email->email = "ricky@blab.to";
             } else {
                 $invite_email->email = $email;
             }
 
-            $invite_email->name = "New Water Cooler User";
+            $invite_email->name = "New Blab User";
             $invite_email->data = [
-                "subject" => $auth_user->first_name . " has invited you to join " . $auth_user->organization->name . " on Water Cooler",
+                "subject" => $auth_user->first_name . " has invited you to join " . $auth_user->organization->name . " on Blab",
                 "organization_name" => $auth_user->organization->name,
                 "inviter_name" => $auth_user->first_name,
                 "invite_token" => base64_encode($invite->invite_code),
@@ -291,7 +291,7 @@ class OnboardingController extends Controller
 
         //create their first watercooler room
         $room = new \App\Room();
-        $room->name = "Water Cooler";
+        $room->name = "Blab";
         $room->team_id = $default_team->id;
         $room->organization_id = $user->organization->id;
         $room->slug = Str::slug($room->name, '-');

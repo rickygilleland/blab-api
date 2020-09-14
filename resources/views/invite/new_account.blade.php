@@ -9,8 +9,8 @@
 				
 				<div class="card-body p-5">
 			
-					<h2 class="pb-2 text-center">Create Your Water Cooler Account</h2>
-                    <p class="sub-heading text-center">We can't wait for you and your team to get started using Water Cooler!<br>Let's get your account created.</p>
+					<h2 class="pb-2 text-center">Create Your Blab Account</h2>
+                    <p class="sub-heading text-center">We can't wait for you and your team to get started using Blab!<br>Let's get your account created.</p>
 					
 					<hr>
 					

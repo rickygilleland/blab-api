@@ -298,9 +298,9 @@ class RoomChannel
             $sg = new \SendGrid($sendgrid_key);
 
             $email = new \SendGrid\Mail\Mail();
-            $email->setFrom("noreply@watercooler.work", "Water Cooler System");
+            $email->setFrom("noreply@blab.o", "Blab System");
 
-            $email->addTo("ricky@watercooler.work", "Ricky Gilleland");
+            $email->addTo("ricky@blab.to", "Ricky Gilleland");
             $email->setSubject("A Media Server was Unreachable");
             $email->addContent(
                 "text/html", $server->hostname . " was unavailable and has been placed out of service. 

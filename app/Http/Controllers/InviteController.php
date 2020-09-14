@@ -79,7 +79,7 @@ class InviteController extends Controller
         }
 
         $invite = new \App\Invite();
-        $invite->email = "hello@watercooler.work";
+        $invite->email = "hello@blab.to";
         $invite->name = "Created By System";
         $invite->invited_by = 0;
         $invite->invite_code = Hash::make(Str::random(256));
@@ -150,11 +150,11 @@ class InviteController extends Controller
         $sg = new \SendGrid($sendgrid_key);
 
         $invite_email = new \SendGrid\Mail\Mail();
-        $invite_email->setFrom("help@watercooler.work", "Water Cooler");
+        $invite_email->setFrom("help@blab.to", "Blab");
         $invite_email->addTo($request->email, $request->name);
 
         $invite_email->addDynamicTemplateDatas([
-            "subject" => $request->name . ": You are Invited to Try Water Cooler",
+            "subject" => $request->name . ": You are Invited to Try Blab",
             "first_name" => $request->name,
             "invite_token" => base64_encode($invite->invite_code),
         ]);
@@ -167,6 +167,6 @@ class InviteController extends Controller
             //do something
         }
 
-        return view('invite.admin_create', ['success' => true, "email" => $request->email, "invite_link" => "https://watercooler.work/invite/".base64_encode($invite->invite_code)]);
+        return view('invite.admin_create', ['success' => true, "email" => $request->email, "invite_link" => "https://blab.to/invite/".base64_encode($invite->invite_code)]);
     }
 }

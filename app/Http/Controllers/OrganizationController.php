@@ -218,14 +218,14 @@ class OrganizationController extends Controller
             //make sure we don't send emails for the demo accounts
             $domain = explode("@", $email);
             if ($domain[1] == "acme.co") {
-                $invite_email->email = "ricky@watercooler.work";
+                $invite_email->email = "ricky@blab.to";
             } else {
                 $invite_email->email = $email;
             }
 
-            $invite_email->name = "New Water Cooler User";
+            $invite_email->name = "New Blab User";
             $invite_email->data = [
-                "subject" => $auth_user->first_name . " has invited you to join " . $auth_user->organization->name . " on Water Cooler",
+                "subject" => $auth_user->first_name . " has invited you to join " . $auth_user->organization->name . " on Blab",
                 "organization_name" => $auth_user->organization->name,
                 "inviter_name" => $auth_user->first_name,
                 "invite_token" => base64_encode($invite->invite_code),

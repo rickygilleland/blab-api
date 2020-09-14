@@ -22,13 +22,13 @@ class CreateServersTable extends Migration
         });
 
         DB::table('servers')->insert([
-            'hostname' => 'streamer-us-west-1.watercooler.work',
+            'hostname' => 'streamer-us-west-1.blab.to',
             'location' => 'us-west',
             'is_active' => true
         ]);
 
         DB::table('servers')->insert([
-            'hostname' => 'streamer-us-west-2.watercooler.work',
+            'hostname' => 'streamer-us-west-2.blab.to',
             'location' => 'us-west',
             'is_active' => true
         ]);

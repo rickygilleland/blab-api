@@ -104,7 +104,7 @@ class LoginController extends Controller
             //make sure we don't send emails for the demo accounts
             $domain = explode("@", $user->email);
             if ($domain[1] == "acme.co") {
-                $email->email = "ricky@watercooler.work";
+                $email->email = "ricky@blab.to";
             } else {
                 $email->email = $user->email;
             }
@@ -113,7 +113,7 @@ class LoginController extends Controller
             $email->data = [
                 "name" => $user->first_name,
                 "token" => $login_code,
-                "subject" => "Your temporary Water Cooler login code is ".$login_code
+                "subject" => "Your temporary Blab login code is ".$login_code
             ];
             $email->template_id = "d-dd835e437d9f4aadaf1c9acb25e5f488";
 
@@ -155,7 +155,7 @@ class LoginController extends Controller
         //make sure we don't send emails for the demo accounts
         $domain = explode("@", $user->email);
         if ($domain[1] == "acme.co") {
-            $email->email = "ricky@watercooler.work";
+            $email->email = "ricky@blab.to";
         } else {
             $email->email = $user->email;
         }
@@ -164,7 +164,7 @@ class LoginController extends Controller
         $email->data = [
             "name" => $user->first_name,
             "token" => $login_code,
-            "subject" => "Your temporary Water Cooler login code is ".$login_code
+            "subject" => "Your temporary Blab login code is ".$login_code
         ];
         $email->template_id = "d-dd835e437d9f4aadaf1c9acb25e5f488";
 

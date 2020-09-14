@@ -9,7 +9,7 @@
 				
 				<div class="card-body p-5">
 			
-					<h2 class="pb-2 text-center">Login to Water Cooler</h2>
+					<h2 class="pb-2 text-center">Login to Blab</h2>
 					
 					<hr>
 					

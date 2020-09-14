@@ -7,9 +7,9 @@
             <div class="card">
                 <div class="card-body p-5">
 
-                    <h2 class="pb-2 text-center">Request an Invitation to Water Cooler</h2>	
+                    <h2 class="pb-2 text-center">Request an Invitation to Blab</h2>	
                     <p class="text-center lead mb-1" style="font-size:1.3rem;font-weight:600">To handle demand, we're accepting new users on a rolling basis.</p>
-                    <p class="text-center lead pt-0 mt-0">Enter your name and email address and we'll send you an invitation to try Water Cooler soon.</p>
+                    <p class="text-center lead pt-0 mt-0">Enter your name and email address and we'll send you an invitation to try Blab soon.</p>
                     <hr>
 
                     @if (isset($success))
@@ -18,7 +18,7 @@
                             <p class="text-center">We're sending out invitations on a rolling basis every day depending on demand, so keep an eye out for your invite!</p>
                         </div>
 
-                        <a href="https://watercooler.work" class="btn btn-primary btn-block text-light">Return to Water Cooler Home Page</a>
+                        <a href="https://blab.to" class="btn btn-primary btn-block text-light">Return to Blab Home Page</a>
                     @else
 
                         <form method="POST" action="/invite">

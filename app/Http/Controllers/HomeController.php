@@ -58,7 +58,7 @@ class HomeController extends Controller
 
         $magic_login_link = encrypt($magic_login_link);
 
-        return redirect('https://app.watercooler.work/magic/login/' . $magic_login_link);
+        return redirect('https://app.blab.to/magic/login/' . $magic_login_link);
         
     }
 }

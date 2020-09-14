@@ -35,7 +35,7 @@ class ProcessEmails implements ShouldQueue
         $sg = new \SendGrid($sendgrid_key);
 
         $invite_email = new \SendGrid\Mail\Mail();
-        $invite_email->setFrom("help@watercooler.work", "Water Cooler");
+        $invite_email->setFrom("help@blab.to", "Blab");
         $invite_email->addTo($this->email->email, $this->email->name);
 
         if (isset($this->email->type) && $this->email->type == "text_only") {

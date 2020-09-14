@@ -88,7 +88,7 @@ class OrganizationController extends Controller
             foreach ($all_rooms as $room) {
                 if ($room->type == "room") {
 
-                    if (count($room->thread) == 0) {
+                    if ($room->thread != null) {
                         $thread = new \App\Thread();
                         $thread->slug = Str::random(12);
                         $thread->type = "room";

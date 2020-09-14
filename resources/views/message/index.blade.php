@@ -12,14 +12,24 @@
     @if (strpos($message->attachment_mime_type, "audio") !== false)
         <meta property="og:audio" content="{{ $message->attachment_temporary_url }}" />
         <meta property="og:description" content="{{ $message->user->first_name }} sent you an audio message on Blab." />
+        <meta name="twitter:title" content="View {{ $message->user->first_name }}'s Audio Blab">
         <meta property="og:audio:type" content="audio/wav" />
     @else
         <meta property="og:video" content="{{ $message->attachment_temporary_url }}" />
         <meta property="og:video:type" content="video/mp4" />
+        <meta property="og:video:width" content="466" />
+        <meta property="og:video:height" content="350" />
         <meta property="og:video:secure_url" content="{{ $message->attachment_temporary_url }}" />
         <meta property="og:description" content="{{ $message->user->first_name }} sent you an video message on Blab." />
+        <meta property="og:image" content="{{ $message->attachment_thumbnail_temporary_url }}" />
+        <meta property="og:image:secure_url" content="{{ $message->attachment_thumbnail_temporary_url }}" />
+        <meta property="og:image:type" content="image/jpeg">
+        <meta property="og:image:width" content="466" />
+        <meta property="og:image:height" content="350" />
+        <meta name="twitter:title" content="View {{ $message->user->first_name }}'s Video Blab">
     @endif
     <meta property="og:url" content="https://blab.to/b/{{ $organization_slug }}/{{ $blab_slug }}" />
+    <meta name="twitter:site" content="@tryblab">
 
     <title>{{ config('app.name', 'Blab') }}</title>
 

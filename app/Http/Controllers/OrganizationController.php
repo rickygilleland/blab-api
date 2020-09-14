@@ -43,7 +43,7 @@ class OrganizationController extends Controller
 
     public function api_show()
     {
-        $user = \Auth::user()->load('teams.rooms', 'organization', 'rooms');
+        $user = \Auth::user()->load('teams.rooms.thread', 'organization', 'rooms.thread');
 
         /*if ($user->organization->trial_ends_at != '2021-06-10 23:59:59') {
             $user->organization->trial_ends_at = '2021-06-10 23:59:59';
@@ -87,6 +87,19 @@ class OrganizationController extends Controller
             $calls = [];
             foreach ($all_rooms as $room) {
                 if ($room->type == "room") {
+
+                    if (count($room->thread) == 0) {
+                        $thread = new \App\Thread();
+                        $thread->slug = Str::random(12);
+                        $thread->type = "room";
+                        $thread->save();
+
+                        $user->threads()->attach($thread);
+                        $room->thread()->attach($thread);
+                    }
+
+                    $room->thread = $thread;
+
                     $rooms[] = $room;
                     continue;
                 }

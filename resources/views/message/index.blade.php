@@ -21,8 +21,8 @@
         <meta property="og:video:height" content="350" />
         <meta property="og:video:secure_url" content="{{ $message->attachment_temporary_url }}" />
         <meta property="og:description" content="{{ $message->user->first_name }} sent you an video message on Blab." />
-        <meta property="og:image" content="{{ $message->attachment_thumbnail_temporary_url }}" />
-        <meta property="og:image:secure_url" content="{{ $message->attachment_thumbnail_temporary_url }}" />
+        <meta property="og:image" content="https://blab.sfo2.digitaloceanspaces.com/{{ $message->attachment_thumbnail_path }}" />
+        <meta property="og:image:secure_url" content="https://blab.sfo2.digitaloceanspaces.com/{{ $message->attachment_thumbnail_path }}" />
         <meta property="og:image:type" content="image/jpeg">
         <meta property="og:image:width" content="466" />
         <meta property="og:image:height" content="350" />

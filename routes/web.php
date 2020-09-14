@@ -64,6 +64,9 @@ Route::post('/billing/upgrade', 'BillingController@upgrade');
 Route::get("/billing/portal", 'BillingController@redirectBillingPortal', function(Request $request) {
 
 });
+Route::get('/billing/success', function() {
+    return view('billing.success');
+});
 
 //public blab viewing links
 Route::get('/b/{organization_slug}/{blab_slug}', 'MessageController@show', function($organization_slug, $blab_slug) {

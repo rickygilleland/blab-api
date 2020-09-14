@@ -63,6 +63,18 @@ class OrganizationController extends Controller
             $billing->screen_sharing_enabled = false;
         }
 
+        if ($user->organization->subscribed('Blab Standard')) {
+            $billing->plan = "Standard";
+            $billing->video_enabled = false;
+            $billing->screen_sharing_enabled = false;
+        }
+
+        if ($user->organization->subscribed('Blab Plus')) {
+            $billing->plan = "Plus";
+            $billing->video_enabled = true;
+            $billing->screen_sharing_enabled = true;
+        }
+
         $teams = [];
 
         foreach ($user->teams as $team_key => $team) {

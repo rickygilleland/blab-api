@@ -76,7 +76,7 @@
                     'coupon': coupon
                 },
                 success: function() {
-                    window.location.href = "/billing";
+                    window.location.href = "/billing/success";
                 },
                 error: function(error) {
                     document.getElementById('card-button').innerHTML = 'Payment Failed';

@@ -96,9 +96,12 @@ class OrganizationController extends Controller
                         $thread->save();
 
                         $user->threads()->attach($thread);
-                        $room->thread_id = $thread->id;
-                    } else {
-                        $room->thread_id = $room->thread->id;
+
+                        $room->thread = $thread;
+
+                        $room = \App\Room::where('id', $room->id)->with('users,thread')->first();
+                        $rooms[] = $room;
+                        continue;
                     }
 
                     $rooms[] = $room;

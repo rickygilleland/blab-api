@@ -213,7 +213,7 @@ class RoomController extends Controller
     {
         $user = \Auth::user()->load('teams');
 
-        $room = \App\Room::where('id', $id)->with('users, thread.users')->first();
+        $room = \App\Room::where('id', $id)->with(['users', 'thread.users'])->first();
 
         if (!$user->teams->contains($room->team_id)) {
             abort(404);

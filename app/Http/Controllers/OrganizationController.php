@@ -111,7 +111,7 @@ class OrganizationController extends Controller
 
                         $room->thread = $thread;
 
-                        $room = \App\Room::where('id', $room->id)->with('users,thread')->first();
+                        $room = \App\Room::where('id', $room->id)->with(['users', 'thread'])->first();
                         $rooms[] = $room;
                         continue;
                     }

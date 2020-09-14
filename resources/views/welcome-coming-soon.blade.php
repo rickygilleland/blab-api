@@ -93,8 +93,8 @@
 
                 <div class="row my-md-5">
                     <div class="col-md-5 order-sm-12">
-                        <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Let the Office Blab Work Remotely Too</h1>
-                        <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Stay connected with always available meeting rooms. Simple, secure, and enhanced with machine learning.</h2>
+                        <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Voice First Communication for Teams</h1>
+                        <h2 class="text-center mt-4" style="font-weight:500;font-size:1.3rem;line-height:1.4">Stay connected with your team no matter what your schedule with our voice first messages.<br><br>And when you do need some face time, pop into a voice or video room to hang out with your teammates.</h2>
                         <center><a class="btn btn-success shadow btn-lg text-dark my-2 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">
@@ -105,13 +105,14 @@
             </div>
         </div>
 
+        <!--
         <div class="container-fluid" style="background-color:#fff;color:black" id="features">
             <div style="max-width:1400px" class="mx-auto py-5">
 
                 <div class="row mb-5 clearfix">
                     <div class="col-md-6">
-                        <h3 class="h2" style="font-weight:800;margin-top:2.5rem">Always Available, Voice-Only by Default</h3>
-                        <p class="lead" style="font-weight:500">Create rooms that are available to the entire team, or restricted to a few select team members.</p>
+                        <h3 class="h2" style="font-weight:800;margin-top:2.5rem">Say Goodbye to Live Meetings</h3>
+                        <p class="lead" style="font-weight:500">Let you and your co-workers take back their time.</p>
                         <p class="lead" style="font-weight:500">Great for general office chit-chat, recurring meetings, or 1:1 conversations with your co-workers.</p>      
                         <p class="lead" style="font-weight:500">Whenever a member of your team is in a different timezone than yours, we automatically overlay their local time whenever they're in a room.</p>  
                     </div>
@@ -127,6 +128,9 @@
                 <div class="row mb-5 clearfix">
                     <div class="col-md-6">
                         <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Secure HD Video and Audio</h3>
+                        <p class="lead" style="font-weight:500">Create rooms that are available to the entire team, or restricted to a few select team members.</p>
+                        <p class="lead" style="font-weight:500">Great for general office chit-chat, recurring meetings, or 1:1 conversations with your co-workers.</p>      
+                        <p class="lead" style="font-weight:500">Whenever a member of your team is in a different timezone than yours, we automatically overlay their local time whenever they're in a room.</p>  
                         <p class="lead" style="font-weight:500">Our video and voice chat is powered by WebRTC for low-latency connections and all streams are encrypted while in transit.</p>
                         <p class="lead" style="font-weight:500">All rooms are voice only by default, putting the conversation at center stage and reducing distractions and embarrassing moments.</p> 
                         <p class="small">*Video quality and resolution may be reduced at times depending on network conditions.</p>             
@@ -138,174 +142,44 @@
 
             </div>
         </div>
-
-        <div class="container-fluid" style="background-color:#fff;color:black" id="community">
-            <div style="max-width:1400px" class="mx-auto py-5">
-                <div class="row mb-5 clearfix">
-                    <div class="col-md-6">
-                        <h3 class="h2" style="font-weight:800;margin-top:5.25rem">Simple and Fast Screen Sharing</h3>
-                        <p class="lead" style="font-weight:500">Share your entire screen, or just a single window. With compact and simple controls, we stay out of your way and so you can work.</p>
-                        <p class="lead" style="font-weight:500">Your screen is shared in full HD through the same secure infrastructure powering our HD video and voice chat.</p> 
-                        <p class="small">*Video quality and resolution may be reduced at times depending on network conditions.</p>             
-                    </div>
-                    <div class="col-md-6">
-                        <img src="/img/screen-sharing-demo.gif" style="max-height:400px" class="img img-fluid rounded shadow float-right" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container-fluid" style="background-color:#0076ff;color:white;border-radius:50px">
-            <div style="max-width:1400px" class="mx-auto py-5">
-                <div class="row mb-5 clearfix">
-                    <div class="col-md-6">
-                        <h3 class="h2" style="font-weight:800;margin-top:2.5rem">Face Tracking <small>(Coming Soon)</small></h3>
-                        <p class="lead" style="font-weight:500">You can't always control what's happening in the background, so let us worry about it. Our face tracking uses machine learning to automatically keep the focus on you.</p>    
-                        <p class="lead" style="font-weight:500">Face Tracking is available as an experimental feature and will be available to everyone soon.</p>  
-                    </div>
-                    <div class="col-md-6">
-                        <img src="/img/face-tracking-demo.gif" style="max-height:650px" class="img img-fluid rounded float-right" />
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        -->
 
         <div class="container-fluid" style="background-color:#fff;color:black" id="pricing">
             <div style="max-width:1400px" class="mx-auto py-5">
-               <!--  <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-tags"></i> Blab Pricing</h3>
+               <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-tags"></i> Blab Pricing</h3>
                 <p class="lead text-center mb-1" style="font-weight:500;font-size:1.45rem">Flexible pricing with no commitments.</p>
-                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it. 7 day free trial available for our Standard Plan.</p>
-                <div class="table-responsive">
-                    <table class="table w-75 mx-auto shadow-sm" style="border-top: 5px solid #0076ff">
-                        <tr>
-                            <th class="border-top-0" style="width:33.33%">&nbsp;</th>
-                            <th class="border-left border-top-0 border-bottom-0 pt-4 pb-0" style="width:33.33%">
-                                <h3 style="font-weight:800">Free</h3>
-                            </th>
-                            <th class="border-left border-top-0 pt-4 pb-0" style="width:33.33%">
-                                <h3 style="font-weight:800">Standard</h3>
-                                <p class="lead mb-1"><s><span style="font-weight:700">$8/active user</span><small> per month</small></s></p>
-                                <p>Free until July 15th, 2020</p>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td class="border-top-0">
-                                <h4 class="pt-0">Usage</h4>
-                            </td>
-                            <td class="border-top-0 border-left">&nbsp;</td>
-                            <td class="border-top-0 border-left">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="lead">Users</p>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                Unlimited
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                Unlimited
-                            </td>
-                        </tr>
-                        <tr class="border-bottom">
-                            <td>
-                                <p class="lead">Rooms</p>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                Unlimited
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                Unlimited
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border-top-0">
-                                <h4 class="pt-4">Features</h4>
-                            </td>
-                            <td class="border-top-0 border-left">&nbsp;</td>
-                            <td class="border-top-0 border-left">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="lead">Private Rooms</p>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                <i class="fas fa-check pr-1" style="color:green"></i>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                <i class="fas fa-check pr-1" style="color:green"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="lead">Video Chat</p>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                Voice Only
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                <i class="fas fa-check pr-1" style="color:green"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="lead">Max Room Participants</p>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                15
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                100 <br><small>(Video participants limited to 20, all others voice only)</small>
-                            </td>
-                        </tr>
-                        <tr class="border-bottom">
-                            <td>
-                                <p class="lead">1:1 and Group Calls</p>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                Coming Soon
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                Coming Soon
-                            </td>
-                        </tr>
-                        <tr class="border-bottom">
-                            <td>
-                                <p class="lead">Screen Sharing</p>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                <i class="fas fa-ban pr-1" style="color:red"></i>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                <i class="fas fa-check pr-1" style="color:green"></i>
-                            </td>
-                        </tr>
-                        <tr class="border-bottom">
-                            <td>
-                                <p class="lead">Live Broadcast to Team</p>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                <i class="fas fa-ban pr-1" style="color:red"></i>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                Coming Soon
-                            </td>
-                        </tr>
-                        <tr class="border-bottom">
-                            <td>
-                                <p class="lead">Send Video Messages to Teammates</p>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                <i class="fas fa-ban pr-1" style="color:red"></i>
-                            </td>
-                            <td class="pricing-table-feature border-left">
-                                Coming Soon
-                            </td>
-                        </tr>
-                    </table>
-                </div> -->
+                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it. All paid plans come with a 30 day money back guarantee.</p>
+                
+                <div class="row">
+                    <div class="col border-right text-center">
+                        <h2 style="font-weight:700">Free Plan<br><span style="font-size:1rem;font-weight:600">&nbsp;</span></h2>
+                        <p style="font-weight:600">Unlimited Voice/Video Messages</p>
+                        <p style="font-weight:600">1 Voice Room</p>
+                        <p style="font-weight:600">Limit of 5 Teammates</p>
+                        <p style="font-weight:600">30 Days of Retention</p>
+                        <p class="mt-4 text-center" style="font-weight:600;font-size:1.2rem">Free</p>
+                    </div>
+                    <div class="col border-right text-center">
+                        <h2 style="font-weight:700">Standard Plan<br>&nbsp;</h2>
+                        <p style="font-weight:600">All Features of the Free Plan +</p>
+                        <p style="font-weight:600">Unlimited Voice Rooms</p>
+                        <p style="font-weight:600">Unlimited Teammates</p>
+                        <p style="font-weight:600">Unlimited Retention Retention</p>
+                        <p class="mt-4 text-center" style="font-weight:600;font-size:1.2rem">$5/user/month</p>
+                    </div>
+                    <div class="col  text-center">
+                        <h2 style="font-weight:700">Plus Plan<br>&nbsp;</h2>
+                        <p style="font-weight:600">All Features of the Standard Plan +</p>
+                        <p style="font-weight:600">Unlimited Voice and Video Rooms</p>
+                        <p style="font-weight:600">Live Screensharing</p>
+                        <p style="font-weight:600">Message Transcription and Search <small>(coming soon)</small></p>
+                        <p class="mt-4 text-center" style="font-weight:600;font-size:1.2rem">$10/user/month</p>
+                    </div>
+                </div>  
 
-                <div class="d-flex justify-content-center" style="margin-top:7rem;">
+                <center><a class="btn btn-success shadow text-dark btn-lg mt-5 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
+
+                <div class="d-flex justify-content-center" style="margin-top:3rem;">
                     <div>
                         <center><img src="img/blab-app-icon.png" class="img img-fluid" style="height:150px" /></center>
                     </div>
@@ -315,7 +189,6 @@
                     </div>
                 </div>
                 
-                <center><a class="btn btn-success shadow text-dark btn-lg mt-2 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
                 <p class="text-center font-weight-bold" style="font-size:1.1rem;margin-top:7rem;margin-bottom:5rem">Questions? Drop us a line at hello (at) blab.to</p>
 
             </div>

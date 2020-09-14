@@ -93,31 +93,33 @@
         <h1 class="text-center pt-5 text-light">blab</h1>
        
         <main class="py-4">
-            <div class="row">
-            
-                <div class="col-md-8 mx-auto">
-                    
-                    <div class="card shadow">
+            <div class="container">
+                <div class="row">
+                
+                    <div class="col-md-8 mx-auto">
                         
-                        <div class="card-body p-5">
-                    
-                            <div class="row">
+                        <div class="card shadow">
+                            
+                            <div class="card-body p-5">
+                        
+                                <div class="row">
 
-                                <div class="col-12 p-5">
-                                    <center>
-                                        <h2 class="mb-3">View {{ $message->user->first_name }}'s Blab</h2>
-                                        @if (strpos($message->attachment_mime_type, "audio") === false)
-                                            <video controls src="{{ $message->attachment_temporary_url }}" />
-                                        @else
-                                            <audio controls src="{{ $message->attachment_temporary_url }}" controlsList="nodownload" />
-                                        @endif
-                                    </center>
-                                </div>
+                                    <div class="col-12 p-5">
+                                        <center>
+                                            <h2 class="mb-3">View {{ $message->user->first_name }}'s Blab</h2>
+                                            @if (strpos($message->attachment_mime_type, "audio") === false)
+                                                <video width="100%" controls src="{{ $message->attachment_temporary_url }}" />
+                                            @else
+                                                <audio width="100%" controls src="{{ $message->attachment_temporary_url }}" controlsList="nodownload" />
+                                            @endif
+                                        </center>
+                                    </div>
 
+                            </div>
+                            
                         </div>
                         
                     </div>
-                    
                 </div>
                 
             </div>

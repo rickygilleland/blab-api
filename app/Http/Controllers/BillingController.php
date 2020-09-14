@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Events\BillingUpdated;
 
 class BillingController extends Controller
 {
@@ -90,7 +91,8 @@ class BillingController extends Controller
             'plan_name' => $plan_name,
             'plan_price' => $plan_price,
             'plan_quantity' => $plan_quantity,
-            'total' => $total
+            'total' => $total,
+            'discounted_total' => $total/2,
         ]);
     }
 
@@ -141,6 +143,11 @@ class BillingController extends Controller
                 'metadata' => ['organization_name' => $user->organization->name ]
             ]);
         }
+
+        $notification = new \stdClass;
+        $notification->organization_id = $user->organization->id;
+
+        broadcast(new BillingUpdated($notification));
 
         return true;
 

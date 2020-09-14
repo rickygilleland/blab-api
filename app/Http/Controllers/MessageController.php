@@ -19,7 +19,6 @@ class MessageController extends Controller
         if ($message->attachment_path != null && $message->attachment_processed) {
 
             $attachment_url = $message->attachment_temporary_url;
-            $attachment_thumbnail_url = $message->attachment_thumbnail_temporary_url;
 
             $update_attachment_temp_url = $message->attachment_temporary_url == null || $message->attachment_temporary_url_last_updated == null;
 
@@ -43,8 +42,6 @@ class MessageController extends Controller
 
                 $message->attachment_temporary_url = $attachment_url;
                 $message->attachment_temporary_url_last_updated = Carbon::now();
-                $message->attachment_thumbnail_temporary_url = $attachment_thumbnail_url;
-                $message->attachment_thumbnail_temporary_url_last_updated = Carbon::now();
 
                 $message->save();
             }
@@ -216,7 +213,6 @@ class MessageController extends Controller
         if ($message->attachment_path != null && $message->attachment_processed) {
 
             $attachment_url = $message->attachment_temporary_url;
-            $attachment_thumbnail_url = $message->attachment_thumbnail_temporary_url;
 
             $update_attachment_temp_url = $message->attachment_temporary_url == null || $message->attachment_temporary_url_last_updated == null;
 
@@ -232,16 +228,8 @@ class MessageController extends Controller
                     $message->attachment_path, now()->addDays(7)
                 );
 
-                if ($message->attachment_thumbnail_path != null) {
-                    $attachment_thumbnail_url = Storage::temporaryUrl(
-                        $message->attachment_thumbnail_path, now()->addDays(7)
-                    ); 
-                }
-
                 $message->attachment_temporary_url = $attachment_url;
                 $message->attachment_temporary_url_last_updated = Carbon::now();
-                $message->attachment_thumbnail_temporary_url = $attachment_thumbnail_url;
-                $message->attachment_thumbnail_temporary_url_last_updated = Carbon::now();
 
                 $message->save();
             }

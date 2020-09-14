@@ -55,10 +55,11 @@ class ProcessUploadedVideo implements ShouldQueue
         $converted_video->getFrameFromSeconds(1)
             ->export()
             ->toDisk('spaces')
+            ->withVisibility('public')
             ->save($thumbnail_path);
 
         $this->message->attachment_thumbnail_path = $thumbnail_path;
-        $this->message->attachment_thumbnail_temporary_url_last_updated = null;
+        $this->message->attachment_thumbnail_temporary_url = Storage::url($thumbnail_path);
         $this->message->save();
 
         $thread = \App\Thread::where('id', $this->message->thread_id)->first();

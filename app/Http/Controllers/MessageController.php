@@ -143,6 +143,8 @@ class MessageController extends Controller
                 abort(404);
             }
 
+            $active_thread = \App\Thread::where('id', $request->thread_id)->first();
+
             $message->thread_id = $request->thread_id;
         }
 

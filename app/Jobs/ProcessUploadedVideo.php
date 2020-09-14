@@ -62,11 +62,11 @@ class ProcessUploadedVideo implements ShouldQueue
         $this->message->attachment_thumbnail_temporary_url = Storage::url($thumbnail_path);
         $this->message->save();
 
-        $thread = \App\Thread::where('id', $this->message->thread_id)->first();
+        $message = \App\Message::where('id', $this->message->id)->with('thread,user,organization')->first();
 
         $notification = new \stdClass;
-        $notification->triggered_by = $this->message->user_id;
-        $notification->message = $this->message;
+        $notification->triggered_by = $message->user_id;
+        $notification->message = $message;
         $notification->thread = $thread;
 
         foreach($thread->users as $thread_user) {

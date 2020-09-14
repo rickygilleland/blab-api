@@ -139,10 +139,10 @@ class RoomController extends Controller
             $thread = new \App\Thread();
             $thread->slug = Str::random(12);
             $thread->type = "room";
+            $thread->room_id = $room->id;
             $thread->save();
 
             $user->threads()->attach($thread);
-            $room->thread()->attach($thread);
     
             if ($room->type == "call") {
                 foreach ($request->participants as $participant) {

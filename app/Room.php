@@ -29,6 +29,6 @@ class Room extends Model
 
     public function thread()
     {
-        return $this->belongsTo('App\Thread');
+        return $this->hasOne('App\Thread');
     }
 }

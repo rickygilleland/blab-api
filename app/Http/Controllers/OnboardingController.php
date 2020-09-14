@@ -190,10 +190,10 @@ class OnboardingController extends Controller
         $thread = new \App\Thread();
         $thread->slug = Str::random(12);
         $thread->type = "room";
+        $thread->room_id = $room->id;
         $thread->save();
 
         $user->threads()->attach($thread);
-        $room->thread()->attach($thread);
         
         //skip the team setup for now until we have multi-team support
         //return redirect('onboarding/team');
@@ -308,10 +308,10 @@ class OnboardingController extends Controller
         $thread = new \App\Thread();
         $thread->slug = Str::random(12);
         $thread->type = "room";
+        $thread->room_id = $room->id;
         $thread->save();
 
         $user->threads()->attach($thread);
-        $room->thread()->attach($thread);
 
         $full_room_slug = $user->organization->slug.'/'.$default_team->slug.'/'.$room->slug;
 

@@ -33,8 +33,6 @@ class SlackController extends Controller {
                 $organization->email_domain = substr(strrchr($slack_user->email, "@"), 1);
                 //temporarily set the slug to the provider id
                 $organization->slug = $organization->provider_id;
-                //create a generic trial sub
-                $organization->trial_ends_at = now()->addDays(7);
                 $organization->save();
             }
 

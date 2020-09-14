@@ -44,9 +44,9 @@ class BillingController extends Controller
         return view('billing.index', ['organization' => $user->organization, 'billing' => $billing]);
     }
 
-    public function upgrade_form()
+    public function show_upgrade_form($plan)
     {
-        $user = \Auth::user()->load('roles', 'organization');
+        $user = \Auth::user()->load('roles', 'organization.users');
 
         $role = \App\Role::where('name', 'organization_admin')->first();
         
@@ -58,17 +58,77 @@ class BillingController extends Controller
         $billing->plan = "Free";
         $billing->is_trial = false;
 
-        if ($user->organization->onGenericTrial()) {
-            $billing->plan = "Standard";
-            $billing->is_trial = true;
-            $billing->trial_ends_at = $user->organization->trial_ends_at->toFormattedDateString();
-        }
+        $plan_quantity = count($user->organization->users);
 
-        return view('billing.upgrade', ['organization' => $user->organization, 'billing' => $billing]);
+        if ($plan == "standard") {
+            $plan_id = "price_1HRFHwFAJZnmFdvTvZczMHFq";
+            $plan_name = "Standard";
+            $plan_price = 5;
+            $total = $plan_price * $plan_quantity;
+        } else {
+            $plan_id = "price_1HRFICFAJZnmFdvTMoSn8Qhl";
+            $plan_name = "Plus";
+            $plan_price = 10;
+            $total = $plan_price * $plan_quantity;
+        }
+        
+        return view('billing.upgrade', [
+            'intent' => $user->organization->createSetupIntent(),
+            'organization' => $user->organization, 
+            'billing' => $billing,
+            'plan_id' => $plan_id,
+            'plan_name' => $plan_name,
+            'plan_price' => $plan_price,
+            'plan_quantity' => $plan_quantity,
+            'total' => $total
+        ]);
     }
 
     public function upgrade(Request $request)
     {
+        $user = \Auth::user()->load('roles', 'organization');
+
+        $role = \App\Role::where('name', 'organization_admin')->first();
+        
+        if ($user->roles()->exists($role) == false) {
+            abort(500);
+        }
+
+        $plan_quantity = count($user->organization->users);
+
+        if ($request->coupon != null && $request->coupon == "HUNTHALFOFF") {
+            $user->organization->newSubscription('Blab', $request->plan_id)->quantity($plan_quantity)->withCoupon($request->coupon)->create($request->payment_method, [
+                'email' => $user->email
+            ], [
+                'metadata' => ['organization_name' => $user->organization->name ]
+            ]);
+        } else {
+            $user->organization->newSubscription('Blab', $request->plan_id)->quantity($plan_quantity)->create($request->payment_method, [
+                'email' => $user->email
+            ], [
+                'metadata' => ['organization_name' => $user->organization->name ]
+            ]);
+        }
+
+        return true;
+
+    }
+
+    public function redirectBillingPortal(Request $request) {
+
+        $user = \Auth::user()->load('roles', 'organization');
+
+        $role = \App\Role::where('name', 'organization_admin')->first();
+        
+        if ($user->roles()->exists($role) == false) {
+            return view('billing.unauthorized');
+        }
+
+        try {
+            return $user->organization->redirectToBillingPortal();
+        } catch (\Exception $e) {
+            return redirect("/billing");
+        }
 
     }
 }

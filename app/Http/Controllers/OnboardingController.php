@@ -97,11 +97,6 @@ class OnboardingController extends Controller
 
         $organization = \App\Organization::where('id', $user->organization_id)->first();
 
-        if ($organization->trial_ends_at = null) {
-            $organization->trial_ends_at = now()->addDays(7);
-            $organization->save();
-        }
-
         $user->is_active = true;
         $user->save();
 

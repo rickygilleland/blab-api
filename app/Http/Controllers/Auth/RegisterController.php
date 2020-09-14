@@ -86,7 +86,6 @@ class RegisterController extends Controller
             }
     
             $organization->slug = md5($data['email'] . uniqid()) . uniqid();
-            $organization->trial_ends_at = now()->addDays(7);
             $organization->save();
 
             $team = new \App\Team();

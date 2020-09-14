@@ -61,7 +61,7 @@
     <div id="app" style="background-color:#0076ff;" class="vh-100 onboarding">
 
    
-        <center><img src="/img/water_cooler.png" class="img img-fluid mt-4 mb-3" style="height:75px"></center>
+        <h1 class="text-center pt-5 text-light">blab</h1>
        
         <main class="py-4">
             @yield('content')

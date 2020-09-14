@@ -95,7 +95,6 @@
                     <div class="col-md-5 order-sm-12">
                         <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Let the Office Water Cooler Work Remotely Too</h1>
                         <h2 class="text-center mt-4" style="font-weight:600;font-size:1.55rem">Stay connected with always available meeting rooms. Simple, secure, and enhanced with machine learning.</h2>
-                        <p class="lead text-center mt-3" style="font-weight:600">Free until at least August 1st, 2020.</p>
                         <center><a class="btn btn-success shadow btn-lg text-dark my-2 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
                     </div>
                     <div class="col-md-7 order-sm-1">
@@ -316,7 +315,6 @@
                     </div>
                 </div>
                 
-                <p class="lead font-weight-bold text-center mt-5">Free until at least August 1st, 2020.</p>
                 <center><a class="btn btn-success shadow text-dark btn-lg mt-2 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
                 <p class="text-center font-weight-bold" style="font-size:1.1rem;margin-top:7rem;margin-bottom:5rem">Questions? Drop us a line at hello (at) watercooler.work</p>
 

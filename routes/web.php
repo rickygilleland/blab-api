@@ -57,8 +57,13 @@ Route::get('onboarding/download', 'OnboardingController@download');
 
 //billing routes
 Route::get('/billing', 'BillingController@index');
-Route::get('/billing/upgrade', 'BillingController@upgrade_form');
+Route::get('/billing/upgrade/{plan_name}', 'BillingController@show_upgrade_form', function($plan_name) {
+
+});
 Route::post('/billing/upgrade', 'BillingController@upgrade');
+Route::get("/billing/portal", 'BillingController@redirectBillingPortal', function(Request $request) {
+
+});
 
 //public blab viewing links
 Route::get('/b/{organization_slug}/{blab_slug}', 'MessageController@show', function($organization_slug, $blab_slug) {

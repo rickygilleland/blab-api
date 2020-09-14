@@ -96,7 +96,7 @@ class BillingController extends Controller
 
         $plan_quantity = count($user->organization->users);
 
-        if ($request->coupon != null && $request->coupon == "HUNTHALFOFF") {
+        if ($request->coupon != null && ($request->coupon == "HUNTHALFOFF" || $request->coupon == "ROO100")) {
             $user->organization->newSubscription('Blab', $request->plan_id)->quantity($plan_quantity)->withCoupon($request->coupon)->create($request->payment_method, [
                 'email' => $user->email
             ], [

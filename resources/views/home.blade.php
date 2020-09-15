@@ -39,11 +39,11 @@
                     <hr class="my-5">
                     <p class="h4">Already have Blab installed and need to log in?</p>
                     <p class="lead">Click the button below to automatically sign into Blab.</p>
-                    <a href="watercooler::/magic/login/{{ $magic_login_link }}" class="btn btn-success btn-lg text-light">Magic Login Link</a>
+                    <a href="blab::/magic/login/{{ $magic_login_link }}" class="btn btn-success btn-lg text-light">Magic Login Link</a>
                 </div>
                 <div id="magicLink" class="d-none">
                     <p class="my-4 lead">Blab is downloading! Use the downloaded file to install Blab.<br><span class="text-muted">Once the installation is complete, you can click the magic link below to automatically log in to Blab.</p>
-                    <a href="watercooler::/magic/login/{{ $magic_login_link }}" class="btn btn-primary btn-lg text-light btn-block">Magic Login Link</a>
+                    <a href="blab::/magic/login/{{ $magic_login_link }}" class="btn btn-primary btn-lg text-light btn-block">Magic Login Link</a>
 
                     <p class="text-muted mt-4">Something go wrong with the download? <a href="https://updater.blab.to">Try again.</a></p>
                 </div>

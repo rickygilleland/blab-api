@@ -159,7 +159,7 @@ class OnboardingController extends Controller
         $default_team = $teams[0];
 
         $room = new \App\Room();
-        $room->name = "Blab";
+        $room->name = "Water Cooler";
         $room->team_id = $default_team->id;
         $room->organization_id = $user->organization->id;
         $room->slug = "water-cooler";

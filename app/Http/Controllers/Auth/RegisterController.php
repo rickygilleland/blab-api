@@ -114,7 +114,7 @@ class RegisterController extends Controller
         if ($request->hasFile('avatar')) {
             try {
                 $avatar_url = Storage::disk('spaces')->putFile('avatars', $request->file('avatar'), 'public');
-                $avatar_url = "https://watercooler-uploads.sfo2.cdn.digitaloceanspaces.com/" . $avatar_url;
+                $avatar_url = "https://blab.sfo2.cdn.digitaloceanspaces.com/" . $avatar_url;
             } catch (\Exception $e) {
                 //do something
             }

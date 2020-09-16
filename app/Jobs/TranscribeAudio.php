@@ -9,7 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use App\Events\DirectMessageUpdated;
-use Terminal;
+use TitasGailius\Terminal\Terminal;
 use Log;
 
 class TranscribeAudio implements ShouldQueue

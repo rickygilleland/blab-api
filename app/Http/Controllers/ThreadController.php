@@ -72,6 +72,8 @@ class ThreadController extends Controller
 
             $user->threads()->attach($thread);
 
+            $thread->users;
+
             $public_threads[] = $thread;
         }
 

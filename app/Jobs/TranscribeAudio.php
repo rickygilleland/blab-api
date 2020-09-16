@@ -46,9 +46,18 @@ class TranscribeAudio implements ShouldQueue
         Log::info("TRANSCRIBE STARTED");
 
         Log::info("TRANSCRIBE AUDIO PATH" . $audio_tmp_file);
+        Log::info("TRANSCRIBE WORKING PATH" . base_path());
+
+        $ls_result = Terminal::in(base_path())
+            ->run('ls');
+
+        foreach ($ls_result as $line) {
+            Log::info($line);
+        }
+
 
         $transcribe_result = Terminal::in(base_path())
-            ->run('deepspeech --model deepspeech-0.8.2-models.pbmm --scorer deepspeech-0.8.2-models.scorer --audio ' . $audio_tmp_file);
+            ->run('deepspeech --model ./deepspeech-0.8.2-models.pbmm --scorer ./deepspeech-0.8.2-models.scorer --audio ' . $audio_tmp_file);
 
         foreach ($transcribe_result as $line) {
             Log::info($line);

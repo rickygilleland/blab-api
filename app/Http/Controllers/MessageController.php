@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
 use App\Jobs\ProcessUploadedVideo;
+use App\Jobs\TranscribeAudio;
 
 class MessageController extends Controller
 {
@@ -179,6 +180,8 @@ class MessageController extends Controller
 
         if ($message->attachment_mime_type != "audio/x-wav") {
             ProcessUploadedVideo::dispatch($message);
+        } else {
+            TranscribeAudio::dispatch($message);
         }
 
         $notification = new \stdClass;

@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use App\Events\DirectMessageUpdated;
 use TitasGailius\Terminal;
+use Log;
 
 class TranscribeAudio implements ShouldQueue
 {
@@ -42,7 +43,12 @@ class TranscribeAudio implements ShouldQueue
         $audio_tmp_file = tempnam($dir, "audio_transcribe_");
         file_put_contents($audio_tmp_file, $audio);
 
-        $transcribe_result = Terminal::run('deepspeech --model deepspeech-0.8.2-models.pbmm --scorer deepspeech-0.8.2-models.scorer --audio ' . $audio_tmp_file);
+        Log::info("TRANSCRIBE STARTED");
+
+        $transcribe_result = Terminal::run('deepspeech --model ~/.deepspeech-0.8.2-models.pbmm --scorer ~/.deepspeech-0.8.2-models.scorer --audio ' . $audio_tmp_file);
+
+        Log::info("TRANSCRIBE DONE");
+        Log::info($transcribe_result);
         
         //clean up the tmp file
         unlink($audio_tmp_file);

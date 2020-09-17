@@ -48,13 +48,24 @@ class TranscribeAudio implements ShouldQueue
         Log::info("TRANSCRIBE AUDIO PATH" . $audio_tmp_file);
         Log::info("TRANSCRIBE WORKING PATH" . base_path());
 
+        if (file_exists(base_path() . "/deepspeech-0.8.2-models.pbmm") === false) {
+            Log::info("Downloading pbmm");
+            $download = Terminal::in(base_path())
+                ->run('wget https://github.com/mozilla/DeepSpeech/releases/download/v0.8.2/deepspeech-0.8.2-models.pbmm');
+        }
+
+        if (file_exists(base_path() . "/deepspeech-0.8.2-models.scorer") === false) {
+            Log::info("Downloading scorer");
+            $download = Terminal::in(base_path())
+                ->run('wget https://github.com/mozilla/DeepSpeech/releases/download/v0.8.2/deepspeech-0.8.2-models.scorer');
+        }
+ 
         $ls_result = Terminal::in(base_path())
             ->run('ls');
 
         foreach ($ls_result as $line) {
             Log::info($line);
         }
-
 
         $transcribe_result = Terminal::in(base_path())
             ->run('deepspeech --model ./deepspeech-0.8.2-models.pbmm --scorer ./deepspeech-0.8.2-models.scorer --audio ' . $audio_tmp_file);

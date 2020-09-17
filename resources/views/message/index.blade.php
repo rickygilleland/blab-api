@@ -119,7 +119,7 @@
                         
                                 <div class="row">
 
-                                    <div class="col-12 p-md-5">
+                                    <div class="col-12 pt-5 pb-3 p-md-5">
                                         <center>
                                             @if (strpos($message->attachment_mime_type, "audio") === false)
                                                 <video width="100%" controls src="{{ $message->attachment_temporary_url }}" />

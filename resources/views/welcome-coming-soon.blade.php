@@ -158,8 +158,8 @@
                 
 
                 <div class="row">
-                    <div class="col d-flex align-items-stretch">
-                        <div class="card card-body shadow-sm" style="border-top: 5px solid #121422">
+                    <div class="col-12 col-md-4 d-flex align-items-stretch">
+                        <div class="card card-body shadow-sm mb-5 mb-md-0" style="border-top: 5px solid #121422">
                             <h3 class="mb-0 pb-0" style="font-weight:700">Basic</h3>
                             <p class="my-5" style="font-weight:700;font-size:1.3rem">$0</p>
                             <p style="font-weight:600;">The Basics, Free</p>
@@ -169,8 +169,8 @@
                             <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> 30 Days of Retention</p>
                         </div>
                     </div>
-                    <div class="col d-flex align-items-stretch">
-                        <div class="card card-body shadow-sm" style="border-top: 5px solid #5e94ff">
+                    <div class="col-12 col-md-4 d-flex align-items-stretch">
+                        <div class="card card-body shadow-sm mb-5 mb-md-0" style="border-top: 5px solid #5e94ff">
                             <h3 class="mb-0 pb-0" style="font-weight:700">Standard</h3>
                             <p class="my-5" style="font-weight:700;font-size:1.3rem">$5/user/month</p>
                             <p style="font-weight:600;">Everything In Basic +</p>
@@ -179,8 +179,8 @@
                             <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Retention</p>
                         </div>
                     </div>
-                    <div class="col d-flex align-items-stretch">
-                        <div class="card card-body shadow-sm" style="border-top: 5px solid rgb(62, 207, 142)">
+                    <div class="col-12 col-md-4 d-flex align-items-stretch">
+                        <div class="card card-body shadow-sm mb-5 mb-md-0" style="border-top: 5px solid rgb(62, 207, 142)">
                             <h3 class="mb-0 pb-0" style="font-weight:700">Plus</h3>
                             <p class="my-5" style="font-weight:700;font-size:1.3rem">$10/user/month</p>
                             <p style="font-weight:600;">Everything In Standard +</p>

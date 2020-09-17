@@ -61,7 +61,7 @@
     <div id="app" style="background-color:#0076ff;" class="vh-100 onboarding">
 
    
-        <h1 class="text-center pt-5 text-light">blab</h1>
+        <h1 class="text-center pt-5 text-light"><a href="/">blab</a></h1>
        
         <main class="py-4">
             @yield('content')

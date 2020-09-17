@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('welcome-coming-soon');
 });
 
+Route::get('terms', function() {
+    return view('terms');
+});
+
+Route::get('privacy', function() {
+    return view('privacy');
+});
+
 Route::get('slack/oauth', 'SlackController@start');
 Route::get('slack/callback', 'SlackController@callback');
 Route::post('slack/hook', 'SlackController@handle_hook');

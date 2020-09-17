@@ -104,7 +104,7 @@
                         
                         <div class="card shadow">
                             
-                            <div class="card-body p-5">
+                            <div class="card-body p-md-5">
 
                                 <div class="row">
                                     <div class="col-12 col-lg-6 d-flex flex-row align-items-center">
@@ -119,7 +119,7 @@
                         
                                 <div class="row">
 
-                                    <div class="col-12 p-5">
+                                    <div class="col-12 p-md-5">
                                         <center>
                                             @if (strpos($message->attachment_mime_type, "audio") === false)
                                                 <video width="100%" controls src="{{ $message->attachment_temporary_url }}" />

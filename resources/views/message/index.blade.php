@@ -115,10 +115,6 @@
                                             <p style="font-size:1.05rem;font-weight:600">Shared by {{ $message->user->first_name }}<br><small class="text-muted">{{ $message->created_at->diffForHumans() }} </small></p>
                                         </div>
                                     </div>
-                                    <div class="col-6 align-items-center d-flex flex-row">
-                                        <p class="text-muted ml-auto" style="font-size:.9rem;">{{ $message->created_at->format('m/d/Y • h:m A') }}</p>
-   
-                                    </div>
                                 </div>
                         
                                 <div class="row">

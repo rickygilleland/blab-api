@@ -79,6 +79,10 @@
         .btn {
             font-weight:600
         }
+        h1 a {
+            font-weight: 900!important;
+            color:white!important;
+        }
         video, audio {
             outline: none;
         }
@@ -90,7 +94,7 @@
 </head>
 <body>
     <div id="app" style="background-color:#0076ff;" class="vh-100 onboarding">
-        <h1 class="text-center pt-5 text-light">blab</h1>
+        <h1 class="text-center pt-5 text-light"><a href="/">blab</a></h1>
        
         <main class="py-4">
             <div class="container">
@@ -101,12 +105,26 @@
                         <div class="card shadow">
                             
                             <div class="card-body p-5">
+
+                                <div class="row">
+                                    <div class="col-6 d-flex flex-row align-items-center">
+                                        <div>
+                                            <img src="{{ $message->user->avatar_url }}" class="img rounded img-fluid" style="height:75px" />
+                                        </div>
+                                        <div class="ml-3">
+                                            <p style="font-size:1.05rem;font-weight:600">Shared by {{ $message->user->first_name }}<br><small class="text-muted">{{ $message->created_at->diffForHumans() }} </small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 align-items-center d-flex flex-row">
+                                        <p class="text-muted ml-auto" style="font-size:.9rem;">{{ $message->created_at->format('m/d/Y • h:m A') }}</p>
+   
+                                    </div>
+                                </div>
                         
                                 <div class="row">
 
                                     <div class="col-12 p-5">
                                         <center>
-                                            <h2 class="mb-3">View {{ $message->user->first_name }}'s Blab</h2>
                                             @if (strpos($message->attachment_mime_type, "audio") === false)
                                                 <video width="100%" controls src="{{ $message->attachment_temporary_url }}" />
                                             @else
@@ -116,7 +134,7 @@
                                     </div>
 
                             </div>
-                            
+
                         </div>
                         
                     </div>

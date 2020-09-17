@@ -36,7 +36,7 @@
                                         <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Voice Rooms</p>
                                         <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Teammates</p>
                                         <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Retention</p>
-                                        <a href="/billing/upgrade/standard" class="btn btn-primary text-light btn-lg btn-block">Upgrade to Standard</a>
+                                        <a href="/billing/upgrade/standard" class="btn btn-primary text-light btn-lg btn-block mt-auto">Upgrade to Standard</a>
                                     </div>
                                 </div>
                                 <div class="col d-flex align-items-stretch">
@@ -47,7 +47,7 @@
                                         <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Voice and Video Rooms</p>
                                         <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Live Screensharing</p>
                                         <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Message Transcription and Search<br><small>(coming soon)</small></p>
-                                        <a href="/billing/upgrade/plus" class="btn btn-primary text-light btn-lg btn-block">Upgrade to Plus</a>
+                                        <a href="/billing/upgrade/plus" class="btn btn-primary text-light btn-lg btn-block mt-auto">Upgrade to Plus</a>
                                     </div>
                                 </div>
                             </div>  

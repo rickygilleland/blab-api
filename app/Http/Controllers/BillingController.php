@@ -32,6 +32,10 @@ class BillingController extends Controller
             return view('billing.unauthorized');
         }
 
+        if ($user->organization->subscribed('Blab Standard') || $user->organization->subscribed('Blab Plus')) {
+            return redirect('billing/portal');
+        }
+
         $billing = new \stdClass;
         $billing->plan = "Free";
         $billing->is_trial = false;

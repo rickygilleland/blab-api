@@ -55,6 +55,10 @@
         .btn {
             font-weight:600
         }
+        h1 a {
+            font-weight: 900!important;
+            color:white!important;
+        }
     </style>
 </head>
 <body>

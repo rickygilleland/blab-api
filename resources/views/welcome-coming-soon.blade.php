@@ -58,6 +58,9 @@
                 font-weight:500!important;
                 text-align:center;
             }
+            .card {
+                border-radius: 25px;
+            }
         </style>
 
     </head>

@@ -107,9 +107,9 @@
                             <div class="card-body p-5">
 
                                 <div class="row">
-                                    <div class="col-6 d-flex flex-row align-items-center">
+                                    <div class="col-12 col-lg-6 d-flex flex-row align-items-center">
                                         <div>
-                                            <img src="{{ $message->user->avatar_url }}" class="img rounded img-fluid" style="height:75px" />
+                                            <img src="{{ $message->user->avatar_url }}" class="img rounded" style="height:75px;width:auto" />
                                         </div>
                                         <div class="ml-3">
                                             <p style="font-size:1.05rem;font-weight:600">Shared by {{ $message->user->first_name }}<br><small class="text-muted">{{ $message->created_at->diffForHumans() }} </small></p>

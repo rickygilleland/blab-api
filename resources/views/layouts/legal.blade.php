@@ -65,7 +65,7 @@
         <div class="container">
             <div>
                 <nav class="navbar navbar-expand-lg navbar-light text-dark">
-                    <a class="navbar-brand" href="#" style="font-weight:900;font-size:1.75rem;"><img src="img/blab-app-icon.png" class="img img-fluid" style="height:60px"></a>
+                    <a class="navbar-brand" href="/" style="font-weight:900;font-size:2.5rem;">blab</a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>

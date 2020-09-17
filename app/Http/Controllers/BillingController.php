@@ -131,6 +131,10 @@ class BillingController extends Controller
                 $coupon = "2DXdr950";
             }
 
+            if ($request->coupon == "50OFF2") {
+                $coupon = "GISrCOsB";
+            }
+
             $user->organization->newSubscription($plan_name, $request->plan)->trialDays(7)->quantity($plan_quantity)->withCoupon($coupon)->create($request->payment_method, [
                 'email' => $user->email
             ], [

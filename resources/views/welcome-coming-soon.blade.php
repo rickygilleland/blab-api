@@ -66,7 +66,7 @@
         <div class="container">
             <div>
                 <nav class="navbar navbar-expand-lg navbar-light text-dark">
-                    <a class="navbar-brand" href="#" style="font-weight:900;font-size:1.75rem;"><img src="img/blab-app-icon.png" class="img img-fluid" style="height:60px"></a>
+                    <a class="navbar-brand" href="#" style="font-weight:900;font-size:2.5rem;">blab</a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -154,7 +154,7 @@
         <div class="container" style="background-color:#fff;color:black" id="pricing">
             <div style="max-width:1400px" class="mx-auto py-5">
                <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800">Blab Pricing</h3>
-                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it. All paid plans come with a 7 day free trial.</p>
+                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it.<br>All paid plans come with a 7 day free trial.</p>
                 
 
                 <div class="row">

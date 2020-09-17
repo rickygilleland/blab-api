@@ -165,7 +165,7 @@ class ThreadController extends Controller
             }
 
             if ($message->is_public) {
-                $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $message->slug;
+                $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $message->thread->slug . "/" . $message->slug;
             }
         }
 

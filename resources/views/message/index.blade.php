@@ -11,7 +11,7 @@
     <meta property="og:title" content="Blab" />
     @if (strpos($message->attachment_mime_type, "audio") !== false)
         <meta property="og:audio" content="{{ $message->attachment_temporary_url }}" />
-        <meta property="og:description" content="{{ $message->user->first_name }} sent you an audio message on Blab." />
+        <meta property="og:description" content="{{ $message->user->first_name }} shared a voice clip on Blab." />
         <meta name="twitter:title" content="View {{ $message->user->first_name }}'s Audio Blab">
         <meta property="og:audio:type" content="audio/wav" />
     @else
@@ -20,7 +20,7 @@
         <meta property="og:video:width" content="466" />
         <meta property="og:video:height" content="350" />
         <meta property="og:video:secure_url" content="{{ $message->attachment_temporary_url }}" />
-        <meta property="og:description" content="{{ $message->user->first_name }} sent you an video message on Blab." />
+        <meta property="og:description" content="{{ $message->user->first_name }} shared a video on Blab." />
         <meta property="og:image" content="https://blab.sfo2.digitaloceanspaces.com/{{ $message->attachment_thumbnail_path }}" />
         <meta property="og:image:secure_url" content="https://blab.sfo2.digitaloceanspaces.com/{{ $message->attachment_thumbnail_path }}" />
         <meta property="og:image:type" content="image/jpeg">

@@ -69,7 +69,7 @@ Route::get('/billing/success', function() {
 });
 
 //public blab viewing links
-Route::get('/b/{organization_slug}/{blab_slug}', 'MessageController@show', function($organization_slug, $blab_slug) {
+Route::get('/b/{organization_slug}/{thread_slug}/{blab_slug}', 'MessageController@show', function($organization_slug, $blab_slug) {
 
 });
 

@@ -54,13 +54,17 @@
                 margin-top:.5rem!important;
                 margin-bottom:.5rem!important;
             }
+            .pricing-table-feature  {
+                font-weight:500!important;
+                text-align:center;
+            }
         </style>
 
     </head>
     <body class="px-md-5 px-2">
 
-        <div class="container-fluid">
-            <div class="max-width:1400px">
+        <div class="container">
+            <div>
                 <nav class="navbar navbar-expand-lg navbar-light text-dark">
                     <a class="navbar-brand" href="#" style="font-weight:900;font-size:1.75rem;"><img src="img/blab-app-icon.png" class="img img-fluid" style="height:60px"></a>
 
@@ -70,9 +74,11 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
+                            <!--
                             <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="#features"><i class="fas fa-flag"></i> Features</a>
                             </li>   
+                            -->
       <!--                       <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
                             </li>    -->
@@ -80,7 +86,7 @@
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="/login">Log In</a>
                             </li>   
                             <li class="nav-item">
-                                <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a>
+                                <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/get_started" rel="nofollow">Start Now For Free</a>
                             </li>
                         </ul>
                     </div>
@@ -88,25 +94,26 @@
             </div>
         </div>      
 
-        <div class="container-fluid" style="background-color:#0076ff;color:white;border-radius:50px">
-            <div style="max-width:1400px" class="mx-auto py-3 py-4">
+        <div class="container">
 
-                <div class="row my-md-5">
-                    <div class="col-md-5 order-sm-12">
-                        <h1 class="text-center align-middle mt-md-5" style="font-weight:900;">Voice First Communication for Teams</h1>
-                        <h2 class="text-center mt-4" style="font-weight:500;font-size:1.3rem;line-height:1.4">Stay connected with your team no matter what your schedule with our voice first messages.<br><br>And when you do need some face time, pop into a voice or video room to hang out with your teammates.</h2>
-                        <center><a class="btn btn-success shadow btn-lg text-dark my-2 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
-                    </div>
-                    <div class="col-md-7 order-sm-1">
-                        <img src="/img/main-hero-demo.gif" class="img img-fluid rounded">
-                    </div>
+            <div class="row my-md-5">
+                <div class="col-12">
+                    <h1 class="text-center" style="font-weight:900;font-size:5rem">Let Your Team Hear You</h1>
+                    <p class="text-center mt-4" style="font-weight:600;font-size:1.13rem;">The convenience of face to face conversation without the hassle of scheduling meetings.<br/>Send a voice or video message and let your teammates get back to you, or pop into a room to hang out live.</p>
+                    <center><a class="btn btn-success shadow btn-lg text-dark my-2 font-weight-bold" href="/get_started" rel="nofollow">Start Now For Free</a></center>
                 </div>
-                
             </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <center><img src="/img/main-hero-demo.gif" class="img img-fluid rounded shadow mt-4 mt-md-0 w-100" style="max-width:975px"></center>
+                </div>
+            </div>
+        
         </div>
 
         <!--
-        <div class="container-fluid" style="background-color:#fff;color:black" id="features">
+        <div class="container" style="background-color:#fff;color:black" id="features">
             <div style="max-width:1400px" class="mx-auto py-5">
 
                 <div class="row mb-5 clearfix">
@@ -123,7 +130,7 @@
             </div>
         </div>
 
-        <div class="container-fluid" style="background-color:#0076ff;color:white;border-radius:50px">
+        <div class="container" style="background-color:#0076ff;color:white;border-radius:50px">
             <div style="max-width:1400px" class="mx-auto py-5">
                 <div class="row mb-5 clearfix">
                     <div class="col-md-6">
@@ -144,48 +151,55 @@
         </div>
         -->
 
-        <div class="container-fluid" style="background-color:#fff;color:black" id="pricing">
+        <div class="container" style="background-color:#fff;color:black" id="pricing">
             <div style="max-width:1400px" class="mx-auto py-5">
-               <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800"><i class="fas fa-tags"></i> Blab Pricing</h3>
-                <p class="lead text-center mb-1" style="font-weight:500;font-size:1.45rem">Flexible pricing with no commitments.</p>
-                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it. All paid plans come with a 30 day money back guarantee.</p>
+               <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800">Blab Pricing</h3>
+                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it. All paid plans come with a 7 day free trial.</p>
                 
+
                 <div class="row">
-                    <div class="col border-right text-center">
-                        <h2 style="font-weight:700">Free Plan<br><span style="font-size:1rem;font-weight:600">&nbsp;</span></h2>
-                        <p style="font-weight:600">Unlimited Voice/Video Messages</p>
-                        <p style="font-weight:600">1 Voice Room</p>
-                        <p style="font-weight:600">Limit of 5 Teammates</p>
-                        <p style="font-weight:600">30 Days of Retention</p>
-                        <p class="mt-4 text-center" style="font-weight:600;font-size:1.2rem">Free</p>
+                    <div class="col d-flex align-items-stretch">
+                        <div class="card card-body shadow-sm" style="border-top: 5px solid #121422">
+                            <h3 class="mb-0 pb-0" style="font-weight:700">Basic</h3>
+                            <p class="my-5" style="font-weight:700;font-size:1.3rem">$0</p>
+                            <p style="font-weight:600;">The Basics, Free</p>
+                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Voice/Video Messages</p>
+                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> 1 Voice Room</p>
+                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Up to 5 Teammates</p>
+                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> 30 Days of Retention</p>
+                        </div>
                     </div>
-                    <div class="col border-right text-center">
-                        <h2 style="font-weight:700">Standard Plan<br>&nbsp;</h2>
-                        <p style="font-weight:600">All Features of the Free Plan +</p>
-                        <p style="font-weight:600">Unlimited Voice Rooms</p>
-                        <p style="font-weight:600">Unlimited Teammates</p>
-                        <p style="font-weight:600">Unlimited Retention Retention</p>
-                        <p class="mt-4 text-center" style="font-weight:600;font-size:1.2rem">$5/user/month</p>
+                    <div class="col d-flex align-items-stretch">
+                        <div class="card card-body shadow-sm" style="border-top: 5px solid #5e94ff">
+                            <h3 class="mb-0 pb-0" style="font-weight:700">Standard</h3>
+                            <p class="my-5" style="font-weight:700;font-size:1.3rem">$5/user/month</p>
+                            <p style="font-weight:600;">Everything In Basic +</p>
+                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Voice Rooms</p>
+                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Teammates</p>
+                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Retention</p>
+                        </div>
                     </div>
-                    <div class="col  text-center">
-                        <h2 style="font-weight:700">Plus Plan<br>&nbsp;</h2>
-                        <p style="font-weight:600">All Features of the Standard Plan +</p>
-                        <p style="font-weight:600">Unlimited Voice and Video Rooms</p>
-                        <p style="font-weight:600">Live Screensharing</p>
-                        <p style="font-weight:600">Message Transcription and Search <small>(coming soon)</small></p>
-                        <p class="mt-4 text-center" style="font-weight:600;font-size:1.2rem">$10/user/month</p>
+                    <div class="col d-flex align-items-stretch">
+                        <div class="card card-body shadow-sm" style="border-top: 5px solid rgb(62, 207, 142)">
+                            <h3 class="mb-0 pb-0" style="font-weight:700">Plus</h3>
+                            <p class="my-5" style="font-weight:700;font-size:1.3rem">$10/user/month</p>
+                            <p style="font-weight:600;">Everything In Standard +</p>
+                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Voice and Video Rooms</p>
+                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Live Screensharing</p>
+                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Message Transcription and Search<br><small>(coming soon)</small></p>
+                        </div>
                     </div>
                 </div>  
 
-                <center><a class="btn btn-success shadow text-dark btn-lg mt-5 font-weight-bold" href="/get_started" rel="nofollow">Get Started for Free</a></center>
+                <center><a class="btn btn-success shadow text-dark btn-lg my-5 font-weight-bold" href="/get_started" rel="nofollow">Start Now For Free</a></center>
 
-                <div class="d-flex justify-content-center" style="margin-top:3rem;">
-                    <div>
+                <h3 class="h1" style="font-weight:900;font-size:3.5rem;margin-top:10rem;margin-bottom:2.8rem">Ready to Work Where You Work</h3>
+                <div class="row">
+                    <div class="col-12 col-md-2 pl-0">
                         <center><img src="img/blab-app-icon.png" class="img img-fluid" style="height:150px" /></center>
                     </div>
-                    <div class="w-50 px-4">
-                        <h3 class="h1" style="font-weight:800;margin-top:1rem">Cross Platform and Ready to Work Where You Do</h3>
-                        <p class="lead" style="font-weight:500">Available on every major browser, and through our MacOS and Windows apps.</p>
+                    <div class="col-12 col-md-10">
+                        <p class="lead mt-5" style="font-weight:600;font-size:1.1rem">Available on every major browser, <br>and through our MacOS and Windows apps.</p>
                     </div>
                 </div>
                 

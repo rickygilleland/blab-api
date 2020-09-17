@@ -49,7 +49,7 @@ class MessageController extends Controller
         }
 
         if ($message->is_public) {
-            $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $message->slug;
+            $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $message->thread->slug . "/" . $message->slug;
         }
 
         return $message;
@@ -175,7 +175,7 @@ class MessageController extends Controller
         $newMessage = \App\Message::where('id', $message->id)->with('user', 'thread')->first()->toArray();
 
         if ($message->is_public) {
-            $newMessage["public_url"] = "https://blab.to/b/" . $message->organization->slug . "/" . $message->slug;
+            $newMessage["public_url"] = "https://blab.to/b/" . $message->organization->slug . "/" . $message->thread->slug . "/" . $message->slug;
         }
 
         if ($message->attachment_mime_type != "audio/x-wav") {
@@ -207,7 +207,7 @@ class MessageController extends Controller
         
     }
 
-    public function show(Request $request, $organization_slug, $blab_slug) 
+    public function show(Request $request, $organization_slug, $thread_slug, $blab_slug) 
     {
 
         if ($organization_slug == null || $blab_slug == null) {

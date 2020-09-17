@@ -131,13 +131,13 @@ class BillingController extends Controller
                 $coupon = "2DXdr950";
             }
 
-            $user->organization->newSubscription($plan_name, $request->plan)->quantity($plan_quantity)->withCoupon($coupon)->create($request->payment_method, [
+            $user->organization->newSubscription($plan_name, $request->plan)->trialDays(7)->quantity($plan_quantity)->withCoupon($coupon)->create($request->payment_method, [
                 'email' => $user->email
             ], [
                 'metadata' => ['organization_name' => $user->organization->name ]
             ]);
         } else {
-            $user->organization->newSubscription($plan_name, $request->plan)->quantity($plan_quantity)->create($request->payment_method, [
+            $user->organization->newSubscription($plan_name, $request->plan)->trialDays(7)->quantity($plan_quantity)->create($request->payment_method, [
                 'email' => $user->email
             ], [
                 'metadata' => ['organization_name' => $user->organization->name ]

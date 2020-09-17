@@ -95,7 +95,7 @@ class MessageController extends Controller
 
             if (count($request->recipient_ids) == 1) {
                 foreach($user->threads as $thread) {
-                    if ($thread->users->contains($request->recipient_ids[0])) {
+                    if ($thread->type == "private" && $thread->users->contains($request->recipient_ids[0])) {
                         $active_thread = $thread;
                         break;
                     }

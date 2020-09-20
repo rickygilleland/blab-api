@@ -11,3 +11,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .DS_STORE
+Makefile
+.depend.mk
+*.cc
+*.o

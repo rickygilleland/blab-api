@@ -189,7 +189,7 @@ class MessageController extends Controller
 
         if (isset($attachment)) {
             if ($attachment->mime_type == "audio/x-wav") {
-                TranscribeAudio::dispatch($attachment);
+                //TranscribeAudio::dispatch($attachment);
             } else {
                 ProcessUploadedVideo::dispatch($attachment); 
             }

@@ -70,6 +70,14 @@ class LibraryController extends Controller
         $library_item->attachment = $attachment;
         $attachment->user;
 
+        if ($request->hasFile("attachment")) {
+            if ($attachment->mime_type == "audio/x-wav") {
+                //TranscribeAudio::dispatch($attachment);
+            } else {
+                ProcessUploadedVideo::dispatch($attachment); 
+            }
+        }
+
         return ($library_item);
     }
 }

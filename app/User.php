@@ -111,4 +111,9 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Thread');
     }
 
+    public function attachments()
+    {
+        return $this->hasMany('App\Attachment');
+    }
+
 }

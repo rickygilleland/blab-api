@@ -9,24 +9,24 @@
 
     <!-- OG tags -->
     <meta property="og:title" content="Blab" />
-    @if (strpos($message->attachment_mime_type, "audio") !== false)
-        <meta property="og:audio" content="{{ $message->attachment_temporary_url }}" />
-        <meta property="og:description" content="{{ $message->user->first_name }} shared a voice clip on Blab." />
-        <meta name="twitter:title" content="View {{ $message->user->first_name }}'s Audio Blab">
+    @if (strpos($attachment->mime_type, "audio") !== false)
+        <meta property="og:audio" content="{{ $attachment->temporary_url }}" />
+        <meta property="og:description" content="{{ $attachment->user->first_name }} shared a voice clip on Blab." />
+        <meta name="twitter:title" content="View {{ $attachment->user->first_name }}'s Audio Blab">
         <meta property="og:audio:type" content="audio/wav" />
     @else
-        <meta property="og:video" content="{{ $message->attachment_temporary_url }}" />
+        <meta property="og:video" content="{{ $attachment->temporary_url }}" />
         <meta property="og:video:type" content="video/mp4" />
         <meta property="og:video:width" content="466" />
         <meta property="og:video:height" content="350" />
-        <meta property="og:video:secure_url" content="{{ $message->attachment_temporary_url }}" />
-        <meta property="og:description" content="{{ $message->user->first_name }} shared a video on Blab." />
-        <meta property="og:image" content="https://blab.sfo2.digitaloceanspaces.com/{{ $message->attachment_thumbnail_path }}" />
-        <meta property="og:image:secure_url" content="https://blab.sfo2.digitaloceanspaces.com/{{ $message->attachment_thumbnail_path }}" />
+        <meta property="og:video:secure_url" content="{{ $attachment->temporary_url }}" />
+        <meta property="og:description" content="{{ $attachment->user->first_name }} shared a video on Blab." />
+        <meta property="og:image" content="https://blab.sfo2.digitaloceanspaces.com/{{ $attachment->thumbnail_temporary_url }}" />
+        <meta property="og:image:secure_url" content="https://blab.sfo2.digitaloceanspaces.com/{{ $attachment->thumbnail_temporary_url }}" />
         <meta property="og:image:type" content="image/jpeg">
         <meta property="og:image:width" content="466" />
         <meta property="og:image:height" content="350" />
-        <meta name="twitter:title" content="View {{ $message->user->first_name }}'s Video Blab">
+        <meta name="twitter:title" content="View {{ $attachment->user->first_name }}'s Video Blab">
     @endif
     <meta property="og:url" content="https://blab.to/b/{{ $organization_slug }}/{{ $blab_slug }}" />
     <meta name="twitter:site" content="@tryblab">
@@ -109,10 +109,10 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-6 d-flex flex-row align-items-center">
                                         <div>
-                                            <img src="{{ $message->user->avatar_url }}" class="img rounded" style="height:75px;width:auto" />
+                                            <img src="{{ $attachment->user->avatar_url }}" class="img rounded" style="height:75px;width:auto" />
                                         </div>
                                         <div class="ml-3">
-                                            <p style="font-size:1.05rem;font-weight:600">Shared by {{ $message->user->first_name }}<br><small class="text-muted">{{ $message->created_at->diffForHumans() }} </small></p>
+                                            <p style="font-size:1.05rem;font-weight:600">Shared by {{ $attachment->user->first_name }}<br><small class="text-muted">{{ $attachment->created_at->diffForHumans() }} </small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -121,10 +121,10 @@
 
                                     <div class="col-12 pt-5 pb-3 p-md-5">
                                         <center>
-                                            @if (strpos($message->attachment_mime_type, "audio") === false)
-                                                <video width="100%" controls src="{{ $message->attachment_temporary_url }}" />
+                                            @if (strpos($attachment->mime_type, "audio") === false)
+                                                <video width="100%" controls src="{{ $attachment->temporary_url }}" />
                                             @else
-                                                <audio width="100%" controls src="{{ $message->attachment_temporary_url }}" controlsList="nodownload" />
+                                                <audio width="100%" controls src="{{ $attachment->temporary_url }}" controlsList="nodownload" />
                                             @endif
                                         </center>
                                     </div>

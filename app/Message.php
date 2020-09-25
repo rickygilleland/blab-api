@@ -20,4 +20,9 @@ class Message extends Model
     {
         return $this->belongsTo('App\Thread');
     }
+
+    public function attachments()
+    {
+        return $this->belongsToMany('App\Attachment');
+    }
 }

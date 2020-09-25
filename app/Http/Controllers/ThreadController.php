@@ -131,7 +131,7 @@ class ThreadController extends Controller
 
     public function get_messages(Request $request, $id) 
     {
-        $thread = \App\Thread::where('id', $id)->with('messages.user')->first();
+        $thread = \App\Thread::where('id', $id)->with(['messages.user', 'messages.attachments'])->first();
 
         if (!$thread) {
             abort(404);
@@ -139,33 +139,39 @@ class ThreadController extends Controller
 
         foreach ($thread->messages as $message) {
 
-            if ($message->attachment_path != null && $message->attachment_processed) {
+            $attachment_slug = null;
 
-                $attachment_url = $message->attachment_temporary_url;
+            if ($message->attachments != null) {
+                foreach ($message->attachments as $attachment) {
     
-                $update_attachment_temp_url = $message->attachment_temporary_url == null || $message->attachment_temporary_url_last_updated == null;
+                    $last_updated = Carbon::parse($attachment->temporary_url_last_updated);
     
-                if (!$update_attachment_temp_url && $message->attachment_thumbnail_path != null) {
-                    $last_updated = Carbon::parse($message->attachment_temporary_url_last_updated);
+                    if ($attachment->temporary_url_last_updated == null || $last_updated->diffInDays() > 5) {
+                        $attachment->temporary_url = Storage::temporaryUrl(
+                            $attachment->path, now()->addDays(7)
+                        );
+        
+                        if ($attachment->thumbnail_path != null) {
+                            $attachment->thumbnail_temporary_url = Storage::temporaryUrl(
+                                $attachment->thumbnail_path, now()->addDays(7)
+                            ); 
+                        }
+                    }
     
-                    $update_attachment_temp_url = $last_updated->diffInDays() > 5;
-                }
+                    $attachment->save();
     
-                if ($update_attachment_temp_url) {
-    
-                    $attachment_url = Storage::temporaryUrl(
-                        $message->attachment_path, now()->addDays(7)
-                    );
-    
-                    $message->attachment_temporary_url = $attachment_url;
-                    $message->attachment_temporary_url_last_updated = Carbon::now();
-    
-                    $message->save();
+                    $attachment_slug = $attachment->slug;
+
+                    //make the attachment changes backwards compatible for existing clients
+                    $message->attachment_processed = $attachment->processed;
+                    $message->attachment_mime_type = $attachment->mime_type;
+                    $message->attachment_temporary_url = $attachment->temporary_url;
+                    $message->attachment_thumbnail_url = $attachment->thumbnail_temporary_url;
                 }
             }
-
+            
             if ($message->is_public) {
-                $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $message->thread->slug . "/" . $message->slug;
+                $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $attachment_slug;
             }
         }
 

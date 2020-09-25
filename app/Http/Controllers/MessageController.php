@@ -15,41 +15,40 @@ class MessageController extends Controller
 {
     public function get_message(Request $request, $id)
     {
-        $message = \App\Message::where('id', $id)->load('organization', 'user')->first();
+        $message = \App\Message::where('id', $id)->load('organization', 'user', 'attachments')->first();
+        $attachment_slug = null;
 
-        if ($message->attachment_path != null && $message->attachment_processed) {
+        if ($message->attachments != null) {
+            foreach ($message->attachments as $attachment) {
 
-            $attachment_url = $message->attachment_temporary_url;
+                $last_updated = Carbon::parse($attachment->temporary_url_last_updated);
 
-            $update_attachment_temp_url = $message->attachment_temporary_url == null || $message->attachment_temporary_url_last_updated == null;
-
-            if (!$update_attachment_temp_url && $message->attachment_thumbnail_path != null) {
-                $last_updated = Carbon::parse($message->attachment_temporary_url_last_updated);
-
-                $update_attachment_temp_url = $last_updated->diffInDays() > 5;
-            }
-
-            if ($update_attachment_temp_url) {
-
-                $attachment_url = Storage::temporaryUrl(
-                    $message->attachment_path, now()->addDays(7)
-                );
-
-                if ($message->attachment_thumbnail_path != null) {
-                    $attachment_thumbnail_url = Storage::temporaryUrl(
-                        $message->attachment_thumbnail_path, now()->addDays(7)
-                    ); 
+                if ($attachment->temporary_url_last_updated == null || $last_updated->diffInDays() > 5) {
+                    $attachment->temporary_url = Storage::temporaryUrl(
+                        $attachment->path, now()->addDays(7)
+                    );
+    
+                    if ($attachment->thumbnail_path != null) {
+                        $attachment->thumbnail_temporary_url = Storage::temporaryUrl(
+                            $attachment->thumbnail_path, now()->addDays(7)
+                        ); 
+                    }
                 }
 
-                $message->attachment_temporary_url = $attachment_url;
-                $message->attachment_temporary_url_last_updated = Carbon::now();
+                $attachment->save();
 
-                $message->save();
+                $attachment_slug = $attachment->slug;
+
+                //make the attachment changes backwards compatible for existing clients
+                $message->attachment_processed = $attachment->processed;
+                $message->attachment_mime_type = $attachment->mime_type;
+                $message->attachment_temporary_url = $attachment->temporary_url;
+                $message->attachment_thumbnail_url = $attachment->thumbnail_temporary_url;
             }
         }
 
         if ($message->is_public) {
-            $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $message->thread->slug . "/" . $message->slug;
+            $message->public_url = "https://blab.to/b/" . $message->organization->slug . "/" . $attachment_slug;
         }
 
         return $message;
@@ -152,36 +151,54 @@ class MessageController extends Controller
         if ($request->hasFile('attachment')) {
             try {
                 $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
-                $message->attachment_path = $attachment_path;
-                $message->attachment_mime_type = $request->file('attachment')->getMimeType();
+
+                $attachment = new \App\Attachment();
+                $attachment->path = $attachment_path;
+                $attachment->mime_type = $request->file('attachment')->getMimeType();
+                $attachment->slug = Str::random(12);
+                $attachment->processed = $attachment->mime_type == "audio/x-wav";
+
+                if ($attachment->mime_type == "audio/x-wav") {
+                    $attachment->temporary_url = Storage::temporaryUrl(
+                        $attachment->path, now()->addDays(7)
+                    );
+                    $attachment->temporary_url_last_updated = Carbon::now();
+                }
+
+                $attachment->save();
+
             } catch (\Exception $e) {
                 //do something
             }
         }
 
         $message->slug = Str::random(12);
-
-        $message->attachment_processed = $message->attachment_mime_type == "audio/x-wav";
-
-        if ($message->attachment_mime_type == "audio/x-wav") {
-            $message->attachment_temporary_url = Storage::temporaryUrl(
-                $message->attachment_path, now()->addDays(7)
-            );
-            $message->attachment_temporary_url_last_updated = Carbon::now();
-        }
-
         $message->save();
 
-        $newMessage = \App\Message::where('id', $message->id)->with('user', 'thread')->first()->toArray();
+        $message->attachments()->attach($attachment);
+
+        $newMessage = \App\Message::where('id', $message->id)->with('user', 'thread', 'attachments')->first()->toArray();
 
         if ($message->is_public) {
             $newMessage["public_url"] = "https://blab.to/b/" . $message->organization->slug . "/" . $message->thread->slug . "/" . $message->slug;
         }
 
-        if ($message->attachment_mime_type != "audio/x-wav") {
-            ProcessUploadedVideo::dispatch($message);
-        } else {
-            TranscribeAudio::dispatch($message);
+        if (isset($attachment)) {
+            if ($attachment->mime_type == "audio/x-wav") {
+                ProcessUploadedVideo::dispatch($attachment); 
+            } else {
+                TranscribeAudio::dispatch($attachment);
+            }
+        }
+
+        $newMessage = (object)$newMessage;
+
+        if (isset($attachment)) {
+            //make the attachment changes backwards compatible for existing clients
+            $newMessage->attachment_processed = $attachment->processed;
+            $newMessage->attachment_mime_type = $attachment->mime_type;
+            $newMessage->attachment_temporary_url = $attachment->temporary_url;
+            $newMessage->attachment_thumbnail_url = $attachment->thumbnail_temporary_url;
         }
 
         $notification = new \stdClass;
@@ -220,7 +237,7 @@ class MessageController extends Controller
             abort(404);
         }
 
-        $message = \App\Message::where('slug', $blab_slug)->with('user')->first();
+        $message = \App\Message::where('slug', $blab_slug)->with('user', 'attachments')->first();
 
         if (!$message || $message->organization_id != $organization->id || !$message->is_public) {
             abort(404);

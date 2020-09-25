@@ -16,16 +16,16 @@ class ProcessUploadedVideo implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $message;
+    public $attachment;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($attachment)
     {
-        $this->message = $message;
+        $this->attachment = $attachment;
     }
 
     /**
@@ -36,21 +36,21 @@ class ProcessUploadedVideo implements ShouldQueue
     public function handle()
     {
 
-        $converted_video = FFMpeg::fromDisk('spaces')->open($this->message->attachment_path);
+        $converted_video = FFMpeg::fromDisk('spaces')->open($this->attachment->path);
 
         $converted_video->export()
             ->toDisk('spaces')
             ->inFormat(new \FFMpeg\Format\Video\X264('aac'))
             ->withVisibility('private')
-            ->save(str_replace('.webm', '.mp4', $this->message->attachment_path));
+            ->save(str_replace('.webm', '.mp4', $this->attachment->path));
 
-        $this->message->attachment_path = str_replace('.webm', '.mp4', $this->message->attachment_path);
-        $this->message->attachment_mime_type = "video/mp4";
-        $this->message->attachment_processed = true;
-        $this->message->attachment_temporary_url_last_updated = null;
-        $this->message->save();
+        $this->attachment->path = str_replace('.webm', '.mp4', $this->attachment->path);
+        $this->attachment->mime_type = "video/mp4";
+        $this->attachment->processed = true;
+        $this->attachment->temporary_url_last_updated = null;
+        $this->attachment->save();
 
-        $thumbnail_path = 'message_thumbnails/' . $this->message->id . "_" . uniqid() . '.jpg';
+        $thumbnail_path = 'message_thumbnails/' . $this->attachment->id . "_" . uniqid() . '.jpg';
 
         $converted_video->getFrameFromSeconds(1)
             ->export()
@@ -58,20 +58,24 @@ class ProcessUploadedVideo implements ShouldQueue
             ->withVisibility('public')
             ->save($thumbnail_path);
 
-        $this->message->attachment_thumbnail_path = $thumbnail_path;
-        $this->message->attachment_thumbnail_temporary_url = Storage::url($thumbnail_path);
-        $this->message->save();
+        $this->attachmentthumbnail_path = $thumbnail_path;
+        $this->attachment->thumbnail_temporary_url = Storage::url($thumbnail_path);
+        $this->attachment->save();
 
-        $message = \App\Message::where('id', $this->message->id)->with(['thread', 'user', 'organization'])->first();
+        if ($this->attachment->messages != null) {
+            foreach ($this->attachment->messages as $message) {
+                $updated_message = \App\Message::where('id', $message->id)->with(['thread', 'user', 'organization'])->first();
 
-        $notification = new \stdClass;
-        $notification->triggered_by = $message->user_id;
-        $notification->message = $message;
-        $notification->thread = $message->thread;
-
-        foreach($message->thread->users as $thread_user) {
-            $notification->recipient_id = $thread_user->id;
-            broadcast(new DirectMessageUpdated($notification));
+                $notification = new \stdClass;
+                $notification->triggered_by = $message->user_id;
+                $notification->message = $message;
+                $notification->thread = $message->thread;
+        
+                foreach($message->thread->users as $thread_user) {
+                    $notification->recipient_id = $thread_user->id;
+                    broadcast(new DirectMessageUpdated($notification));
+                }
+            }
         }
         
     }

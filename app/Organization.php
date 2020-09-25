@@ -25,4 +25,9 @@ class Organization extends Model
     {
         return $this->hasMany('App\User');
     }
+
+    public function attachments()
+    {
+        return $this->hasMany('App\Attachment');
+    }
 }

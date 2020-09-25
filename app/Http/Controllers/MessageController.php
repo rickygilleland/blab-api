@@ -205,6 +205,8 @@ class MessageController extends Controller
             $newMessage->attachment_thumbnail_url = $attachment->thumbnail_temporary_url;
         }
 
+        $newMessage = (array)$newMessage;
+
         $notification = new \stdClass;
         $notification->triggered_by = $user->id;
         $notification->message = (object)$newMessage;

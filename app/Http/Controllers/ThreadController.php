@@ -40,20 +40,25 @@ class ThreadController extends Controller
             }
 
             if ($thread->name == null) {
-                $name = '';
 
-                $i = 0;
-                foreach ($thread->users as $thread_user) {
-                    $name .= $thread_user->first_name;
+                if ($thread->type == "room") {
+                    $thread->name = $thread->room->name;
+                } else {
+                    $name = '';
 
-                    if ($i != count($thread->users) - 1) {
-                        $name .= ", ";
+                    $i = 0;
+                    foreach ($thread->users as $thread_user) {
+                        $name .= $thread_user->first_name;
+
+                        if ($i != count($thread->users) - 1) {
+                            $name .= ", ";
+                        }
+
+                        $i++;
                     }
 
-                    $i++;
+                    $thread->name = $name;
                 }
-
-                $thread->name = $name;
             }
 
             if ($thread->type == "room") {

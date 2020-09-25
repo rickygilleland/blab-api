@@ -149,7 +149,9 @@ class MessageController extends Controller
         }
 
         if ($request->hasFile('attachment')) {
-            $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
+
+            try { 
+                $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
 
                 $attachment = new \App\Attachment();
                 $attachment->user_id = $user->id;
@@ -167,12 +169,17 @@ class MessageController extends Controller
                 }
 
                 $attachment->save();
-
-                $message->attachments()->attach($attachment);
+            } catch (\Exception $e) {
+                //do something
+            }
         }
 
         $message->slug = Str::random(12);
         $message->save();
+
+        if (isset($attachment)) {
+            $message->attachments()->attach($attachment);
+        }
 
         $newMessage = \App\Message::where('id', $message->id)->with('user', 'thread', 'attachments')->first()->toArray();
 

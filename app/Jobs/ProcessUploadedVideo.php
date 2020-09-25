@@ -69,8 +69,8 @@ class ProcessUploadedVideo implements ShouldQueue
 
                 $notification = new \stdClass;
                 $notification->triggered_by = $message->user_id;
-                $notification->message = $message;
-                $notification->thread = $message->thread;
+                $notification->message = $updated_message;
+                $notification->thread = $updated_message->thread;
         
                 foreach($message->thread->users as $thread_user) {
                     $notification->recipient_id = $thread_user->id;

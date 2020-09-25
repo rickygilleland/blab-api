@@ -9,6 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use App\Events\DirectMessageUpdated;
+use App\Events\LibraryItemUpdated;
 
 use FFMpeg;
 
@@ -58,13 +59,13 @@ class ProcessUploadedVideo implements ShouldQueue
             ->withVisibility('public')
             ->save($thumbnail_path);
 
-        $this->attachmentthumbnail_path = $thumbnail_path;
+        $this->attachment->thumbnail_path = $thumbnail_path;
         $this->attachment->thumbnail_temporary_url = Storage::url($thumbnail_path);
         $this->attachment->save();
 
         if ($this->attachment->messages != null) {
             foreach ($this->attachment->messages as $message) {
-                $updated_message = \App\Message::where('id', $message->id)->with(['thread', 'user', 'organization'])->first();
+                $updated_message = \App\Message::where('id', $message->id)->with(['thread', 'user', 'organization', 'attachments'])->first();
 
                 $notification = new \stdClass;
                 $notification->triggered_by = $message->user_id;
@@ -76,6 +77,18 @@ class ProcessUploadedVideo implements ShouldQueue
                     broadcast(new DirectMessageUpdated($notification));
                 }
             }
+        }
+
+        if ($this->attachment->libraryItem != null) {
+
+            $library_item = \App\LibraryItem::where('id', $this->attachment->libraryItem)->first();
+
+            $notification = new \stdClass;
+            $notification->triggered_by = $this->attachment->created_by_user;
+            $notification->item = $library_item;
+            $notification->recipient_id = $this->attachment->created_by_user;
+
+            broadcast(new LibraryItemUpdated($notification));
         }
         
     }

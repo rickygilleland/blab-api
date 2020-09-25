@@ -14,7 +14,7 @@ class LibraryController extends Controller
 {
     public function get_items(Request $request)
     {
-        $user = \Auth::user()->load('libraryItems.attachment');
+        $user = \Auth::user()->load('libraryItems.attachment.user');
 
         return $user->libraryItems;
     }
@@ -68,6 +68,7 @@ class LibraryController extends Controller
         $user->libraryItems()->attach($library_item);
 
         $library_item->attachment = $attachment;
+        $attachment->user;
 
         return ($library_item);
     }

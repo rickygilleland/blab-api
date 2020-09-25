@@ -152,6 +152,8 @@ class MessageController extends Controller
             $attachment_path = Storage::disk('spaces')->putFile('message_attachments', $request->file('attachment'), 'private');
 
                 $attachment = new \App\Attachment();
+                $attachment->user_id = $user->id;
+                $attachment->organization_id = $user->organization->id;
                 $attachment->path = $attachment_path;
                 $attachment->mime_type = $request->file('attachment')->getMimeType();
                 $attachment->slug = Str::random(12);

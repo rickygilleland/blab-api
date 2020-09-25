@@ -81,7 +81,7 @@ class ProcessUploadedVideo implements ShouldQueue
 
         if ($this->attachment->libraryItem != null) {
 
-            $library_item = \App\LibraryItem::where('id', $this->attachment->libraryItem)->first();
+            $library_item = \App\LibraryItem::where('id', $this->attachment->libraryItem)->with('attachment.user')->first();
 
             $notification = new \stdClass;
             $notification->triggered_by = $this->attachment->created_by_user;

@@ -58,3 +58,6 @@ Route::middleware('auth:api')->patch('/messages/{id}', 'MessageController@edit_m
 Route::middleware('auth:api')->get('/threads', 'ThreadController@get_user_threads', function() { });
 Route::middleware('auth:api')->get('/threads/{id}', 'ThreadController@get_thread', function($id) { });
 Route::middleware('auth:api')->get('/threads/{id}/messages', 'ThreadController@get_messages', function($id) { });
+
+Route::middleware('auth:api')->get('/library/items', 'LibraryController@get_items', function() { });
+Route::middleware('auth:api')->post('/library/items', 'LibraryController@create_item', function() { });

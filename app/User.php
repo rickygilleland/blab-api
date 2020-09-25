@@ -116,4 +116,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Attachment');
     }
 
+    public function libraryItems() {
+        return $this->belongsToMany('App\LibraryItem');
+    }
+
 }

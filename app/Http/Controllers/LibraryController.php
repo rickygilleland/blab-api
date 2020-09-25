@@ -16,6 +16,24 @@ class LibraryController extends Controller
     {
         $user = \Auth::user()->load('libraryItems.attachment.user');
 
+        foreach ($user->libraryItems as $item) {
+            $last_updated = Carbon::parse($item->attachment->temporary_url_last_updated);
+
+            if ($item->attachment->temporary_url_last_updated == null || $last_updated->diffInDays() > 5) {
+                $item->attachment->temporary_url = Storage::temporaryUrl(
+                    $item->attachment->path, now()->addDays(7)
+                );
+
+                if ($item->attachment->thumbnail_path != null) {
+                    $item->attachment->thumbnail_temporary_url = Storage::temporaryUrl(
+                        $item->attachment->thumbnail_path, now()->addDays(7)
+                    ); 
+                }
+            }
+
+            $item->attachment->save();
+        }
+
         return $user->libraryItems;
     }
 

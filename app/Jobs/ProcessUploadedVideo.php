@@ -56,7 +56,7 @@ class ProcessUploadedVideo implements ShouldQueue
         $this->attachment->mime_type = "video/mp4";
         $this->attachment->processed = true;
         $this->attachment->temporary_url = Storage::temporaryUrl(
-            $attachment->path, now()->addDays(7)
+            $this->attachment->path, now()->addDays(7)
         );
         $this->attachment->temporary_url_last_updated = Carbon::now();
         $this->attachment->save();

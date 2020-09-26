@@ -217,7 +217,7 @@ class Kernel extends ConsoleKernel
                 ->get();
 
             foreach ($attachments as $attachment) {
-                dispatch(ProcessUploadedVideo($attachment));
+                ProcessUploadedVideo::dispatch($attachment);
             }
             
         })

@@ -26,9 +26,9 @@ class LibraryItem extends Model
         return $this->belongsTo('App\User', 'created_by');
     }
 
-    public function attachment()
+    public function attachments()
     {
-        return $this->hasOne('App\Attachment');
+        return $this->belongsToMany('App\Attachment');
     }
     
 }

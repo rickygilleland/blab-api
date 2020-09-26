@@ -26,9 +26,9 @@ class Attachment extends Model
         return $this->belongsTo('App\Organization');
     }
 
-    public function libraryItem()
+    public function libraryItems()
     {
-        return $this->belongsTo('App\LibraryItem');
+        return $this->belongsToMany('App\LibraryItem');
     }
     
 }

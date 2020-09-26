@@ -14,24 +14,27 @@ class LibraryController extends Controller
 {
     public function get_items(Request $request)
     {
-        $user = \Auth::user()->load('libraryItems.attachment.user');
+        $user = \Auth::user()->load('libraryItems.attachments.user');
 
         foreach ($user->libraryItems as $item) {
-            $last_updated = Carbon::parse($item->attachment->temporary_url_last_updated);
 
-            if ($item->attachment->temporary_url_last_updated == null || $last_updated->diffInDays() > 5) {
-                $item->attachment->temporary_url = Storage::temporaryUrl(
-                    $item->attachment->path, now()->addDays(7)
-                );
+            foreach ($item->attachments as $attachment) {
+                $last_updated = Carbon::parse($attachment->temporary_url_last_updated);
 
-                if ($item->attachment->thumbnail_path != null) {
-                    $item->attachment->thumbnail_temporary_url = Storage::temporaryUrl(
-                        $item->attachment->thumbnail_path, now()->addDays(7)
-                    ); 
+                if ($attachment->temporary_url_last_updated == null || $last_updated->diffInDays() > 5) {
+                    $attachment->temporary_url = Storage::temporaryUrl(
+                        $attachment->path, now()->addDays(7)
+                    );
+    
+                    if ($attachment->thumbnail_path != null) {
+                        $attachment->thumbnail_temporary_url = Storage::temporaryUrl(
+                            $attachment->thumbnail_path, now()->addDays(7)
+                        ); 
+                    }
                 }
+    
+                $attachment->save();
             }
-
-            $item->attachment->save();
         }
 
         return $user->libraryItems;
@@ -81,12 +84,13 @@ class LibraryController extends Controller
 
         $library_item = new \App\LibraryItem();
         $library_item->created_by = $user->id;
-        $library_item->attachment_id = $attachment->id;
         $library_item->save();
+
+        $library_item->attachments()->attach($attachment);
 
         $user->libraryItems()->attach($library_item);
 
-        $library_item->attachment = $attachment;
+        $library_item->attachments;
         $attachment->user;
 
         if ($request->hasFile("attachment")) {

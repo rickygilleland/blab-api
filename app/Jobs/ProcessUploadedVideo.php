@@ -39,10 +39,6 @@ class ProcessUploadedVideo implements ShouldQueue
     public function handle()
     {
 
-        //$attachment = \App\Attachment::find($this->attachment)->with(['organization', 'messages', 'libraryItem']);
-
-        Log::info("Attachment", $this->attachment);
-
         $converted_video = FFMpeg::fromDisk('spaces')->open($this->attachment->path);
 
         try {
@@ -56,8 +52,6 @@ class ProcessUploadedVideo implements ShouldQueue
             //this is fine, let it try updating the model anyways
         }
 
-        Log::info("Video converted");
-
         $this->attachment->path = str_replace('.webm', '.mp4', $this->attachment->path);
         $this->attachment->mime_type = "video/mp4";
         $this->attachment->processed = true;
@@ -66,8 +60,6 @@ class ProcessUploadedVideo implements ShouldQueue
         );
         $this->attachment->temporary_url_last_updated = Carbon::now();
         $this->attachment->save();
-
-        Log::info("Attachment updated", $this->attachment);
 
         $thumbnail_path = 'message_thumbnails/' . $this->attachment->id . "_" . uniqid() . '.jpg';
 
@@ -81,9 +73,6 @@ class ProcessUploadedVideo implements ShouldQueue
         $this->attachment->thumbnail_temporary_url = Storage::url($thumbnail_path);
         $this->attachment->save();
 
-        Log::info("Thumbnail generated", $this->attachment);
-
-        Log::info("Messages relationship", $this->attachment->messages);
         if ($this->attachment->messages != null) {
             foreach ($this->attachment->messages as $message) {
                 $updated_message = \App\Message::where('id', $message->id)->with(['thread', 'user', 'organization', 'attachments'])->first();
@@ -100,18 +89,19 @@ class ProcessUploadedVideo implements ShouldQueue
             }
         }
 
-        Log::info("LibraryItem relationship", $this->attachment->libraryItem);
+        if ($this->attachment->libraryItems != null) {
 
-        if ($this->attachment->libraryItem != null) {
+            foreach ($this->attachment->libraryItems as $libraryItem) {
+                $library_item = \App\LibraryItem::where('id', $libraryItem)->with('attachment.user')->first();
 
-            $library_item = \App\LibraryItem::where('id', $this->attachment->libraryItem)->with('attachment.user')->first();
+                $notification = new \stdClass;
+                $notification->triggered_by = $library_item->created_by_user;
+                $notification->item = $library_item;
+                $notification->recipient_id = $library_item->created_by_user;
+    
+                broadcast(new LibraryItemUpdated($notification));
+            }
 
-            $notification = new \stdClass;
-            $notification->triggered_by = $library_itemL->created_by_user;
-            $notification->item = $library_item;
-            $notification->recipient_id = $library_item->created_by_user;
-
-            broadcast(new LibraryItemUpdated($notification));
         }
         
     }

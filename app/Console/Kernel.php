@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 use App\Jobs\ProcessEmails;
+use App\Jobs\ProcessUploadedVideo;
 use App\Invite;
 use App\User;
 
@@ -204,6 +205,24 @@ class Kernel extends ConsoleKernel
         })
         ->everyMinute()
         ->name('send_organization_invite_reminders')
+        ->onOneServer();
+
+        $schedule->call(function () {
+            $attachments = DB::table('attachments')
+                ->where([
+                    'processed', false,
+                    'mime_type', 'video/webm',
+                    'created_at', '<', Carbon::now()->subMinutes(15)
+                ])
+                ->get();
+
+            foreach ($attachments as $attachment) {
+                dispatch(ProcessUploadedVideo($attachment));
+            }
+            
+        })
+        ->everyMinute()
+        ->name('process_failed_videos')
         ->onOneServer();
 
     }

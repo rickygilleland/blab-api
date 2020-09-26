@@ -107,6 +107,10 @@ class LibraryController extends Controller
             }
         }
 
+        if ($library_item->is_public) {
+            $library_item->public_url = "https://blab.to/b/" . $user->organization->slug . "/" . $attachment->slug;
+        }
+
         return ($library_item);
     }
 }

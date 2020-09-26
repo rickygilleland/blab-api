@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use App\Events\DirectMessageUpdated;
 use App\Events\LibraryItemUpdated;
+use App\Attachment;
 
 use FFMpeg;
 
@@ -24,9 +25,9 @@ class ProcessUploadedVideo implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($attachment)
+    public function __construct(Attachment $attachment)
     {
-        $this->attachment = \App\Attachment::find($attachment->id)->with(['user', 'messages', 'libraryItem']);
+        $this->attachment = $attachment;
     }
 
     /**

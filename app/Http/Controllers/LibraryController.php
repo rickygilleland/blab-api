@@ -34,6 +34,12 @@ class LibraryController extends Controller
                 }
     
                 $attachment->save();
+
+                $attachment_slug = $attachment->slug;
+            }
+
+            if ($item->is_public) {
+                $item->public_url = "https://blab.to/b/" . $user->organization->slug . "/" . $attachment_slug;
             }
         }
 

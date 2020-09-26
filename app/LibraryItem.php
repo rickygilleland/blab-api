@@ -28,7 +28,7 @@ class LibraryItem extends Model
 
     public function attachment()
     {
-        return $this->belongsTo('App\Attachment');
+        return $this->hasOne('App\Attachment');
     }
     
 }

@@ -58,6 +58,7 @@ class LibraryController extends Controller
                 $attachment->mime_type = $request->file('attachment')->getMimeType();
                 $attachment->slug = Str::random(12);
                 $attachment->processed = $attachment->mime_type == "audio/x-wav";
+                $attachment->is_public = true;
 
                 if ($attachment->mime_type == "audio/x-wav") {
                     $attachment->temporary_url = Storage::temporaryUrl(

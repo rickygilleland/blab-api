@@ -210,9 +210,9 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $attachments = DB::table('attachments')
                 ->where([
-                    'processed', false,
-                    'mime_type', 'video/webm',
-                    'created_at', '<', Carbon::now()->subMinutes(15)
+                    ['processed', false],
+                    ['mime_type', 'video/webm'],
+                    ['created_at', '<', Carbon::now()->subMinutes(15)]
                 ])
                 ->get();
 

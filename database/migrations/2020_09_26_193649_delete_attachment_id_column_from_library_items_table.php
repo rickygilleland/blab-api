@@ -14,8 +14,10 @@ class DeleteAttachmentIdColumnFromLibraryItemsTable extends Migration
     public function up()
     {
         Schema::table('library_items', function (Blueprint $table) {
+            $table->dropForeign('library_items_attachment_id_foreign');
             $table->dropColumn('attachment_id');
         });
+
     }
 
     /**

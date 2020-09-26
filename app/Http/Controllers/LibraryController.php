@@ -89,6 +89,7 @@ class LibraryController extends Controller
 
         $library_item = new \App\LibraryItem();
         $library_item->is_public = true;
+        $library_item->slug = Str::random(12);
         $library_item->created_by = $user->id;
         $library_item->save();
 

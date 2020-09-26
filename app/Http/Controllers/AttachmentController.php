@@ -22,7 +22,13 @@ class AttachmentController extends Controller
             abort(404);
         }
 
-        $attachment = \App\Attachment::where('slug', $blab_slug)->with('user')->first();
+        $library_item = \App\LibraryItem::where('slug', $blab_slug)->with('attachments.user')->first();
+
+        if (!$library_item) {
+            $attachment = \App\Attachment::where('slug', $blab_slug)->with('user')->first();
+        } else {
+            $attachment = $library_item->attachments[0];
+        }
 
         if (!$attachment || $attachment->organization_id != $organization->id || !$attachment->is_public) {
             abort(404);

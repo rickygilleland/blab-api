@@ -96,7 +96,7 @@ class ProcessUploadedVideo implements ShouldQueue
                 $library_item = \App\LibraryItem::where('id', $libraryItem->id)->with('attachments.user')->first();
 
                 if ($library_item->is_public) {
-                    $library_item->public_url = "https://blab.to/b/" . $user->organization->slug . "/" . $this->attachment->slug;
+                    $library_item->public_url = "https://blab.to/b/" . $library_item->created_by_user->organization->slug . "/" . $this->attachment->slug;
                 }        
 
                 $notification = new \stdClass;

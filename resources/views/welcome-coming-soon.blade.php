@@ -112,50 +112,51 @@
                     <center><img src="/img/main-hero-demo.gif" class="img img-fluid rounded shadow mt-4 mt-md-0 w-100" style="max-width:975px"></center>
                 </div>
             </div>
+
+            <hr class="my-5" />
+
+            <div class="row my-md-5">
+                <div class="col-md-6">
+                    <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Spontaneous Water Cooler Style Conversations</h3>
+                    <p class="lead" style="font-weight:500">Ditch the scheduled meetings and give your team a place to hang out instead.</p>
+                    <p class="lead" style="font-weight:500">Great for general office chit-chat, recurring meetings, or 1:1 conversations with your co-workers.</p>      
+                    <p class="lead" style="font-weight:500">Our video and voice chat is powered by WebRTC for low-latency connections and all streams are encrypted while in transit.</p>          
+                </div>
+                <div class="col-md-6">
+                    <img src="/img/blab-room-demo.gif" style="max-height:400px" class="img img-fluid rounded shadow" />
+                </div>
+            </div>
+
+            <div class="row my-md-5">
+                <div class="col-md-6">
+                    <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Let Your Voice Do The Talking</h3>
+                    <p class="lead" style="font-weight:500">Send your teammates an audio or video message and get your point across <strong>7x faster than typing a Slack message.</strong></p>
+                    <p class="lead" style="font-weight:500">And because your team can actually hear and see you, you'll never have to worry about things getting lost in translation.</p>      
+                    <p class="text-muted" style="font-weight:500">Voice transcription of messages and the ability to record your screen is coming soon.</p>          
+                </div>
+                <div class="col-md-6">
+                    <img src="/img/blab-thread-demo.gif" style="max-height:400px" class="img img-fluid rounded shadow" />
+                </div>
+            </div>
+
+            <div class="row my-md-5">
+                <div class="col-md-6">
+                    <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Save Your Recordings For Later Or Share Them With The World</h3>
+                    <p class="lead" style="font-weight:500">Save your recordings to your library to use them later, or get a publically shareable link and send them to someone outside your team.</p>
+                    <p class="lead" style="font-weight:500">Take your sales pitches to the next level with a personalized audio or video message, or save a product demo recording that can use re-used.</p>              
+                    <p class="text-muted" style="font-weight:500">Screen recording is coming soon.</p>      
+                </div>
+                <div class="col-md-6">
+                    <img src="/img/blab-library-demo.gif" style="max-height:400px" class="img img-fluid rounded shadow" />
+                </div>
+            </div>
+            
+            <hr class="my-5" />
+        </div>
         
-        </div>
-
-        <!--
-        <div class="container" style="background-color:#fff;color:black" id="features">
-            <div style="max-width:1400px" class="mx-auto py-5">
-
-                <div class="row mb-5 clearfix">
-                    <div class="col-md-6">
-                        <h3 class="h2" style="font-weight:800;margin-top:2.5rem">Say Goodbye to Live Meetings</h3>
-                        <p class="lead" style="font-weight:500">Let you and your co-workers take back their time.</p>
-                        <p class="lead" style="font-weight:500">Great for general office chit-chat, recurring meetings, or 1:1 conversations with your co-workers.</p>      
-                        <p class="lead" style="font-weight:500">Whenever a member of your team is in a different timezone than yours, we automatically overlay their local time whenever they're in a room.</p>  
-                    </div>
-                    <div class="col-md-6">
-                        <img src="/img/overview-screenshot.png" style="max-height:650px" class="img img-fluid rounded float-right" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container" style="background-color:#0076ff;color:white;border-radius:50px">
-            <div style="max-width:1400px" class="mx-auto py-5">
-                <div class="row mb-5 clearfix">
-                    <div class="col-md-6">
-                        <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Secure HD Video and Audio</h3>
-                        <p class="lead" style="font-weight:500">Create rooms that are available to the entire team, or restricted to a few select team members.</p>
-                        <p class="lead" style="font-weight:500">Great for general office chit-chat, recurring meetings, or 1:1 conversations with your co-workers.</p>      
-                        <p class="lead" style="font-weight:500">Whenever a member of your team is in a different timezone than yours, we automatically overlay their local time whenever they're in a room.</p>  
-                        <p class="lead" style="font-weight:500">Our video and voice chat is powered by WebRTC for low-latency connections and all streams are encrypted while in transit.</p>
-                        <p class="lead" style="font-weight:500">All rooms are voice only by default, putting the conversation at center stage and reducing distractions and embarrassing moments.</p> 
-                        <p class="small">*Video quality and resolution may be reduced at times depending on network conditions.</p>             
-                    </div>
-                    <div class="col-md-6">
-                        <img src="/img/video-audio-containers-screenshot.png" style="max-height:400px" class="img img-fluid rounded shadow float-right" />
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        -->
 
         <div class="container" style="background-color:#fff;color:black" id="pricing">
-            <div style="max-width:1400px" class="mx-auto py-5">
+            <div style="max-width:1400px" class="mx-auto">
                <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800">Blab Pricing</h3>
                 <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it.<br>All paid plans come with a 7 day free trial.</p>
                 

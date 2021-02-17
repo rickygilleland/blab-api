@@ -80,14 +80,14 @@
                             <!--
                             <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="#features"><i class="fas fa-flag"></i> Features</a>
-                            </li>   
+                            </li>
                             -->
       <!--                       <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
                             </li>    -->
                             <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="/login">Log In</a>
-                            </li>   
+                            </li>
                             <li class="nav-item">
                                 <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/get_started" rel="nofollow">Start Now For Free</a>
                             </li>
@@ -95,7 +95,7 @@
                     </div>
                 </nav>
             </div>
-        </div>      
+        </div>
 
         <div class="container">
 
@@ -119,8 +119,8 @@
                 <div class="col-md-6">
                     <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Spontaneous Water Cooler Style Conversations</h3>
                     <p class="lead" style="font-weight:500">Ditch the scheduled meetings and give your team a place to hang out instead.</p>
-                    <p class="lead" style="font-weight:500">Great for general office chit-chat, recurring meetings, or 1:1 conversations with your co-workers.</p>      
-                    <p class="lead" style="font-weight:500">Our video and voice chat is powered by WebRTC for low-latency connections and all streams are encrypted while in transit.</p>          
+                    <p class="lead" style="font-weight:500">Great for general office chit-chat, recurring meetings, or 1:1 conversations with your co-workers.</p>
+                    <p class="lead" style="font-weight:500">Our video and voice chat is powered by WebRTC for low-latency connections and all streams are encrypted while in transit.</p>
                 </div>
                 <div class="col-md-6">
                     <img src="/img/blab-room-demo.gif" style="max-height:400px" class="img img-fluid rounded shadow" />
@@ -131,8 +131,8 @@
                 <div class="col-md-6">
                     <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Let Your Voice Do The Talking</h3>
                     <p class="lead" style="font-weight:500">Send your teammates an audio or video message and get your point across <strong>7x faster than typing a Slack message.</strong></p>
-                    <p class="lead" style="font-weight:500">And because your team can actually hear and see you, you'll never have to worry about things getting lost in translation.</p>      
-                    <p class="text-muted" style="font-weight:500">Voice transcription of messages and the ability to record your screen is coming soon.</p>          
+                    <p class="lead" style="font-weight:500">And because your team can actually hear and see you, you'll never have to worry about things getting lost in translation.</p>
+                    <p class="text-muted" style="font-weight:500">Voice transcription of messages and the ability to record your screen is coming soon.</p>
                 </div>
                 <div class="col-md-6">
                     <img src="/img/blab-thread-demo.gif" style="max-height:400px" class="img img-fluid rounded shadow" />
@@ -143,57 +143,20 @@
                 <div class="col-md-6">
                     <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Save Your Recordings For Later Or Share Them With The World</h3>
                     <p class="lead" style="font-weight:500">Save your recordings to your library to use them later, or get a publically shareable link and send them to someone outside your team.</p>
-                    <p class="lead" style="font-weight:500">Take your sales pitches to the next level with a personalized audio or video message, or save a product demo recording that can use re-used.</p>              
-                    <p class="text-muted" style="font-weight:500">Screen recording is coming soon.</p>      
+                    <p class="lead" style="font-weight:500">Take your sales pitches to the next level with a personalized audio or video message, or save a product demo recording that can use re-used.</p>
+                    <p class="text-muted" style="font-weight:500">Screen recording is coming soon.</p>
                 </div>
                 <div class="col-md-6">
                     <img src="/img/blab-library-demo.gif" style="max-height:400px" class="img img-fluid rounded shadow" />
                 </div>
             </div>
-            
+
             <hr class="my-5" />
         </div>
-        
+
 
         <div class="container" style="background-color:#fff;color:black" id="pricing">
             <div style="max-width:1400px" class="mx-auto">
-               <h3 class="h1 text-center mt-5 mb-3" style="font-weight:800">Blab Pricing</h3>
-                <p class="text-center pt-0 mb-5" style="font-size:1.1rem">Start off with a free account and upgrade when you outgrow it.<br>All paid plans come with a 7 day free trial.</p>
-                
-
-                <div class="row">
-                    <div class="col-12 col-md-4 d-flex align-items-stretch">
-                        <div class="card card-body shadow-sm mb-5 mb-md-0" style="border-top: 5px solid #121422">
-                            <h3 class="mb-0 pb-0" style="font-weight:700">Basic</h3>
-                            <p class="my-5" style="font-weight:700;font-size:1.3rem">$0</p>
-                            <p style="font-weight:600;">The Basics, Free</p>
-                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Voice/Video Messages</p>
-                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> 1 Voice Room</p>
-                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Up to 5 Teammates</p>
-                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> 30 Days of Retention</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 d-flex align-items-stretch">
-                        <div class="card card-body shadow-sm mb-5 mb-md-0" style="border-top: 5px solid #5e94ff">
-                            <h3 class="mb-0 pb-0" style="font-weight:700">Standard</h3>
-                            <p class="my-5" style="font-weight:700;font-size:1.3rem">$5/user/month</p>
-                            <p style="font-weight:600;">Everything In Basic +</p>
-                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Voice Rooms</p>
-                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Teammates</p>
-                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Retention</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 d-flex align-items-stretch">
-                        <div class="card card-body shadow-sm mb-5 mb-md-0" style="border-top: 5px solid rgb(62, 207, 142)">
-                            <h3 class="mb-0 pb-0" style="font-weight:700">Plus</h3>
-                            <p class="my-5" style="font-weight:700;font-size:1.3rem">$10/user/month</p>
-                            <p style="font-weight:600;">Everything In Standard +</p>
-                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Unlimited Voice and Video Rooms</p>
-                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Live Screensharing</p>
-                            <p style="font-weight:500"><i class="fas fa-check pr-1" style="color:rgb(62, 207, 142)"></i> Message Transcription and Search<br><small>(coming soon)</small></p>
-                        </div>
-                    </div>
-                </div>  
 
                 <center><a class="btn btn-success shadow text-dark btn-lg my-5 font-weight-bold" href="/get_started" rel="nofollow">Start Now For Free</a></center>
 
@@ -206,12 +169,12 @@
                         <p class="lead mt-5" style="font-weight:600;font-size:1.1rem">Available on every major browser, <br>and through our MacOS and Windows apps.</p>
                     </div>
                 </div>
-                
+
                 <p class="text-center font-weight-bold" style="font-size:1.1rem;margin-top:7rem;margin-bottom:5rem">Questions? Drop us a line at hello (at) blab.to</p>
 
             </div>
         </div>
-            
+
 
         <!-- Twitter universal website tag code -->
         <script>

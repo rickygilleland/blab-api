@@ -25,7 +25,7 @@ class OrganizationController extends Controller
     public function show($organization_slug)
     {
         $user = \Auth::user()->load('teams.rooms', 'organization');
-        
+
         //fetch the rooms within the organization and make sure this checks out
         $organization = \App\Organization::where('slug', $organization_slug)->with('teams')->first();
 
@@ -45,10 +45,10 @@ class OrganizationController extends Controller
     {
         $user = \Auth::user()->load('teams.rooms.thread', 'organization', 'rooms.thread', 'threads');
 
-        /*if ($user->organization->trial_ends_at != '2021-06-10 23:59:59') {
+        if ($user->organization->trial_ends_at != '2021-06-10 23:59:59') {
             $user->organization->trial_ends_at = '2021-06-10 23:59:59';
             $user->organization->save();
-        }*/
+        }
 
         $billing = new \stdClass;
         $billing->plan = "Free";
@@ -59,8 +59,8 @@ class OrganizationController extends Controller
         if ($user->organization->onGenericTrial()) {
             $billing->plan = "Standard";
             $billing->is_trial = true;
-            $billing->video_enabled = false;
-            $billing->screen_sharing_enabled = false;
+            $billing->video_enabled = true;
+            $billing->screen_sharing_enabled = true;
         }
 
         if ($user->organization->subscribed('Blab Standard')) {
@@ -90,8 +90,8 @@ class OrganizationController extends Controller
                     }
 
                     continue;
-                } 
-                
+                }
+
                 $all_rooms[] = $room;
             }
 
@@ -138,7 +138,7 @@ class OrganizationController extends Controller
 
             $teams[] = $newTeam;
         }
-        
+
         $organization = [
             "id" => $user->organization->id,
             "name" => $user->organization->name,
@@ -146,7 +146,7 @@ class OrganizationController extends Controller
             "billing" => $billing,
             "teams" => $teams
         ];
-        
+
         return $organization;
     }
 
@@ -159,12 +159,12 @@ class OrganizationController extends Controller
         }
 
         $organization_users = \App\Organization::find($id)->users;
-    
+
         $users = [];
 
         foreach ($organization_users as $user) {
             $users[] = [
-                'id' => $user->id, 
+                'id' => $user->id,
                 'first_name' => $user->first_name,
                 'last_name' => $user->last_name,
                 'avatar_url' => $user->avatar_url,

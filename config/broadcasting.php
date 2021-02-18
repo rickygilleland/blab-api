@@ -39,8 +39,9 @@ return [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'encrypted' => true,
                 'useTLS' => true,
-                'host' => '127.0.0.1',
-                'port' => 6001,
+                'host' => 'socket.blab.to',
+                'port' => 443,
+                'scheme' => 'https'
             ],
         ],
 

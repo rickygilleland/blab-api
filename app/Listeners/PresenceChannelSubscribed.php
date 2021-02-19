@@ -44,13 +44,15 @@ class PresenceChannelSubscribed
             if (!$socket) {
                 $socket = new Socket();
                 $socket->socketId = $event->socketId;
-                $socket->userId = $event->user->user_id;
+                $socket->user_id = $event->user->user_id;
                 $socket->save();
             }
 
             $channelId = explode('.', $event->channelName);
 
             $room = Room::where('channel_id', $$channelId[1])->first();
+
+            Log::info($channelId[1]);
 
             if ($room) {
                 $user->current_room_id = $room->id;

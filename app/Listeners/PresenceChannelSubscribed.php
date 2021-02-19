@@ -29,7 +29,7 @@ class PresenceChannelSubscribed
      */
     public function handle(SubscribedToChannel $event)
     {
-        Log::info($event);
+        Log::info(json_encode($event));
 
         if (strpos($event->channelName, 'presence-room') !== false) {
             $user->current_room_id = null;

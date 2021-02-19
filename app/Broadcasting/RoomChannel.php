@@ -288,7 +288,7 @@ class RoomChannel
             ];
 
         } catch(\Exception $e) {
-
+            /*
             //take this server out of service for now and try again
             $server = \App\Server::where('hostname', $hostname)->first();
 
@@ -325,7 +325,7 @@ class RoomChannel
                 $response = $sg->send($email);
             } catch (Exception $e) {
                 //do something
-            }
+            }*/
 
             return $this->join($user, $channelId, true);
         }

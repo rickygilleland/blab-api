@@ -4,8 +4,10 @@ namespace App\Listeners;
 
 use BeyondCode\LaravelWebSockets\Events\UnsubscribedFromChannel;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
 
-class PresenceChannelUnsubscribed implements ShouldQueue
+
+class PresenceChannelUnsubscribed
 {
     /**
      * Create the event listener.

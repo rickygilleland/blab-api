@@ -38,6 +38,9 @@ class PresenceChannelSubscribed
             $socket = Socket::where('socketId', $event->socketId)->first();
             $user = User::where('id', $event->user->user_id)->first();
 
+            Log::info($event->channelName);
+            Log::info(json_encode($user));
+
             if (!$socket) {
                 $socket = new Socket();
                 $socket->socketId = $event->socketId;

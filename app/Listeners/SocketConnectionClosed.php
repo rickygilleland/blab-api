@@ -32,6 +32,7 @@ class SocketConnectionClosed
     public function handle(ConnectionClosed $event)
     {
         $socket = Socket::where('socketId', $event->socketId)->first();
+        Log::info(json_encode($socket));
 
         if ($socket) {
             $socket->delete();

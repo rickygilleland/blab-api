@@ -44,7 +44,7 @@ return [
     ],
 
     'streaming_backend' => [
-        'url' => env('STREAMING_BACKEND_API_URL'),
-        'secret' => env('STREAMING_BACKEND_API_SECRET')
+        'secret' => env('STREAMING_BACKEND_API_SECRET'),
+        'admin_secret' => env('STREAMING_BACKEND_API_ADMIN_SECRET')
     ]
 ];

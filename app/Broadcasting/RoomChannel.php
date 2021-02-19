@@ -32,8 +32,10 @@ class RoomChannel
 		$this->key = config('services.twilio.key');
         $this->secret = config('services.twilio.secret');
 
-        $this->streaming_backend_api_url = config('services.streaming_backend.url');
+        //secret key for the Janus API (main janus config)
         $this->streaming_backend_api_secret = config('services.streaming_backend.secret');
+        //admin secret for the videoroom plugin (not the main Janus api admin key)
+        $this->streaming_backend_admin_api_secret = config('services.streaming_backend.admin_secret');
     }
 
     /**
@@ -183,7 +185,7 @@ class RoomChannel
                 //create the room
                 $message_body = [
                     "request" => "create",
-                    "admin_key" => $this->streaming_backend_api_secret,
+                    "admin_key" => $this->streaming_backend_admin_api_secret,
                     "room" => $room->channel_id,
                     "secret" => $room->secret,
                     "is_private" => true,
@@ -213,7 +215,7 @@ class RoomChannel
                 //make sure the current user's token is in there
                 $message_body = [
                     "request" => "allowed",
-                    "admin_key" => $this->streaming_backend_api_secret,
+                    "admin_key" => $this->streaming_backend_admin_api_secret,
                     "room" => $room->channel_id,
                     "secret" => $room->secret,
                     "action" => "add",

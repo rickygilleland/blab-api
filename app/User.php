@@ -49,18 +49,18 @@ class User extends Authenticatable
     {
         foreach ($this->loginCodes as $code) {
             if (Hash::check($password, $code->code)) {
-                if ($code->user_id != $this->id || $code->used 
+                if ($code->user_id != $this->id || $code->used
                     || (strtotime($code->created_at) + 3600) < time()) {
                     return false;
                 }
-                
+
                 $code->used = true;
                 $code->save();
 
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -68,22 +68,22 @@ class User extends Authenticatable
     {
 	    return $this->belongsToMany('App\Role');
     }
-    
+
     public function hasRole($role)
     {
-	    
+
 	    foreach ($this->roles as $user_role) {
-		    
+
 		    if ($user_role->name == $role) {
 			    return true;
 		    }
-		    
+
 		    if ($user_role->name == "system_admin") {
 			    //let them do whatever they want
 			    return true;
 		    }
 	    }
-	    
+
 	    return false;
     }
 
@@ -118,6 +118,10 @@ class User extends Authenticatable
 
     public function libraryItems() {
         return $this->belongsToMany('App\LibraryItem');
+    }
+
+    public function sockets() {
+        return $this->hasMany('App\Socket');
     }
 
 }

@@ -8,6 +8,9 @@ use BeyondCode\LaravelWebSockets\Events\SubscribedToChannel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
+use App\Socket;
+use App\User;
+use App\Room;
 
 class PresenceChannelSubscribed
 {
@@ -31,9 +34,25 @@ class PresenceChannelSubscribed
     {
         Log::info(json_encode($event));
 
-        if (strpos($event->channelName, 'presence-room') !== false) {
-            $user->current_room_id = null;
-            $user->save();
+        if (strpos($event->channelName, 'presence-room') !== false && $event->user !== null) {
+            $socket = Socket::where('socketId', $event->socketId)->first();
+            $user = User::where('id', $event->user->user_id)->first();
+
+            if (!$socket) {
+                $socket = new Socket();
+                $socket->socketId = $event->socketId;
+                $socket->userId = $event->user->user_id;
+                $socket->save();
+            }
+
+            $channelId = explode('.', $event->channelName);
+
+            $room = Room::where('channel_id', $$channelId[1])->first();
+
+            if ($room) {
+                $user->current_room_id = $room->id;
+                $user->save();
+            }
         }
     }
 }

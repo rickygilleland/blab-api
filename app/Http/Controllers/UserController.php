@@ -60,13 +60,7 @@ class UserController extends Controller
             abort(404);
         }
 
-        if (isset($request->timezone)) {
-            $user->timezone = $request->timezone;
-        }
-
-        if (isset($request->current_room_id)) {
-            $user->current_room_id = $request->current_room_id;
-        }
+        $user->timezone = $request->timezone;
 
         $user->save();
 

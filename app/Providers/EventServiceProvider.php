@@ -25,6 +25,9 @@ class EventServiceProvider extends ServiceProvider
         \BeyondCode\LaravelWebSockets\Events\UnsubscribedFromChannel::class => [
             App\Listeners\PresenceChannelUnsubscribed::class,
         ],
+        \BeyondCode\LaravelWebSockets\Events\SubscribedToChannel::class => [
+            App\Listeners\PresenceChannelSubscribed::class,
+        ],
     ];
 
     /**

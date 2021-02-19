@@ -4,12 +4,12 @@ namespace App\Listeners;
 
 use Log;
 
-use BeyondCode\LaravelWebSockets\Events\UnsubscribedFromChannel;
+use BeyondCode\LaravelWebSockets\Events\SubscribedToChannel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
 
-class PresenceChannelUnsubscribed
+class PresenceChannelSubscribed
 {
     /**
      * Create the event listener.
@@ -24,10 +24,10 @@ class PresenceChannelUnsubscribed
     /**
      * Handle the event.
      *
-     * @param  UnsubscribedFromChannel  $event
+     * @param  SubscribedToChannel  $event
      * @return void
      */
-    public function handle(UnsubscribedFromChannel $event)
+    public function handle(SubscribedToChannel $event)
     {
         Log::info($event);
 

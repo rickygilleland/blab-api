@@ -74,6 +74,9 @@ class RoomChannel
 
         if ($room->server_id == null || $changeServer == true) {
 
+            //remove this for now until we 1) have more servers and 2) have better error handling
+            /*
+
             if ($user->timezone != null) {
                 if ($user->timezone == "America/New_York") {
                     $available_servers = \App\Server::where('is_active', 1)->where('location', 'us-east')->get();
@@ -86,9 +89,12 @@ class RoomChannel
                 $available_servers = \App\Server::where('is_active', 1)->get();
             }
 
+
             if (count($available_servers) == 0) {
                 abort(503);
             }
+
+
 
             $least_loaded_key = 0;
             $least_loaded_count = 0;
@@ -101,10 +107,13 @@ class RoomChannel
                 }
             }
 
-            $room->server_id = $available_servers[$least_loaded_key]->id;
+            $room->server_id = $available_servers[$least_loaded_key]->id;*/
+            $room->server_id = 1;
             $room->save();
 
-            $server = $available_servers[$least_loaded_key];
+            $server = \App\Server::where('id', 1)->first();
+
+            //$server = $available_servers[$least_loaded_key];
         }
 
         $hostname = $server->hostname;
@@ -261,9 +270,6 @@ class RoomChannel
             $event->room_id = $room->id;
 
             ProcessUsageEvent::dispatch($event);
-
-            $user->current_room_id = $room->id;
-            $user->save();
 
             return [
                 'id' => $user->id,

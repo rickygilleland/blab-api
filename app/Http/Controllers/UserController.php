@@ -48,11 +48,11 @@ class UserController extends Controller
             $user->avatar_url = $avi_base . md5($user->name) . "?theme=" . $random_theme . "&numcolors=4&size=880&fmt=svg";
             $user->save();
         }
-        
+
         return $user;
     }
 
-    public function update(Request $request, $id) 
+    public function update(Request $request, $id)
     {
         $user = \Auth::user();
 
@@ -60,7 +60,14 @@ class UserController extends Controller
             abort(404);
         }
 
-        $user->timezone = $request->timezone;
+        if (isset($request->timezone)) {
+            $user->timezone = $request->timezone;
+        }
+
+        if (isset($request->current_room_id)) {
+            $user->current_room_id = $request->current_room_id;
+        }
+
         $user->save();
 
         return $user;

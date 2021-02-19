@@ -43,7 +43,7 @@ class RoomChannel
      * @return array|bool
      */
     public function join(User $user, $channelId, $changeServer = false)
-    {        
+    {
         $room = \App\Room::where('channel_id', $channelId)->first();
 
         if (!$room) {
@@ -57,11 +57,11 @@ class RoomChannel
         if ($room->is_private && !$user->rooms()->exists($room)) {
             abort(404);
         }
-        
+
         //check if they already have a streamer key set
         if ($user->streamer_key == null) {
             $user->streamer_key = Hash::make(Str::random(256));
-            $user->streamer_key .= "_" . $user->id; 
+            $user->streamer_key .= "_" . $user->id;
             $user->save();
         }
 
@@ -108,7 +108,7 @@ class RoomChannel
         }
 
         $hostname = $server->hostname;
-        
+
         if ($room->secret == null) {
             $room->secret = Hash::make(Str::random(256));
             $room->secret .= "_" . $room->id;
@@ -122,8 +122,8 @@ class RoomChannel
 
         //get the room details from the backend server
         $data = [
-            "janus" => "create", 
-            "transaction" => Str::random(80), 
+            "janus" => "create",
+            "transaction" => Str::random(80),
             "apisecret" => $this->streaming_backend_api_secret
         ];
 
@@ -137,14 +137,14 @@ class RoomChannel
             $session_handler = $session_handler['data']['id'];
 
             $data = [
-                "janus" => "attach", 
-                "plugin" => "janus.plugin.videoroom", 
-                "transaction" => Str::random(80), 
+                "janus" => "attach",
+                "plugin" => "janus.plugin.videoroom",
+                "transaction" => Str::random(80),
                 "apisecret" => $this->streaming_backend_api_secret
             ];
 
             $api_url_with_handler = "https://" . $hostname . "/streamer/" . $session_handler;
-            
+
 
             //attach the video room plugin
             $room_handler = Http::post($api_url_with_handler, $data);
@@ -156,12 +156,12 @@ class RoomChannel
             $message_body = [
                 "request" => "exists",
                 "room" => $room->channel_id
-            ];  
+            ];
 
             $data = [
-                "janus" => "message", 
+                "janus" => "message",
                 "body" => $message_body,
-                "transaction" => Str::random(80), 
+                "transaction" => Str::random(80),
                 "apisecret" => $this->streaming_backend_api_secret
             ];
 
@@ -187,12 +187,12 @@ class RoomChannel
                     "allowed" => [
                         $user->streamer_key
                     ]
-                ];  
+                ];
 
                 $data = [
-                    "janus" => "message", 
+                    "janus" => "message",
                     "body" => $message_body,
-                    "transaction" => Str::random(80), 
+                    "transaction" => Str::random(80),
                     "apisecret" => $this->streaming_backend_api_secret
                 ];
 
@@ -211,12 +211,12 @@ class RoomChannel
                     "allowed" => [
                         $user->streamer_key
                     ]
-                ];  
+                ];
 
                 $data = [
-                    "janus" => "message", 
+                    "janus" => "message",
                     "body" => $message_body,
-                    "transaction" => Str::random(80), 
+                    "transaction" => Str::random(80),
                     "apisecret" => $this->streaming_backend_api_secret
                 ];
 
@@ -231,9 +231,9 @@ class RoomChannel
             ];
 
             $data = [
-                "janus" => "message", 
+                "janus" => "message",
                 "body" => $message_body,
-                "transaction" => Str::random(80), 
+                "transaction" => Str::random(80),
                 "apisecret" => $this->streaming_backend_api_secret
             ];
 
@@ -242,9 +242,11 @@ class RoomChannel
 
             $publisher_count = 0;
 
-            foreach ($quota_check['plugindata']['data']['participants'] as $participant) {
-                if ($participant['publisher']) {
-                    $publisher_count++;
+            if (isset($quota_check['plugindata']['data']['participants'])) {
+                foreach ($quota_check['plugindata']['data']['participants'] as $participant) {
+                    if ($participant['publisher']) {
+                        $publisher_count++;
+                    }
                 }
             }
 
@@ -260,12 +262,15 @@ class RoomChannel
 
             ProcessUsageEvent::dispatch($event);
 
+            $user->current_room_id = $room->id;
+            $user->save();
+
             return [
-                'id' => $user->id, 
+                'id' => $user->id,
                 'first_name' => $user->first_name,
-                'last_name' => $user->last_name, 
-                'avatar' => $user->avatar_url, 
-                'peer_uuid' =>  md5($user->id), 
+                'last_name' => $user->last_name,
+                'avatar' => $user->avatar_url,
+                'peer_uuid' =>  md5($user->id),
                 'room_pin' => $room->pin,
                 'streamer_key' => $user->streamer_key,
                 'timezone' => $user->timezone,
@@ -278,7 +283,7 @@ class RoomChannel
 
             //take this server out of service for now and try again
             $server = \App\Server::where('hostname', $hostname)->first();
-            
+
             if (!$server) {
                 return $this->join($user, $channelId, true);
             }
@@ -303,11 +308,11 @@ class RoomChannel
             $email->addTo("ricky@blab.to", "Ricky Gilleland");
             $email->setSubject("A Media Server was Unreachable");
             $email->addContent(
-                "text/html", $server->hostname . " was unavailable and has been placed out of service. 
-                Here's the error we received:<br>" . 
+                "text/html", $server->hostname . " was unavailable and has been placed out of service.
+                Here's the error we received:<br>" .
                 $e->getMessage()
             );
-            
+
             try {
                 $response = $sg->send($email);
             } catch (Exception $e) {

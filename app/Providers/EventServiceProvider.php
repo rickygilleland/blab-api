@@ -22,12 +22,6 @@ class EventServiceProvider extends ServiceProvider
             // add your listeners (aka providers) here
             'SocialiteProviders\\Slack\\SlackExtendSocialite@handle',
         ],
-        \BeyondCode\LaravelWebSockets\Events\UnsubscribedFromChannel::class => [
-            \App\Listeners\PresenceChannelUnsubscribed::class,
-        ],
-        \BeyondCode\LaravelWebSockets\Events\SubscribedToChannel::class => [
-            \App\Listeners\PresenceChannelSubscribed::class,
-        ],
     ];
 
     /**
@@ -40,5 +34,10 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
 
         //
+    }
+
+    public function shouldDiscoverEvents()
+    {
+        return true;
     }
 }

@@ -43,7 +43,7 @@ class OrganizationController extends Controller
 
     public function api_show()
     {
-        $user = \Auth::user()->load('teams.rooms.thread', 'organization', 'rooms.thread', 'threads');
+        $user = \Auth::user()->load('teams.rooms.thread', 'teams.rooms.active_users', 'organization', 'rooms.thread', 'threads');
 
         if ($user->organization->trial_ends_at != '2021-06-10 23:59:59') {
             $user->organization->trial_ends_at = '2021-06-10 23:59:59';

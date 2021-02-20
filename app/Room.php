@@ -31,4 +31,9 @@ class Room extends Model
     {
         return $this->hasOne('App\Thread');
     }
+
+    public function active_users()
+    {
+        return $this->hasMany('App\User', 'current_room_id');
+    }
 }

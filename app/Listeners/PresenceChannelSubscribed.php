@@ -12,6 +12,8 @@ use App\Socket;
 use App\User;
 use App\Room;
 
+use App\Events\UserJoinedRoom;
+
 class PresenceChannelSubscribed
 {
     /**
@@ -50,13 +52,19 @@ class PresenceChannelSubscribed
 
             $channelId = explode('.', $event->channelName);
 
-            $room = Room::where('channel_id', $$channelId[1])->first();
+            $room = Room::where('channel_id', $channelId[1])->first();
 
             Log::info($channelId[1]);
 
             if ($room) {
                 $user->current_room_id = $room->id;
                 $user->save();
+
+                $notification = new \stdClass;
+                $notification->room = $room;
+                $notification->user = $user;
+
+                broadcast(new UserJoinedRoom($notification));
             }
         }
     }

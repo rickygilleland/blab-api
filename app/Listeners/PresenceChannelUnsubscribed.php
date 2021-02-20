@@ -11,6 +11,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use App\Socket;
 use App\User;
 
+use App\Events\UserJoinedRoom;
+
 class PresenceChannelUnsubscribed
 {
     /**
@@ -42,6 +44,12 @@ class PresenceChannelUnsubscribed
                 if ($user) {
                     $user->current_room_id = null;
                     $user->save();
+
+                    $notification = new \stdClass;
+                    $notification->room = $room;
+                    $notification->user = $user;
+
+                    broadcast(new UserLeftRoom($notification));
                 }
             }
         }

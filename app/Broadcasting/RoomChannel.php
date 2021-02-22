@@ -5,6 +5,7 @@ namespace App\Broadcasting;
 use Log;
 use App\User;
 use App\Events\NotifyServerOutOfService;
+use App\Events\UserJoinedRoom;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
@@ -272,6 +273,16 @@ class RoomChannel
             $event->room_id = $room->id;
 
             ProcessUsageEvent::dispatch($event);
+
+            $user->current_room_id = $room->id;
+            $user->save();
+
+
+            $notification = new \stdClass;
+            $notification->room = $room;
+            $notification->user = $user;
+
+            broadcast(new UserJoinedRoom($notification));
 
             return [
                 'id' => $user->id,

@@ -35,7 +35,7 @@ class PresenceChannelUnsubscribed
     {
         Log::info(json_encode($event));
 
-        if (strpos($event->channelName, 'presence-room') !== false) {
+        if (strpos($event->channelName, 'presence-room') !== false || strpos($event->channelName, 'presence-organization')) {
             $socket = Socket::where('socketId', $event->socketId)->first();
 
             if ($socket) {

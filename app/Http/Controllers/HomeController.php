@@ -28,7 +28,7 @@ class HomeController extends Controller
         if (!$user->is_active) {
             return redirect('onboarding/confirm');
         }
-        
+
         $teams = $user->teams;
 
         if (count($teams) == 0) {
@@ -58,7 +58,25 @@ class HomeController extends Controller
 
         $magic_login_link = encrypt($magic_login_link);
 
-        return redirect('https://app.blab.to/magic/login/' . $magic_login_link);
-        
+        $role = \App\Role::where('name', 'organization_admin')->first();
+
+        $is_billing_admin = false;
+        if ($user->roles()->exists($role)) {
+            $is_billing_admin = true;
+        }
+
+        $billing = new \stdClass;
+        $billing->plan = "Free";
+        $billing->is_trial = false;
+
+        if ($user->organization->onGenericTrial()) {
+            $billing->plan = "Standard";
+            $billing->is_trial = true;
+            $billing->trial_ends_at = $user->organization->trial_ends_at->toFormattedDateString();
+        }
+
+        $is_billing_admin = false;
+
+        return view('home', ['magic_login_link' => $magic_login_link, 'is_billing_admin' => $is_billing_admin, 'billing' => $billing, 'organization' => $user->organization]);
     }
 }

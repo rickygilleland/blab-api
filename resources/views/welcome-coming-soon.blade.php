@@ -91,9 +91,9 @@
 
         <div class="container-fluid">
 
-            <div class="row my-md-5">
+            <div class="row">
                 <div class="col-lg-6 col-md-12">
-                    <h1 class="text-center" style="font-weight:900;font-size:3rem">Stop Meeting, Start Working</h1>
+                    <h1 class="text-center mt-md-5" style="font-weight:900;font-size:3rem">Stop Meeting, Start Working</h1>
                     <p class="text-center mt-4" style="font-weight:500;font-size:1.5rem;">Blab lets you enjoy face to face conversations with your teammates without getting in the way.</p>
                     <p class="text-center mt-4" style="font-weight:600;font-size:1.13rem;">Simple, secure, and enhanced by machine learning.<br/>Available now on MacOS and Windows.</p>
                     <center><a class="btn btn-success shadow btn-lg text-dark my-2 font-weight-bold" href="/get_started" rel="nofollow">Start Now For Free</a></center>

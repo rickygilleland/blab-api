@@ -66,7 +66,7 @@
     </head>
     <body class="px-md-5 px-2">
 
-        <div class="container">
+        <div class="container-fluid">
             <div>
                 <nav class="navbar navbar-expand-lg navbar-light text-dark">
                     <a class="navbar-brand" href="#" style="font-weight:900;font-size:2.5rem;">blab</a>
@@ -77,14 +77,6 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <!--
-                            <li class="nav-item">
-                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="#features"><i class="fas fa-flag"></i> Features</a>
-                            </li>
-                            -->
-      <!--                       <li class="nav-item">
-                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
-                            </li>    -->
                             <li class="nav-item">
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="/login">Log In</a>
                             </li>
@@ -97,79 +89,26 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container-fluid">
 
             <div class="row my-md-5">
-                <div class="col-12">
-                    <h1 class="text-center" style="font-weight:900;font-size:5rem">Let Your Team Hear You</h1>
-                    <p class="text-center mt-4" style="font-weight:600;font-size:1.13rem;">The convenience of face to face conversation without the hassle of scheduling meetings.<br/>Send a voice or video message and let your teammates get back to you, or pop into a room to hang out live.</p>
+                <div class="col-lg-6 col-md-12">
+                    <h1 class="text-center" style="font-weight:900;font-size:3rem">Stop Meeting, Start Working</h1>
+                    <p class="text-center mt-4" style="font-weight:500;font-size:1.5rem;">Blab lets you enjoy face to face conversations with your teammates without getting in the way.</p>
+                    <p class="text-center mt-4" style="font-weight:600;font-size:1.13rem;">Simple, secure, and enhanced by machine learning.<br/>Available now on MacOS and Windows.</p>
                     <center><a class="btn btn-success shadow btn-lg text-dark my-2 font-weight-bold" href="/get_started" rel="nofollow">Start Now For Free</a></center>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <center><img src="/img/main-hero-demo.gif" class="img img-fluid rounded shadow mt-4 mt-md-0 w-100" style="max-width:975px"></center>
-                </div>
-            </div>
-
-            <hr class="my-5" />
-
-            <div class="row my-md-5">
-                <div class="col-md-6">
-                    <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Spontaneous Water Cooler Style Conversations</h3>
-                    <p class="lead" style="font-weight:500">Ditch the scheduled meetings and give your team a place to hang out instead.</p>
-                    <p class="lead" style="font-weight:500">Great for general office chit-chat, recurring meetings, or 1:1 conversations with your co-workers.</p>
-                    <p class="lead" style="font-weight:500">Our video and voice chat is powered by WebRTC for low-latency connections and all streams are encrypted while in transit.</p>
-                </div>
-                <div class="col-md-6">
-                    <img src="/img/blab-room-demo.gif" style="max-height:400px" class="img img-fluid rounded shadow" />
+                <div class="col-lg-5 col-md-12 offset-lg-1">
+                    <center><video src="/img/main-demo.mp4" class="img img-fluid rounded shadow mt-4 mt-md-0 w-100" autoplay playsinline muted loop /></center>
                 </div>
             </div>
 
-            <div class="row my-md-5">
-                <div class="col-md-6">
-                    <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Let Your Voice Do The Talking</h3>
-                    <p class="lead" style="font-weight:500">Send your teammates an audio or video message and get your point across <strong>7x faster than typing a Slack message.</strong></p>
-                    <p class="lead" style="font-weight:500">And because your team can actually hear and see you, you'll never have to worry about things getting lost in translation.</p>
-                    <p class="text-muted" style="font-weight:500">Voice transcription of messages and the ability to record your screen is coming soon.</p>
-                </div>
-                <div class="col-md-6">
-                    <img src="/img/blab-thread-demo.gif" style="max-height:400px" class="img img-fluid rounded shadow" />
-                </div>
-            </div>
-
-            <div class="row my-md-5">
-                <div class="col-md-6">
-                    <h3 class="h2" style="font-weight:800;margin-top:3.25rem">Save Your Recordings For Later Or Share Them With The World</h3>
-                    <p class="lead" style="font-weight:500">Save your recordings to your library to use them later, or get a publically shareable link and send them to someone outside your team.</p>
-                    <p class="lead" style="font-weight:500">Take your sales pitches to the next level with a personalized audio or video message, or save a product demo recording that can use re-used.</p>
-                    <p class="text-muted" style="font-weight:500">Screen recording is coming soon.</p>
-                </div>
-                <div class="col-md-6">
-                    <img src="/img/blab-library-demo.gif" style="max-height:400px" class="img img-fluid rounded shadow" />
-                </div>
-            </div>
-
-            <hr class="my-5" />
         </div>
 
 
-        <div class="container" style="background-color:#fff;color:black" id="pricing">
+        <div class="container-fluid" style="background-color:#fff;color:black">
             <div style="max-width:1400px" class="mx-auto">
-
-                <center><a class="btn btn-success shadow text-dark btn-lg my-5 font-weight-bold" href="/get_started" rel="nofollow">Start Now For Free</a></center>
-
-                <h3 class="h1" style="font-weight:900;font-size:3.5rem;margin-top:10rem;margin-bottom:2.8rem">Ready to Work Where You Work</h3>
-                <div class="row">
-                    <div class="col-12 col-md-2 pl-0">
-                        <center><img src="img/blab-app-icon.png" class="img img-fluid" style="height:150px" /></center>
-                    </div>
-                    <div class="col-12 col-md-10">
-                        <p class="lead mt-5" style="font-weight:600;font-size:1.1rem">Available on every major browser, <br>and through our MacOS and Windows apps.</p>
-                    </div>
-                </div>
-
                 <p class="text-center font-weight-bold" style="font-size:1.1rem;margin-top:7rem;margin-bottom:5rem">Questions? Drop us a line at hello (at) blab.to</p>
 
             </div>

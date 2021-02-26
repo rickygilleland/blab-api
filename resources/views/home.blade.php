@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">      
+    <div class="row justify-content-center">
         @if ($is_billing_admin)
-            <div class="card shadow-sm w-75 mb-5">
+            <!--<div class="card shadow-sm w-75 mb-5">
                 <div class="card-body p-4 text-center">
                     <h1>Billing Information</h1>
                     @if ($billing->is_trial)
@@ -15,12 +15,12 @@
                     <a href="/billing" class="btn btn-primary text-light">
                         @if ($billing->plan == "Free")
                             Upgrade Account
-                        @else  
+                        @else
                             Manage Billing
                         @endif
                     </a>
                 </div>
-            </div>  
+            </div>-->
         @endif
 
         <div class="card shadow-sm w-75">
@@ -36,14 +36,14 @@
 
                     <a href="https://updater.blab.to" class="btn btn-primary btn-lg text-light btn-block" onclick="toggleMagicLinkDisplay()">Download Blab</a>
 
-                    <hr class="my-5">
+                    <!--<hr class="my-5">
                     <p class="h4">Already have Blab installed and need to log in?</p>
                     <p class="lead">Click the button below to automatically sign into Blab.</p>
-                    <a href="blab::/magic/login/{{ $magic_login_link }}" class="btn btn-success btn-lg text-light">Magic Login Link</a>
+                    <a href="blab::/magic/login/{{ $magic_login_link }}" class="btn btn-success btn-lg text-light">Magic Login Link</a>-->
                 </div>
                 <div id="magicLink" class="d-none">
-                    <p class="my-4 lead">Blab is downloading! Use the downloaded file to install Blab.<br><span class="text-muted">Once the installation is complete, you can click the magic link below to automatically log in to Blab.</p>
-                    <a href="blab::/magic/login/{{ $magic_login_link }}" class="btn btn-primary btn-lg text-light btn-block">Magic Login Link</a>
+                    <!--<p class="my-4 lead">Blab is downloading! Use the downloaded file to install Blab.<br><span class="text-muted">Once the installation is complete, you can click the magic link below to automatically log in to Blab.</p>
+                    <a href="blab::/magic/login/{{ $magic_login_link }}" class="btn btn-primary btn-lg text-light btn-block">Magic Login Link</a>-->
 
                     <p class="text-muted mt-4">Something go wrong with the download? <a href="https://updater.blab.to">Try again.</a></p>
                 </div>

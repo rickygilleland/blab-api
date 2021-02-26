@@ -62,11 +62,11 @@
     </style>
 </head>
 <body>
-    <div id="app" style="background-color:#0076ff;" class="vh-100 onboarding">
+    <div id="app" style="background-color:#212529;" class="vh-100 onboarding">
 
-   
+
         <h1 class="text-center pt-5 text-light"><a href="/">blab</a></h1>
-       
+
         <main class="py-4">
             @yield('content')
         </main>

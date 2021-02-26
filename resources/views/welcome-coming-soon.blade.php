@@ -64,7 +64,7 @@
         </style>
 
     </head>
-    <body class="px-md-5 px-2">
+    <body class="px-md-5 px-2" style="background-color: #212529;color: white">
 
         <div class="container-fluid">
             <div>
@@ -78,7 +78,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#343a40!important" href="/login">Log In</a>
+                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#fff!important" href="/login">Log In</a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/get_started" rel="nofollow">Start Now For Free</a>
@@ -107,7 +107,7 @@
         </div>
 
 
-        <div class="container-fluid" style="background-color:#fff;color:black">
+        <div class="container-fluid">
             <div style="max-width:1400px" class="mx-auto">
                 <p class="text-center font-weight-bold" style="font-size:1.1rem;margin-top:7rem;margin-bottom:5rem">Questions? Drop us a line at hello (at) blab.to</p>
 

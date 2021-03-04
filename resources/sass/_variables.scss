@@ -2,19 +2,21 @@
 $body-bg: #fff;
 
 // Typography
-$font-family-sans-serif: 'Airbnb Cereal App', Arial, Helvetica, sans-serif;
+$font-family-sans-serif: -apple-system, system-ui, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Colors
 $blue: #408af8;
-$indigo: #4F4581;
+$indigo: #4f4581;
 $purple: #6772ef;
 $pink: #f29fbd;
 $red: #f9426c;
 $orange: #e69a5a;
-$yellow: #F9F871;
+$yellow: #f9f871;
 $green: #3ecf8e;
-$teal: #00DBD7;
+$teal: #00dbd7;
 $cyan: #6cb2eb;
-

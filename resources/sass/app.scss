@@ -1,34 +1,8 @@
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
-@font-face {
-    font-family: 'Airbnb Cereal App';
-    src: url("https://watercooler-uploads.sfo2.cdn.digitaloceanspaces.com/fonts/AirbnbCereal-Bold.ttf");
-    font-weight: 700;
-}
-@font-face {
-    font-family: 'Airbnb Cereal App';
-    src: url("https://watercooler-uploads.sfo2.cdn.digitaloceanspaces.com/fonts/AirbnbCereal-ExtraBold.ttf");
-    font-weight: 900;
-}
-@font-face {
-    font-family: 'Airbnb Cereal App';
-    src: url("https://watercooler-uploads.sfo2.cdn.digitaloceanspaces.com/fonts/AirbnbCereal-Light.ttf");
-    font-weight: 300;
-}
-@font-face {
-    font-family: 'Airbnb Cereal App';
-    src: url("https://watercooler-uploads.sfo2.cdn.digitaloceanspaces.com/fonts/AirbnbCereal-Medium.ttf");
-    font-weight: 600;
-}
-@font-face {
-    font-family: 'Airbnb Cereal App';
-    src: url("https://watercooler-uploads.sfo2.cdn.digitaloceanspaces.com/fonts/AirbnbCereal-Book.ttf");
-    font-weight: 400;
-}
+@import "~bootstrap/scss/bootstrap";
 
 body {
     text-rendering: optimizeLegibility;
@@ -36,17 +10,20 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-button:hover, .btn:hover {
+button:hover,
+.btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
-a, label, .btn {
+a,
+label,
+.btn {
     font-weight: 500;
 }
 
 a {
-    color:$blue !important;
+    color: $blue !important;
 }
 
 .btn-primary {
@@ -60,5 +37,5 @@ a {
 }
 
 .onboarding .card {
-    border-radius: 25px
+    border-radius: 25px;
 }

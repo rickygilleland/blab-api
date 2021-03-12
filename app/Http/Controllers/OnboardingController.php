@@ -44,7 +44,7 @@ class OnboardingController extends Controller
 
             if ($i != 2) {
                 $login_code .= "-";
-            } 
+            }
         }
 
         $code->code = Hash::make($login_code);
@@ -106,11 +106,11 @@ class OnboardingController extends Controller
 
     public function generateHumanReadableString($length) {
         $string     = '';
-        $vowels     = array("a","e","i","o","u");  
+        $vowels     = array("a","e","i","o","u");
         $consonants = array(
-            'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 
+            'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm',
             'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'
-        );  
+        );
 
         // Seed it
         srand((double) microtime() * 1000000);
@@ -135,7 +135,7 @@ class OnboardingController extends Controller
         if ($user->organization->name != null) {
             return redirect('onboarding/invite');
         }
-        
+
         return view('onboarding.organization', ['organization' => $user->organization]);
     }
 
@@ -171,11 +171,9 @@ class OnboardingController extends Controller
 
         $available_servers = \App\Server::where('is_active', true)->get();
 
-        if (!$available_servers) {
+        if (count($available_servers) == 0) {
             $room->server_id = 1;
-        }
-
-        if (!isset($room->server_id)) {
+        } else {
             $rand = rand(0, (count($available_servers) - 1));
             $room->server_id = $available_servers[$rand]->id;
         }
@@ -189,7 +187,7 @@ class OnboardingController extends Controller
         $thread->save();
 
         $user->threads()->attach($thread);
-        
+
         //skip the team setup for now until we have multi-team support
         //return redirect('onboarding/team');
         return redirect('onboarding/invite');
@@ -200,11 +198,11 @@ class OnboardingController extends Controller
         $user = \Auth::user();
         $teams = $user->teams;
         $default_team = $teams[0];
-        
+
         return view('onboarding.team', ['team' => $default_team, 'organization' => $user->organization]);
     }
 
-    public function invite() 
+    public function invite()
     {
         $user = \Auth::user();
 

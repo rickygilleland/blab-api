@@ -19,7 +19,7 @@
 
         <meta property="og:title" content="Blab" />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content="We deliver always available rooms for office banter, meetings, or quick questions." />
+        <meta property="og:description" content="AI enhanced voice first chat for the next generation of WFH." />
         <meta property="og:url" content="https://blab.to" />
         <meta property="og:image" content="https://blab.to/img/og-hero.png" />
 

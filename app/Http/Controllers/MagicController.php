@@ -10,7 +10,7 @@ class MagicController extends Controller
         $magic_login_link = $this->getMagicCode($user->id, $user->email);
         $full_login_link = "blab::/magic/login/" . $magic_login_link;
 
-        return redirect($full_login_link);
+        return redirect()->away($full_login_link);
     }
 
     private function getMagicCode($userId, $email) {

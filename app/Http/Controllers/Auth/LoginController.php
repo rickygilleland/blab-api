@@ -54,8 +54,7 @@ class LoginController extends Controller
 
         if ($user) {
 
-            $magic_login_link = $user->id . "|" . $user->email . "|" . time();
-            $magic_login_link = encrypt($magic_login_link);
+            $magic_login_link = $this->getMagicCode($user->id, $user->email);
 
             $full_login_link = "https://blab.to/magic/" . $magic_login_link;
 
@@ -72,7 +71,7 @@ class LoginController extends Controller
             $email->name = $user->first_name;
             $email->data = [
                 "name" => $user->first_name,
-                "link" => $login_code,
+                "link" => $full_login_link,
                 "subject" => "Blab Magic Login Link"
             ];
             $email->template_id = "d-1b1ca36d100f4e4db060c11e3044f92f";
@@ -222,5 +221,12 @@ class LoginController extends Controller
         }
 
         return $string;
+    }
+
+    private function getMagicCode($userId, $email) {
+        $magic_login_link = $userId . "|" . $email . "|" . time();
+        $magic_login_link = encrypt($magic_login_link);
+
+        return $magic_login_link;
     }
 }

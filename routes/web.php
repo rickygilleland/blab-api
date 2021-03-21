@@ -36,7 +36,9 @@ Route::get('invite/{code}', 'InviteController@index', function($code) {
 
 });
 
-Route::get("/magic", 'Auth\LoginController@webMagicLogin', function($code) {
+Route::get("/magic/app", 'MagicController@webAppMagicLogin')->middleware('auth');
+
+Route::get("/magic/{code}", 'Auth\LoginController@webMagicLogin', function($code) {
 
 });
 

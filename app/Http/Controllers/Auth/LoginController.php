@@ -52,52 +52,12 @@ class LoginController extends Controller
         //make sure we have a user
         $user = \App\User::where('email', $request->email)->first();
 
-        if ($user && isset($request->token)) {
-            foreach ($user->loginCodes as $code) {
-                if (Hash::check($request->token, $code->code)) {
-                    if ($code->user_id != $user->id || $code->used 
-                        || (strtotime($code->created_at) + 3600) < time()) {
-                        
-                        return view('auth.code_sent', ['email' => $user->email, 'error' => 'The code you entered was incorrect.']);
-
-                    }
-                    
-                    $code->used = true;
-                    $code->save();
-
-                    $organization = \App\Organization::where('id', $user->organization_id)->first();
-
-                    if (!$user->is_active) {
-                        $user->is_active = true;
-                        $user->save();
-                    }
-    
-                    \Auth::login($user);
-                    return redirect()->intended('home');
-                }
-            } 
-
-            return view('auth.code_sent', ['email' => $user->email, 'error' => 'The code you entered was incorrect.']);
-        }
-
         if ($user) {
 
-            //generate a new code
-            $code = new \App\LoginCode();
-            $code->user_id = $user->id;
+            $magic_login_link = $user->id . "|" . $user->email . "|" . time();
+            $magic_login_link = encrypt($magic_login_link);
 
-            $login_code = '';
-
-            for ($i=0; $i<3; $i++) {
-                $login_code .= $this->generateHumanReadableString(4);
-
-                if ($i != 2) {
-                    $login_code .= "-";
-                } 
-            }
-
-            $code->code = Hash::make($login_code);
-            $code->save();
+            $full_login_link = "https://blab.to/magic/" . $magic_login_link;
 
             $email = new \stdClass;
 
@@ -112,10 +72,10 @@ class LoginController extends Controller
             $email->name = $user->first_name;
             $email->data = [
                 "name" => $user->first_name,
-                "token" => $login_code,
-                "subject" => "Your temporary Blab login code is ".$login_code
+                "link" => $login_code,
+                "subject" => "Blab Magic Login Link"
             ];
-            $email->template_id = "d-dd835e437d9f4aadaf1c9acb25e5f488";
+            $email->template_id = "d-1b1ca36d100f4e4db060c11e3044f92f";
 
             ProcessEmails::dispatch($email);
 
@@ -125,14 +85,51 @@ class LoginController extends Controller
         return view('auth.login', ['error' => 'We could not find an account under that address. Please try again.']);
     }
 
-    public function apiRequestLoginCode(Request $request)
-    {
-        $user = \App\User::where('email', $request->email)->first(); 
+    public function webMagicLogin($magic_code) {
+        if (!isset($magic_code) || $magic_code == null) {
+            abort(404);
+        }
+
+        $decrypted_code = decrypt($magic_code);
+
+        $decrypted_code = explode("|", $decrypted_code);
+
+        if (count($decrypted_code) != 3) {
+            abort(404);
+        }
+
+        $user = \App\User::where('id', $decrypted_code[0])->first();
 
         if (!$user) {
             abort(404);
         }
-        
+
+        if ($user->email != $decrypted_code[1]) {
+            abort(404);
+        }
+
+        //codes expire after 1 hour
+        if ((time() - 3600 > $decrypted_code[2])) {
+            return view('auth.code_error', ['error' => 'Your magic login link has expired. Please close this window and request a new link.']);
+        }
+
+        if (!$user->is_active) {
+            $user->is_active = true;
+            $user->save();
+        }
+
+        \Auth::login($user);
+        return redirect()->intended('home');
+    }
+
+    public function apiRequestLoginCode(Request $request)
+    {
+        $user = \App\User::where('email', $request->email)->first();
+
+        if (!$user) {
+            abort(404);
+        }
+
         //generate a new code
         $code = new \App\LoginCode();
         $code->user_id = $user->id;
@@ -144,7 +141,7 @@ class LoginController extends Controller
 
             if ($i != 2) {
                 $login_code .= "-";
-            } 
+            }
         }
 
         $code->code = Hash::make($login_code);
@@ -171,10 +168,10 @@ class LoginController extends Controller
         ProcessEmails::dispatch($email);
 
         return true;
-        
+
     }
 
-    public function apiMagicAuth(Request $request) 
+    public function apiMagicAuth(Request $request)
     {
         if (!isset($request->code) || $request->code == null) {
             abort(500);
@@ -207,16 +204,16 @@ class LoginController extends Controller
         $token = $user->createToken('Token created by Magic Link')->accessToken;
 
         return ['access_token' => $token];
-        
+
     }
 
     public function generateHumanReadableString($length) {
         $string     = '';
-        $vowels     = array("a","e","i","o","u");  
+        $vowels     = array("a","e","i","o","u");
         $consonants = array(
-            'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 
+            'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm',
             'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'
-        );  
+        );
 
         $max = $length/2;
         for ($i = 1; $i <= $max; $i++) {

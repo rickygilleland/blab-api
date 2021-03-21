@@ -36,6 +36,10 @@ Route::get('invite/{code}', 'InviteController@index', function($code) {
 
 });
 
+Route::get("/magic", 'Auth\LoginController@webMagicLogin', function($code) {
+
+});
+
 Route::get('invite', 'InviteController@request_invite');
 Route::post('invite', 'InviteController@submit_invite_request');
 

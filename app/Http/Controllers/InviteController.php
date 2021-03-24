@@ -113,6 +113,15 @@ class InviteController extends Controller
         $invite->invite_sent = false;
         $invite->save();
 
+        $email = new \stdClass;
+        $email->type = "text_only";
+        $email->email = "ricky@blab.to";
+        $email->name = "Ricky Gilleland";
+        $email->subject = "New Waitlist Sign Up";
+        $email->content = "A new user was added to the waitlist: " .  $invite->email;
+
+        ProcessEmails::dispatch($email);
+
         return view('invite.request', ['success' => true ]);
     }
 

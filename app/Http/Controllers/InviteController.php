@@ -22,7 +22,7 @@ class InviteController extends Controller
         if (\Auth::check()) {
             return redirect('home');
         }
-        
+
         $invite = \App\Invite::where('invite_code', base64_decode($code))->first();
 
         if (!$invite) {
@@ -31,7 +31,7 @@ class InviteController extends Controller
 
         if ($invite->invite_accepted && $invite->type != "organization_root") {
             return view('invite.accepted');
-        } 
+        }
 
         if ($invite->organization_id == null) {
             //this was an internal, new account invite, show them the new account sign up page
@@ -70,6 +70,9 @@ class InviteController extends Controller
     }
 
     public function request_invite() {
+
+        //force waitlist for now
+        return view('invite.request');
 
         //check how many users we've accepted today, if less than 10 let them sign up immediately
         $users = User::where('created_at', '>', Carbon::now()->subHours(24))->count();
@@ -139,7 +142,7 @@ class InviteController extends Controller
         if ($request->name == null || $request->name == '') {
             return view('invite.admin_create', ['success' => false ]);
         }
- 
+
         $invite = new \App\Invite();
         $invite->email = $request->email;
         $invite->invited_by = 0;
@@ -158,9 +161,9 @@ class InviteController extends Controller
             "first_name" => $request->name,
             "invite_token" => base64_encode($invite->invite_code),
         ]);
-    
+
         $invite_email->setTemplateId("d-4af02e391aff4fbba88409c2be1ccef5");
-        
+
         try {
             $response = $sg->send($invite_email);
         } catch (Exception $e) {

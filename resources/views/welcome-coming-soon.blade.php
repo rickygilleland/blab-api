@@ -81,7 +81,7 @@
                                 <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#fff!important" href="/login">Log In</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/get_started" rel="nofollow">Start Now For Free</a>
+                                <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Request Access</a>
                             </li>
                         </ul>
                     </div>
@@ -93,10 +93,10 @@
 
             <div class="row">
                 <div class="col-12">
-                    <h1 class="text-center mt-md-5" style="font-weight:700;font-size:6rem">Not Your Father's Video Chat</h1>
+                    <h1 class="text-center mt-md-5" style="font-weight:700;font-size:5rem">Voice First Chat for Working, Not Meeting</h1>
                     <p class="text-center mt-4" style="font-weight:500;font-size:2.2rem;">Face to face conversations that stay out of the way.</p>
-                    <p class="text-center mt-3" style="font-weight:400;font-size:1.6rem;">Simple, secure, and enhanced by machine learning. Built for the next generation of work.<br/><span style="font-size:1.3rem">Available on MacOS and Windows.</span></p>
-                    <center><a class="btn btn-success shadow btn-lg text-dark my-2 font-weight-bold" href="/get_started" rel="nofollow">Start Now For Free</a></center>
+                    <p class="text-center mt-3" style="font-weight:400;font-size:1.6rem;">Simple, secure, and enhanced by machine learning. Built for the next generation of work.<br/><span style="font-size:1.3rem">Requires MacOS or Windows.</span></p>
+                    <center><a class="btn btn-success shadow btn-lg text-dark my-2 font-weight-bold" href="/invite" rel="nofollow">Request Access</a></center>
                 </div>
             </div>
 

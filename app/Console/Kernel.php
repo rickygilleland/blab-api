@@ -46,7 +46,7 @@ class Kernel extends ConsoleKernel
         ->name('purge_expired_login_codes')
         ->onOneServer();
 
-        $schedule->call(function () {
+        /*$schedule->call(function () {
             $invites = DB::table('invites')
                 ->where([
                     ['organization_id', null],
@@ -99,12 +99,12 @@ class Kernel extends ConsoleKernel
                 if ($updated_invite->invite_sent == false) {
                     $updated_invite->invite_sent = true;
                     $updated_invite->save();
-                } 
+                }
 
                 $updated_invite->touch();
 
                 $invited_count++;
-        
+
             }
 
             if ($invited_count > 0) {
@@ -121,7 +121,7 @@ class Kernel extends ConsoleKernel
         })
         ->everyMinute()
         ->name('send_invites')
-        ->onOneServer();
+        ->onOneServer();*/
 
         $schedule->call(function () {
             $invites = DB::table('invites')
@@ -139,18 +139,18 @@ class Kernel extends ConsoleKernel
                 ])
                 ->limit(30)
                 ->get();
-    
+
             $invited_count = 0;
             $reminder_count = 0;
-    
+
             foreach ($invites as $invite) {
-    
+
                 //make sure we don't send emails for the demo accounts
                 $email = $invite->email;
                 $domain = explode("@", $invite->email);
                 if ($domain[1] == "acme.co") {
                     $email = "ricky@blab.to";
-                } 
+                }
 
                 $invite_user = User::where('id', $invite->invited_by)->first();
 
@@ -165,7 +165,7 @@ class Kernel extends ConsoleKernel
                 if ($invite->created_at <= Carbon::now()->subDays(6)) {
                     $subject = "Final " . $subject;
                 }
-    
+
                 $invite_email = new \stdClass;
                 $invite_email->name = "New Blab User";
                 $invite_email->email = $email;
@@ -176,9 +176,9 @@ class Kernel extends ConsoleKernel
                     "invite_token" => base64_encode($invite->invite_code),
                 ];
                 $invite_email->template_id = "d-ed053e9026d742eda4c66e5c5d6b2963";
-    
+
                 ProcessEmails::dispatch($invite_email);
-    
+
                 $updated_invite = Invite::where('id', $invite->id)->first();
                 $updated_invite->touch();
 
@@ -186,11 +186,11 @@ class Kernel extends ConsoleKernel
                     $updated_invite->invite_sent = true;
                     $updated_invite->save();
                 }
-    
+
                 $invited_count++;
-        
+
             }
-    
+
             if ($invited_count > 0) {
                 $email = new \stdClass;
                 $email->type = "text_only";
@@ -198,10 +198,10 @@ class Kernel extends ConsoleKernel
                 $email->name = "Ricky Gilleland";
                 $email->subject = "Organization Invite Reminders Were Sent Out";
                 $email->content = $invited_count . " reminders were sent.";
-    
+
                 ProcessEmails::dispatch($email);
             }
-    
+
         })
         ->everyMinute()
         ->name('send_organization_invite_reminders')
@@ -219,7 +219,7 @@ class Kernel extends ConsoleKernel
             foreach ($attachments as $attachment) {
                 ProcessUploadedVideo::dispatch($attachment);
             }
-            
+
         })
         ->everyMinute()
         ->name('process_failed_videos')

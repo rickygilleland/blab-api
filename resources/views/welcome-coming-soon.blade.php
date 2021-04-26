@@ -46,9 +46,10 @@
                 font-weight: 600;
                 font-size: 7.5rem;
                 line-height: .91667;
-
-                @media (max-width: 1000px) {
-                    font-size: 3rem;
+            }
+            @media (max-width: 900px) {
+                h1 {
+                    font-size: 5rem;
                 }
             }
             h2 {
@@ -172,7 +173,7 @@
                 <div class="row">
                     <div class="col-12">
                         <h1 class="text-center mt-md-5">The Water Cooler is <br>Remote Now Too</h1>
-                        <center><img src="/img/og-hero.png" class="hero img-fluid" /></center>
+                        <center><img src="/img/og-hero.png" class="hero img img-fluid" /></center>
 
                         <p class="text-center sub-heading my-4">Simple, secure, and enhanced by machine learning.<br />Built for the next generation of work.</p>
                         <center><i class="fas fa-arrow-alt-circle-down"></i></center>
@@ -227,19 +228,19 @@
 
         <div class="container-fluid container-dark">
             <div class="row" style="padding:5.5rem 0;">
-                <div class="col-4">
+                <div class="col-12 col-md-4">
                     <h2 class="text-center mt-md-5 mb-4"><i class="fas fa-lock"></i></h2>
                     <p class="text-center sub-heading sub-grey mb-3">Encrypted in transit</p>
                     <p class="text-center sub-heading sub-grey mb-3">User data encrypted at rest</p>
                     <p class="text-center sub-heading sub-grey mb-3">Rooms can only be joined by users within your organization</p>
                 </div>
-                <div class="col-4">
+                <div class="col-12 col-md-4">
                     <h2 class="text-center mt-md-5 mb-4"><i class="fas fa-server"></i></h2>
                     <p class="text-center sub-heading sub-grey mb-3">Custom voice/video infrastructure</p>
                     <p class="text-center sub-heading sub-grey mb-3">Streams are optimized for limited bandwidth</p>
                     <p class="text-center sub-heading sub-grey mb-3">Powered by WebRTC and open source software</p>
                 </div>
-                <div class="col-4">
+                <div class="col-12 col-md-4">
                     <h2 class="text-center mt-md-5 mb-4"><i class="fas fa-user-secret"></i></h2>
                     <p class="text-center sub-heading sub-grey mb-3">All AI models run locally with no cloud processing</p>
                     <p class="text-center sub-heading sub-grey mb-3">Voice/video data is never processed by 3rd parties</p>

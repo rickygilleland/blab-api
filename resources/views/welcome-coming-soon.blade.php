@@ -260,6 +260,7 @@
             <div style="max-width:1400px" class="mx-auto">
                 <h2 class="text-center" style="padding-top:6rem">Get on the list.</h2>
                 <p class="text-center sub-heading sub-grey mb-4 mt-3">Request access to Blab and we'll get you onboarded for free soon.</p>
+                <h3 class="text-center mb-4 mt-3">Available on MacOS and Windows.</h3>
                 <center><a class="btn shadow btn-lg text-light mt-3 mb-5 font-weight-bold hero-gradient" style="padding:1.2rem 1.75rem;font-size:1.25rem" href="/invite" rel="nofollow">Request Access</a></center>
                 <p class="text-center font-weight-bold" style="font-size:1.1rem;margin-bottom:5rem">Questions? Drop us a line at hello (at) blab.to</p>
 

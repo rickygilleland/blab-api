@@ -42,6 +42,33 @@
         </script>
 
         <style>
+            h1 {
+                font-weight: 600;
+                font-size: 7.5rem;
+                line-height: .91667;
+
+                @media (max-width: 1000px) {
+                    font-size: 3rem;
+                }
+            }
+            h2 {
+                font-weight: 600;
+                font-size: 4rem;
+                line-height: .91667;
+
+                @media (max-width: 1000px) {
+                    font-size: 2.5rem;
+                }
+            }
+            .sub-heading {
+                font-weight: 600;
+                font-size: 32px;
+                line-height: 1.09375;
+                margin: 0 auto;
+            }
+            .sub-grey {
+                color: #bebec5;
+            }
             h4 {
                 font-weight:800
             }
@@ -61,42 +88,123 @@
             .card {
                 border-radius: 25px;
             }
+            .container-dark {
+                background-color: #212529;
+                color: white
+            }
+            .container-light {
+                background-color: #fff;
+                color: #212529;
+            }
+            .container-dark, .container-light {
+                min-height: 450px;
+            }
+            .hero {
+                max-width: 500px;
+                border-radius: 1.2rem;
+                opacity: .95;
+                margin: 2rem 0;
+            }
+            .hero-gradient .fa-arrow-alt-circle-down {
+                margin-top: 1.25rem;
+                font-size: 3rem;
+            }
+            .hero-gradient {
+                background: radial-gradient(circle, #5ADFFF, #42C3FF, #1ca3ec, #2389da);
+                background-size: 600% 600%;
+
+                -webkit-animation: HeroGradient 25s ease infinite;
+                -moz-animation: HeroGradient 25s ease infinite;
+                animation: HeroGradient 25s ease infinite;
+                color: #fff;
+                padding-bottom: 4.5rem;
+            }
+
+            @-webkit-keyframes HeroGradient {
+                0%{background-position:0% 50%}
+                50%{background-position:100% 51%}
+                100%{background-position:0% 50%}
+            }
+            @-moz-keyframes HeroGradient {
+                0%{background-position:0% 50%}
+                50%{background-position:100% 51%}
+                100%{background-position:0% 50%}
+            }
+            @keyframes HeroGradient {
+                0%{background-position:0% 50%}
+                50%{background-position:100% 51%}
+                100%{background-position:0% 50%}
+            }
+
+
         </style>
 
     </head>
-    <body class="px-md-5 px-2" style="background-color: #212529;color: white">
+    <body class="container-dark">
 
-        <div class="container-fluid">
-            <div>
-                <nav class="navbar navbar-expand-lg navbar-light text-dark">
-                    <a class="navbar-brand" href="#" style="font-weight:900;font-size:2.5rem;">blab</a>
+        <div class="hero-gradient">
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+            <div class="container-fluid">
+                <div>
+                    <nav class="navbar navbar-expand-lg navbar-light text-dark">
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#fff!important" href="/login">Log In</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-success shadow text-dark my-3 font-weight-bold" href="/invite" rel="nofollow">Request Access</a>
-                            </li>
-                        </ul>
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link text-light font-weight-bold pr-5" style="padding-top:1.35rem;font-size:1.1rem;color:#fff!important" href="/login">Log In</a>
+                                </li>
+                                <li class="nav-item">
+                                <center><a class="btn shadow btn-lg text-light mt-3 mb-5 font-weight-bold hero-gradient" style="padding-bottom:0.5rem" href="/invite" rel="nofollow">Request Access</a></center>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-center mt-md-5">The Water Cooler is <br>Remote Now Too</h1>
+                        <center><img src="/img/og-hero.png" class="hero img-fluid" /></center>
+
+                        <p class="text-center sub-heading my-4">Simple, secure, and enhanced by machine learning.<br />Built for the next generation of work.</p>
+                        <center><i class="fas fa-arrow-alt-circle-down"></i></center>
+
                     </div>
-                </nav>
+                </div>
+
+
             </div>
         </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid container-light">
+            <div class="row" style="padding-top:5.5rem;">
+                <div class="col-12">
+                    <h2 class="text-center mt-md-5">Bring serendipity back to your team.</h2>
+                    <p class="text-center sub-heading sub-grey my-4">Blab rooms are always available for more natural, spontaneous conversations.<br />Rooms are voice only by default for when you aren't quite camera ready.</p>
+                    <div style="overflow:hidden;max-height:500px;padding:2em;margin-bottom:8rem;">
+                        <center><video src="/img/main-demo.mp4" class="img img-fluid rounded shadow mt-4 mt-md-0 w-100" style="max-width:750px" autoplay playsinline muted loop /></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container-fluid container-dark">
 
             <div class="row">
                 <div class="col-12">
-                    <h1 class="text-center mt-md-5" style="font-weight:700;font-size:5rem">Voice First Chat for Working, Not Meeting</h1>
-                    <p class="text-center mt-4" style="font-weight:500;font-size:2.2rem;">Face to face conversations that stay out of the way.</p>
-                    <p class="text-center mt-3" style="font-weight:400;font-size:1.6rem;">Simple, secure, and enhanced by machine learning. Built for the next generation of work.<br/><span style="font-size:1.3rem">Requires MacOS or Windows.</span></p>
-                    <center><a class="btn btn-success shadow btn-lg text-dark my-2 font-weight-bold" href="/invite" rel="nofollow">Request Access</a></center>
+                    <h2 class="text-center mt-md-5"><i class="fas fa-crop-alt"></i></h2>
+                    <h2 class="text-center mt-md-5">AI powered auto zoom.</h2>
+                    <p class="text-center sub-heading sub-grey my-4">Never worry about your background again.<br/>We use AI to keep the focus on you, not what's going on around you.</p>
                 </div>
             </div>
 
@@ -106,10 +214,54 @@
 
         </div>
 
+        <div class="container-fluid container-light">
+            <div class="row" style="padding-top:5.5rem;">
+                <div class="col-12">
+                    <h2 class="text-center"><i class="fas fa-headset"></i></h2>
+                    <h2 class="text-center mt-md-5">Say goodbye to background noise.</h2>
+                    <p class="text-center sub-heading sub-grey my-4 mb-5">Blab uses a neural network to isolate your voice and strip out everything else happening around you.<br />It runs entirely on your computer for a private and secure experience.</p>
+                    <p class="text-center sub-heading" style="margin-bottom:5.25rem">Coming soon.</p>
+                </div>
+            </div>
+        </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid container-dark">
+            <div class="row" style="padding:5.5rem 0;">
+                <div class="col-4">
+                    <h2 class="text-center mt-md-5 mb-4"><i class="fas fa-lock"></i></h2>
+                    <p class="text-center sub-heading sub-grey mb-3">Encrypted in transit</p>
+                    <p class="text-center sub-heading sub-grey mb-3">User data encrypted at rest</p>
+                    <p class="text-center sub-heading sub-grey mb-3">Rooms can only be joined by users within your organization</p>
+                </div>
+                <div class="col-4">
+                    <h2 class="text-center mt-md-5 mb-4"><i class="fas fa-server"></i></h2>
+                    <p class="text-center sub-heading sub-grey mb-3">Custom voice/video infrastructure</p>
+                    <p class="text-center sub-heading sub-grey mb-3">Streams are optimized for limited bandwidth</p>
+                    <p class="text-center sub-heading sub-grey mb-3">Powered by WebRTC and open source software</p>
+                </div>
+                <div class="col-4">
+                    <h2 class="text-center mt-md-5 mb-4"><i class="fas fa-user-secret"></i></h2>
+                    <p class="text-center sub-heading sub-grey mb-3">All AI models run locally with no cloud processing</p>
+                    <p class="text-center sub-heading sub-grey mb-3">Voice/video data is never processed by 3rd parties</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid container-light">
+            <div class="row" style="padding-top:5.5rem;">
+                <div class="col-12">
+                    <h2 class="text-center mt-md-5">Completely free for now.</h2>
+                    <p class="text-center sub-heading sub-grey my-4">Paid plans launching later this year.<br />A free tier will be available forever.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid container-dark">
             <div style="max-width:1400px" class="mx-auto">
-                <p class="text-center font-weight-bold" style="font-size:1.1rem;margin-top:7rem;margin-bottom:5rem">Questions? Drop us a line at hello (at) blab.to</p>
+                <h2 class="text-center" style="padding-top:6rem">Get on the list.</h2>
+                <p class="text-center sub-heading sub-grey mb-4 mt-3">Request access to Blab and we'll get you onboarded for free soon.</p>
+                <center><a class="btn shadow btn-lg text-light mt-3 mb-5 font-weight-bold hero-gradient" style="padding:1.2rem 1.75rem;font-size:1.25rem" href="/invite" rel="nofollow">Request Access</a></center>
+                <p class="text-center font-weight-bold" style="font-size:1.1rem;margin-bottom:5rem">Questions? Drop us a line at hello (at) blab.to</p>
 
             </div>
         </div>
